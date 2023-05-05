@@ -12,6 +12,11 @@ async function createDB() {
 
     await connection.query("CREATE DATABASE IF NOT EXISTS users");
     await connection.query("USE users");
+    await connection.query("CREATE DATABASE IF NOT EXISTS requiredS");
+    await connection.query("USE requiredS");
+    await connection.query("CREATE DATABASE IF NOT EXISTS comments");
+    await connection.query("USE comments");
+
 
     console.log("Base de datos creada");
 
