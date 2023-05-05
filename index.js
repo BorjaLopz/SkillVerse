@@ -22,40 +22,41 @@ async function createDB() {
 
     console.log("Creando tablas...");
 
-    await connection.query("DROP TABLE IF EXISTS names;");
+    await connection.query("DROP TABLE IF EXIST users;");
 
-    await connection.query("DROP TABLE IF EXISTS email;");
-
-    await connection.query("DROP TABLE IF EXISTS password;");
+    await connection.query("DROP TABLE IF EXISTS required_services;");
 
     await connection.query(`
     CREATE TABLE users(
       id INT AUTO_INCREMENT PRIMARY KEY,
       email VARCHAR(100) NOT NULL UNIQUE,
       name VARCHAR(255),
-      registration_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+      password VARCHAR(20)
       active BOOLEAN DEFAULT FALSE
     );
     `);
 
     await connection.query(`
-    CREATE TABLE photos(
+    CREATE TABLE requiredS(
       id INT AUTO_INCREMENT PRIMARY KEY,
+      title VARCHAR(50) NOT NULL,
+      request_body VARCHAR(500) NOT NULL CHECK (LENGTH(request_body) >= 15),
       user_id INT NOT NULL,
-      photo_file_name VARCHAR(90) NOT NULL UNIQUE,
+      file_name VARCHAR(90) UNIQUE,
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+      required_type VARCHAR(20) NOT NULL,
       FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
     );
     `);
 
     await connection.query(`
-    CREATE TABLE likes(
+    CREATE TABLE comments(
       id INT AUTO_INCREMENT PRIMARY KEY,
       user_id INT NOT NULL,
-      photo_id INT NOT NULL,
+      requiredS_id INT NOT NULL,
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
-      FOREIGN KEY (photo_id) REFERENCES photos (id) ON DELETE CASCADE
+      FOREIGN KEY (requiredS_id) REFERENCES photos (id) ON DELETE CASCADE
     );
     `);
 
