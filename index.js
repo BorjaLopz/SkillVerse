@@ -30,11 +30,19 @@ async function createDB() {
     CREATE TABLE users(
       id INT AUTO_INCREMENT PRIMARY KEY,
       email VARCHAR(100) NOT NULL UNIQUE,
-      name VARCHAR(255),
-      password VARCHAR(20)
+      nickname VARCHAR(30) NOT NULL UNIQUE,
+      name VARCHAR(30),
+      surname VARCHAR(60),
+      password VARCHAR(20) NOT NULL,
+      biography VARCHAR(600),
+      userPhoto VARCHAR(1000),
+      RSS VARCHAR(1000),
       active BOOLEAN DEFAULT FALSE
     );
     `);
+    /*RSSS Será actualizado de cara al 3º proyecto para poder guardar por separado las diferentes redes sociales 
+    del usuario que nosotros decidamos que este pueda aportar de manera que luego se muestren en su pagina de perfil de usuario*/
+    
 
     await connection.query(`
     CREATE TABLE requiredS(
