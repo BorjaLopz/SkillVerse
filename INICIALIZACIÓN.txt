@@ -1,0 +1,7 @@
+//Editar .gitignore según necesidades antes de entregar (de momento está comentado para que podamos trabajar sin complicaciones).
+
+//Módulos necesarios para la app:
+
+> npm init
+> npm i mysql2
+> 
