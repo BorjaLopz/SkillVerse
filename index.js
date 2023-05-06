@@ -1,37 +1,39 @@
 "use strict";
 
 const getDB = require("./db");
+const chalk = require("chalk");
 
 async function createDB() {
   let connection;
   try {
     connection = await getDB();
-    console.log("Conexión establecida");
+    console.log(chalk.green("Conexión establecida"));
 
     //Crear BBDD
 
-    await connection.query("CREATE DATABASE IF NOT EXISTS users");
-    await connection.query("USE users");
+    await connection.query("CREATE DATABASE IF NOT EXISTS portalDigital");
+    await connection.query("USE portalDigital");
 
-    console.log("Base de datos creada");
+    console.log(chalk.green("Base de datos creada"));
 
     //Borrar tablas
-    console.log("Borrando tablas...");
+    console.log(chalk.yellow("Borrando tablas antiguas..."));
 
     //Crear tablas
+    console.log(chalk.yellow("Creando tablas nuevas..."));
 
-    console.log("Creando tablas...");
+    await connection.query("DROP TABLE IF EXISTS comments;");
 
-    await connection.query("DROP TABLE IF EXIST users;");
+    await connection.query("DROP TABLE IF EXISTS requiredS;");
 
-    await connection.query("DROP TABLE IF EXISTS required_services;");
+    await connection.query("DROP TABLE IF EXISTS users;");
 
     await connection.query(`
     CREATE TABLE users(
       id INT AUTO_INCREMENT PRIMARY KEY,
       email VARCHAR(100) NOT NULL UNIQUE,
       name VARCHAR(255),
-      password VARCHAR(20)
+      password VARCHAR(20),
       active BOOLEAN DEFAULT FALSE
     );
     `);
@@ -56,17 +58,18 @@ async function createDB() {
       requiredS_id INT NOT NULL,
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
-      FOREIGN KEY (requiredS_id) REFERENCES photos (id) ON DELETE CASCADE
+      FOREIGN KEY (requiredS_id) REFERENCES requiredS (id) ON DELETE CASCADE
     );
     `);
 
-    console.log("tablas creadas");
+    console.log(chalk.green("Tablas creadas con éxito"));
   } catch (e) {
-    console.error("Hubo un error: " + e.message);
+    console.error(chalk.red("Hubo un error: " + e.message));
   } finally {
     if (connection) {
-      console.log("liberando conexión");
+      console.log(chalk.yellow("Liberando conexión..."));
       connection.release();
+      console.log(chalk.green("Conexión liberada"));
 
       process.exit();
     }

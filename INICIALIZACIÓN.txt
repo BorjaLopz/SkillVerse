@@ -1,5 +1,7 @@
 //Editar .gitignore según necesidades antes de entregar (de momento está comentado para que podamos trabajar sin complicaciones).
 
+//Cambiar datos del db.js según necesario: password, host, etc.
+
 //Módulos necesarios para la app:
 
 > npm init
