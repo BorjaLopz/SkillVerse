@@ -9,16 +9,8 @@ async function getDB() {
     pool = mysql.createPool({
       connectionLimit: 10,
       host: "localhost",
-      /*       
-//Para Coding Rooms:
-      user: "admin",
-      password: "Classroom", */
-
-      //Local:
       user: "demo",
       password: "password",
-      //
-
       timezone: "Z",
     });
   }
