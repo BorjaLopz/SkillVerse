@@ -12,3 +12,5 @@
 > npm i express
 > npm i multer // o multiparty
 > npm i nodemon // borrar antes de entregar proyecto
+> npm i jsonwebtoken
+> npm i bcrypt
