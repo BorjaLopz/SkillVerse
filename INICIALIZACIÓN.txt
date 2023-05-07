@@ -6,4 +6,9 @@
 
 > npm init
 > npm i mysql2
-> 
+> npm i body-parser
+> npm i chalk@4.1.2
+> npm i dotenv
+> npm i express
+> npm i multer // o multiparty
+> npm i nodemon // borrar antes de entregar proyecto

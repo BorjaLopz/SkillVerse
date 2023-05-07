@@ -1,12 +1,14 @@
 "use strict";
 
-const getDB = require("./db");
+require("dotenv").config();
+
+const { getConnection } = require("./db");
 const chalk = require("chalk");
 
-async function createDB() {
+async function main() {
   let connection;
   try {
-    connection = await getDB();
+    connection = await getConnection();
     console.log(chalk.green("Conexión establecida"));
 
     //Crear BBDD
@@ -19,14 +21,14 @@ async function createDB() {
     //Borrar tablas
     console.log(chalk.yellow("Borrando tablas antiguas..."));
 
-    //Crear tablas
-    console.log(chalk.yellow("Creando tablas nuevas..."));
-
     await connection.query("DROP TABLE IF EXISTS comments;");
 
     await connection.query("DROP TABLE IF EXISTS requiredS;");
 
     await connection.query("DROP TABLE IF EXISTS users;");
+
+    //Crear tablas
+    console.log(chalk.yellow("Creando tablas nuevas..."));
 
     await connection.query(`
     CREATE TABLE users(
@@ -38,13 +40,12 @@ async function createDB() {
       password VARCHAR(20) NOT NULL,
       biography VARCHAR(600),
       userPhoto VARCHAR(1000),
-      RSS VARCHAR(1000),
+      RRSS VARCHAR(1000),
       active BOOLEAN DEFAULT FALSE
     );
     `);
     /*RSSS Será actualizado de cara al 3º proyecto para poder guardar por separado las diferentes redes sociales 
     del usuario que nosotros decidamos que este pueda aportar de manera que luego se muestren en su pagina de perfil de usuario*/
-    
 
     await connection.query(`
     CREATE TABLE requiredS(
@@ -71,17 +72,15 @@ async function createDB() {
     `);
 
     console.log(chalk.green("Tablas creadas con éxito"));
-  } catch (e) {
-    console.error(chalk.red("Hubo un error: " + e.message));
+  } catch (error) {
+    console.error(chalk.red("Hubo un error: " + error.message));
   } finally {
-    if (connection) {
-      console.log(chalk.yellow("Liberando conexión..."));
-      connection.release();
-      console.log(chalk.green("Conexión liberada"));
+    if (connection) console.log(chalk.yellow("Liberando conexión..."));
+    connection.release();
+    console.log(chalk.green("Conexión liberada"));
 
-      process.exit();
-    }
+    process.exit();
   }
 }
 
-createDB();
+main();
