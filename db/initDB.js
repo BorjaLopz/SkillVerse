@@ -36,7 +36,7 @@ async function main() {
       nickname VARCHAR(30) NOT NULL UNIQUE,
       name VARCHAR(30),
       surname VARCHAR(60),
-      password VARCHAR(20) NOT NULL,
+      password VARCHAR(100) NOT NULL,
       biography VARCHAR(600),
       userPhoto VARCHAR(1000),
       RRSS VARCHAR(1000),
