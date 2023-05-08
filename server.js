@@ -28,23 +28,20 @@ const upload = multer({ storage });
 app.use(upload.array());
 app.use(express.static("public"));
 
-//ENDPOINT para obtener todo de la base de datos 
+//ENDPOINT para obtener todo de la base de datos
 
-app.get('/requiredS', async (req, res) => {
-
+app.get("/requiredS", async (req, res) => {
   try {
-    
-    const [rows, fields] = await connection.query('SELECT id, title, request_body FROM requiredS');
-    console.log('Servicios obtenidos exitosamente');
+    const [rows, fields] = await connection.query(
+      "SELECT id, title, request_body FROM requiredS"
+    );
+    console.log("Servicios obtenidos exitosamente");
     res.status(200).send(rows);
   } catch (error) {
-    console.error('Error al obtener los servicios: ' + error.stack);
-    res.status(500).send('Error al obtener los servicios');
+    console.error("Error al obtener los servicios: " + error.stack);
+    res.status(500).send("Error al obtener los servicios");
   }
 });
-  
-
-
 
 app.post("/login", loginController); // login del usuario(devulve token)
 

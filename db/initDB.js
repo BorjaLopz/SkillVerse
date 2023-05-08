@@ -43,7 +43,7 @@ async function main() {
       active BOOLEAN DEFAULT FALSE
     );
     `);
-    /*RSSS Será actualizado de cara al 3º proyecto para poder guardar por separado las diferentes redes sociales 
+    /*RRSS Será actualizado de cara al 3º proyecto para poder guardar por separado las diferentes redes sociales 
     del usuario que nosotros decidamos que este pueda aportar de manera que luego se muestren en su pagina de perfil de usuario*/
 
     await connection.query(`
@@ -55,6 +55,7 @@ async function main() {
       file_name VARCHAR(90) UNIQUE,
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
       required_type VARCHAR(20) NOT NULL,
+      done BOOLEAN DEFAULT FALSE,
       FOREIGN KEY (user_id) REFERENCES users (id)
     );
     `);

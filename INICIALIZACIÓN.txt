@@ -16,3 +16,10 @@
 > npm i bcrypt
 > npm i passport passport-local
 > npm i @hapi/joi
+
+
+//CREAR BBDD
+> node db/initDB.js
+
+//Iniciar servidor
+> node server.js
