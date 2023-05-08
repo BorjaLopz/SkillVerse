@@ -28,7 +28,35 @@ app.get("/all", async (req, res) => {
   }
 });
 
-//ENDPOINT para obtener
+///////////////////
+const {
+  loginController,
+} = require('./controllers/users');
+const { authUser } = require('./middlewares/auth')
+
+
+app.post('/login', loginController);// login del usuario(devulve token)
+
+
+/////////////////////////
+
+
+//crear usuario
+
+app.post('/users', async (req, res) => {
+  const { name, email, password } = req.body;
+
+  try {
+    res.status(200).send({ name, email, password });
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
+
+
+
+
 
 //ENDPOINT para añadir servicios a la base de datos
 app.post("/add", async (req, res) => {
