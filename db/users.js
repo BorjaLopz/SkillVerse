@@ -36,7 +36,6 @@ const createUser = async (
     if (userNickname.length > 0) {
       throw generateError("Nickname already in use", 409);
     }
-    
 
     //Encriptamos la contraseña
     const passwordHash = await bcrypt.hash(password, 10);
@@ -45,8 +44,8 @@ const createUser = async (
     //Creamos usuario en la base de datos
     const [newUser] = await connection.query(
       `
-    INSERT INTO users(email, nickname, password) VALUES (?, ?, ?)`,
-      [email, nickname, passwordHash]
+    INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, RRSS) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [email, nickname, name, surname, passwordHash, biography, userPhoto, RRSS]
     );
 
     //Devolvemos el id

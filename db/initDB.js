@@ -52,7 +52,7 @@ async function main() {
       title VARCHAR(50) NOT NULL,
       request_body VARCHAR(500) NOT NULL CHECK (LENGTH(request_body) >= 15),
       user_id INT NOT NULL,
-      file_name VARCHAR(90) UNIQUE,
+      file_name VARCHAR(90),
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
       required_type VARCHAR(20) NOT NULL,
       FOREIGN KEY (user_id) REFERENCES users (id)

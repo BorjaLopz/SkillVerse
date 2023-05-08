@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const Joi = require("@hapi/joi");
 const { generateError } = require("../helpers");
 const { createUser } = require("../db/users");
+const { createService } = require("../db/services");
 
 const loginController = async (req, res, next) => {
   try {
@@ -49,7 +50,16 @@ const loginController = async (req, res, next) => {
 
 const newUserController = async (req, res, next) => {
   try {
-    const { email, nickname, password } = req.body;
+    const {
+      email,
+      nickname,
+      name,
+      surname,
+      password,
+      biography,
+      userPhoto,
+      RRSS,
+    } = req.body;
 
     const schema = Joi.object({
       email: Joi.string().email().required(),
@@ -64,7 +74,16 @@ const newUserController = async (req, res, next) => {
       throw generateError("Debes enviar un email y un password", 401);
     }
 
-    const id = await createUser(email, password, nickname);
+    const id = await createUser(
+      email,
+      password,
+      nickname,
+      name,
+      surname,
+      biography,
+      userPhoto,
+      RRSS
+    );
 
     res.send({
       status: "ok",
@@ -75,7 +94,31 @@ const newUserController = async (req, res, next) => {
   }
 };
 
+const newServiceController = async (req, res, next) => {
+  try {
+    const { title, request_body, user_id, required_type } = req.body;
+    const file_name = req.file;
+
+    const id_services = await createService(
+      title,
+      request_body,
+      user_id,
+      required_type
+    );
+
+    console.log("Ya hemos creado el servicio!");
+
+    res.send({
+      status: "ok",
+      message: `Services created with id ${id_services}`,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
 module.exports = {
   loginController,
   newUserController,
+  newServiceController,
 };

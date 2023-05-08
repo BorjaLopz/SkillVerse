@@ -10,7 +10,11 @@ const app = new express();
 app.use(bodyParser.json()); //Parseamos appliacion/json
 app.use(bodyParser.urlencoded({ extended: true })); //Parseamos application xwww-form-urlencoded
 
-const { loginController, newUserController } = require("./controllers/users");
+const {
+  loginController,
+  newUserController,
+  newServiceController,
+} = require("./controllers/users");
 const { authUser } = require("./middlewares/auth");
 const { createPathIfNotExists } = require("./helpers");
 
@@ -28,23 +32,20 @@ const upload = multer({ storage });
 app.use(upload.array());
 app.use(express.static("public"));
 
-//ENDPOINT para obtener todo de la base de datos 
+//ENDPOINT para obtener todo de la base de datos
 
-app.get('/requiredS', async (req, res) => {
-
+app.get("/requiredS", async (req, res) => {
   try {
-    
-    const [rows, fields] = await connection.query('SELECT id, title, request_body FROM requiredS');
-    console.log('Servicios obtenidos exitosamente');
+    const [rows, fields] = await connection.query(
+      "SELECT id, title, request_body FROM requiredS"
+    );
+    console.log("Servicios obtenidos exitosamente");
     res.status(200).send(rows);
   } catch (error) {
-    console.error('Error al obtener los servicios: ' + error.stack);
-    res.status(500).send('Error al obtener los servicios');
+    console.error("Error al obtener los servicios: " + error.stack);
+    res.status(500).send("Error al obtener los servicios");
   }
 });
-  
-
-
 
 app.post("/login", loginController); // login del usuario(devulve token)
 
@@ -61,6 +62,9 @@ app.post("/users", async (req, res) => {
 
 //Creamos un usuario
 app.post("/user/add", newUserController);
+
+//Creamos un servicio
+app.post("/service/add", newServiceController);
 
 /*MIDDLEWARES COPIADOS DE BERTO*/
 //GESTIONAMOS LOS 404. Cuando accedemos a rutas que no estan definidas
