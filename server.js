@@ -3,6 +3,7 @@ const mysql = require("mysql2/promise");
 const bodyParser = require("body-parser");
 require("dotenv").config();
 const multer = require("multer"); //Nos servira para almacenar ficheros, y leer form-data desde postman
+const fs = require("fs/promises");
 
 let connection;
 
@@ -17,6 +18,9 @@ const {
 } = require("./controllers/users");
 const { authUser } = require("./middlewares/auth");
 const { createPathIfNotExists } = require("./helpers");
+const { generalError, error404 } = require("./middlewares/handleErrors");
+
+const path = "uploads/";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -26,10 +30,11 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
+
 const upload = multer({ storage });
 
 /* Parseamos multipar/form-data */
-app.use(upload.array());
+// app.use(upload.array());
 app.use(express.static("public"));
 
 //ENDPOINT para obtener todo de la base de datos
@@ -47,18 +52,8 @@ app.get("/requiredS", async (req, res) => {
   }
 });
 
-app.post("/login", loginController); // login del usuario(devulve token)
-
-//crear usuario
-app.post("/users", async (req, res) => {
-  const { name, email, password } = req.body;
-
-  try {
-    res.status(200).send({ name, email, password });
-  } catch (e) {
-    res.status(500).send(e);
-  }
-});
+// login del usuario(devulve token)
+app.post("/login", loginController);
 
 //Creamos un usuario
 app.post("/user/add", newUserController);
@@ -66,34 +61,23 @@ app.post("/user/add", newUserController);
 //Creamos un servicio
 app.post("/service/add", newServiceController);
 
+app.post("/upload", upload.single("myfile"), async (req, res) => {
+//     // const path = "./newFolder";
+//   createPathIfNotExists(path)
+//     .then(() => console.log("Directory created successfully!"))
+//     .catch((error) => console.error(error));
+  createPathIfNotExists("uploads/");
+  const image = await fs.readFile(req.file.path);
+  res.end(image);
+  // res.send("hola");
+});
+
 /*MIDDLEWARES COPIADOS DE BERTO*/
 //GESTIONAMOS LOS 404. Cuando accedemos a rutas que no estan definidas
-app.use((req, res) => {
-  res.status(404).send({
-    status: "error",
-    message: "not found",
-  });
-});
+app.use(error404);
 
 //Gestion de errores
-app.use((error, req, res, next) => {
-  console.error(error);
-  res.status(error.httpStatus || 500).send({
-    status: "error",
-    message: error.message,
-  });
-});
-
-//ENDPOINT para añadir servicios a la base de datos
-app.post("/add", async (req, res) => {
-  try {
-    const { title, explanation } = req.body; //Hacemos destructuring del body para obtener el titulo de la solicitud y una explicacion
-    const file = req.file; //TODO en proceso
-    res.status(200).send({ title, explanation }); //Mandamos a postman lo que hemos obtenido de la peticion en JSON
-  } catch (e) {
-    res.status(500).send(e);
-  }
-});
+app.use(generalError);
 
 app.listen(process.env.APP_PORT, async () => {
   console.log(
