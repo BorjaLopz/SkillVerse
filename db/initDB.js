@@ -55,7 +55,7 @@ async function main() {
       file_name VARCHAR(90) UNIQUE,
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
       required_type VARCHAR(20) NOT NULL,
-      FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+      FOREIGN KEY (user_id) REFERENCES users (id)
     );
     `);
 
@@ -65,8 +65,8 @@ async function main() {
       user_id INT NOT NULL,
       requiredS_id INT NOT NULL,
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-      FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
-      FOREIGN KEY (requiredS_id) REFERENCES requiredS (id) ON DELETE CASCADE
+      FOREIGN KEY (user_id) REFERENCES users (id),
+      FOREIGN KEY (requiredS_id) REFERENCES requiredS (id)
     );
     `);
 
