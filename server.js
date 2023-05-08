@@ -16,17 +16,22 @@ app.use(upload.array());
 app.use(express.static("public"));
 
 
-//ENDPOINT para obtener todo de la base de datos
-app.get("/all", async (req, res) => {
+//ENDPOINT para obtener todo de la base de datos 
+
+app.get('/requiredS', async (req, res) => {
   try {
-    //destructuring posicional, solamente necesitamos el primer elemento
-    const prueba = "GET";
-    console.log(prueba);
-    res.status(200).send(prueba);
-  } catch (e) {
-    res.status(500).send(e);
+    
+    const [rows, fields] = await connection.query('SELECT id, title, request_body FROM requiredS');
+    console.log('Servicios obtenidos exitosamente');
+    res.status(200).send(rows);
+  } catch (error) {
+    console.error('Error al obtener los servicios: ' + error.stack);
+    res.status(500).send('Error al obtener los servicios');
   }
 });
+  
+
+
 
 ///////////////////
 const {
