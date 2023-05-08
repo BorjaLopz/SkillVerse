@@ -14,3 +14,5 @@
 > npm i nodemon // borrar antes de entregar proyecto
 > npm i jsonwebtoken
 > npm i bcrypt
+> npm i passport passport-local
+> npm i @hapi/joi
