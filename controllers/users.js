@@ -3,12 +3,14 @@ const jwt = require("jsonwebtoken");
 const Joi = require("@hapi/joi");
 const { generateError, createPathIfNotExists } = require("../helpers");
 const { createUser, getUserByEmail } = require("../db/users");
-const { createService } = require("../db/services");
+
 
 /* Necesario para express-uploadfile */
 const path = require("path"); //Obtenemos el path del directorio __dirname
 const sharp = require("sharp"); //Modificamos el tamaño del fichero .resize()
 const { nanoid } = require("nanoid"); //Generaremos un nombre aleatorio de N caracteres nanoid(24);
+
+
 
 const loginController = async (req, res, next) => {
   try {
@@ -52,6 +54,8 @@ const loginController = async (req, res, next) => {
     next(error);
   }
 };
+
+
 
 const newUserController = async (req, res, next) => {
   try {
@@ -99,6 +103,8 @@ const newUserController = async (req, res, next) => {
   }
 };
 
+
+
 const deleteUserController = async (req, res, next) => {
   try {
     let { verifyNickname } = req.body;
@@ -117,15 +123,24 @@ const deleteUserController = async (req, res, next) => {
   }
 };
 
-// const editUserController = async (req, res, next) => {
-//   try {
-//     let { email } = req.body;
-//   }
-// }
+
+
+
+/*const editUserController = async (req, res, next) => {
+  try {
+    let { email } = req.body;
+  }
+}
+}*/
+
 
 module.exports = {
   loginController,
   newUserController,
   deleteUserController,
-  editUserController,
-};
+
+  editUserController
+=======
+  
+
+
