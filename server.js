@@ -4,30 +4,28 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const multer = require("multer"); //Nos servira para almacenar ficheros, y leer form-data desde postman
 const fs = require("fs/promises");
-const fileUpload = require("express-fileupload")
+const fileUpload = require("express-fileupload");
 
 let connection;
 
 const app = new express();
 app.use(bodyParser.json()); //Parseamos appliacion/json
 app.use(bodyParser.urlencoded({ extended: true })); //Parseamos application xwww-form-urlencoded
-app.use(fileUpload());  //Le pasamos el middleware para que pueda leer archivos binarios
+app.use(fileUpload()); //Le pasamos el middleware para que pueda leer archivos binarios
+app.use("/uploads", express.static("./uploads"));
 
 const {
   loginController,
   newUserController,
   deleteUserController,
-  editUserController
+  editUserController,
 } = require("./controllers/users");
 
 const { newServiceController } = require("./controllers/services");
 
-
-
 const { authUser } = require("./middlewares/auth");
 const { createPathIfNotExists } = require("./helpers");
 const { generalError, error404 } = require("./middlewares/handleErrors");
-
 
 /* MULTER */ //TODO BORRAR
 const path = "uploads/";
@@ -70,18 +68,13 @@ app.post("/login", loginController);
 app.post("/user/add", newUserController);
 
 //Creamos un servicio
-
 app.post("/service/add", authUser, newServiceController);
-
 
 //borramos un servicio
 app.delete("/service/delete", authUser, deleteUserController);
 
-
 //modificamos un servicio
 // app.put("/service/edit", authUser, editUserController);  //Lo comentamos de momento
-
-
 
 /*MIDDLEWARES COPIADOS DE BERTO*/
 //GESTIONAMOS LOS 404. Cuando accedemos a rutas que no estan definidas

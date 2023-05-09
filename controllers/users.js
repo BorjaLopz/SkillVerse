@@ -36,6 +36,7 @@ const newUserController = async (req, res, next) => {
       biography,
       userPhoto
     );
+   
 
     res.send({
       status: "ok",
@@ -96,6 +97,7 @@ const deleteUserController = async (req, res, next) => {
     if (!verifyNickname) {
       throw generateError("No has cubierto todos los campos", 400);
     }
+
     await deleteUserController(req.user.id, verifyNickname);
 
     res.send({
