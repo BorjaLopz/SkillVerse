@@ -56,6 +56,28 @@ const createUser = async (
   }
 };
 
+//Devuelve la informacion del usuario por email
+const getUserByEmail = async (email) => {
+  let connection;
+  try {
+    connection = await getConnection();
+    const [result] = await connection.query(
+      `
+    SELECT * FROM users WHERE email = ?`,
+      [email]
+    );
+
+    if (result.length === 0) {
+      throw generateError("No hay ningun usuario con ese email.", 404);
+    }
+
+    return result[0];
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 module.exports = {
   createUser,
+  getUserByEmail,
 };
