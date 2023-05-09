@@ -64,7 +64,8 @@ async function main() {
       serviceFile VARCHAR(30),
       hide BOOLEAN DEFAULT FALSE,
       FOREIGN KEY (user_id) REFERENCES users (id),
-      FOREIGN KEY (requiredS_id) REFERENCES requiredS (id)
+      FOREIGN KEY (requiredS_id) REFERENCES requiredS (id),
+      FOREIGN KEY (hide) REFERENCES requiredS (hide)
     );
     `);
 
