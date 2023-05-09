@@ -117,15 +117,15 @@ const deleteUserController = async (req, res, next) => {
   }
 };
 
-const editUserController = async (req, res, next) => {
-  try {
-    let { email } = req.body;
-  }
-}
+// const editUserController = async (req, res, next) => {
+//   try {
+//     let { email } = req.body;
+//   }
+// }
 
 module.exports = {
   loginController,
   newUserController,
-  newServiceController,
   deleteUserController,
+  editUserController,
 };
