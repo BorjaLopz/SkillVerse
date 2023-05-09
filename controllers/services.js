@@ -1,14 +1,16 @@
 const { createService } = require("../db/services");
+const chalk = require("chalk");
 
 const newServiceController = async (req, res, next) => {
   try {
-    const { title, request_body, user_id, required_type } = req.body;
+    const { title, request_body, required_type } = req.body;
+    
     const file_name = req.file;
 
     const id_services = await createService(
       title,
       request_body,
-      user_id,
+      req.userId,
       required_type
     );
 

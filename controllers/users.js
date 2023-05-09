@@ -8,7 +8,6 @@ const { getConnection } = require("../db/db");
 
 /* Necesario para express-uploadfile */
 const path = require("path"); //Obtenemos el path del directorio __dirname
-const sharp = require("sharp"); //Modificamos el tamaño del fichero .resize()
 const { nanoid } = require("nanoid"); //Generaremos un nombre aleatorio de N caracteres nanoid(24);
 
 const newUserController = async (req, res, next) => {
