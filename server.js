@@ -79,7 +79,7 @@ app.delete("/service/delete", authUser, deleteUserController);
 
 
 //modificamos un servicio
-app.put("/service/edit", authUser, editUserController);
+// app.put("/service/edit", authUser, editUserController);  //Lo comentamos de momento
 
 
 
