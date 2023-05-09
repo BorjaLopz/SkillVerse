@@ -99,79 +99,33 @@ const newUserController = async (req, res, next) => {
   }
 };
 
-const newServiceController = async (req, res, next) => {
+const deleteUserController = async (req, res, next) => {
   try {
-    const { title, request_body, required_type } = req.body;
+    let { verifyNickname } = req.body;
 
-    //Comprobamos el titulo
-    if (!title || title.length > 50) {
-      throw generateError(
-        "El titulo debe existir y ser menor de 50 caracateres",
-        400
-      );
+    if (!verifyNickname) {
+      throw generateError("No has cubierto todos los campos", 400);
     }
-
-    //Comprobamos la descripcion
-    if (!request_body || request_body.length > 500) {
-      throw generateError(
-        "La descripcion debe existir y ser menor de 500 caracateres",
-        400
-      );
-    }
-
-    //Comprobamos el servicio
-    if (!required_type || required_type.length > 20) {
-      throw generateError(
-        "La peticion debe existir y ser menor de 20 caracateres",
-        400
-      );
-    }
-
-    let fileName;
-    let requestFile;
-
-    if (req.files && req.files.file) {
-      //Procesamos el fichero
-      const uploadsDir = path.join(__dirname, "../uploads");
-
-      //Creamos el directorio si no existe
-      await createPathIfNotExists(uploadsDir);
-
-      requestFile = req.files.file; //Obtenemos el fichero en binario
-
-      fileName = `${nanoid(24)}.${requestFile.name.split(".").slice(-1)}`; //Obtenemos la extension original del archivo y lo guardamos como tal generando un nombre aleatorio de 24 caracteres {nanoid}
-
-      // console.log(uploadsDir + "\\" + fileName);  //dev
-
-      //Usamos el metodo mv() para colocar el fichero en algún lugar de nuestro server
-      requestFile.mv(uploadsDir + "\\" + fileName, function (err) {
-        if (err) {
-          throw generateError("No se ha podido subir el archivo.", 500);
-        }
-        // console.log("File uploaded!");  //dev
-      });
-    }
-
-    // Creamos servicio
-    const id = await createService(
-      title,
-      request_body,
-      req.userId,
-      required_type,
-      fileName
-    );
+    await deleteUserController(req.user.id, verifyNickname);
 
     res.send({
       status: "ok",
-      message: `${title} creado con exito con id ${id}`,
+      message: "Usuario eliminado correctamente",
     });
-  } catch (e) {
-    next(e);
+  } catch (error) {
+    next(error);
   }
 };
+
+const editUserController = async (req, res, next) => {
+  try {
+    let { email } = req.body;
+  }
+}
 
 module.exports = {
   loginController,
   newUserController,
   newServiceController,
+  deleteUserController,
 };
