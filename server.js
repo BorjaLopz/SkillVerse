@@ -24,6 +24,7 @@ const {
 const {
   newServiceController,
   getServiceByIDController,
+  getAllServicesController,
 } = require("./controllers/services");
 
 const { authUser } = require("./middlewares/auth");
@@ -62,6 +63,8 @@ app.delete("/service/delete", authUser, deleteUserController);
 
 //Obtenemos un servicio por ID
 app.get("/service/:id", getServiceByIDController);
+
+app.get("/service", getAllServicesController)
 
 //modificamos un servicio
 // app.put("/service/edit", authUser, editUserController);  //Lo comentamos de momento
