@@ -1,5 +1,9 @@
 const { nanoid } = require("nanoid");
-const { createService, getServiceByID } = require("../db/services");
+const {
+  createService,
+  getServiceByID,
+  getAllServices,
+} = require("../db/services");
 const { generateError, createPathIfNotExists } = require("../helpers");
 const chalk = require("chalk");
 const path = require("path");
@@ -101,4 +105,22 @@ const getServiceByIDController = async (req, res, next) => {
   }
 };
 
-module.exports = { newServiceController, getServiceByIDController };
+const getAllServicesController = async (req, res, next) => {
+  try {
+    const services = await getAllServices();
+
+    //Lo mandamos a postman
+    res.send({
+      status: "ok",
+      message: services,
+    });
+  } catch (e) {
+    next(e)
+  }
+}
+
+module.exports = {
+  newServiceController,
+  getServiceByIDController,
+  getAllServicesController,
+};

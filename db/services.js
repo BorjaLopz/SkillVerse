@@ -54,10 +54,26 @@ const getServiceByID = async (id) => {
       throw generateError("No hay ningun servicio con ese id", 400);
     }
     return result[0];
-
   } catch (e) {
     throw generateError(`error: ${e.message}`, 400);
   }
 };
 
-module.exports = { createService, getServiceByID};
+const getAllServices = async () => {
+  let connection;
+
+  try {
+    connection = await getConnection();
+    const [result] = await connection.query(`SELECT * FROM requireds WHERE done = ? ORDER BY creation_date ASC`, [0]);
+
+    if (result.length === 0) {
+      throw generateError("No hay ningun servicio", 404);
+    }
+
+    return result;
+  } catch (e) {
+    throw generateError(`error: ${e.message}`, 400);
+  }
+};
+
+module.exports = { createService, getServiceByID, getAllServices };
