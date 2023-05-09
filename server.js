@@ -20,8 +20,10 @@ const { authUser } = require("./middlewares/auth");
 const { createPathIfNotExists } = require("./helpers");
 const { generalError, error404 } = require("./middlewares/handleErrors");
 
-const path = "uploads/";
 
+
+
+const path = "uploads/";
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
@@ -30,8 +32,17 @@ const storage = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
-
 const upload = multer({ storage });
+
+app.post("/upload", upload.single("file"), async (req, res) => {
+  res.send("Archivo descargado exitosamente");
+});
+
+
+
+
+
+
 
 /* Parseamos multipar/form-data */
 // app.use(upload.array());
@@ -61,16 +72,7 @@ app.post("/user/add", newUserController);
 //Creamos un servicio
 app.post("/service/add", newServiceController);
 
-app.post("/upload", upload.single("myfile"), async (req, res) => {
-//     // const path = "./newFolder";
-//   createPathIfNotExists(path)
-//     .then(() => console.log("Directory created successfully!"))
-//     .catch((error) => console.error(error));
-  createPathIfNotExists("uploads/");
-  const image = await fs.readFile(req.file.path);
-  res.end(image);
-  // res.send("hola");
-});
+
 
 /*MIDDLEWARES COPIADOS DE BERTO*/
 //GESTIONAMOS LOS 404. Cuando accedemos a rutas que no estan definidas
