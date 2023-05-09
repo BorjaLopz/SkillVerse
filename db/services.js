@@ -8,7 +8,7 @@ const createService = async (
   required_type,
   file_name = "",
   hide,
-  done,
+  done
 ) => {
   let connection;
 
@@ -22,8 +22,8 @@ const createService = async (
 
     const [newService] = await connection.query(
       `
-    INSERT INTO requireds (title, request_body, user_id, file_name, required_type, hide) VALUES (?, ?, ?, ?, ?, ?)`,
-      [title, request_body, user_id, file_name, required_type, hide]
+    INSERT INTO requireds (title, request_body, user_id, file_name, required_type, hide) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [title, request_body, user_id, file_name, required_type, hide, done]
     );
 
     /*const [newService] = await connection.query(
