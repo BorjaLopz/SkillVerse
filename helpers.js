@@ -16,6 +16,7 @@ const createPathIfNotExists = async (path) => {
   
   }
 };
+createPathIfNotExists('./uploads');
 
 module.exports = {
   generateError,
