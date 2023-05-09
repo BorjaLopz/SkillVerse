@@ -1,5 +1,6 @@
 const { getConnection } = require("../db/db");
 const { generateError } = require("../helpers");
+const chalk = require("chalk");
 
 const createService = async (
   title,
@@ -7,8 +8,8 @@ const createService = async (
   user_id,
   required_type,
   file_name = "",
-  hide,
-  done
+  hide = false,
+  done = false
 ) => {
   let connection;
 
@@ -22,8 +23,8 @@ const createService = async (
 
     const [newService] = await connection.query(
       `
-    INSERT INTO requireds (title, request_body, user_id, file_name, required_type, hide) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [title, request_body, user_id, file_name, required_type, hide, done]
+    INSERT INTO requireds (title, request_body, user_id, file_name, required_type, done, hide) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [title, request_body, user_id, file_name, required_type, done, hide]
     );
 
     /*const [newService] = await connection.query(
