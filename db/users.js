@@ -10,7 +10,8 @@ const createUser = async (
   surname = "",
   biography = "",
   userPhoto = "",
-  RRSS = ""
+  linkedin = "",
+  instagram = "",
 ) => {
   let connection;
 
@@ -44,8 +45,8 @@ const createUser = async (
     //Creamos usuario en la base de datos
     const [newUser] = await connection.query(
       `
-    INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, RRSS) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      [email, nickname, name, surname, passwordHash, biography, userPhoto, RRSS]
+    INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, linkedin, instagram) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [email, nickname, name, surname, passwordHash, biography, userPhoto, linkedin, instagram]
     );
 
     //Devolvemos el id
@@ -55,6 +56,28 @@ const createUser = async (
   }
 };
 
+//Devuelve la informacion del usuario por email
+const getUserByEmail = async (email) => {
+  let connection;
+  try {
+    connection = await getConnection();
+    const [result] = await connection.query(
+      `
+    SELECT * FROM users WHERE email = ?`,
+      [email]
+    );
+
+    if (result.length === 0) {
+      throw generateError("No hay ningun usuario con ese email.", 404);
+    }
+
+    return result[0];
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 module.exports = {
   createUser,
+  getUserByEmail,
 };
