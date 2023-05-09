@@ -12,12 +12,7 @@ const createService = async (
 
   try {
     connection = await getConnection();
-
-    console.log(title);
-    console.log(request_body);
-    console.log(user_id);
-    console.log(required_type);
-
+    
     const [newService] = await connection.query(
       `
     INSERT INTO requireds (title, request_body, user_id, file_name, required_type) VALUES (?, ?, ?, ?, ?)`,
