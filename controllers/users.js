@@ -81,6 +81,7 @@ const newUserController = async (req, res, next) => {
       biography,
       userPhoto
     );
+    
 
     res.send({
       status: "ok",

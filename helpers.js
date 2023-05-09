@@ -16,7 +16,8 @@ const createPathIfNotExists = async (path) => {
     await fs.mkdir(path);
   }
 };
-createPathIfNotExists("./uploads");
+
+// createPathIfNotExists("./uploads");
 
 module.exports = {
   generateError,
