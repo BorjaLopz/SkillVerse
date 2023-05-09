@@ -11,19 +11,14 @@ async function main() {
     console.log(chalk.green("Conexión establecida"));
 
     //Crear BBDD
-
     await connection.query("CREATE DATABASE IF NOT EXISTS portalDigital");
     await connection.query("USE portalDigital");
-
     console.log(chalk.green("Base de datos creada"));
 
     //Borrar tablas
     console.log(chalk.yellow("Borrando tablas antiguas..."));
-
     await connection.query("DROP TABLE IF EXISTS comments;");
-
     await connection.query("DROP TABLE IF EXISTS requiredS;");
-
     await connection.query("DROP TABLE IF EXISTS users;");
 
     //Crear tablas
@@ -33,22 +28,22 @@ async function main() {
     CREATE TABLE users(
       id INT AUTO_INCREMENT PRIMARY KEY,
       email VARCHAR(100) NOT NULL UNIQUE,
-      nickname VARCHAR(30) NOT NULL UNIQUE CHECK (LENGTH(password) >= 4),
+      nickname VARCHAR(30) NOT NULL UNIQUE CHECK (LENGTH(nickname) >= 4),
       name VARCHAR(30),
       surname VARCHAR(60),
       password VARCHAR(100) NOT NULL CHECK (LENGTH(password) >= 8 AND password REGEXP '[A-Z]' AND password REGEXP '[a-z]' AND password REGEXP '[0-9]'),
       biography VARCHAR(600),
       userPhoto VARCHAR(1000),
       linkedin VARCHAR(100) CHECK (linkedin REGEXP '^https?://(www\.)?linkedin\.com/in/[\w-]+$'),
-      instagram VARCHAR(100) CHECK (instagram REGEXP '^https?://(www\.)?instagram\.com/[\w-]+igshid=[\w-]+$')
-      active BOOLEAN DEFAULT TRUE,
+      instagram VARCHAR(100) CHECK (instagram REGEXP '^https?://(www\.)?instagram\.com/[\w-]+igshid=[\w-]+$'),
+      active BOOLEAN DEFAULT TRUE
     );
     `);
 
     await connection.query(`
     CREATE TABLE requiredS(
       id INT AUTO_INCREMENT PRIMARY KEY,
-      title VARCHAR(50) NOT NULL (LENGTH(title) >= 15),
+      title VARCHAR(50) NOT NULL CHECK (LENGTH(title) >= 15),
       request_body VARCHAR(500) NOT NULL CHECK (LENGTH(request_body) >= 15),
       user_id INT NOT NULL,
       file_name VARCHAR(90),
@@ -70,7 +65,6 @@ async function main() {
       hide BOOLEAN DEFAULT FALSE,
       FOREIGN KEY (user_id) REFERENCES users (id),
       FOREIGN KEY (requiredS_id) REFERENCES requiredS (id)
-      FOREIGN KEY (hide) REFERENCES requiredS (hide)
     );
     `);
 
