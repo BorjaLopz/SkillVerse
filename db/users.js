@@ -8,7 +8,7 @@ const createUser = async (
   nickname,
   name = "",
   surname = "",
-  biography = ",",
+  biography = "",
   userPhoto = "",
   RRSS = ""
 ) => {

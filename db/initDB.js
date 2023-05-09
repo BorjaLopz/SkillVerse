@@ -66,6 +66,9 @@ async function main() {
       user_id INT NOT NULL,
       requiredS_id INT NOT NULL,
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+      serviceFile VARCHAR(30),
+      FOREIGN KEY (serviceFile) REFERENCES requiredS (id),
+      FOREIGN KEY (serviceFile) REFERENCES users (id),
       FOREIGN KEY (user_id) REFERENCES users (id),
       FOREIGN KEY (requiredS_id) REFERENCES requiredS (id)
     );
