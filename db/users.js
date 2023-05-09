@@ -10,7 +10,8 @@ const createUser = async (
   surname = "",
   biography = "",
   userPhoto = "",
-  RRSS = ""
+  linkedin = "",
+  instagram = "",
 ) => {
   let connection;
 
@@ -44,8 +45,8 @@ const createUser = async (
     //Creamos usuario en la base de datos
     const [newUser] = await connection.query(
       `
-    INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, RRSS) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      [email, nickname, name, surname, passwordHash, biography, userPhoto, RRSS]
+    INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, linkedin, instagram) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [email, nickname, name, surname, passwordHash, biography, userPhoto, linkedin, instagram]
     );
 
     //Devolvemos el id

@@ -33,18 +33,17 @@ async function main() {
     CREATE TABLE users(
       id INT AUTO_INCREMENT PRIMARY KEY,
       email VARCHAR(100) NOT NULL UNIQUE,
-      nickname VARCHAR(30) NOT NULL UNIQUE (LENGTH(password) >= 4),
+      nickname VARCHAR(30) NOT NULL UNIQUE CHECK (LENGTH(password) >= 4),
       name VARCHAR(30),
       surname VARCHAR(60),
-      password VARCHAR(100) NOT NULL CHECK (LENGTH(password) >= 8 AND password REGEXP '[A-Z]' AND password REGEXP '[a-z]' AND password REGEXP '[0-9]')
+      password VARCHAR(100) NOT NULL CHECK (LENGTH(password) >= 8 AND password REGEXP '[A-Z]' AND password REGEXP '[a-z]' AND password REGEXP '[0-9]'),
       biography VARCHAR(600),
       userPhoto VARCHAR(1000),
-      linkedin VARCHAR(100) CHECK (linkedin REGEXP '^https?://(www\.)?linkedin\.com/in/[\w-]+$')
+      linkedin VARCHAR(100) CHECK (linkedin REGEXP '^https?://(www\.)?linkedin\.com/in/[\w-]+$'),
+      instagram VARCHAR(100) CHECK (instagram REGEXP '^https?://(www\.)?instagram\.com/[\w-]+igshid=[\w-]+$')
       active BOOLEAN DEFAULT TRUE,
     );
     `);
-    /*RRSS Será actualizado de cara al 3º proyecto para poder guardar por separado las diferentes redes sociales 
-    del usuario que nosotros decidamos que este pueda aportar de manera que luego se muestren en su pagina de perfil de usuario*/
 
     await connection.query(`
     CREATE TABLE requiredS(
@@ -58,8 +57,6 @@ async function main() {
       done BOOLEAN DEFAULT FALSE,
       hide BOOLEAN DEFAULT FALSE,
       FOREIGN KEY (user_id) REFERENCES users (id)
-      FOREIGN KEY (file_name) REFERENCES users (id)
-      FOREIGN KEY (file_name) REFERENCES requiredS (id)
     );
     `);
 
@@ -70,10 +67,7 @@ async function main() {
       requiredS_id INT NOT NULL,
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
       serviceFile VARCHAR(30),
-      choseen BOOLEAN DEFAULT FALSE,
       hide BOOLEAN DEFAULT FALSE,
-      FOREIGN KEY (serviceFile) REFERENCES requiredS (id),
-      FOREIGN KEY (serviceFile) REFERENCES users (id),
       FOREIGN KEY (user_id) REFERENCES users (id),
       FOREIGN KEY (requiredS_id) REFERENCES requiredS (id)
       FOREIGN KEY (hide) REFERENCES requiredS (hide)
