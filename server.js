@@ -21,27 +21,14 @@ const {
   editUserController,
 } = require("./controllers/users");
 
-const { newServiceController } = require("./controllers/services");
+const {
+  newServiceController,
+  getServiceByIDController,
+} = require("./controllers/services");
 
 const { authUser } = require("./middlewares/auth");
 const { createPathIfNotExists } = require("./helpers");
 const { generalError, error404 } = require("./middlewares/handleErrors");
-
-/* MULTER */ //TODO BORRAR
-const path = "uploads/";
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-const upload = multer({ storage });
-
-app.post("/upload", upload.single("file"), async (req, res) => {
-  res.send("Archivo descargado exitosamente");
-});
 
 /* Parseamos multipar/form-data */
 // app.use(upload.array());
@@ -73,6 +60,9 @@ app.post("/service/add", authUser, newServiceController);
 //borramos un servicio
 app.delete("/service/delete", authUser, deleteUserController);
 
+//Obtenemos un servicio por ID
+app.get("/service/:id", getServiceByIDController);
+
 //modificamos un servicio
 // app.put("/service/edit", authUser, editUserController);  //Lo comentamos de momento
 
@@ -83,6 +73,7 @@ app.use(error404);
 //Gestion de errores
 app.use(generalError);
 
+/* SERVER */
 app.listen(process.env.APP_PORT, async () => {
   console.log(
     `App listening on port ${process.env.APP_PORT}\nDB: ${process.env.DB_DATABASE}`
