@@ -40,4 +40,24 @@ const createService = async (
   }
 };
 
-module.exports = { createService };
+const getServiceByID = async (id) => {
+  let connection;
+
+  try {
+    connection = await getConnection();
+    const [result] = await connection.query(
+      `SELECT * FROM requireds WHERE id = ?`,
+      [id]
+    );
+
+    if (result.length === 0) {
+      throw generateError("No hay ningun servicio con ese id", 400);
+    }
+    return result[0];
+
+  } catch (e) {
+    throw generateError(`error: ${e.message}`, 400);
+  }
+};
+
+module.exports = { createService, getServiceByID};

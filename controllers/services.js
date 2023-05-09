@@ -1,5 +1,5 @@
 const { nanoid } = require("nanoid");
-const { createService } = require("../db/services");
+const { createService, getServiceByID } = require("../db/services");
 const { generateError, createPathIfNotExists } = require("../helpers");
 const chalk = require("chalk");
 const path = require("path");
@@ -49,22 +49,21 @@ const newServiceController = async (req, res, next) => {
       //Creamos directorio si no existe
       await createPathIfNotExists(uploadDir);
 
-      console.log(sampleFile)
+      console.log(sampleFile);
 
       fileName = `${nanoid(24)}.${sampleFile.name.split(".").slice(-1)}`; //Obtenemos la extension del fichero para guardarlo de la misma manera
 
       uploadPath = uploadDir + "\\" + fileName;
 
-      console.log(uploadPath)
+      console.log(uploadPath);
 
       //Subimos el fichero
-      sampleFile.mv(uploadPath, function(e) {
-        if(e){
+      sampleFile.mv(uploadPath, function (e) {
+        if (e) {
           throw generateError("No se ha podido mandar el fichero", 400);
         }
         console.log("Fichero subido con exito!");
       });
-
     }
 
     const id_services = await createService(
@@ -84,4 +83,22 @@ const newServiceController = async (req, res, next) => {
   }
 };
 
-module.exports = { newServiceController };
+const getServiceByIDController = async (req, res, next) => {
+  try {
+    //Obtenemos el id que le pasamos por params
+    const { id } = req.params;
+
+    //Obtenemos el servicio
+    const service = await getServiceByID(id);
+
+    //Lo mandamos a postman
+    res.send({
+      status: "ok",
+      message: service,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+module.exports = { newServiceController, getServiceByIDController };
