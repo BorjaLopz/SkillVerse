@@ -4,11 +4,48 @@ const Joi = require("@hapi/joi");
 const { generateError, createPathIfNotExists } = require("../helpers");
 const { createUser, getUserByEmail } = require("../db/users");
 const { createService } = require("../db/services");
+const { getConnection } = require("../db/db");
 
 /* Necesario para express-uploadfile */
 const path = require("path"); //Obtenemos el path del directorio __dirname
 const sharp = require("sharp"); //Modificamos el tamaño del fichero .resize()
 const { nanoid } = require("nanoid"); //Generaremos un nombre aleatorio de N caracteres nanoid(24);
+
+const newUserController = async (req, res, next) => {
+  try {
+    const { email, nickname, name, surname, password, biography, userPhoto } =
+      req.body;
+
+    const schema = Joi.object({
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
+    });
+
+    if (!email || !password || !nickname) {
+      throw generateError(
+        "Debes enviar un email, un password y un nickname",
+        401
+      );
+    }
+
+    const id = await createUser(
+      email,
+      password,
+      nickname,
+      name,
+      surname,
+      biography,
+      userPhoto
+    );
+
+    res.send({
+      status: "ok",
+      message: `User created with id ${id}`,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
 
 const loginController = async (req, res, next) => {
   try {
@@ -53,52 +90,6 @@ const loginController = async (req, res, next) => {
   }
 };
 
-const newUserController = async (req, res, next) => {
-  try {
-    const {
-      email,
-      nickname,
-      name,
-      surname,
-      password,
-      biography,
-      userPhoto,
-      RRSS,
-    } = req.body;
-
-    const schema = Joi.object({
-      email: Joi.string().email().required(),
-      password: Joi.string().required(),
-    });
-
-    const response = req.body;
-    const keys = Object.keys(response);
-    console.log(keys);
-
-    if (!email || !password) {
-      throw generateError("Debes enviar un email y un password", 401);
-    }
-
-    const id = await createUser(
-      email,
-      password,
-      nickname,
-      name,
-      surname,
-      biography,
-      userPhoto,
-      RRSS
-    );
-
-    res.send({
-      status: "ok",
-      message: `User created with id ${id}`,
-    });
-  } catch (e) {
-    next(e);
-  }
-};
-
 const deleteUserController = async (req, res, next) => {
   try {
     let { verifyNickname } = req.body;
@@ -117,15 +108,111 @@ const deleteUserController = async (req, res, next) => {
   }
 };
 
-// const editUserController = async (req, res, next) => {
-//   try {
-//     let { email } = req.body;
-//   }
-// }
+const getUserController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const user = await getUserByIdController(id);
+
+    res.send({
+      status: "ok",
+      data: user,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getUserByIdController = async (id) => {
+  let connection;
+
+  try {
+    connection = await getConnection();
+
+    const [result] = await connection.query(
+      `
+      SELECT id, email FROM users WHERE id = ?
+    `,
+      [id]
+    );
+
+    if (result.length === 0) {
+      throw generateError("No hay ningún usuario con esa id", 404);
+    }
+
+    return result[0];
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+const editUserController = async (req, res, next) => {
+  try {
+    let { email } = req.body;
+
+    if (!email) {
+      throw generateError("Introduzca su email", 400);
+    }
+    const user = await getUserByIdController(req.user.id);
+    email = email || user.email;
+    avatar = avatar || user.avatar;
+    role = role || user.role;
+
+    const editUser = await (email,
+    userPhoto,
+    nickname,
+    name,
+    surname,
+    password,
+    biography,
+    req.user.id);
+
+    if (email != user.email) {
+      res.send({
+        status: "ok",
+        message: "Email actualizado",
+      });
+    } else if (userPhoto != user.userPhoto) {
+      res.send({
+        status: "ok",
+        message: "Fotografía actualizada",
+      });
+    } else if (nickname != user.nickname) {
+      res.send({
+        status: "ok",
+        message: "Nickname actualizado",
+      });
+    } else if (name != user.name) {
+      res.send({
+        status: "ok",
+        message: "Nombre actualizado",
+      });
+    } else if (surname != user.surname) {
+      res.send({
+        status: "ok",
+        message: "Apellido actualizado",
+      });
+    } else if (password != user.surname) {
+      res.send({
+        status: "ok",
+        message: "Contraseña actualizada",
+      });
+    } else if (biography != user.biography) {
+      res.send({
+        status: "ok",
+        message: "Biografía actualizada",
+      });
+    }
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
-  loginController,
   newUserController,
+  loginController,
   deleteUserController,
+  getUserController,
+  getUserByIdController,
   editUserController,
 };
