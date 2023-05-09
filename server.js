@@ -38,12 +38,6 @@ app.post("/upload", upload.single("file"), async (req, res) => {
   res.send("Archivo descargado exitosamente");
 });
 
-
-
-
-
-
-
 /* Parseamos multipar/form-data */
 // app.use(upload.array());
 app.use(express.static("public"));
@@ -69,6 +63,7 @@ app.post("/login", loginController);
 app.post("/user/add", newUserController);
 
 //Creamos un servicio
+
 app.post("/service/add", authUser, newServiceController);
 
 /*MIDDLEWARES COPIADOS DE BERTO*/
