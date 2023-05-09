@@ -38,6 +38,14 @@ const createUser = async (
       throw generateError("Nickname already in use", 409);
     }
 
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$/;
+    if (!passwordRegex.test(password)) {
+      throw generateError(
+        "Password must contain at least one uppercase letter, one lowercase letter, one number, and be at least 8 characters long",
+        400
+      );
+    }
+
     //Encriptamos la contraseña
     const passwordHash = await bcrypt.hash(password, 10);
     // console.log(passwordHash); //Comprobamos la contraseña encriptada
