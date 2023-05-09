@@ -42,7 +42,6 @@ async function main() {
     /*linkedin VARCHAR(100) NULL CHECK (linkedin IS NULL OR linkedin REGEXP '^https?://(www.)?linkedin.com/in/[\w-]+$'),
       instagram VARCHAR(100) NULL CHECK (instagram IS NULL OR instagram REGEXP '^https?://(www.)?instagram.com/[\w-]+igshid=[\w-]+$'),
     */
-
     await connection.query(`
     CREATE TABLE requiredS(
       id INT AUTO_INCREMENT PRIMARY KEY,
