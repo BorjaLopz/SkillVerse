@@ -35,11 +35,13 @@ async function main() {
       biography VARCHAR(600),
       userPhoto VARCHAR(1000),
       active BOOLEAN DEFAULT TRUE
-      );
-      `);
-      /*linkedin VARCHAR(100) NULL CHECK (linkedin IS NULL OR linkedin REGEXP '^https?://(www\.)?linkedin\.com/in/[\w-]+$'),
-      instagram VARCHAR(100) NULL CHECK (instagram IS NULL OR instagram REGEXP '^https?://(www\.)?instagram\.com/[\w-]+igshid=[\w-]+$'),
-      */
+    );
+    `);
+
+    /* TODO VERIFICAR QUE ESTO FUNCIONE*/
+    /*linkedin VARCHAR(100) NULL CHECK (linkedin IS NULL OR linkedin REGEXP '^https?://(www.)?linkedin.com/in/[\w-]+$'),
+      instagram VARCHAR(100) NULL CHECK (instagram IS NULL OR instagram REGEXP '^https?://(www.)?instagram.com/[\w-]+igshid=[\w-]+$'),
+    */
     await connection.query(`
     CREATE TABLE requiredS(
       id INT AUTO_INCREMENT PRIMARY KEY,
@@ -64,9 +66,10 @@ async function main() {
       serviceFile VARCHAR(30),
       hide BOOLEAN DEFAULT FALSE,
       FOREIGN KEY (user_id) REFERENCES users (id),
-      FOREIGN KEY (requiredS_id) REFERENCES requiredS (id),
+      FOREIGN KEY (requiredS_id) REFERENCES requiredS (id)
+      
     );
-    `);
+    `); //FOREIGN KEY (hide) REFERENCES requiredS (hide)
 
     console.log(chalk.green("Tablas creadas con éxito"));
   } catch (error) {

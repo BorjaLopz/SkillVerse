@@ -16,11 +16,18 @@ app.use(fileUpload());  //Le pasamos el middleware para que pueda leer archivos 
 const {
   loginController,
   newUserController,
-  newServiceController,
+  deleteUserController,
+  editUserController
 } = require("./controllers/users");
+
+const { newServiceController } = require("./controllers/services");
+
+
+
 const { authUser } = require("./middlewares/auth");
 const { createPathIfNotExists } = require("./helpers");
 const { generalError, error404 } = require("./middlewares/handleErrors");
+
 
 /* MULTER */ //TODO BORRAR
 const path = "uploads/";
@@ -65,6 +72,16 @@ app.post("/user/add", newUserController);
 //Creamos un servicio
 
 app.post("/service/add", authUser, newServiceController);
+
+
+//borramos un servicio
+app.delete("/service/delete", authUser, deleteUserController);
+
+
+//modificamos un servicio
+// app.put("/service/edit", authUser, editUserController);  //Lo comentamos de momento
+
+
 
 /*MIDDLEWARES COPIADOS DE BERTO*/
 //GESTIONAMOS LOS 404. Cuando accedemos a rutas que no estan definidas

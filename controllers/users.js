@@ -3,11 +3,9 @@ const jwt = require("jsonwebtoken");
 const Joi = require("@hapi/joi");
 const { generateError, createPathIfNotExists } = require("../helpers");
 const { createUser, getUserByEmail } = require("../db/users");
-const { createService } = require("../db/services");
 
 /* Necesario para express-uploadfile */
 const path = require("path"); //Obtenemos el path del directorio __dirname
-const sharp = require("sharp"); //Modificamos el tamaño del fichero .resize()
 const { nanoid } = require("nanoid"); //Generaremos un nombre aleatorio de N caracteres nanoid(24);
 
 const loginController = async (req, res, next) => {
@@ -62,8 +60,7 @@ const newUserController = async (req, res, next) => {
       surname,
       password,
       biography,
-      userPhoto,
-      RRSS,
+      userPhoto
     } = req.body;
 
     const schema = Joi.object({
@@ -71,12 +68,8 @@ const newUserController = async (req, res, next) => {
       password: Joi.string().required(),
     });
 
-    const response = req.body;
-    const keys = Object.keys(response);
-    console.log(keys);
-
-    if (!email || !password) {
-      throw generateError("Debes enviar un email y un password", 401);
+    if (!email || !password || !nickname) {
+      throw generateError("Debes enviar un email, un password y un nickname", 401);
     }
 
     const id = await createUser(
@@ -86,8 +79,7 @@ const newUserController = async (req, res, next) => {
       name,
       surname,
       biography,
-      userPhoto,
-      RRSS
+      userPhoto
     );
 
     res.send({
@@ -117,15 +109,15 @@ const deleteUserController = async (req, res, next) => {
   }
 };
 
-// const editUserController = async (req, res, next) => {
-//   try {
-//     let { email } = req.body;
-//   }
-// }
+/*const editUserController = async (req, res, next) => {
+  try {
+    let { email } = req.body;
+  }
+}
+}*/
 
 module.exports = {
   loginController,
   newUserController,
   deleteUserController,
-  editUserController,
 };
