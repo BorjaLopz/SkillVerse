@@ -16,10 +16,12 @@ const {
 const chalk = require("chalk");
 const path = require("path");
 
+//Controller para crear nuevo servicio en la BBDD
 const newServiceController = async (req, res, next) => {
   try {
     const { title, request_body, required_type } = req.body;
-
+    const file_name = req.file;
+    
     //Comprobamos titulo
     if (!title || title.lenght > 50 || title.lenght < 15) {
       throw generateError(
@@ -86,6 +88,7 @@ const newServiceController = async (req, res, next) => {
       fileName
     );
 
+    console.log(chalk.green("Service created"));
     res.send({
       status: "ok",
       message: `Services created with id ${id_services}`, //${id_services}

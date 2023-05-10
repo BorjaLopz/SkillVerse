@@ -5,6 +5,7 @@ require("dotenv").config();
 const multer = require("multer"); //Nos servira para almacenar ficheros, y leer form-data desde postman
 const fs = require("fs/promises");
 const fileUpload = require("express-fileupload");
+const chalk = require("chalk");
 
 let connection;
 
@@ -21,6 +22,7 @@ const {
   editUserController,
 } = require("./controllers/users");
 
+const { newServiceController } = require("./controllers/services");
 const {
   newServiceController,
   getServiceByIDController,
@@ -32,6 +34,22 @@ const { authUser } = require("./middlewares/auth");
 const { createPathIfNotExists } = require("./helpers");
 const { generalError, error404 } = require("./middlewares/handleErrors");
 
+/* MULTER */ //TODO BORRAR
+const path = "uploads/";
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage });
+
+app.post("/upload", upload.single("file"), async (req, res) => {
+  res.send("File downloaded");
+});
+
 /* Parseamos multipar/form-data */
 // app.use(upload.array());
 app.use(express.static("public"));
@@ -42,10 +60,10 @@ app.get("/requiredS", async (req, res) => {
     const [rows, fields] = await connection.query(
       "SELECT id, title, request_body FROM requiredS"
     );
-    console.log("Servicios obtenidos exitosamente");
+    console.log(chalk.green("Services obtained"));
     res.status(200).send(rows);
   } catch (error) {
-    console.error("Error al obtener los servicios: " + error.stack);
+    console.error(chalk.red("Error getting services: " + error.stack));
     res.status(500).send("Error al obtener los servicios");
   }
 });
@@ -61,6 +79,9 @@ app.post("/service/add", authUser, newServiceController);
 
 //borramos un servicio
 app.delete("/service/delete", authUser, deleteUserController);
+
+//modificamos un servicio
+// app.put("/service/edit", authUser, editUserController);  //Lo comentamos de momento
 
 //Obtenemos un servicio por ID
 app.get("/service/:id", getServiceByIDController);
@@ -87,6 +108,8 @@ app.use(generalError);
 /* SERVER */
 app.listen(process.env.APP_PORT, async () => {
   console.log(
-    `App listening on port ${process.env.APP_PORT}\nDB: ${process.env.DB_DATABASE}`
+    chalk.green(
+      `App listening on port ${process.env.APP_PORT}\nDB: ${process.env.DB_DATABASE}`
+    )
   );
 });

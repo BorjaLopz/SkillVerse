@@ -8,21 +8,21 @@ async function main() {
   let connection;
   try {
     connection = await getConnection();
-    console.log(chalk.green("Conexión establecida"));
+    console.log(chalk.green("Connection established"));
 
     //Crear BBDD
     await connection.query("CREATE DATABASE IF NOT EXISTS portalDigital");
     await connection.query("USE portalDigital");
-    console.log(chalk.green("Base de datos creada"));
+    console.log(chalk.green("Database created"));
 
     //Borrar tablas
-    console.log(chalk.yellow("Borrando tablas antiguas..."));
+    console.log(chalk.yellow("Deleting old tables..."));
     await connection.query("DROP TABLE IF EXISTS comments;");
     await connection.query("DROP TABLE IF EXISTS requiredS;");
     await connection.query("DROP TABLE IF EXISTS users;");
 
     //Crear tablas
-    console.log(chalk.yellow("Creando tablas nuevas..."));
+    console.log(chalk.yellow("Creating new tables..."));
 
     await connection.query(`
     CREATE TABLE users(
@@ -38,10 +38,11 @@ async function main() {
     );
     `);
 
-    /* TODO VERIFICAR QUE ESTO FUNCIONE*/
+    /*DA ERROR: REHACER*/
     /*linkedin VARCHAR(100) NULL CHECK (linkedin IS NULL OR linkedin REGEXP '^https?://(www.)?linkedin.com/in/[\w-]+$'),
       instagram VARCHAR(100) NULL CHECK (instagram IS NULL OR instagram REGEXP '^https?://(www.)?instagram.com/[\w-]+igshid=[\w-]+$'),
     */
+
     await connection.query(`
     CREATE TABLE requiredS(
       id INT AUTO_INCREMENT PRIMARY KEY,
@@ -71,13 +72,13 @@ async function main() {
     );
     `); //FOREIGN KEY (hide) REFERENCES requiredS (hide)
 
-    console.log(chalk.green("Tablas creadas con éxito"));
+    console.log(chalk.green("Tables created"));
   } catch (error) {
-    console.error(chalk.red("Hubo un error: " + error.message));
+    console.error(chalk.red("An error has occurred " + error.message));
   } finally {
-    if (connection) console.log(chalk.yellow("Liberando conexión..."));
+    if (connection) console.log(chalk.yellow("Releasing connection..."));
     connection.release();
-    console.log(chalk.green("Conexión liberada"));
+    console.log(chalk.green("Connection released"));
 
     process.exit();
   }

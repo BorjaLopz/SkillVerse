@@ -1,5 +1,4 @@
 const fs = require("fs/promises");
-const chalk = require("chalk");
 
 /* DICCIONARIO DE ESTADOS DE UN SERVICIO */
 const SERVICE_STATUS = Object.freeze({
