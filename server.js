@@ -26,6 +26,7 @@ const {
   getServiceByIDController,
   getAllServicesController,
   updateServiceStatusByIDController,
+  getServiceByTypeController,
 } = require("./controllers/services");
 
 const { authUser } = require("./middlewares/auth");
@@ -50,11 +51,23 @@ app.get("/requiredS", async (req, res) => {
   }
 });
 
+
+//#region USER
+
 // login del usuario (devulve token)
-app.post("/login", loginController);
+app.post("/user/login", loginController);
 
 //Creamos un usuario
 app.post("/user/add", newUserController);
+
+//modificamos un servicio
+app.put("/user/edit", authUser, editUserController); //Lo comentamos de momento
+
+//#endregion USER
+
+
+
+//#region Servicio
 
 //Creamos un servicio
 app.post("/service/add", authUser, newServiceController);
@@ -68,25 +81,32 @@ app.get("/service/:id", getServiceByIDController);
 //Obtenemos todos los servicios
 app.get("/service", authUser, getAllServicesController);
 
-//Obtenemos todos los servicios
-app.get("/prueba", authUser, getAllServicesController);
-
 //Modificamos el estado de determinado servicio
 app.patch("/service/:id/:status", updateServiceStatusByIDController);
 
-//modificamos un servicio
-app.put("/service/edit", authUser, editUserController); //Lo comentamos de momento
+//Obtenemos servicios en funcion de su tipo
+app.get("/service/type/(:type)?", authUser, getServiceByTypeController);
 
-/*MIDDLEWARES COPIADOS DE BERTO*/
+//#endregion Servicio
+
+
+
+//#region Middlewares
+
 //GESTIONAMOS LOS 404. Cuando accedemos a rutas que no estan definidas
 app.use(error404);
 
 //Gestion de errores
 app.use(generalError);
 
-/* SERVER */
+//#endregion Middlewares
+
+//#region SERVER
+
 app.listen(process.env.APP_PORT, async () => {
   console.log(
     `App listening on port ${process.env.APP_PORT}\nDB: ${process.env.DB_DATABASE}`
   );
 });
+
+//#endregion SERVER

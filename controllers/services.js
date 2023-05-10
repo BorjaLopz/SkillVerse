@@ -4,6 +4,7 @@ const {
   getServiceByID,
   getAllServices,
   updateServiceStatus,
+  getServiceByType,
 } = require("../db/services");
 const {
   generateError,
@@ -115,9 +116,10 @@ const getServiceByIDController = async (req, res, next) => {
 
 const getAllServicesController = async (req, res, next) => {
   try {
-    
     // const services = await getAllServices();
-    const services = await (!req.userId ? getAllServices() : getAllServices(req.userId));
+    const services = await (!req.userId
+      ? getAllServices()
+      : getAllServices(req.userId));
 
     //Lo mandamos a postman
     res.send({
@@ -151,7 +153,23 @@ const updateServiceStatusByIDController = async (req, res, next) => {
 
     //Lo mandamos a postman
     res.send({
-      status: "error",
+      status: "ok",
+      message: service,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+const getServiceByTypeController = async (req, res, next) => {
+  try {
+    console.log(req.params)
+    const { type } = req.params;
+
+    const service = await getServiceByType(type);
+
+    res.send({
+      status: "ok",
       message: service,
     });
   } catch (e) {
@@ -164,4 +182,5 @@ module.exports = {
   getServiceByIDController,
   getAllServicesController,
   updateServiceStatusByIDController,
+  getServiceByTypeController,
 };

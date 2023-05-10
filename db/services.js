@@ -63,7 +63,7 @@ const getServiceByID = async (id) => {
 
 const getAllServices = async (user_id = -1) => {
   let connection;
-  console.log(chalk.green(user_id))
+  console.log(chalk.green(user_id));
 
   try {
     connection = await getConnection();
@@ -105,7 +105,31 @@ const updateServiceStatus = async (id, serviceValue) => {
     );
 
     return update;
+  } catch (e) {
+    throw generateError(`error: ${e.message}`, 400);
+  }
+};
 
+const getServiceByType = async (type) => {
+  let connection;
+  console.log(chalk.red(type));
+
+  try {
+    connection = await getConnection();
+
+    const [result] = await connection.query(
+      `SELECT * FROM requireds WHERE required_type LIKE ? AND done = ?`,
+      [`${type}%`, 0]
+    );
+
+    if (result.length === 0) {
+      throw generateError(
+        `No existe ningun servicio que empiece por ${type}`,
+        400
+      );
+    }
+
+    return result;
   } catch (e) {
     throw generateError(`error: ${e.message}`, 400);
   }
@@ -116,4 +140,5 @@ module.exports = {
   getServiceByID,
   getAllServices,
   updateServiceStatus,
+  getServiceByType,
 };
