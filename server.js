@@ -28,7 +28,7 @@ const {
   getServiceByIDController,
   getAllServicesController,
   updateServiceStatusByIDController,
-  getServiceByTypeController,
+
 } = require("./controllers/services");
 
 const { authUser } = require("./middlewares/auth");
@@ -105,14 +105,7 @@ app.get("/service", authUser, getAllServicesController);
 //Modificamos el estado de determinado servicio
 app.patch("/service/:id/:status", updateServiceStatusByIDController);
 
-//Obtenemos servicios en funcion de su tipo
-app.get("/service/type/(:type)?", authUser, getServiceByTypeController);
 
-//#endregion Servicio
-
-
-
-//#region Middlewares
 
 //GESTIONAMOS LOS 404. Cuando accedemos a rutas que no estan definidas
 app.use(error404);
