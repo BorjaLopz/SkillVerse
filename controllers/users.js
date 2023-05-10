@@ -2,7 +2,11 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Joi = require("@hapi/joi");
 const { generateError, createPathIfNotExists } = require("../helpers");
-const { createUser, getUserByEmail } = require("../db/users");
+const {
+  createUser,
+  getUserByEmail,
+  getAllFieldsExceptPassword,
+} = require("../db/users");
 const { createService } = require("../db/services");
 const { getConnection } = require("../db/db");
 const chalk = require("chalk");
@@ -22,9 +26,7 @@ const newUserController = async (req, res, next) => {
     });
 
     if (!email || !password || !nickname) {
-      throw generateError(
-        chalk.red("Email, password and a nickname are required", 401)
-      );
+      throw generateError("Email, password and a nickname are required", 401);
     }
 
     const id = await createUser(
@@ -36,7 +38,6 @@ const newUserController = async (req, res, next) => {
       biography,
       userPhoto
     );
-   
 
     res.send({
       status: "ok",
@@ -56,13 +57,13 @@ const loginController = async (req, res, next) => {
     });
     const { error } = schema.validate(req.body);
     if (error) {
-      throw generateError(chalk.red(error.details.message, 400));
+      throw generateError(error.details.message, 400);
     }
 
     const { email, password } = req.body;
 
     if (!email || !password) {
-      throw generateError(chalk.red("Email and password are required", 400));
+      throw generateError("Email and password are required", 400);
     }
 
     //recojo los datos de la base de datos del usuario con ese mail
@@ -71,7 +72,7 @@ const loginController = async (req, res, next) => {
     const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
-      throw generateError(chalk.red("Password does not match", 401));
+      throw generateError("Password does not match", 401);
     }
     //creo el payload del token
     const payload = { id: user.id };
@@ -95,7 +96,7 @@ const deleteUserController = async (req, res, next) => {
     let { verifyNickname } = req.body;
 
     if (!verifyNickname) {
-      throw generateError > chalk.red("Covering all fields is required", 400);
+      throw generateError("Covering all fields is required", 400);
     }
 
     await deleteUserController(req.user.id, verifyNickname);
@@ -124,6 +125,25 @@ const getUserController = async (req, res, next) => {
   }
 };
 
+async function prueba(id) {}
+
+const getAllFieldsExceptPasswordController = async (req, res, next) => {
+  const { id } = req.params;
+  console.log(id);
+  try {
+    connection = await getConnection();
+
+    const userId = await getAllFieldsExceptPassword(id);
+
+    res.send({
+      status: "ok",
+      data: userId,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
 const getUserByIdController = async (id) => {
   let connection;
 
@@ -138,7 +158,7 @@ const getUserByIdController = async (id) => {
     );
 
     if (result.length === 0) {
-      throw generateError(chalk.red("There is no user with that ID", 404));
+      throw generateError("There is no user with that ID", 404);
     }
 
     return result[0];
@@ -148,17 +168,37 @@ const getUserByIdController = async (id) => {
 };
 
 const editUserController = async (req, res, next) => {
-  try {
-    let { email } = req.body;
+  const { id } = req.params;
+  console.log(chalk.red(id));
 
-    if (!email) {
-      throw generateError(chalk.red("Email is required", 400));
-    }
-    // const user = await getUserByIdController(req.user.id);
-    const user = await getUserByEmail(email);
-    // email = email || user.email;
-    avatar = avatar || user.avatar;
-    role = role || user.role;
+  //@TODO HACER BIEN
+
+  //  let { email, userPhoto, nickname, name, surname, password, biography} 
+  let email;
+  let userPhoto;
+  let nickname;
+  let name;
+  let surname;
+  let password;
+  let biography;
+
+  try {
+    // let { email } = req.body;
+
+    // if (!email) {
+    //   throw generateError("Email is required", 400);
+    // }
+    const user = await getAllFieldsExceptPassword(id);
+
+    console.log(user)
+    // const user = await getUserByEmail(email);
+    email = email || user.email;
+    userPhoto = userPhoto || user.userPhoto;
+    nickname = nickname || user.nickname;
+    name = name || user.name;
+    surname = surname || user.surname;
+    password = password || user.password;
+    biography = biography || user.biography;
 
     const editUser = await (email,
     userPhoto,
@@ -167,7 +207,7 @@ const editUserController = async (req, res, next) => {
     surname,
     password,
     biography,
-    req.user.id);
+    id);
 
     if (email != user.email) {
       res.send({
@@ -180,6 +220,7 @@ const editUserController = async (req, res, next) => {
         message: "Photo updated",
       });
     } else if (nickname != user.nickname) {
+      console.log("Estamos aqui");
       res.send({
         status: "ok",
         message: "Nickname updated",
@@ -205,6 +246,10 @@ const editUserController = async (req, res, next) => {
         message: "Biography updated",
       });
     }
+
+    console.log(chalk.blue(nickname));
+
+    // actualizarUsuario(user.email, user.nickname);
   } catch (error) {
     next(error);
   }
@@ -217,4 +262,5 @@ module.exports = {
   getUserController,
   getUserByIdController,
   editUserController,
+  getAllFieldsExceptPasswordController,
 };

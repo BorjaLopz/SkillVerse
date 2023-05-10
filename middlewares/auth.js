@@ -17,6 +17,7 @@ const authUser = (req, res, next) => {
       token = jwt.verify(authorization, process.env.JWT_SECTRET);
     } catch (error) {
       throw generateError(chalk.red("Wrong token", 401));
+      next();
     }
 
       console.log(token); //dev
