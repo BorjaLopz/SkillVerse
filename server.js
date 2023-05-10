@@ -66,13 +66,16 @@ app.delete("/service/delete", authUser, deleteUserController);
 app.get("/service/:id", getServiceByIDController);
 
 //Obtenemos todos los servicios
-app.get("/service", getAllServicesController)
+app.get("/service", authUser, getAllServicesController);
+
+//Obtenemos todos los servicios
+app.get("/prueba", authUser, getAllServicesController);
 
 //Modificamos el estado de determinado servicio
-app.patch("/service/:id/:status", updateServiceStatusByIDController)
+app.patch("/service/:id/:status", updateServiceStatusByIDController);
 
 //modificamos un servicio
-// app.put("/service/edit", authUser, editUserController);  //Lo comentamos de momento
+app.put("/service/edit", authUser, editUserController); //Lo comentamos de momento
 
 /*MIDDLEWARES COPIADOS DE BERTO*/
 //GESTIONAMOS LOS 404. Cuando accedemos a rutas que no estan definidas
