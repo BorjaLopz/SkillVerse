@@ -3,8 +3,16 @@ const {
   createService,
   getServiceByID,
   getAllServices,
+  updateServiceStatus,
 } = require("../db/services");
-const { generateError, createPathIfNotExists } = require("../helpers");
+const {
+  generateError,
+  createPathIfNotExists,
+  SERVICE_STATUS,
+  SERVICES_VALUES,
+  getKeyByValue,
+} = require("../helpers");
+// const {  } = require("../helpers")
 const chalk = require("chalk");
 const path = require("path");
 
@@ -115,12 +123,43 @@ const getAllServicesController = async (req, res, next) => {
       message: services,
     });
   } catch (e) {
-    next(e)
+    next(e);
   }
-}
+};
+
+const updateServiceStatusByIDController = async (req, res, next) => {
+  try {
+    const { id, status } = req.params; //Obtenemos el id del servicio y el estado
+
+    //Comprobamos si  el estado que le hemos pasado es valido
+    if (!Object.values(SERVICE_STATUS).includes(status.toUpperCase())) {
+      throw generateError("Estado no valido", 401);
+    }
+
+    /* dev */
+    // console.log(
+    //   SERVICES_VALUES[getKeyByValue(SERVICE_STATUS, status.toUpperCase())]
+    // );
+    // console.log(status);
+
+    const service = await updateServiceStatus(
+      id,
+      SERVICES_VALUES[getKeyByValue(SERVICE_STATUS, status.toUpperCase())]  //Obtenemos el valor que tiene la key done:1 o undone:2 segun el status que le pasemos en el endpoint
+    );
+
+    //Lo mandamos a postman
+    res.send({
+      status: "error",
+      message: service,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
 
 module.exports = {
   newServiceController,
   getServiceByIDController,
   getAllServicesController,
+  updateServiceStatusByIDController,
 };

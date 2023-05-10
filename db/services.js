@@ -2,6 +2,8 @@ const { getConnection } = require("../db/db");
 const { generateError } = require("../helpers");
 const chalk = require("chalk");
 
+const { SERVICES_VALUES } = require("../helpers");
+
 const createService = async (
   title,
   request_body,
@@ -64,7 +66,10 @@ const getAllServices = async () => {
 
   try {
     connection = await getConnection();
-    const [result] = await connection.query(`SELECT * FROM requireds WHERE done = ? ORDER BY creation_date ASC`, [0]);
+    const [result] = await connection.query(
+      `SELECT * FROM requireds WHERE done = ? ORDER BY creation_date ASC`,
+      [0]
+    );
 
     if (result.length === 0) {
       throw generateError("No hay ningun servicio", 404);
@@ -76,4 +81,38 @@ const getAllServices = async () => {
   }
 };
 
-module.exports = { createService, getServiceByID, getAllServices };
+const updateServiceStatus = async (id, serviceValue) => {
+  let connection;
+
+  try {
+    console.log(chalk.blue(id));
+    console.log(chalk.blue(serviceValue));
+
+    connection = await getConnection();
+    const [result] = await connection.query(
+      `SELECT * FROM requireds WHERE id = ?`,
+      [id]
+    );
+
+    if (result.length === 0) {
+      throw generateError("No hay ningun servicio", 404);
+    }
+
+    const [update] = await connection.query(
+      `UPDATE requireds SET done = ? WHERE id = ?`,
+      [serviceValue, id]
+    );
+
+    return update;
+
+  } catch (e) {
+    throw generateError(`error: ${e.message}`, 400);
+  }
+};
+
+module.exports = {
+  createService,
+  getServiceByID,
+  getAllServices,
+  updateServiceStatus,
+};

@@ -25,6 +25,7 @@ const {
   newServiceController,
   getServiceByIDController,
   getAllServicesController,
+  updateServiceStatusByIDController,
 } = require("./controllers/services");
 
 const { authUser } = require("./middlewares/auth");
@@ -64,7 +65,11 @@ app.delete("/service/delete", authUser, deleteUserController);
 //Obtenemos un servicio por ID
 app.get("/service/:id", getServiceByIDController);
 
+//Obtenemos todos los servicios
 app.get("/service", getAllServicesController)
+
+//Modificamos el estado de determinado servicio
+app.patch("/service/:id/:status", updateServiceStatusByIDController)
 
 //modificamos un servicio
 // app.put("/service/edit", authUser, editUserController);  //Lo comentamos de momento
