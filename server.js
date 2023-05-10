@@ -2,7 +2,6 @@ const express = require("express");
 const mysql = require("mysql2/promise");
 const bodyParser = require("body-parser");
 require("dotenv").config();
-const multer = require("multer"); //Nos servira para almacenar ficheros, y leer form-data desde postman
 const fs = require("fs/promises");
 const fileUpload = require("express-fileupload");
 const chalk = require("chalk");
@@ -35,17 +34,6 @@ const { authUser } = require("./middlewares/auth");
 const { createPathIfNotExists } = require("./helpers");
 const { generalError, error404 } = require("./middlewares/handleErrors");
 
-/* MULTER */ //TODO BORRAR
-const path = "uploads/";
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/");
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
-});
-const upload = multer({ storage });
 
 app.post("/upload", upload.single("file"), async (req, res) => {
   res.send("File downloaded");
