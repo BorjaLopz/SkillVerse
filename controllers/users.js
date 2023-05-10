@@ -36,6 +36,7 @@ const newUserController = async (req, res, next) => {
       biography,
       userPhoto
     );
+   
 
     res.send({
       status: "ok",
@@ -96,6 +97,7 @@ const deleteUserController = async (req, res, next) => {
     if (!verifyNickname) {
       throw generateError > chalk.red("Covering all fields is required", 400);
     }
+
     await deleteUserController(req.user.id, verifyNickname);
 
     res.send({
@@ -152,8 +154,9 @@ const editUserController = async (req, res, next) => {
     if (!email) {
       throw generateError(chalk.red("Email is required", 400));
     }
-    const user = await getUserByIdController(req.user.id);
-    email = email || user.email;
+    // const user = await getUserByIdController(req.user.id);
+    const user = await getUserByEmail(email);
+    // email = email || user.email;
     avatar = avatar || user.avatar;
     role = role || user.role;
 

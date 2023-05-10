@@ -8,7 +8,8 @@ const authUser = (req, res, next) => {
     const { authorization } = req.headers;
     if (!authorization) {
       throw generateError(chalk.red("Missing Authorization header", 401));
-    }
+      next();
+    } else {
     //comprobamos que el token sea correcto
     let token;
 
@@ -18,14 +19,15 @@ const authUser = (req, res, next) => {
       throw generateError(chalk.red("Wrong token", 401));
     }
 
-    console.log(token); //dev
+      console.log(token); //dev
 
-    // metemos la informacion del token en la request para usarla en el controlador
+      // metemos la informacion del token en la request para usarla en el controlador
 
-    req.userId = token.id;
-    //saltamos al controlador
+      req.userId = token.id;
+      //saltamos al controlador
 
-    next();
+      next();
+    }
   } catch (error) {
     next(error);
   }

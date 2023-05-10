@@ -13,6 +13,7 @@ const app = new express();
 app.use(bodyParser.json()); //Parseamos appliacion/json
 app.use(bodyParser.urlencoded({ extended: true })); //Parseamos application xwww-form-urlencoded
 app.use(fileUpload()); //Le pasamos el middleware para que pueda leer archivos binarios
+app.use("/uploads", express.static("./uploads"));
 
 const {
   loginController,
@@ -22,6 +23,12 @@ const {
 } = require("./controllers/users");
 
 const { newServiceController } = require("./controllers/services");
+const {
+  newServiceController,
+  getServiceByIDController,
+  getAllServicesController,
+  updateServiceStatusByIDController,
+} = require("./controllers/services");
 
 const { authUser } = require("./middlewares/auth");
 const { createPathIfNotExists } = require("./helpers");
@@ -68,7 +75,6 @@ app.post("/login", loginController);
 app.post("/user/add", newUserController);
 
 //Creamos un servicio
-
 app.post("/service/add", authUser, newServiceController);
 
 //borramos un servicio
@@ -77,6 +83,21 @@ app.delete("/service/delete", authUser, deleteUserController);
 //modificamos un servicio
 // app.put("/service/edit", authUser, editUserController);  //Lo comentamos de momento
 
+//Obtenemos un servicio por ID
+app.get("/service/:id", getServiceByIDController);
+
+//Obtenemos todos los servicios
+app.get("/service", authUser, getAllServicesController);
+
+//Obtenemos todos los servicios
+app.get("/prueba", authUser, getAllServicesController);
+
+//Modificamos el estado de determinado servicio
+app.patch("/service/:id/:status", updateServiceStatusByIDController);
+
+//modificamos un servicio
+app.put("/service/edit", authUser, editUserController); //Lo comentamos de momento
+
 /*MIDDLEWARES COPIADOS DE BERTO*/
 //GESTIONAMOS LOS 404. Cuando accedemos a rutas que no estan definidas
 app.use(error404);
@@ -84,6 +105,7 @@ app.use(error404);
 //Gestion de errores
 app.use(generalError);
 
+/* SERVER */
 app.listen(process.env.APP_PORT, async () => {
   console.log(
     chalk.green(
