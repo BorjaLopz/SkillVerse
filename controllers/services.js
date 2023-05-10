@@ -188,7 +188,7 @@ const getServiceByTypeController = async (req, res, next) => {
 
 
 
-const serviceFileController = async (req, res, next) => {
+const commentsFileController = async (req, res, next) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0) {
       return res.status(400).send('No se ha subido ningún archivo');
@@ -239,5 +239,7 @@ module.exports = {
   getServiceByIDController,
   getAllServicesController,
   updateServiceStatusByIDController,
+  commentsFileController
+ 
 
 };

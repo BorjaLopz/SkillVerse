@@ -22,12 +22,13 @@ const {
   editUserController,
 } = require("./controllers/users");
 
-const { newServiceController } = require("./controllers/services");
+const { newServiceController, commentsFileController } = require("./controllers/services");
 const {
   newServiceController,
   getServiceByIDController,
   getAllServicesController,
   updateServiceStatusByIDController,
+  commentsFileController
 
 } = require("./controllers/services");
 
@@ -104,6 +105,9 @@ app.get("/service", authUser, getAllServicesController);
 
 //Modificamos el estado de determinado servicio
 app.patch("/service/:id/:status", updateServiceStatusByIDController);
+
+//añadimos comentario fichero
+app.post("/comments/file", commentsFileController);
 
 
 
