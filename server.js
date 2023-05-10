@@ -1,8 +1,6 @@
 const express = require("express");
-const mysql = require("mysql2/promise");
 const bodyParser = require("body-parser");
 require("dotenv").config();
-const fs = require("fs/promises");
 const fileUpload = require("express-fileupload");
 const chalk = require("chalk");
 
@@ -13,6 +11,7 @@ app.use(bodyParser.json()); //Parseamos appliacion/json
 app.use(bodyParser.urlencoded({ extended: true })); //Parseamos application xwww-form-urlencoded
 app.use(fileUpload()); //Le pasamos el middleware para que pueda leer archivos binarios
 app.use("/uploads", express.static("./uploads"));
+app.use("/requestfiles", express.static("./requestfiles"));
 
 const {
   loginController,
@@ -21,26 +20,17 @@ const {
   editUserController,
 } = require("./controllers/users");
 
-// const { newServiceController, commentsFileController } = require("./controllers/services");
 const {
   newServiceController,
   getServiceByIDController,
   getAllServicesController,
   updateServiceStatusByIDController,
-  commentsFileController
+  commentsFileController,
 } = require("./controllers/services");
 
 const { authUser } = require("./middlewares/auth");
-const { createPathIfNotExists } = require("./helpers");
 const { generalError, error404 } = require("./middlewares/handleErrors");
 
-
-app.post("/upload", upload.single("file"), async (req, res) => {
-  res.send("File downloaded");
-});
-
-/* Parseamos multipar/form-data */
-// app.use(upload.array());
 app.use(express.static("public"));
 
 //ENDPOINT para obtener todo de la base de datos
@@ -57,7 +47,6 @@ app.get("/requiredS", async (req, res) => {
   }
 });
 
-
 //#region USER
 
 // login del usuario (devulve token)
@@ -66,12 +55,7 @@ app.post("/user/login", loginController);
 //Creamos un usuario
 app.post("/user/add", newUserController);
 
-//modificamos un servicio
-app.put("/user/edit", authUser, editUserController); //Lo comentamos de momento
-
 //#endregion USER
-
-
 
 //#region Servicio
 
@@ -81,8 +65,8 @@ app.post("/service/add", authUser, newServiceController);
 //borramos un servicio
 app.delete("/service/delete", authUser, deleteUserController);
 
-//modificamos un servicio
-// app.put("/service/edit", authUser, editUserController);  //Lo comentamos de momento
+//modificamos un user
+app.put("/user/edit", authUser, editUserController);
 
 //Obtenemos un servicio por ID
 app.get("/service/:id", getServiceByIDController);
@@ -95,8 +79,6 @@ app.patch("/service/:id/:status", updateServiceStatusByIDController);
 
 //añadimos comentario fichero
 app.post("/comments/:id", authUser, commentsFileController);
-
-
 
 //GESTIONAMOS LOS 404. Cuando accedemos a rutas que no estan definidas
 app.use(error404);

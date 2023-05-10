@@ -29,11 +29,6 @@ const createService = async (
       [title, request_body, user_id, file_name, required_type, done, hide]
     );
 
-    /*const [newService] = await connection.query(
-      `
-    INSERT INTO requireds (title, request_body, user_id, file_name, required_type) VALUES (?, ?, ?, ?, ?)`, [title, request_body, user_id, file_name, required_type]
-    );*/
-
     console.log(chalk.green("Service created"));
 
     return newService.insertId;
