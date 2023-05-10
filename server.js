@@ -22,14 +22,13 @@ const {
   editUserController,
 } = require("./controllers/users");
 
-const { newServiceController, commentsFileController } = require("./controllers/services");
+// const { newServiceController, commentsFileController } = require("./controllers/services");
 const {
   newServiceController,
   getServiceByIDController,
   getAllServicesController,
   updateServiceStatusByIDController,
   commentsFileController
-
 } = require("./controllers/services");
 
 const { authUser } = require("./middlewares/auth");
@@ -107,7 +106,7 @@ app.get("/service", authUser, getAllServicesController);
 app.patch("/service/:id/:status", updateServiceStatusByIDController);
 
 //añadimos comentario fichero
-app.post("/comments/file", commentsFileController);
+app.post("/comments/:id", authUser, commentsFileController);
 
 
 

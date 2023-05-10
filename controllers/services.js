@@ -1,11 +1,12 @@
 const { nanoid } = require("nanoid");
-const fileType = require("file-type");//detecta el tipo de archivo cargado
+// const fileType = require("file-type");//detecta el tipo de archivo cargado
 const {
   createService,
   getServiceByID,
   getAllServices,
   updateServiceStatus,
   getServiceByType,
+  createComment,
 } = require("../db/services");
 const {
   generateError,
@@ -13,17 +14,15 @@ const {
   SERVICE_STATUS,
   SERVICES_VALUES,
   getKeyByValue,
+  getExtensionFile,
 } = require("../helpers");
-// const {  } = require("../helpers")
 const chalk = require("chalk");
 const path = require("path");
-
 
 const newServiceController = async (req, res, next) => {
   try {
     const { title, request_body, required_type } = req.body;
-    const file_name = req.file;
-    
+
     //Comprobamos titulo
     if (!title || title.lenght > 50 || title.lenght < 15) {
       throw generateError(
@@ -52,6 +51,8 @@ const newServiceController = async (req, res, next) => {
       );
     }
 
+    console.log(chalk.magenta(req.userId));
+
     //Tratamos el fichero
     let fileName;
     let uploadPath;
@@ -65,20 +66,20 @@ const newServiceController = async (req, res, next) => {
       //Creamos directorio si no existe
       await createPathIfNotExists(uploadDir);
 
-      console.log(sampleFile);
+      // console.log(sampleFile);
 
-      fileName = `${nanoid(24)}.${sampleFile.name.split(".").slice(-1)}`; //Obtenemos la extension del fichero para guardarlo de la misma manera
+      fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`; //Obtenemos la extension del fichero para guardarlo de la misma manera
 
       uploadPath = uploadDir + "\\" + fileName;
 
-      console.log(uploadPath);
+      // console.log(uploadPath);
 
       //Subimos el fichero
       sampleFile.mv(uploadPath, function (e) {
         if (e) {
           throw generateError("No se ha podido mandar el fichero", 400);
         }
-        console.log("Fichero subido con exito!");
+        // console.log("Fichero subido con exito!");
       });
     }
 
@@ -99,10 +100,6 @@ const newServiceController = async (req, res, next) => {
     next(e);
   }
 };
-
-
-
-
 
 const getServiceByIDController = async (req, res, next) => {
   try {
@@ -171,7 +168,7 @@ const updateServiceStatusByIDController = async (req, res, next) => {
 
 const getServiceByTypeController = async (req, res, next) => {
   try {
-    console.log(req.params)
+    console.log(req.params);
     const { type } = req.params;
 
     const service = await getServiceByType(type);
@@ -185,24 +182,75 @@ const getServiceByTypeController = async (req, res, next) => {
   }
 };
 
-
-
-
 const commentsFileController = async (req, res, next) => {
   try {
+    const { comments } = req.body;
+    const { id } = req.params;
+
+    //Comprobamos titulo
+    if (!comments) {
+      throw generateError("El comentario debe existir", 400);
+    }
+
+    //Tratamos el fichero
+    let fileName;
+    let uploadPath;
+
+    if (req.files && req.files.serviceFile) {
+      let sampleFile = req.files.serviceFile;
+
+      //Creamos el path
+      const uploadDir = path.join(__dirname, "../requestfiles");
+
+      //Creamos directorio si no existe
+      await createPathIfNotExists(uploadDir);
+
+      fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`; //Obtenemos la extension del fichero para guardarlo de la misma manera
+
+      uploadPath = uploadDir + "\\" + fileName;
+
+      //Subimos el fichero
+      sampleFile.mv(uploadPath, function (e) {
+        if (e) {
+          throw generateError("No se ha podido mandar el fichero", 400);
+        }
+        console.log("Fichero subido con exito!");
+      });
+    }
+
+    console.log(chalk.yellow(comments));
+    console.log(chalk.yellow(uploadPath));
+    console.log(chalk.yellow(id));
+    console.log(chalk.yellow(req.userId));
+
+    const id_comment = await createComment(comments, fileName, req.userId, id);
+
+    console.log(chalk.green("Service created"));
+    res.send({
+      status: "ok",
+      message: `Services created with id ${id_comment}`, //${id_comment}
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+/* NOS SIRVE PARA DISTINGUIR UN ARCHIVO DE UN TEXTO */
+const commentsFileController_deprecated = async (req, res, next) => {
+  try {
     if (!req.files || Object.keys(req.files).length === 0) {
-      return res.status(400).send('No se ha subido ningún archivo');
+      return res.status(400).send("No se ha subido ningún archivo");
     }
 
     const file = req.files.serviceFile;
 
     //detecta el tipo de archivo
     const buffer = file.data;
+    console.log(buffer);
     const fileInfo = await fileType.fromBuffer(buffer);
 
-
     // Comprueba si subimos un archivo o un texto
-    if (fileInfo && fileInfo.mime.startsWith('text/')) {
+    if (fileInfo && fileInfo.mime.startsWith("text/")) {
       //si el archivo es un comentario de texto guardalo en la base de datos
       const comment = req.body.comment;
       res.send("Comentario guardado correctamente");
@@ -210,19 +258,16 @@ const commentsFileController = async (req, res, next) => {
       //si el archivo no es un comentario guardalo en el servidor
 
       const fileName = `${nanoid(24)}.${fileInfo.ext}`;
-      const filePath = path.join(__dirname, 'uploads', fileName);
+      const filePath = path.join(__dirname, "uploads", fileName);
       file.mv(filePath, (error) => {
         if (error) {
           return res.status(500).send(error);
         }
-        res.send('Archivo subido correctamente');
+        res.send("Archivo subido correctamente");
       });
     }
 
-    const id_files = await createFile(
-      requiredS_id,
-      serviceFile
-    );
+    const id_files = await createFile(requiredS_id, serviceFile);
     res.send({
       status: "ok",
       message: `Comentario creado con id ${id_files}`,
@@ -232,14 +277,10 @@ const commentsFileController = async (req, res, next) => {
   }
 };
 
-
-
 module.exports = {
   newServiceController,
   getServiceByIDController,
   getAllServicesController,
   updateServiceStatusByIDController,
-  commentsFileController
- 
-
+  commentsFileController,
 };
