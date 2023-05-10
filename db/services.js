@@ -2,8 +2,8 @@ const { getConnection } = require("../db/db");
 const { generateError } = require("../helpers");
 const chalk = require("chalk");
 
+//Crear servicio en la BBDD
 const { SERVICES_VALUES } = require("../helpers");
-
 const createService = async (
   title,
   request_body,
@@ -18,10 +18,10 @@ const createService = async (
   try {
     connection = await getConnection();
 
-    console.log(chalk.green(title));
-    console.log(chalk.yellow(request_body));
-    console.log(chalk.yellow(user_id));
-    console.log(chalk.yellow(required_type));
+    console.log(title);
+    console.log(request_body);
+    console.log(user_id);
+    console.log(required_type);
 
     const [newService] = await connection.query(
       `
@@ -34,11 +34,11 @@ const createService = async (
     INSERT INTO requireds (title, request_body, user_id, file_name, required_type) VALUES (?, ?, ?, ?, ?)`, [title, request_body, user_id, file_name, required_type]
     );*/
 
-    console.log(chalk.green("Ya lo hemos creado!"));
+    console.log(chalk.green("Service created"));
 
     return newService.insertId;
   } catch (e) {
-    throw generateError(`error: ${e.message}`, 400);
+    throw generateError(chalk.red(`error: ${e.message}`, 400));
   }
 };
 
@@ -61,14 +61,15 @@ const getServiceByID = async (id) => {
   }
 };
 
-const getAllServices = async () => {
+const getAllServices = async (user_id = -1) => {
   let connection;
+  console.log(chalk.green(user_id));
 
   try {
     connection = await getConnection();
     const [result] = await connection.query(
-      `SELECT * FROM requireds WHERE done = ? ORDER BY creation_date ASC`,
-      [0]
+      `SELECT * FROM requireds WHERE user_id != ? AND done = ? ORDER BY creation_date ASC`,
+      [user_id, 0]
     );
 
     if (result.length === 0) {
@@ -104,7 +105,31 @@ const updateServiceStatus = async (id, serviceValue) => {
     );
 
     return update;
+  } catch (e) {
+    throw generateError(`error: ${e.message}`, 400);
+  }
+};
 
+const getServiceByType = async (type) => {
+  let connection;
+  console.log(chalk.red(type));
+
+  try {
+    connection = await getConnection();
+
+    const [result] = await connection.query(
+      `SELECT * FROM requireds WHERE required_type LIKE ? AND done = ?`,
+      [`${type}%`, 0]
+    );
+
+    if (result.length === 0) {
+      throw generateError(
+        `No existe ningun servicio que empiece por ${type}`,
+        400
+      );
+    }
+
+    return result;
   } catch (e) {
     throw generateError(`error: ${e.message}`, 400);
   }
@@ -115,4 +140,5 @@ module.exports = {
   getServiceByID,
   getAllServices,
   updateServiceStatus,
+  getServiceByType,
 };

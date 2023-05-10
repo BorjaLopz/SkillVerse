@@ -5,6 +5,7 @@ const {
   getServiceByID,
   getAllServices,
   updateServiceStatus,
+  getServiceByType,
 } = require("../db/services");
 const {
   generateError,
@@ -21,7 +22,8 @@ const path = require("path");
 const newServiceController = async (req, res, next) => {
   try {
     const { title, request_body, required_type } = req.body;
-
+    const file_name = req.file;
+    
     //Comprobamos titulo
     if (!title || title.lenght > 50 || title.lenght < 15) {
       throw generateError(
@@ -88,6 +90,7 @@ const newServiceController = async (req, res, next) => {
       fileName
     );
 
+    console.log(chalk.green("Service created"));
     res.send({
       status: "ok",
       message: `Services created with id ${id_services}`, //${id_services}
@@ -121,7 +124,10 @@ const getServiceByIDController = async (req, res, next) => {
 
 const getAllServicesController = async (req, res, next) => {
   try {
-    const services = await getAllServices();
+    // const services = await getAllServices();
+    const services = await (!req.userId
+      ? getAllServices()
+      : getAllServices(req.userId));
 
     //Lo mandamos a postman
     res.send({
@@ -150,12 +156,28 @@ const updateServiceStatusByIDController = async (req, res, next) => {
 
     const service = await updateServiceStatus(
       id,
-      SERVICES_VALUES[getKeyByValue(SERVICE_STATUS, status.toUpperCase())]  //Obtenemos el valor que tiene la key done:1 o undone:2 segun el status que le pasemos en el endpoint
+      SERVICES_VALUES[getKeyByValue(SERVICE_STATUS, status.toUpperCase())] //Obtenemos el valor que tiene la key done:1 o undone:2 segun el status que le pasemos en el endpoint
     );
 
     //Lo mandamos a postman
     res.send({
-      status: "error",
+      status: "ok",
+      message: service,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+const getServiceByTypeController = async (req, res, next) => {
+  try {
+    console.log(req.params)
+    const { type } = req.params;
+
+    const service = await getServiceByType(type);
+
+    res.send({
+      status: "ok",
       message: service,
     });
   } catch (e) {
@@ -217,5 +239,5 @@ module.exports = {
   getServiceByIDController,
   getAllServicesController,
   updateServiceStatusByIDController,
-  serviceFileController
+
 };
