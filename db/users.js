@@ -49,7 +49,6 @@ const createUser = async (
 
     //Encriptamos la contraseña
     const passwordHash = await bcrypt.hash(password, 10);
-    // console.log(passwordHash); //Comprobamos la contraseña encriptada
 
     //Creamos usuario en la base de datos
     const [newUser] = await connection.query(
