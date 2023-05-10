@@ -33,20 +33,6 @@ const { generalError, error404 } = require("./middlewares/handleErrors");
 
 app.use(express.static("public"));
 
-//ENDPOINT para obtener todo de la base de datos
-app.get("/requiredS", async (req, res) => {
-  try {
-    const [rows, fields] = await connection.query(
-      "SELECT id, title, request_body FROM requiredS"
-    );
-    console.log(chalk.green("Services obtained"));
-    res.status(200).send(rows);
-  } catch (error) {
-    console.error(chalk.red("Error getting services: " + error.stack));
-    res.status(500).send("Error al obtener los servicios");
-  }
-});
-
 //#region USER
 
 // login del usuario (devulve token)
