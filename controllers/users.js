@@ -154,8 +154,9 @@ const editUserController = async (req, res, next) => {
     if (!email) {
       throw generateError("Introduzca su email", 400);
     }
-    const user = await getUserByIdController(req.user.id);
-    email = email || user.email;
+    // const user = await getUserByIdController(req.user.id);
+    const user = await getUserByEmail(email);
+    // email = email || user.email;
     avatar = avatar || user.avatar;
     role = role || user.role;
 

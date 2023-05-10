@@ -61,14 +61,15 @@ const getServiceByID = async (id) => {
   }
 };
 
-const getAllServices = async () => {
+const getAllServices = async (user_id = -1) => {
   let connection;
+  console.log(chalk.green(user_id))
 
   try {
     connection = await getConnection();
     const [result] = await connection.query(
-      `SELECT * FROM requireds WHERE done = ? ORDER BY creation_date ASC`,
-      [0]
+      `SELECT * FROM requireds WHERE user_id != ? AND done = ? ORDER BY creation_date ASC`,
+      [user_id, 0]
     );
 
     if (result.length === 0) {

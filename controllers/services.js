@@ -115,7 +115,9 @@ const getServiceByIDController = async (req, res, next) => {
 
 const getAllServicesController = async (req, res, next) => {
   try {
-    const services = await getAllServices();
+    
+    // const services = await getAllServices();
+    const services = await (!req.userId ? getAllServices() : getAllServices(req.userId));
 
     //Lo mandamos a postman
     res.send({
@@ -144,7 +146,7 @@ const updateServiceStatusByIDController = async (req, res, next) => {
 
     const service = await updateServiceStatus(
       id,
-      SERVICES_VALUES[getKeyByValue(SERVICE_STATUS, status.toUpperCase())]  //Obtenemos el valor que tiene la key done:1 o undone:2 segun el status que le pasemos en el endpoint
+      SERVICES_VALUES[getKeyByValue(SERVICE_STATUS, status.toUpperCase())] //Obtenemos el valor que tiene la key done:1 o undone:2 segun el status que le pasemos en el endpoint
     );
 
     //Lo mandamos a postman
