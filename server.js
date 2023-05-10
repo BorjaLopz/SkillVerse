@@ -18,6 +18,7 @@ const {
   newUserController,
   deleteUserController,
   editUserController,
+  getAllFieldsExceptPasswordController,
 } = require("./controllers/users");
 
 const {
@@ -52,7 +53,10 @@ app.post("/service/add", authUser, newServiceController);
 app.delete("/service/delete", authUser, deleteUserController);
 
 //modificamos un user
-app.put("/user/edit", authUser, editUserController);
+app.get("/user/:id", authUser, getAllFieldsExceptPasswordController);
+
+//modificamos un user
+app.put("/user/:id/edit", authUser, editUserController);
 
 //Obtenemos un servicio por ID
 app.get("/service/:id", getServiceByIDController);

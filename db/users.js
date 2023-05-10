@@ -85,7 +85,36 @@ const getUserByEmail = async (email) => {
   }
 };
 
+const getAllFieldsExceptPassword = async (id) => {
+  let connection;
+  try {
+    connection = await getConnection();
+    const table_tmp = await connection.query(`
+    DROP VIEW IF EXISTS user_tmp`);
+    const table_tmp_2 = await connection.query(
+      `CREATE VIEW user_tmp AS
+    SELECT id, email, nickname, name, surname, biography, userPhoto
+    FROM users`
+    );
+    const [table_tmp_3] = await connection.query(
+      `SELECT * FROM user_tmp WHERE id = ? `,
+      id
+    );
+
+    // console.log(table_tmp_3);
+
+    if (table_tmp_3.length === 0) {
+      throw generateError("No hay usuarios", 400);
+    }
+
+    return table_tmp_3;
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 module.exports = {
   createUser,
   getUserByEmail,
+  getAllFieldsExceptPassword,
 };

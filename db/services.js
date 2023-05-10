@@ -66,7 +66,7 @@ const getAllServices = async (user_id = -1) => {
       `SELECT * FROM requireds WHERE user_id != ? AND done = ? ORDER BY creation_date ASC`,
       [user_id, 0]
     );
-
+      console.log(chalk.blue(result));
     if (result.length === 0) {
       throw generateError("No hay ningun servicio", 404);
     }
