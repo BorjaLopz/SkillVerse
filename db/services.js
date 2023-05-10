@@ -135,10 +135,38 @@ const getServiceByType = async (type) => {
   }
 };
 
+const createComment = async (
+  comment,
+  service_file = "",
+  user_id,
+  service_id,
+  hide = false,
+  solution = false
+) => {
+  let connection;
+
+  try {
+    connection = await getConnection();
+
+    const [newComment] = await connection.query(
+      `
+    INSERT INTO comments (user_id, requiredS_id, comments, serviceFile, hide) VALUES (?, ?, ?, ?, ?)`,
+      [user_id, service_id, comment, service_file, hide]
+    );
+
+    console.log(chalk.green("Comment created"));
+
+    return newComment.insertId;
+  } catch (e) {
+    throw generateError(chalk.red(`error: ${e.message}`, 400));
+  }
+};
+
 module.exports = {
   createService,
   getServiceByID,
   getAllServices,
   updateServiceStatus,
   getServiceByType,
+  createComment,
 };

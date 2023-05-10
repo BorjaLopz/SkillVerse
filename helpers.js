@@ -32,6 +32,10 @@ function getKeyByValue(object, value) {
   return Object.keys(object).find((key) => object[key] === value);
 }
 
+function getExtensionFile(filename) {
+  return filename.split(".").slice(-1);
+}
+
 
 // createPathIfNotExists("./uploads");
 
@@ -41,4 +45,5 @@ module.exports = {
   SERVICE_STATUS, //Exportamos el diccionario para poder utilizarlo desde fuera del fichero
   SERVICES_VALUES, //Exportamos el valor que tendra cada key,
   getKeyByValue,
+  getExtensionFile,
 };
