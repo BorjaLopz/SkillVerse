@@ -2,6 +2,7 @@ const { getConnection } = require("../db/db");
 const { generateError } = require("../helpers");
 const chalk = require("chalk");
 
+//Crear servicio en la BBDD
 const createService = async (
   title,
   request_body,
@@ -16,10 +17,10 @@ const createService = async (
   try {
     connection = await getConnection();
 
-    console.log(chalk.green(title));
-    console.log(chalk.yellow(request_body));
-    console.log(chalk.yellow(user_id));
-    console.log(chalk.yellow(required_type));
+    console.log(title);
+    console.log(request_body);
+    console.log(user_id);
+    console.log(required_type);
 
     const [newService] = await connection.query(
       `
@@ -32,11 +33,11 @@ const createService = async (
     INSERT INTO requireds (title, request_body, user_id, file_name, required_type) VALUES (?, ?, ?, ?, ?)`, [title, request_body, user_id, file_name, required_type]
     );*/
 
-    console.log(chalk.green("Ya lo hemos creado!"));
+    console.log(chalk.green("Service created"));
 
     return newService.insertId;
   } catch (e) {
-    throw generateError(`error: ${e.message}`, 400);
+    throw generateError(chalk.red(`error: ${e.message}`, 400));
   }
 };
 

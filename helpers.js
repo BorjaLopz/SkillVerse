@@ -1,5 +1,4 @@
 const fs = require("fs/promises");
-const chalk = require("chalk");
 
 //Genera errores personalizados que pueden enviarse como respuesta a una solicitu HTTP en caso de error en el server
 const generateError = (message, status) => {

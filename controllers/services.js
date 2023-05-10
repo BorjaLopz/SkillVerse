@@ -1,10 +1,11 @@
 const { createService } = require("../db/services");
 const chalk = require("chalk");
 
+//Controller para crear nuevo servicio en la BBDD
 const newServiceController = async (req, res, next) => {
   try {
     const { title, request_body, required_type } = req.body;
-    
+
     const file_name = req.file;
 
     const id_services = await createService(
@@ -14,7 +15,7 @@ const newServiceController = async (req, res, next) => {
       required_type
     );
 
-    console.log("Ya hemos creado el servicio!");
+    console.log(chalk.green("Service created"));
 
     res.send({
       status: "ok",

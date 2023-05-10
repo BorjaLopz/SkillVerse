@@ -1,10 +1,12 @@
 "use strict";
 
+const chalk = require("chalk");
 const mysql = require("mysql2/promise");
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE } = process.env;
 
 let pool;
 
+//Establecemos conexión con la BBDD
 const getConnection = async () => {
   try {
     if (!pool) {
@@ -20,7 +22,7 @@ const getConnection = async () => {
     return await pool.getConnection();
   } catch (error) {
     console.error(error);
-    throw new Error("Error al conectar con MySQL");
+    throw new Error(chalk.red("Error connecting to MySQL"));
   }
 };
 
