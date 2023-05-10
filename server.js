@@ -26,6 +26,7 @@ const {
   getServiceByIDController,
   getAllServicesController,
   updateServiceStatusByIDController,
+  serviceFileController,
 } = require("./controllers/services");
 
 const { authUser } = require("./middlewares/auth");
@@ -70,6 +71,9 @@ app.get("/service", getAllServicesController)
 
 //Modificamos el estado de determinado servicio
 app.patch("/service/:id/:status", updateServiceStatusByIDController)
+
+//subimos comentario o archivo
+app.post("/service/file", serviceFileController);
 
 //modificamos un servicio
 // app.put("/service/edit", authUser, editUserController);  //Lo comentamos de momento

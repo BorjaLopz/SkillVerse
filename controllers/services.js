@@ -1,4 +1,5 @@
 const { nanoid } = require("nanoid");
+const fileType = require("file-type");//detecta el tipo de archivo cargado
 const {
   createService,
   getServiceByID,
@@ -15,6 +16,7 @@ const {
 // const {  } = require("../helpers")
 const chalk = require("chalk");
 const path = require("path");
+
 
 const newServiceController = async (req, res, next) => {
   try {
@@ -95,6 +97,10 @@ const newServiceController = async (req, res, next) => {
   }
 };
 
+
+
+
+
 const getServiceByIDController = async (req, res, next) => {
   try {
     //Obtenemos el id que le pasamos por params
@@ -157,9 +163,59 @@ const updateServiceStatusByIDController = async (req, res, next) => {
   }
 };
 
+
+
+
+const serviceFileController = async (req, res, next) => {
+  try {
+    if (!req.files || Object.keys(req.files).length === 0) {
+      return res.status(400).send('No se ha subido ningún archivo');
+    }
+
+    const file = req.files.serviceFile;
+
+    //detecta el tipo de archivo
+    const buffer = file.data;
+    const fileInfo = await fileType.fromBuffer(buffer);
+
+
+    // Comprueba si subimos un archivo o un texto
+    if (fileInfo && fileInfo.mime.startsWith('text/')) {
+      //si el archivo es un comentario de texto guardalo en la base de datos
+      const comment = req.body.comment;
+      res.send("Comentario guardado correctamente");
+    } else {
+      //si el archivo no es un comentario guardalo en el servidor
+
+      const fileName = `${nanoid(24)}.${fileInfo.ext}`;
+      const filePath = path.join(__dirname, 'uploads', fileName);
+      file.mv(filePath, (error) => {
+        if (error) {
+          return res.status(500).send(error);
+        }
+        res.send('Archivo subido correctamente');
+      });
+    }
+
+    const id_files = await createFile(
+      requiredS_id,
+      serviceFile
+    );
+    res.send({
+      status: "ok",
+      message: `Comentario creado con id ${id_files}`,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+
+
 module.exports = {
   newServiceController,
   getServiceByIDController,
   getAllServicesController,
   updateServiceStatusByIDController,
+  serviceFileController
 };
