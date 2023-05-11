@@ -1,6 +1,3 @@
-"use strict";
-
-const chalk = require("chalk");
 const mysql = require("mysql2/promise");
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE } = process.env;
 
@@ -22,7 +19,7 @@ const getConnection = async () => {
     return await pool.getConnection();
   } catch (error) {
     console.error(error);
-    throw new Error(chalk.red("Error connecting to MySQL"));
+    throw new Error("Error connecting to MySQL");
   }
 };
 

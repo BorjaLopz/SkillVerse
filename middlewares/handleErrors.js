@@ -9,7 +9,7 @@ const generalError = (error, req, res, next) => {
 const error404 = (req, res) => {
   res.status(404).send({
     status: "error",
-    message: "not found",
+    message: "Not found",
   });
 };
 

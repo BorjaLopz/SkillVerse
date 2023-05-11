@@ -26,7 +26,7 @@ const newServiceController = async (req, res, next) => {
     //Comprobamos titulo
     if (!title || title.lenght > 50 || title.lenght < 15) {
       throw generateError(
-        "El titulo debe existir y debe ser mayor que 15 caracteres y menor que 50",
+        "The title must be greater than 15 characters and less than 50",
         400
       );
     }
@@ -38,17 +38,14 @@ const newServiceController = async (req, res, next) => {
       request_body.lenght < 15
     ) {
       throw generateError(
-        "La descripcion debe existir y debe ser mayor que 15 caracteres y menor que 500",
+        "The description must be greater than 15 characters and less than 500",
         400
       );
     }
 
     //Comprobamos required_type
     if (!required_type || required_type.lenght > 20) {
-      throw generateError(
-        "El servicio debe existir y debe ser menor que 20 caracteres",
-        400
-      );
+      throw generateError("Service type must be less than 20 characters", 400);
     }
 
     console.log(chalk.magenta(req.userId));
@@ -71,15 +68,16 @@ const newServiceController = async (req, res, next) => {
       fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`; //Obtenemos la extension del fichero para guardarlo de la misma manera
 
       uploadPath = uploadDir + "\\" + fileName;
+      //uploadPath = path.join(uploadDir, fileName);????
 
       // console.log(uploadPath);
 
       //Subimos el fichero
       sampleFile.mv(uploadPath, function (e) {
         if (e) {
-          throw generateError("No se ha podido mandar el fichero", 400);
+          throw generateError("The file could not be sent", 400);
         }
-        // console.log("Fichero subido con exito!");
+        // console.log(chalk.green("File uploaded"));
       });
     }
 
@@ -142,7 +140,7 @@ const updateServiceStatusByIDController = async (req, res, next) => {
 
     //Comprobamos si  el estado que le hemos pasado es valido
     if (!Object.values(SERVICE_STATUS).includes(status.toUpperCase())) {
-      throw generateError("Estado no valido", 401);
+      throw generateError("Invalid status", 401);
     }
 
     /* dev */
@@ -189,7 +187,7 @@ const commentsFileController = async (req, res, next) => {
 
     //Comprobamos titulo
     if (!comments) {
-      throw generateError("El comentario debe existir", 400);
+      throw generateError("Comment is required", 400);
     }
 
     //Tratamos el fichero
@@ -208,13 +206,14 @@ const commentsFileController = async (req, res, next) => {
       fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`; //Obtenemos la extension del fichero para guardarlo de la misma manera
 
       uploadPath = uploadDir + "\\" + fileName;
+      // uploadPath = path.join(uploadDir, fileName);????
 
       //Subimos el fichero
       sampleFile.mv(uploadPath, function (e) {
         if (e) {
-          throw generateError("No se ha podido mandar el fichero", 400);
+          throw generateError("The file could not be sent", 400);
         }
-        console.log("Fichero subido con exito!");
+        console.log("File uploaded");
       });
     }
 
@@ -225,10 +224,10 @@ const commentsFileController = async (req, res, next) => {
 
     const id_comment = await createComment(comments, fileName, req.userId, id);
 
-    console.log(chalk.green("Service created"));
+    console.log(chalk.green("Comment created"));
     res.send({
       status: "ok",
-      message: `Services created with id ${id_comment}`, //${id_comment}
+      message: `Comment created with id ${id_comment}`, //${id_comment}
     });
   } catch (e) {
     next(e);
@@ -282,5 +281,6 @@ module.exports = {
   getServiceByIDController,
   getAllServicesController,
   updateServiceStatusByIDController,
+  getServiceByTypeController,
   commentsFileController,
 };

@@ -1,19 +1,14 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Joi = require("@hapi/joi");
-const { generateError, createPathIfNotExists } = require("../helpers");
+const { generateError } = require("../helpers");
 const {
   createUser,
   getUserByEmail,
   getAllFieldsExceptPassword,
 } = require("../db/users");
-const { createService } = require("../db/services");
 const { getConnection } = require("../db/db");
 const chalk = require("chalk");
-
-/* Necesario para express-uploadfile */
-const path = require("path"); //Obtenemos el path del directorio __dirname
-const { nanoid } = require("nanoid"); //Generaremos un nombre aleatorio de N caracteres nanoid(24);
 
 const newUserController = async (req, res, next) => {
   try {
@@ -23,10 +18,11 @@ const newUserController = async (req, res, next) => {
     const schema = Joi.object({
       email: Joi.string().email().required(),
       password: Joi.string().required(),
+      nickname: Joi.string().required(),
     });
 
     if (!email || !password || !nickname) {
-      throw generateError("Email, password and a nickname are required", 401);
+      throw generateError("Email, password and nickname are required", 401);
     }
 
     const id = await createUser(
@@ -77,7 +73,7 @@ const loginController = async (req, res, next) => {
     //creo el payload del token
     const payload = { id: user.id };
     //firmo el token
-    const token = jwt.sign(payload, process.env.JWT_SECTRET, {
+    const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "30d",
     });
     //envio el token
@@ -93,10 +89,10 @@ const loginController = async (req, res, next) => {
 
 const deleteUserController = async (req, res, next) => {
   try {
-    let { verifyNickname } = req.body;
+    const { verifyNickname } = req.body;
 
     if (!verifyNickname) {
-      throw generateError("Covering all fields is required", 400);
+      throw generateError("Nickname is required", 400);
     }
 
     await deleteUserController(req.user.id, verifyNickname);
@@ -173,14 +169,16 @@ const editUserController = async (req, res, next) => {
 
   //@TODO HACER BIEN
 
-  //  let { email, userPhoto, nickname, name, surname, password, biography} 
-  let email;
-  let userPhoto;
-  let nickname;
-  let name;
-  let surname;
-  let password;
-  let biography;
+  let { email, userPhoto, nickname, name, surname, password, biography } =
+    req.body;
+
+  // let email;
+  // let userPhoto;
+  // let nickname;
+  // let name;
+  // let surname;
+  // let password;
+  // let biography;
 
   try {
     // let { email } = req.body;
@@ -190,7 +188,7 @@ const editUserController = async (req, res, next) => {
     // }
     const user = await getAllFieldsExceptPassword(id);
 
-    console.log(user)
+    console.log(user);
     // const user = await getUserByEmail(email);
     email = email || user.email;
     userPhoto = userPhoto || user.userPhoto;
@@ -200,14 +198,18 @@ const editUserController = async (req, res, next) => {
     password = password || user.password;
     biography = biography || user.biography;
 
-    const editUser = await (email,
-    userPhoto,
-    nickname,
-    name,
-    surname,
-    password,
-    biography,
-    id);
+    await editUser(
+      email,
+      userPhoto,
+      nickname,
+      name,
+      surname,
+      password,
+      biography,
+      id
+    );
+
+    let message = "";
 
     if (email != user.email) {
       res.send({
@@ -244,6 +246,11 @@ const editUserController = async (req, res, next) => {
       res.send({
         status: "ok",
         message: "Biography updated",
+      });
+    } else {
+      res.send({
+        status: "ok",
+        message: "No fields updated",
       });
     }
 
