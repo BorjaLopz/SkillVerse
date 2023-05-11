@@ -19,3 +19,6 @@ _Segundo proyecto para HACK A BOSS - 2023: Juego que permite usando el ratón o 
 * [@AnaBelenBernardez](https://github.com/AnaBelenBernardez)
 * [@moirivilla](https://github.com/moirivilla)
 * [@FranciscoEsparraga](https://github.com/FranciscoEsparraga)
+
+## 💻 Tech Stack
+![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
