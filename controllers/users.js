@@ -6,6 +6,7 @@ const {
   createUser,
   getUserByEmail,
   getAllFieldsExceptPassword,
+  editUser,
 } = require("../db/users");
 const { getConnection } = require("../db/db");
 const chalk = require("chalk");
@@ -164,32 +165,27 @@ const getUserByIdController = async (id) => {
 };
 
 const editUserController = async (req, res, next) => {
-  const { id } = req.params;
-  console.log(chalk.red(id));
+  //Obtenemos el id por parametro
+  const { id_params } = req.params;
 
-  //@TODO HACER BIEN
+  //Obtenemos el id por token
+  const id = req.userId;
 
-  let { email, userPhoto, nickname, name, surname, password, biography } =
-    req.body;
-
-  // let email;
-  // let userPhoto;
-  // let nickname;
-  // let name;
-  // let surname;
-  // let password;
-  // let biography;
-
+  let tmp_user = {}; //Objeto que le vamos a pasar a editUser();
+  
   try {
-    // let { email } = req.body;
 
-    // if (!email) {
-    //   throw generateError("Email is required", 400);
-    // }
-    const user = await getAllFieldsExceptPassword(id);
+    //Comprobacion para evitar que puedas editar otro usuario
+    if(id !== id_params){
+      throw generateError("You can't edit another user", 403);
+    }
 
-    console.log(user);
-    // const user = await getUserByEmail(email);
+    //Obtenemos la informacion del usuario por id
+    const [user] = await getAllFieldsExceptPassword(id);
+    
+    //Obtenemos todos los campos del body
+    let { email, userPhoto, nickname, name, surname, password, biography } = req.body;
+    
     email = email || user.email;
     userPhoto = userPhoto || user.userPhoto;
     nickname = nickname || user.nickname;
@@ -198,65 +194,52 @@ const editUserController = async (req, res, next) => {
     password = password || user.password;
     biography = biography || user.biography;
 
-    await editUser(
-      email,
-      userPhoto,
-      nickname,
-      name,
-      surname,
-      password,
-      biography,
-      id
-    );
-
-    let message = "";
-
     if (email != user.email) {
+      user.email = email;
+    }
+    if (userPhoto != user.userPhoto) {
+      user.userPhoto = userPhoto;
+    }
+    if (nickname != user.nickname) {
+      user.nickname = nickname;
+    }
+    if (name != user.name) {
+      user.name = name;
+    }
+    if (surname != user.surname) {
+      user.surname = surname;
+    }
+    if (password != user.password) {
+      //Aqui tendremos que hacer un check para comprobar que la contraseña que introduce es igual a la antigua
+      user.password = password;
+    }
+    if (biography != user.biography) {
+      user.biography = biography;
+    }
+
+    /* Añadimos campos al objeto */
+    tmp_user.id = req.userId;
+    tmp_user.email = user.email;
+    tmp_user.nickname = user.nickname;
+    tmp_user.name = user.name;
+    tmp_user.surname = user.surname;
+    tmp_user.password = user.password;
+    tmp_user.biography = user.biography;
+    tmp_user.userPhoto = user.userPhoto;
+
+    const updatedUser = await editUser(tmp_user);
+
+    if (updatedUser.changedRows === 0) {
       res.send({
         status: "ok",
-        message: "Email updated",
-      });
-    } else if (userPhoto != user.userPhoto) {
-      res.send({
-        status: "ok",
-        message: "Photo updated",
-      });
-    } else if (nickname != user.nickname) {
-      console.log("Estamos aqui");
-      res.send({
-        status: "ok",
-        message: "Nickname updated",
-      });
-    } else if (name != user.name) {
-      res.send({
-        status: "ok",
-        message: "Name updated",
-      });
-    } else if (surname != user.surname) {
-      res.send({
-        status: "ok",
-        message: "Surname updated",
-      });
-    } else if (password != user.surname) {
-      res.send({
-        status: "ok",
-        message: "Password updated",
-      });
-    } else if (biography != user.biography) {
-      res.send({
-        status: "ok",
-        message: "Biography updated",
+        data: "Ningun campo ha sido actualizado",
       });
     } else {
       res.send({
         status: "ok",
-        message: "No fields updated",
+        data: "Perfil actualizado",
       });
     }
-
-    console.log(chalk.blue(nickname));
-
-    // actualizarUsuario(user.email, user.nickname);
   } catch (error) {
     next(error);
   }
