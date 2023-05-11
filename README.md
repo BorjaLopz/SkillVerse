@@ -1,5 +1,6 @@
 # 🧩 Portal de necesidades digitales
-_Segundo proyecto para HACK A BOSS - 2023: API que permite gestionar una web donde personas que necesiten algún servicio digital puedan pedir ayuda a otros usuarios. Por ejemplo: traducir un texto, editar una foto, revisar un documento, etc. Solo necesidades que puedan realizarse mediante un fichero digital.
+_Segundo proyecto para HACK A BOSS - 2023: API que permite gestionar una web donde personas que necesiten algún servicio digital puedan pedir ayuda a otros usuarios. Por ejemplo: traducir un texto, editar una foto, revisar un documento, etc. Solo necesidades que puedan realizarse mediante un fichero digital._
+
 ## 📋 Descripción
 * Los usuarios anónimos pueden:
   - Ver lista de servicios requeridos.
