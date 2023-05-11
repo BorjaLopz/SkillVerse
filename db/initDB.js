@@ -78,10 +78,19 @@ async function main() {
   } catch (error) {
     console.error(chalk.red("An error has occurred " + error.message));
   } finally {
-    if (connection) console.log(chalk.yellow("Releasing connection..."));
-    connection.release();
-    console.log(chalk.green("Connection released"));
-
+    let connection;
+    try {
+      connection = await getConnection();
+      console.log(chalk.yellow("Releasing connection..."));
+      connection.release();
+      console.log(chalk.green("Connection released"));
+    } catch (error) {
+      console.error(
+        chalk.red(
+          "An error occurred while releasing the connection " + error.message
+        )
+      );
+    }
     process.exit();
   }
 }

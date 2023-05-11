@@ -1,24 +1,21 @@
 const jwt = require("jsonwebtoken");
 const { generateError } = require("../helpers");
-const chalk = require("chalk");
 
 //Autenticación y autorización de users
 const authUser = (req, res, next) => {
   try {
     const { authorization } = req.headers;
     if (!authorization) {
-      throw generateError(chalk.red("Missing Authorization header", 401));
-      next();
+      throw generateError("Missing Authorization header", 401);
     } else {
-    //comprobamos que el token sea correcto
-    let token;
+      //comprobamos que el token sea correcto
+      let token;
 
-    try {
-      token = jwt.verify(authorization, process.env.JWT_SECTRET);
-    } catch (error) {
-      throw generateError(chalk.red("Wrong token", 401));
-      next();
-    }
+      try {
+        token = jwt.verify(authorization, process.env.JWT_SECRET);
+      } catch (error) {
+        throw generateError("Wrong token", 401);
+      }
 
       console.log(token); //dev
 

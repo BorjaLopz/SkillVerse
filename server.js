@@ -3,16 +3,6 @@ const bodyParser = require("body-parser");
 require("dotenv").config();
 const fileUpload = require("express-fileupload");
 const chalk = require("chalk");
-
-let connection;
-
-const app = new express();
-app.use(bodyParser.json()); //Parseamos appliacion/json
-app.use(bodyParser.urlencoded({ extended: true })); //Parseamos application xwww-form-urlencoded
-app.use(fileUpload()); //Le pasamos el middleware para que pueda leer archivos binarios
-app.use("/uploads", express.static("./uploads"));
-app.use("/requestfiles", express.static("./requestfiles"));
-
 const {
   loginController,
   newUserController,
@@ -20,7 +10,6 @@ const {
   editUserController,
   getAllFieldsExceptPasswordController,
 } = require("./controllers/users");
-
 const {
   newServiceController,
   getServiceByIDController,
@@ -28,9 +17,17 @@ const {
   updateServiceStatusByIDController,
   commentsFileController,
 } = require("./controllers/services");
-
 const { authUser } = require("./middlewares/auth");
 const { generalError, error404 } = require("./middlewares/handleErrors");
+
+let connection;
+const app = new express();
+
+app.use(bodyParser.json()); //Parseamos appliacion/json
+app.use(bodyParser.urlencoded({ extended: true })); //Parseamos application xwww-form-urlencoded
+app.use(fileUpload()); //Le pasamos el middleware para que pueda leer archivos binarios
+app.use("/uploads", express.static("./uploads"));
+app.use("/requestfiles", express.static("./requestfiles"));
 
 app.use(express.static("public"));
 
@@ -80,11 +77,10 @@ app.use(generalError);
 
 //#region SERVER
 
-app.listen(process.env.APP_PORT, async () => {
+const PORT = process.env.APP_PORT || 3000;
+app.listen(PORT, async () => {
   console.log(
-    chalk.green(
-      `App listening on port ${process.env.APP_PORT}\nDB: ${process.env.DB_DATABASE}`
-    )
+    chalk.green(`App listening on port ${PORT}\nDB: ${process.env.DB_DATABASE}`)
   );
 });
 
