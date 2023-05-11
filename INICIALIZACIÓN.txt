@@ -1,22 +1,20 @@
 //Editar .gitignore según necesidades antes de entregar (de momento está comentado para que podamos trabajar sin complicaciones).
 
-//Cambiar datos del db.js según necesario: password, host, etc.
-//Hacer .env.example
+//postman_collection.json
 
 //Módulos necesarios para la app:
 
 > npm init
-> npm i mysql2
+> npm i @hapi/joi
+> npm i bcrypt
 > npm i body-parser
 > npm i chalk@4.1.2
 > npm i dotenv
 > npm i express
-> npm i multer // o multiparty
-> npm i nodemon // borrar antes de entregar proyecto
+> npm i express-fileupload
 > npm i jsonwebtoken
-> npm i bcrypt
-> npm i passport passport-local
-> npm i @hapi/joi
+> npm i mysql2
+> npm i nanoid
 
 
 //CREAR BBDD
