@@ -15,7 +15,7 @@ _Segundo proyecto para HACK A BOSS - 2023: Juego que permite usando el ratón o 
   - Gestionar el perfil de usuario.
 
 ## 👩‍💻 Autores
-* - [@BorjaLopz](https://github.com/BorjaLopz)
-* - [@AnaBelenBernardez](https://github.com/AnaBelenBernardez)
-* - [@moirivilla](https://github.com/moirivilla)
-* - [@FranciscoEsparraga](https://github.com/FranciscoEsparraga)
+* [@BorjaLopz](https://github.com/BorjaLopz)
+* [@AnaBelenBernardez](https://github.com/AnaBelenBernardez)
+* [@moirivilla](https://github.com/moirivilla)
+* [@FranciscoEsparraga](https://github.com/FranciscoEsparraga)
