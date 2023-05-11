@@ -6,7 +6,7 @@ _Segundo proyecto para HACK A BOSS - 2023: Juego que permite usando el ratón o 
   - Ver lista de servicios requeridos.
   - Registrarse con un nickname, email y password.
   - Login con email y password.
- * Los usuarios registrados pueden:
+* Los usuarios registrados pueden:
   - Crear un nuevo servicio requerido.
   - Escoger un servicio requerido por otro usuario.
   - Hacer comentarios en los servicios requeridos.
