@@ -113,8 +113,29 @@ const getAllFieldsExceptPassword = async (id) => {
   }
 };
 
+const editUser = async (tmp_user) => {
+  let connection;
+
+  
+  try {
+    let { id, email, nickname, name, surname, password, biography, userPhoto } = tmp_user;
+    connection = await getConnection();
+
+    const [result] = await connection.query(
+      `UPDATE users SET email = ?, nickname = ?, name = ?, surname = ?, biography = ?, userPhoto = ? WHERE id = ?;`, [email, nickname, name, surname, biography, userPhoto, id]
+    );
+
+    console.log(result);
+
+    return result;
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 module.exports = {
   createUser,
   getUserByEmail,
   getAllFieldsExceptPassword,
+  editUser,
 };

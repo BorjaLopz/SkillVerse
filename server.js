@@ -20,7 +20,6 @@ const {
 const { authUser } = require("./middlewares/auth");
 const { generalError, error404 } = require("./middlewares/handleErrors");
 
-let connection;
 const app = new express();
 
 app.use(bodyParser.json()); //Parseamos appliacion/json
@@ -39,21 +38,22 @@ app.post("/user/login", loginController);
 //Creamos un usuario
 app.post("/user/add", newUserController);
 
+//modificamos un user
+app.get("/user/:id", authUser, getAllFieldsExceptPasswordController);
+
+//modificamos un user
+app.put("/user/:id/edit", authUser, editUserController);
+
 //#endregion USER
 
-//#region Servicio
+
+//#region SERVICIO
 
 //Creamos un servicio
 app.post("/service/add", authUser, newServiceController);
 
 //borramos un servicio
 app.delete("/service/delete", authUser, deleteUserController);
-
-//modificamos un user
-app.get("/user/:id", authUser, getAllFieldsExceptPasswordController);
-
-//modificamos un user
-app.put("/user/:id/edit", authUser, editUserController);
 
 //Obtenemos un servicio por ID
 app.get("/service/:id", getServiceByIDController);
@@ -67,13 +67,19 @@ app.patch("/service/:id/:status", updateServiceStatusByIDController);
 //añadimos comentario fichero
 app.post("/comments/:id", authUser, commentsFileController);
 
+//#endregion SERVICIO
+
+
+//#region MIDDLEWARES
+
 //GESTIONAMOS LOS 404. Cuando accedemos a rutas que no estan definidas
 app.use(error404);
 
 //Gestion de errores
 app.use(generalError);
 
-//#endregion Middlewares
+//#endregion MIDDLEWARES
+
 
 //#region SERVER
 
