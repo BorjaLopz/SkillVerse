@@ -166,7 +166,7 @@ const getUserByIdController = async (id) => {
 
 const editUserController = async (req, res, next) => {
   //Obtenemos el id por parametro
-  const { id_params } = req.params;
+  const id_params = +req.params.id;
 
   //Obtenemos el id por token
   const id = req.userId;
@@ -175,6 +175,8 @@ const editUserController = async (req, res, next) => {
   
   try {
 
+    console.log(id);
+    console.log(id_params);
     //Comprobacion para evitar que puedas editar otro usuario
     if(id !== id_params){
       throw generateError("You can't edit another user", 403);
@@ -185,7 +187,7 @@ const editUserController = async (req, res, next) => {
     
     //Obtenemos todos los campos del body
     let { email, userPhoto, nickname, name, surname, password, biography } = req.body;
-    
+
     email = email || user.email;
     userPhoto = userPhoto || user.userPhoto;
     nickname = nickname || user.nickname;
