@@ -13,6 +13,33 @@ _Segundo proyecto para HACK A BOSS - 2023: API que permite gestionar una web don
   - Subir un archivo con el servicio resuelto.
   - Marcar un servicio como ya resuelto.
   - Gestionar el perfil de usuario.
+  - Borrar su usuario.
+  - Borrar un comentario.
+
+## ⚙ Inicialización
+### Archivo .env
+* El archivo .env no se mostrará ya que está incluido en el .gitignore.
+* La información contenida no es sensible ya que se trata de un proyecto de ejemplo, pero por convención lo introducimos de esta forma.
+* La información necesaria se puede encontrar en el archivo .env.example.
+### Base de datos
+* Es necesario tener previamente configurado el archivo .env.
+* Para crear la base de datos con las tablas vacías:
+```
+node db/initDB
+```
+* Para crear la base de datos con 20 usuarios aleatorios:
+```
+node db/initDB --data
+```
+### Servidor
+* Para instalar los módulos necesarios:
+```
+npm install
+```
+* Para iniciar el servidor:
+```
+npm start
+```
 
 ## 👩‍💻 Autores
 * [@BorjaLopz](https://github.com/BorjaLopz)
