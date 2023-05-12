@@ -2,7 +2,6 @@ const { getConnection } = require("./db");
 const { generateError } = require("../helpers");
 const bcrypt = require("bcrypt");
 const chalk = require("chalk");
-const faker = require("@faker-js/faker");
 
 const createUser = async (
   email,
@@ -63,6 +62,7 @@ const createUser = async (
     if (connection) connection.release();
   }
 };
+
 
 //Devuelve la informacion del usuario por email
 const getUserByEmail = async (email) => {
