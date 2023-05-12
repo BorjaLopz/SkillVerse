@@ -106,19 +106,18 @@ const updateServiceStatus = async (id, serviceValue) => {
 
 const getServiceByType = async (type) => {
   let connection;
-  console.log(chalk.red(type));
 
   try {
     connection = await getConnection();
 
     const [result] = await connection.query(
       `SELECT * FROM requireds WHERE required_type LIKE ? AND done = ?`,
-      [`${type}%`, 0]
+      [`%${type}%`, 0]
     );
 
     if (result.length === 0) {
       throw generateError(
-        `No existe ningun servicio que empiece por ${type}`,
+        `No existe ningun servicio por realizar que contengan ${type}`,
         400
       );
     }

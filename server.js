@@ -16,6 +16,7 @@ const {
   getAllServicesController,
   updateServiceStatusByIDController,
   commentsFileController,
+  getServiceByTypeController,
 } = require("./controllers/services");
 const { authUser, checkHeaders } = require("./middlewares/auth");
 const { generalError, error404 } = require("./middlewares/handleErrors");
@@ -38,7 +39,7 @@ app.post("/user/login", loginController);
 //Creamos un usuario
 app.post("/user/add", newUserController);
 
-//modificamos un user
+//Obtenemos todos los campos de un user excepto su id
 app.get("/user/:id", authUser, getAllFieldsExceptPasswordController);
 
 //modificamos un user
@@ -66,6 +67,9 @@ app.patch("/service/:id/:status", updateServiceStatusByIDController);
 
 //añadimos comentario fichero
 app.post("/comments/:id", authUser, commentsFileController);
+
+//Obtenemos servicios en funcion de su tipo
+app.get("/service/type/(:type)?", authUser, getServiceByTypeController);
 
 //#endregion SERVICIO
 
