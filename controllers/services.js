@@ -1,5 +1,6 @@
 const { nanoid } = require("nanoid");
-// const fileType = require("file-type");//detecta el tipo de archivo cargado
+const chalk = require("chalk");
+const path = require("path");
 const {
   createService,
   getServiceByID,
@@ -19,14 +20,12 @@ const {
   checkIfExtensionIsAllowed,
   ALLOWED_EXTENSIONS,
 } = require("../helpers");
-const chalk = require("chalk");
-const path = require("path");
 
 const newServiceController = async (req, res, next) => {
   try {
     const { title, request_body, required_type } = req.body;
 
-    //Comprobamos titulo
+    //Comprobar título
     if (!title || title.lenght > 50 || title.lenght < 15) {
       throw generateError(
         "El título debe tener más de 15 caracteres y menos de 50",
@@ -34,7 +33,7 @@ const newServiceController = async (req, res, next) => {
       );
     }
 
-    //Comprobamos request_body
+    //Comprobar request_body
     if (
       !request_body ||
       request_body.lenght > 500 ||
@@ -46,7 +45,7 @@ const newServiceController = async (req, res, next) => {
       );
     }
 
-    //Comprobamos required_type
+    //Comprobar required_type
     if (!required_type || required_type.lenght > 20) {
       throw generateError(
         "El tipo de servicio requerido debe tener menos de 20 caracteres",
@@ -54,45 +53,39 @@ const newServiceController = async (req, res, next) => {
       );
     }
 
-    // console.log(chalk.magenta(req.userId));
-
-    //Tratamos el fichero
+    //Tratar el fichero
     let fileName;
     let uploadPath;
 
     if (req.files && req.files.file) {
       let sampleFile = req.files.file;
 
-      //Creamos el path
+      //Crear el path
       const uploadDir = path.join(__dirname, "../uploads");
 
-      //Creamos directorio si no existe
+      //Crear directorio si no existe
       await createPathIfNotExists(uploadDir);
 
-      // console.log(sampleFile);
-
-      //Comprobamos si la extension es valida.
+      //Comprobar si la extension es valida.
       console.log(chalk.red(getExtensionFile(sampleFile.name)));
       if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
         throw generateError(
-          `Documento no valido. Tipos de ficheros permitidos: ${ALLOWED_EXTENSIONS}`,
+          `Formato no válido. Tipos de formatos permitidos: ${ALLOWED_EXTENSIONS}`,
           415
-        ); //415 - Unsopported media type
+        );
       }
 
-      fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`; //Obtenemos la extension del fichero para guardarlo de la misma manera
+      //Obtener la extensión del fichero para guardarlo de la misma manera
+      fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`;
 
       uploadPath = uploadDir + "\\" + fileName;
       //uploadPath = path.join(uploadDir, fileName);????
 
-      // console.log(uploadPath);
-
-      //Subimos el fichero
+      //Subir el fichero
       sampleFile.mv(uploadPath, function (e) {
         if (e) {
           throw generateError("No se pudo enviar el archivo", 400);
         }
-        // console.log(chalk.green("File uploaded"));
       });
     }
 
@@ -107,7 +100,7 @@ const newServiceController = async (req, res, next) => {
     console.log(chalk.green("Servicio requerido creado"));
     res.send({
       status: "ok",
-      message: `Services created with id ${id_services}`, //${id_services}
+      message: `Services created with id ${id_services}`,
     });
   } catch (e) {
     next(e);
@@ -116,13 +109,13 @@ const newServiceController = async (req, res, next) => {
 
 const getServiceByIDController = async (req, res, next) => {
   try {
-    //Obtenemos el id que le pasamos por params
+    //Obtener el ID que le pasamos por params
     const { id } = req.params;
 
-    //Obtenemos el servicio
+    //Obtener el servicio
     const service = await getServiceByID(id);
 
-    //Lo mandamos a postman
+    //Enviarlo a postman
     res.send({
       status: "ok",
       message: service,
@@ -134,12 +127,11 @@ const getServiceByIDController = async (req, res, next) => {
 
 const getAllServicesController = async (req, res, next) => {
   try {
-    // const services = await getAllServices();
     const services = await (!req.userId
       ? getAllServices()
       : getAllServices(req.userId));
 
-    //Lo mandamos a postman
+    //Enviar a postman
     res.send({
       status: "ok",
       message: services,
@@ -151,9 +143,10 @@ const getAllServicesController = async (req, res, next) => {
 
 const updateServiceStatusByIDController = async (req, res, next) => {
   try {
-    const { id, status } = req.params; //Obtenemos el id del servicio y el estado
+    //Obtener el ID del servicio y del estado
+    const { id, status } = req.params;
 
-    //Comprobamos si  el estado que le hemos pasado es valido
+    //Comprobar si el estado es válido
     if (!Object.values(SERVICE_STATUS).includes(status.toUpperCase())) {
       throw generateError("Invalid status", 401);
     }
@@ -164,12 +157,13 @@ const updateServiceStatusByIDController = async (req, res, next) => {
     // );
     // console.log(status);
 
+    //Obtener el valor de la key (done: 1 o undone: 2) según el status que se le pase al endpoint
     const service = await updateServiceStatus(
       id,
-      SERVICES_VALUES[getKeyByValue(SERVICE_STATUS, status.toUpperCase())] //Obtenemos el valor que tiene la key done:1 o undone:2 segun el status que le pasemos en el endpoint
+      SERVICES_VALUES[getKeyByValue(SERVICE_STATUS, status.toUpperCase())]
     );
 
-    //Lo mandamos a postman
+    //Enviarlo a postman
     res.send({
       status: "ok",
       message: service,
@@ -199,12 +193,12 @@ const commentsFileController = async (req, res, next) => {
     const { comments } = req.body;
     const { id } = req.params;
 
-    //Comprobamos titulo
+    //Comprobar título
     if (!comments) {
       throw generateError("Debes introducir un comentario", 400);
     }
 
-    //Tratamos el fichero
+    //Tratar el fichero
     let fileName;
     let uploadPath;
 
@@ -214,20 +208,21 @@ const commentsFileController = async (req, res, next) => {
       //Creamos el path
       const uploadDir = path.join(__dirname, "../requestfiles");
 
-      //Creamos directorio si no existe
+      //Crear directorio si no existe
       await createPathIfNotExists(uploadDir);
 
-      fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`; //Obtenemos la extension del fichero para guardarlo de la misma manera
+      //Obtener la extensión del fichero para guardarlo de la misma forma
+      fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`;
 
       uploadPath = uploadDir + "\\" + fileName;
       // uploadPath = path.join(uploadDir, fileName);????
 
-      //Subimos el fichero
+      //Subir el fichero
       sampleFile.mv(uploadPath, function (e) {
         if (e) {
           throw generateError("No se pudo enviar el archivo", 400);
         }
-        console.log("Archivo subido");
+        console.log(chalk.green("Archivo subido"));
       });
     }
 
@@ -241,14 +236,14 @@ const commentsFileController = async (req, res, next) => {
     console.log(chalk.green("Comentario creado"));
     res.send({
       status: "ok",
-      message: `Comment created with id ${id_comment}`, //${id_comment}
+      message: `Comment created with id ${id_comment}`,
     });
   } catch (e) {
     next(e);
   }
 };
 
-/* PARA DISTINGUIR UN ARCHIVO DE UN TEXTO */
+// DISTINGUIR UN ARCHIVO DE UN TEXTO //
 const commentsFileController_deprecated = async (req, res, next) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0) {
@@ -257,18 +252,18 @@ const commentsFileController_deprecated = async (req, res, next) => {
 
     const file = req.files.serviceFile;
 
-    //detecta el tipo de archivo
+    //Detectar el tipo de archivo
     const buffer = file.data;
     console.log(buffer);
     const fileInfo = await fileType.fromBuffer(buffer);
 
-    // Comprueba si subimos un archivo o un texto
+    //Comprobar si subimos un archivo o un texto
     if (fileInfo && fileInfo.mime.startsWith("text/")) {
-      //si el archivo es un comentario de texto guardalo en la base de datos
+      //Si el archivo es un comentario de texto se guarda en la base de datos
       const comment = req.body.comment;
       res.send("Comentario guardado");
     } else {
-      //si el archivo no es un comentario guardalo en el servidor
+      //Si el archivo no es un comentario, se guarda en el servidor
 
       const fileName = `${nanoid(24)}.${fileInfo.ext}`;
       const filePath = path.join(__dirname, "uploads", fileName);

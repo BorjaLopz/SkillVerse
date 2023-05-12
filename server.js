@@ -24,71 +24,75 @@ const { generalError, error404 } = require("./middlewares/handleErrors");
 
 const app = new express();
 
-app.use(bodyParser.json()); //Parseamos appliacion/json
-app.use(bodyParser.urlencoded({ extended: true })); //Parseamos application xwww-form-urlencoded
-app.use(fileUpload()); //Le pasamos el middleware para que pueda leer archivos binarios
+//Parsear JSON y URL-encoded
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+//Leer archivos binarios
+app.use(fileUpload());
+
+//Directorios de los archivos
 app.use("/uploads", express.static("./uploads"));
 app.use("/requestfiles", express.static("./requestfiles"));
-
 app.use(express.static("public"));
 
 //#region USER
 
-// login del usuario (devulve token)
+//Login del user (devulve token)
 app.post("/user/login", loginController);
 
-//Creamos un usuario
+//Crear un user
 app.post("/user/register", newUserController);
 
-//Obtenemos todos los campos de un user excepto su id
+//Obtener todos los campos de un user excepto su ID
 app.get("/user/:id", authUser, getAllFieldsExceptPasswordController);
 
-//modificamos un user
+//Modificar un user
 app.put("/user/:id/edit", authUser, editUserController);
 
-//borramos un usuario
+//Borrar un user
 app.delete("/user/delete", authUser, deleteUserController);
 
 //#endregion USER
 
+//#region SERVICES
 
-//#region SERVICIO
-
-//Creamos un servicio
+//Crear un servicio
 app.post("/service/add", authUser, newServiceController);
 
-
-//Obtenemos un servicio por ID
+//Obtener un servicio por ID
 app.get("/service/:id", getServiceByIDController);
 
-//Obtenemos todos los servicios
+//Obtener todos los servicios
 app.get("/service", checkHeaders, getAllServicesController);
 
-//Modificamos el estado de determinado servicio
+//Modificar el estado de determinado servicio
 app.patch("/service/:id/:status", updateServiceStatusByIDController);
 
-//Obtenemos servicios en funcion de su tipo
+//Obtener servicios en funcion de su tipo
 app.get("/service/type/(:type)?", authUser, getServiceByTypeController);
 
-//añadimos comentario fichero
+//Añadir comentario fichero
 app.post("/service/:id/comments", authUser, commentsFileController);
 
-//Eliminamos comentario TODO
-app.delete("/service/:id_s/comments/:id_c/delete", authUser, deleteCommentsController)
+//Eliminar comentario
+app.delete(
+  "/service/:id_s/comments/:id_c/delete",
+  authUser,
+  deleteCommentsController
+);
 
-//#endregion SERVICIO
-
+//#endregion SERVICES
 
 //#region MIDDLEWARES
 
-//GESTIONAMOS LOS 404. Cuando accedemos a rutas que no estan definidas
+//Gestión de 404: Cuando accedemos a rutas que no están definidas
 app.use(error404);
 
-//Gestion de errores
+//Gestión de errores
 app.use(generalError);
 
 //#endregion MIDDLEWARES
-
 
 //#region SERVER
 

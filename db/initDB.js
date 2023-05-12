@@ -3,7 +3,7 @@
 require("dotenv").config();
 const { getConnection } = require("./db");
 const chalk = require("chalk");
-const { faker } = require('@faker-js/faker/locale/es');
+const { faker } = require("@faker-js/faker/locale/es");
 const bcrypt = require("bcrypt");
 
 const addData = process.argv[2] === "--data";
@@ -73,31 +73,36 @@ async function main() {
       FOREIGN KEY (requiredS_id) REFERENCES requiredS (id)
       
     );
-    `); //FOREIGN KEY (hide) REFERENCES requiredS (hide)
-
+    `);
 
     if (addData) {
       const hashedDefaultPassword = await bcrypt.hash("password", 10);
       await connection.query(`
   INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto)
    VALUES( '${faker.internet.email()}', '${faker.internet.userName()}', '${faker.person.firstName()}', '${faker.person.lastName()}', '${hashedDefaultPassword}', '${faker.lorem.sentences()}','${faker.internet.avatar()}' )
-          `); 
-      
+          `);
+
       const users = 20;
 
       for (let i = 0; i < users; i++) {
         const password = await bcrypt.hash(faker.internet.password(), 10);
-    
-        await connection.query(`
-  INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto)VALUES(?, ?, ?, ?, ?, ?, ?)`,
-          [faker.internet.email(), faker.internet.userName(), faker.person.firstName(), faker.person.lastName(), password, faker.lorem.sentences(), faker.image.avatar()]
+
+        await connection.query(
+          `
+  INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+          [
+            faker.internet.email(),
+            faker.internet.userName(),
+            faker.person.firstName(),
+            faker.person.lastName(),
+            password,
+            faker.lorem.sentences(),
+            faker.image.avatar(),
+          ]
         );
         console.log(chalk.green(`Inserted user ${i + 1}`));
       }
-      
     }
-
-
 
     console.log(chalk.green("Tables created"));
   } catch (error) {
@@ -112,7 +117,8 @@ async function main() {
     } catch (error) {
       console.error(
         chalk.red(
-          "An error occurred while releasing the connection " + error.message
+          "An error has occurred while releasing the connection " +
+            error.message
         )
       );
     }

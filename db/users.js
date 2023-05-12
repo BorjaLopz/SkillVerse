@@ -46,25 +46,24 @@ const createUser = async (
       );
     }
 
-    //Encriptamos la contraseña
+    //Encriptar la contraseña
     const passwordHash = await bcrypt.hash(password, 10);
 
-    //Creamos usuario en la base de datos
+    //Crear usuario en la BBDD
     const [newUser] = await connection.query(
       `
     INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto) VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [email, nickname, name, surname, passwordHash, biography, userPhoto]
     );
 
-    //Devolvemos el id
+    //Devolver el ID
     return newUser.insertId;
   } finally {
     if (connection) connection.release();
   }
 };
 
-
-//Devuelve la informacion del usuario por email
+//Devolver la información del usuario por su email
 const getUserByEmail = async (email) => {
   let connection;
   try {
@@ -100,8 +99,6 @@ const getAllFieldsExceptPassword = async (id) => {
       `SELECT * FROM user_tmp WHERE id = ? `,
       id
     );
-
-    // console.log(table_tmp_3);
 
     if (table_tmp_3.length === 0) {
       throw generateError("No hay usuarios con ese ID", 404);

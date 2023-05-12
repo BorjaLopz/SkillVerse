@@ -1,0 +1,281 @@
+{
+  "info": {
+    "_postman_id": "0d7d0093-38a5-45b1-97c5-e62ad0b1fea5",
+    "name": "Proyecto 2 Portal Digital",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "26978288"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"borja@gmail.com\",\r\n    \"nickname\": \"nickname\",\r\n    \"password\": \"1234\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/user/add",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["user", "add"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"borjaa@borjaa.com\",\r\n    \"password\": \"bbbB8888888\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/user/login",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["user", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get user by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "not implemented",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/user/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["user", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjgzNjU2NDk5LCJleHAiOjE2ODYyNDg0OTl9.m84C3E9SL1LF0pHZVjcdsSoi5yRL2GvHi2BZNLbkaIw",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{ \r\n    \"email\": \"borjaa@borjaa.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:3000/user/1/edit",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["user", "1", "edit"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/user/delete",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["user", "delete"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Service",
+      "item": [
+        {
+          "name": "Add Service",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjgzNjMxODMzLCJleHAiOjE2ODYyMjM4MzN9.-p1kl7owfbaEIDFzoGPHp-7Bh2uV23chyMyserHy2ec",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Prueba base de datos",
+                  "type": "text"
+                },
+                {
+                  "key": "request_body",
+                  "value": "descripcion del proyecto que tiene que tener 15 caracteres minimo",
+                  "type": "text"
+                },
+                {
+                  "key": "required_type",
+                  "value": "Edicion de fotos",
+                  "type": "text"
+                },
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/D:/Fondos de Pantalla/TEST/Prueba.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "http://localhost:3000/service/add",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["service", "add"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get service by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/service/1",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["service", "1"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener todos los servicios",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/service",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["service"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Status of Service",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/service/1/done",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["service", "1", "done"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get service by type",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/service/type/type",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["service", "type", "type"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comments",
+      "item": [
+        {
+          "name": "Post comments/file",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/comments/file",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["comments", "file"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Comment",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjgzODgyNDM4LCJleHAiOjE2ODY0NzQ0Mzh9.iOVlEyk2y8SD7bfbYwcFgBz1DchuFUb-HAqtaEvw2yA",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:3000/service/1/comments/delete",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "3000",
+              "path": ["service", "1", "comments", "delete"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
