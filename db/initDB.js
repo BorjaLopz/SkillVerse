@@ -80,7 +80,7 @@ async function main() {
       const hashedDefaultPassword = await bcrypt.hash("password", 10);
       await connection.query(`
   INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto)
-   VALUES( 'user@user.com', '${faker.internet.userName()}', '${faker.person.firstName()}', '${faker.person.lastName()}', '${hashedDefaultPassword}', '${faker.lorem.sentences()}','${faker.internet.avatar()}' )
+   VALUES( '${faker.internet.email()}', '${faker.internet.userName()}', '${faker.person.firstName()}', '${faker.person.lastName()}', '${hashedDefaultPassword}', '${faker.lorem.sentences()}','${faker.internet.avatar()}' )
           `); 
       
       const users = 20;
