@@ -38,6 +38,7 @@ async function main() {
       userPhoto VARCHAR(1000),
       linkedin VARCHAR(100) NULL CHECK (linkedin IS NULL OR linkedin REGEXP 'linkedin'),
       instagram VARCHAR(100) NULL CHECK (instagram IS NULL OR instagram REGEXP 'instagram'),
+      deleted BOOLEAN DEFAULT 0,
       active BOOLEAN DEFAULT TRUE
     );
     `);

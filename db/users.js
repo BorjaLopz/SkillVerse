@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt");
 const chalk = require("chalk");
 
 
+
+
 const createUser = async (
   email,
   password,
@@ -15,8 +17,12 @@ const createUser = async (
 ) => {
   let connection;
 
+
  try {
  
+
+
+
     connection = await getConnection();
 
     const [user] = await connection.query(
@@ -26,7 +32,7 @@ const createUser = async (
     );
 
     if (user.length > 0) {
-      throw generateError("Email already in use", 409);
+      throw generateError(chalk.red("Email ya en uso", 409));
     }
 
     const [userNickname] = await connection.query(
@@ -36,14 +42,16 @@ const createUser = async (
     );
 
     if (userNickname.length > 0) {
-      throw generateError("Nickname already in use", 409);
+      throw generateError(chalk.red("Nickname ya en uso", 409));
     }
 
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$/;
     if (!passwordRegex.test(password)) {
       throw generateError(
-        "Password must contain at least one uppercase letter, one lowercase letter, one number, and be at least 8 characters long",
-        400
+        chalk.red(
+          "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y tener al menos 8 caracteres",
+          400
+        )
       );
     }
 
@@ -77,7 +85,7 @@ const getUserByEmail = async (email) => {
     );
 
     if (result.length === 0) {
-      throw generateError(chalk.red("There is no user with that email", 404));
+      throw generateError(chalk.red("No existe usuario con ese email", 404));
     }
 
     return result[0];
@@ -135,9 +143,39 @@ const editUser = async (tmp_user) => {
   }
 };
 
+const deleteUser = async (idUser, verifyNickname) => {
+  let connection;
+  try {
+    connection = await getConnection();
+    const [user] = await connection.query(
+      `SELECT id, nickname, active FROM users WHERE id = ?`,
+      [idUser]
+    );
+
+    if (user.length === 0) {
+      throw generateError("Usuario no encontrado", 404);
+    }
+
+    if (verifyNickname != user[0].nickname) {
+      throw generateError("Usuario incorrecto", 401);
+    }
+
+    if (user[0].active === 0) {
+      throw generateError("Usuario ya eliminado", 404);
+    }
+
+    await connection.query(`UPDATE users SET active = 0 WHERE id = ?`, [
+      idUser,
+    ]);
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 module.exports = {
   createUser,
   getUserByEmail,
   getAllFieldsExceptPassword,
   editUser,
+  deleteUser,
 };
