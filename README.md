@@ -13,6 +13,8 @@ _Segundo proyecto para HACK A BOSS - 2023: API que permite gestionar una web don
   - Subir un archivo con el servicio resuelto.
   - Marcar un servicio como ya resuelto.
   - Gestionar el perfil de usuario.
+  - Borrar su usuario.
+  - Borrar un comentario.
 
 ## ⚙ Inicialización
 ### Archivo .env
