@@ -1,9 +1,10 @@
 const mysql = require("mysql2/promise");
+const chalk = require("chalk");
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE } = process.env;
 
 let pool;
 
-//Establecemos conexión con la BBDD
+//Establecer conexión con la BBDD
 const getConnection = async () => {
   try {
     if (!pool) {
@@ -18,7 +19,7 @@ const getConnection = async () => {
     }
     return await pool.getConnection();
   } catch (error) {
-    console.error(error);
+    console.error(chalk.red(error));
     throw new Error("Error connecting to MySQL");
   }
 };

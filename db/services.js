@@ -3,7 +3,6 @@ const { generateError } = require("../helpers");
 const chalk = require("chalk");
 
 //Crear servicio en la BBDD
-const { SERVICES_VALUES } = require("../helpers");
 const createService = async (
   title,
   request_body,
@@ -162,7 +161,7 @@ const deleteComment = async (id_s, id_c) => {
       [id_s]
     );
 
-    if(getCommentByID_s.length === 0) {
+    if (getCommentByID_s.length === 0) {
       throw generateError("No hay comentarios de este servicio", 404);
     }
 
@@ -172,21 +171,23 @@ const deleteComment = async (id_s, id_c) => {
     );
 
     if (getCommentByID_c.length === 0) {
-      throw generateError("No hay comentarios con esta id", 404);
+      throw generateError("No hay comentarios con esta ID", 404);
     }
 
-    const [deletedComment] = await connection.query(`DELETE FROM comments WHERE requireds_id = ? AND id = ?`, [id_s, id_c]);
+    const [deletedComment] = await connection.query(
+      `DELETE FROM comments WHERE requireds_id = ? AND id = ?`,
+      [id_s, id_c]
+    );
 
-    if(deletedComment.length === 0){
+    if (deletedComment.length === 0) {
       throw generateError("No hay nigun comentario", 400);
     }
 
     return deletedComment;
-
   } finally {
     if (connection) connection.release();
   }
-}
+};
 
 module.exports = {
   createService,

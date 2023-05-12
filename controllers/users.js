@@ -10,7 +10,6 @@ const {
   deleteUser,
 } = require("../db/users");
 const { getConnection } = require("../db/db");
-const chalk = require("chalk");
 
 const newUserController = async (req, res, next) => {
   try {
@@ -122,7 +121,6 @@ const getUserController = async (req, res, next) => {
 
 const getAllFieldsExceptPasswordController = async (req, res, next) => {
   const { id } = req.params;
-  // console.log(id);
   try {
     connection = await getConnection();
 
