@@ -2,19 +2,21 @@ const { getConnection } = require("./db");
 const { generateError } = require("../helpers");
 const bcrypt = require("bcrypt");
 const chalk = require("chalk");
+const faker  = require('@faker-js/faker');
 
-const createUser = async (
-  email,
-  password,
-  nickname,
-  name = "",
-  surname = "",
-  biography = "",
-  userPhoto = ""
-) => {
+const createUser = async () => {
   let connection;
+ try {
+  email = faker.internet.email();
+  nickname = faker.internet.userName();
+  name = faker.internet.firstName();
+  surname = faker.interner.lastName();
+  password = faker.internet.password();
+  biography = faker.lorem.sentences();
+  userPhoto = faker.image.avatar();
+  
 
-  try {
+ 
     connection = await getConnection();
 
     const [user] = await connection.query(
@@ -61,6 +63,12 @@ const createUser = async (
     if (connection) connection.release();
   }
 };
+
+
+
+
+
+
 
 //Devuelve la informacion del usuario por email
 const getUserByEmail = async (email) => {
