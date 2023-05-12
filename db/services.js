@@ -67,7 +67,7 @@ const getAllServices = async (user_id = -1) => {
       [user_id, 0]
     );
     if (result.length === 0) {
-      throw generateError("No hay ningún servicio", 404);
+      throw generateError("No hay ningún servicio aún", 404);
     }
 
     return result;
@@ -90,7 +90,7 @@ const updateServiceStatus = async (id, serviceValue) => {
     );
 
     if (result.length === 0) {
-      throw generateError("No hay ningún servicio", 404);
+      throw generateError("No hay ningún servicio con ese ID", 404);
     }
 
     const [update] = await connection.query(
@@ -116,10 +116,7 @@ const getServiceByType = async (type) => {
     );
 
     if (result.length === 0) {
-      throw generateError(
-        `No existe ningún servicio que contenga "${type}"`,
-        400
-      );
+      throw generateError("No existe ningún servicio que contenga" + type, 400);
     }
 
     return result;

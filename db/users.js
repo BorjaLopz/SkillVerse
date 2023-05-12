@@ -104,7 +104,7 @@ const getAllFieldsExceptPassword = async (id) => {
     // console.log(table_tmp_3);
 
     if (table_tmp_3.length === 0) {
-      throw generateError("No hay usuarios", 404);
+      throw generateError("No hay usuarios con ese ID", 404);
     }
 
     return table_tmp_3;
