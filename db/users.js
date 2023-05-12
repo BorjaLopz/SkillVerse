@@ -7,13 +7,13 @@ const faker  = require('@faker-js/faker');
 const createUser = async () => {
   let connection;
  try {
-  email = faker.internet.email();
-  nickname = faker.internet.userName();
-  name = faker.internet.firstName();
-  surname = faker.interner.lastName();
-  password = faker.internet.password();
-  biography = faker.lorem.sentences();
-  userPhoto = faker.image.avatar();
+  const email = faker.internet.email();
+  const nickname = faker.internet.userName();
+  const name = faker.internet.firstName();
+  const surname = faker.interner.lastName();
+  const password = faker.internet.password();
+  const biography = faker.lorem.sentences();
+  const userPhoto = faker.image.avatar();
   
 
  
