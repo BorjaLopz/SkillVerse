@@ -9,8 +9,10 @@
 //Vacía
 > node db/initDB.js
 //Con datos aleatorios
-> node db/initDB.js --random //monica
+> node db/initDB.js --data
 
+//Instalar modulos
+> npm install
 //Iniciar servidor
 //añadir comando para start
 > npm start
