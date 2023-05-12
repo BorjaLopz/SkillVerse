@@ -2,10 +2,11 @@
   "name": "portal-digital",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon run server.js"
+    "dev": "nodemon run server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

@@ -2,23 +2,16 @@
 
 //postman_collection.json
 
-//Módulos necesarios para la app:
 
-> npm init
-> npm i @hapi/joi
-> npm i bcrypt
-> npm i body-parser
-> npm i chalk@4.1.2
-> npm i dotenv
-> npm i express
-> npm i express-fileupload
-> npm i jsonwebtoken
-> npm i mysql2
-> npm i nanoid
-
+///README///
 
 //CREAR BBDD
+//Vacía
 > node db/initDB.js
+//Con datos aleatorios
+> node db/initDB.js --random //monica
 
 //Iniciar servidor
-> node server.js
+//añadir comando para start
+> npm start
+> 
