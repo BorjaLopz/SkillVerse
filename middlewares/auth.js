@@ -2,67 +2,42 @@ const jwt = require("jsonwebtoken");
 const { generateError } = require("../helpers");
 
 //Autenticación y autorización de users
-const authUser = (req, res, next) => {
+const authUser = (req, res, next, authorization) => {
   try {
-    const { authorization } = req.headers;
-    if (!authorization) {
-      throw generateError("Missing Authorization header", 401);
-    } else {
-      //comprobamos que el token sea correcto
-      let token;
-
-      try {
-        token = jwt.verify(authorization, process.env.JWT_SECRET);
-      } catch (error) {
-        throw generateError("Wrong token", 401);
-      }
-
-      console.log(token); //dev
-
-      // metemos la informacion del token en la request para usarla en el controlador
-
-      req.userId = token.id;
-      //saltamos al controlador
-
-      next();
-    }
-  } catch (error) {
-    next(error);
-  }
-};
-
-/* COPIA DE AUTH USER. LA USAREMOS PARA OBTENER TODOS LOS SERVICIOS MENOS LOS PROPIOS DEL USUARIO */
-const checkIfRegistered = async (req, res, next) => {
-try {
-  const { authorization } = req.headers;
-  if (!authorization) {
-    // throw generateError("Missing Authorization header", 401);
-    next();
-  } else {
-    //comprobamos que el token sea correcto
     let token;
 
+    //comprobamos que el token sea correcto
     try {
       token = jwt.verify(authorization, process.env.JWT_SECRET);
     } catch (error) {
       throw generateError("Wrong token", 401);
     }
 
-    // console.log(token); //dev
-
     // metemos la informacion del token en la request para usarla en el controlador
-
     req.userId = token.id;
-    //saltamos al controlador
 
     next();
+  } catch (error) {
+    next(error);
   }
-} catch (error) {
-  next(error);
-}
-}
+};
+
+//Comprobamos si exite la cabecera de Authorization, si existe pasamos a authUser, si no next();
+const checkHeaders = (req, res, next) => {
+  try {
+    const { authorization } = req.headers;
+    if (!authorization) {
+      next();
+    } else {
+      console.log("Vamos a ir por aqui!");
+      authUser(req, res, next, authorization);
+    }
+  } catch (e) {
+    next(e);
+  }
+};
 
 module.exports = {
   authUser,
-  checkIfRegistered
+  checkHeaders,
 };

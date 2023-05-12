@@ -144,7 +144,7 @@ const createComment = async (
 
     const [newComment] = await connection.query(
       `
-    INSERT INTO comments (user_id, requiredS_id, comments, serviceFile, hide) VALUES (?, ?, ?, ?, ?)`,
+    INSERT INTO comments (user_id, requiredS_id, comment, serviceFile, hide) VALUES (?, ?, ?, ?, ?)`,
       [user_id, service_id, comment, service_file, hide]
     );
 

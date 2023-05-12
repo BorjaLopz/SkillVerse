@@ -17,7 +17,7 @@ const {
   updateServiceStatusByIDController,
   commentsFileController,
 } = require("./controllers/services");
-const { authUser } = require("./middlewares/auth");
+const { authUser, checkHeaders } = require("./middlewares/auth");
 const { generalError, error404 } = require("./middlewares/handleErrors");
 
 const app = new express();
@@ -59,7 +59,7 @@ app.delete("/service/delete", authUser, deleteUserController);
 app.get("/service/:id", getServiceByIDController);
 
 //Obtenemos todos los servicios
-app.get("/service", authUser, getAllServicesController);
+app.get("/service", checkHeaders, getAllServicesController);
 
 //Modificamos el estado de determinado servicio
 app.patch("/service/:id/:status", updateServiceStatusByIDController);
