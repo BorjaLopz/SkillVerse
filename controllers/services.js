@@ -28,7 +28,7 @@ const newServiceController = async (req, res, next) => {
     //Comprobamos titulo
     if (!title || title.lenght > 50 || title.lenght < 15) {
       throw generateError(
-        "The title must be greater than 15 characters and less than 50",
+        "El título debe tener más de 15 caracteres y menos de 50",
         400
       );
     }
@@ -40,14 +40,17 @@ const newServiceController = async (req, res, next) => {
       request_body.lenght < 15
     ) {
       throw generateError(
-        "The description must be greater than 15 characters and less than 500",
+        "La descripción debe tener más de 15 caracteres y menos de 500 ",
         400
       );
     }
 
     //Comprobamos required_type
     if (!required_type || required_type.lenght > 20) {
-      throw generateError("Service type must be less than 20 characters", 400);
+      throw generateError(
+        "El tipo de servicio requerido debe tener menos de 20 caracteres",
+        400
+      );
     }
 
     // console.log(chalk.magenta(req.userId));
@@ -82,7 +85,7 @@ const newServiceController = async (req, res, next) => {
       //Subimos el fichero
       sampleFile.mv(uploadPath, function (e) {
         if (e) {
-          throw generateError("The file could not be sent", 400);
+          throw generateError("No se pudo enviar el archivo", 400);
         }
         // console.log(chalk.green("File uploaded"));
       });
@@ -96,7 +99,7 @@ const newServiceController = async (req, res, next) => {
       fileName
     );
 
-    console.log(chalk.green("Service created"));
+    console.log(chalk.green("Servicio requerido creado"));
     res.send({
       status: "ok",
       message: `Services created with id ${id_services}`, //${id_services}
@@ -193,7 +196,7 @@ const commentsFileController = async (req, res, next) => {
 
     //Comprobamos titulo
     if (!comments) {
-      throw generateError("Comment is required", 400);
+      throw generateError("Debes introducir un comentario", 400);
     }
 
     //Tratamos el fichero
@@ -217,9 +220,9 @@ const commentsFileController = async (req, res, next) => {
       //Subimos el fichero
       sampleFile.mv(uploadPath, function (e) {
         if (e) {
-          throw generateError("The file could not be sent", 400);
+          throw generateError("No se pudo enviar el archivo", 400);
         }
-        console.log("File uploaded");
+        console.log("Archivo subido");
       });
     }
 
@@ -230,7 +233,7 @@ const commentsFileController = async (req, res, next) => {
 
     const id_comment = await createComment(comments, fileName, req.userId, id);
 
-    console.log(chalk.green("Comment created"));
+    console.log(chalk.green("Comentario creado"));
     res.send({
       status: "ok",
       message: `Comment created with id ${id_comment}`, //${id_comment}
@@ -240,7 +243,7 @@ const commentsFileController = async (req, res, next) => {
   }
 };
 
-/* NOS SIRVE PARA DISTINGUIR UN ARCHIVO DE UN TEXTO */
+/* PARA DISTINGUIR UN ARCHIVO DE UN TEXTO */
 const commentsFileController_deprecated = async (req, res, next) => {
   try {
     if (!req.files || Object.keys(req.files).length === 0) {
@@ -258,7 +261,7 @@ const commentsFileController_deprecated = async (req, res, next) => {
     if (fileInfo && fileInfo.mime.startsWith("text/")) {
       //si el archivo es un comentario de texto guardalo en la base de datos
       const comment = req.body.comment;
-      res.send("Comentario guardado correctamente");
+      res.send("Comentario guardado");
     } else {
       //si el archivo no es un comentario guardalo en el servidor
 
@@ -268,14 +271,14 @@ const commentsFileController_deprecated = async (req, res, next) => {
         if (error) {
           return res.status(500).send(error);
         }
-        res.send("Archivo subido correctamente");
+        res.send("Archivo subido");
       });
     }
 
     const id_files = await createFile(requiredS_id, serviceFile);
     res.send({
       status: "ok",
-      message: `Comentario creado con id ${id_files}`,
+      message: `Comment created with id ${id_files}`,
     });
   } catch (e) {
     next(e);

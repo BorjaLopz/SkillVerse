@@ -29,7 +29,7 @@ const createService = async (
       [title, request_body, user_id, file_name, required_type, done, hide]
     );
 
-    console.log(chalk.green("Service created"));
+    console.log(chalk.green("Servicio creado"));
 
     return newService.insertId;
   } catch (e) {
@@ -48,7 +48,7 @@ const getServiceByID = async (id) => {
     );
 
     if (result.length === 0) {
-      throw generateError("No hay ningun servicio con ese id", 400);
+      throw generateError("No hay ningun servicio con ese ID", 400);
     }
     return result[0];
   } catch (e) {
@@ -67,7 +67,7 @@ const getAllServices = async (user_id = -1) => {
       [user_id, 0]
     );
     if (result.length === 0) {
-      throw generateError("No hay ningun servicio", 404);
+      throw generateError("No hay ningún servicio", 404);
     }
 
     return result;
@@ -90,7 +90,7 @@ const updateServiceStatus = async (id, serviceValue) => {
     );
 
     if (result.length === 0) {
-      throw generateError("No hay ningun servicio", 404);
+      throw generateError("No hay ningún servicio", 404);
     }
 
     const [update] = await connection.query(
@@ -117,7 +117,7 @@ const getServiceByType = async (type) => {
 
     if (result.length === 0) {
       throw generateError(
-        `No existe ningun servicio por realizar que contengan ${type}`,
+        `No existe ningún servicio que contenga "${type}"`,
         400
       );
     }
@@ -147,7 +147,7 @@ const createComment = async (
       [user_id, service_id, comment, service_file, hide]
     );
 
-    console.log(chalk.green("Comment created"));
+    console.log(chalk.green("Comentario creado"));
 
     return newComment.insertId;
   } catch (e) {
