@@ -23,7 +23,10 @@ const newUserController = async (req, res, next) => {
     });
 
     if (!email || !password || !nickname) {
-      throw generateError("Email, password and nickname are required", 401);
+      throw generateError(
+        "Debes introducir un email, contraseña y nickname",
+        401
+      );
     }
 
     const id = await createUser(
@@ -60,7 +63,7 @@ const loginController = async (req, res, next) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
-      throw generateError("Email and password are required", 400);
+      throw generateError("Debes introducir email y contraseña", 400);
     }
 
     //recojo los datos de la base de datos del usuario con ese mail
@@ -69,7 +72,7 @@ const loginController = async (req, res, next) => {
     const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
-      throw generateError("Password does not match", 401);
+      throw generateError("La contraseña no coincide", 401);
     }
     //creo el payload del token
     const payload = { id: user.id };
@@ -93,7 +96,7 @@ const deleteUserController = async (req, res, next) => {
     const { verifyNickname } = req.body;
 
     if (!verifyNickname) {
-      throw generateError("Nickname is required", 400);
+      throw generateError("Debes introducir nickname", 400);
     }
 
     await deleteUserController(req.user.id, verifyNickname);
@@ -155,7 +158,7 @@ const getUserByIdController = async (id) => {
     );
 
     if (result.length === 0) {
-      throw generateError("There is no user with that ID", 404);
+      throw generateError("No hay ningún usuario con ese ID", 404);
     }
 
     return result[0];
@@ -172,20 +175,20 @@ const editUserController = async (req, res, next) => {
   const id = req.userId;
 
   let tmp_user = {}; //Objeto que le vamos a pasar a editUser();
-  
-  try {
 
+  try {
     //Comprobacion para evitar que puedas editar otro usuario
-    if(id !== id_params){
-      throw generateError("You can't edit another user", 403);
+    if (id !== id_params) {
+      throw generateError("No puedes editar otro usuario", 403);
     }
 
     //Obtenemos la informacion del usuario por id
     const [user] = await getAllFieldsExceptPassword(id);
-    
+
     //Obtenemos todos los campos del body
-    let { email, userPhoto, nickname, name, surname, password, biography } = req.body;
-    
+    let { email, userPhoto, nickname, name, surname, password, biography } =
+      req.body;
+
     email = email || user.email;
     userPhoto = userPhoto || user.userPhoto;
     nickname = nickname || user.nickname;
@@ -232,12 +235,12 @@ const editUserController = async (req, res, next) => {
     if (updatedUser.changedRows === 0) {
       res.send({
         status: "ok",
-        data: "Ningun campo ha sido actualizado",
+        data: "Ningún campo ha sido actualizado",
       });
     } else {
       res.send({
         status: "ok",
-        data: "Perfil actualizado",
+        data: "Profile updated",
       });
     }
   } catch (error) {

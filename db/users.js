@@ -24,7 +24,7 @@ const createUser = async (
     );
 
     if (user.length > 0) {
-      throw generateError(chalk.red("Email already in use", 409));
+      throw generateError(chalk.red("Email ya en uso", 409));
     }
 
     const [userNickname] = await connection.query(
@@ -34,14 +34,14 @@ const createUser = async (
     );
 
     if (userNickname.length > 0) {
-      throw generateError(chalk.red("Nickname already in use", 409));
+      throw generateError(chalk.red("Nickname ya en uso", 409));
     }
 
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$/;
     if (!passwordRegex.test(password)) {
       throw generateError(
         chalk.red(
-          "Password must contain at least one uppercase letter, one lowercase letter, one number, and be at least 8 characters long",
+          "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y tener al menos 8 caracteres",
           400
         )
       );
@@ -76,7 +76,7 @@ const getUserByEmail = async (email) => {
     );
 
     if (result.length === 0) {
-      throw generateError(chalk.red("There is no user with that email", 404));
+      throw generateError(chalk.red("No existe usuario con ese email", 404));
     }
 
     return result[0];
@@ -116,13 +116,14 @@ const getAllFieldsExceptPassword = async (id) => {
 const editUser = async (tmp_user) => {
   let connection;
 
-  
   try {
-    let { id, email, nickname, name, surname, password, biography, userPhoto } = tmp_user;
+    let { id, email, nickname, name, surname, password, biography, userPhoto } =
+      tmp_user;
     connection = await getConnection();
 
     const [result] = await connection.query(
-      `UPDATE users SET email = ?, nickname = ?, name = ?, surname = ?, biography = ?, userPhoto = ? WHERE id = ?;`, [email, nickname, name, surname, biography, userPhoto, id]
+      `UPDATE users SET email = ?, nickname = ?, name = ?, surname = ?, biography = ?, userPhoto = ? WHERE id = ?;`,
+      [email, nickname, name, surname, biography, userPhoto, id]
     );
 
     console.log(result);
@@ -133,9 +134,43 @@ const editUser = async (tmp_user) => {
   }
 };
 
+const deleteUser = async (idUser, verifyNickname) => {
+  let connection;
+  try {
+    connection = await getConnection();
+    const [user] = await connection.query(
+      `SELECT id, nickname, deleted FROM users WHERE id = ?`,
+      [idUser]
+    );
+
+    if (user.length === 0) {
+      throw generateError("Usuario no encontrado", 404);
+    }
+
+    if (verifyNickname != user[0].nickname) {
+      throw generateError("Usuario incorrecto", 401);
+    }
+
+    if (user[0].deleted === 1) {
+      throw generateError("Usuario ya eliminado", 404);
+    }
+
+    const deletedNickname = `deleted_user_${user[0].id}`;
+    const deletedEmail = `deleted_email_${user[0].id}`;
+
+    await connection.query(
+      `UPDATE users SET deleted = 1, password = "", email = ?, nickname = ? WHERE id = ?`,
+      [deletedNickname, deletedEmail, idUser]
+    );
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 module.exports = {
   createUser,
   getUserByEmail,
   getAllFieldsExceptPassword,
   editUser,
+  deleteUser,
 };
