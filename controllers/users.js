@@ -122,11 +122,9 @@ const getUserController = async (req, res, next) => {
   }
 };
 
-async function prueba(id) {}
-
 const getAllFieldsExceptPasswordController = async (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
+  // console.log(id);
   try {
     connection = await getConnection();
 
@@ -178,6 +176,10 @@ const editUserController = async (req, res, next) => {
     console.log(id);
     console.log(id_params);
     //Comprobacion para evitar que puedas editar otro usuario
+
+    if(!id){
+      throw generateError("id no valido!", 400);
+    }
     if(id !== id_params){
       throw generateError("You can't edit another user", 403);
     }

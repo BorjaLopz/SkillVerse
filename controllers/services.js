@@ -166,7 +166,6 @@ const updateServiceStatusByIDController = async (req, res, next) => {
 
 const getServiceByTypeController = async (req, res, next) => {
   try {
-    console.log(req.params);
     const { type } = req.params;
 
     const service = await getServiceByType(type);

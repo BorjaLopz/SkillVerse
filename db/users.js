@@ -24,7 +24,7 @@ const createUser = async (
     );
 
     if (user.length > 0) {
-      throw generateError(chalk.red("Email already in use", 409));
+      throw generateError("Email already in use", 409);
     }
 
     const [userNickname] = await connection.query(
@@ -34,16 +34,14 @@ const createUser = async (
     );
 
     if (userNickname.length > 0) {
-      throw generateError(chalk.red("Nickname already in use", 409));
+      throw generateError("Nickname already in use", 409);
     }
 
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$/;
     if (!passwordRegex.test(password)) {
       throw generateError(
-        chalk.red(
-          "Password must contain at least one uppercase letter, one lowercase letter, one number, and be at least 8 characters long",
-          400
-        )
+        "Password must contain at least one uppercase letter, one lowercase letter, one number, and be at least 8 characters long",
+        400
       );
     }
 
@@ -104,7 +102,7 @@ const getAllFieldsExceptPassword = async (id) => {
     // console.log(table_tmp_3);
 
     if (table_tmp_3.length === 0) {
-      throw generateError("No hay usuarios", 400);
+      throw generateError("No hay usuarios", 404);
     }
 
     return table_tmp_3;
@@ -116,13 +114,14 @@ const getAllFieldsExceptPassword = async (id) => {
 const editUser = async (tmp_user) => {
   let connection;
 
-  
   try {
-    let { id, email, nickname, name, surname, password, biography, userPhoto } = tmp_user;
+    let { id, email, nickname, name, surname, password, biography, userPhoto } =
+      tmp_user;
     connection = await getConnection();
 
     const [result] = await connection.query(
-      `UPDATE users SET email = ?, nickname = ?, name = ?, surname = ?, biography = ?, userPhoto = ? WHERE id = ?;`, [email, nickname, name, surname, biography, userPhoto, id]
+      `UPDATE users SET email = ?, nickname = ?, name = ?, surname = ?, biography = ?, userPhoto = ? WHERE id = ?;`,
+      [email, nickname, name, surname, biography, userPhoto, id]
     );
 
     console.log(result);
