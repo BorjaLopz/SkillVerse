@@ -3,6 +3,8 @@
 require("dotenv").config();
 const { getConnection } = require("./db");
 const chalk = require("chalk");
+const { faker } = require('@faker-js/faker');
+const addData = process.argv[2] === "--data";
 
 async function main() {
   let connection;
@@ -70,6 +72,15 @@ async function main() {
       
     );
     `); //FOREIGN KEY (hide) REFERENCES requiredS (hide)
+// faker en proceso
+   /* if (addData) {
+      const passwordHash = await bcrypt.hash(password, 10);
+      await connection.query(`
+  INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto)
+  VALUES('${faker.internet.email()}', '${passwordHash}', '${}, '${faker.name.firstName()}', '${faker.name.lastName()}', '${faker.internet.avatar()}', '${birthDate}')
+  `);
+    }*/
+
 
     console.log(chalk.green("Tables created"));
   } catch (error) {
