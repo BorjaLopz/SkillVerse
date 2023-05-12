@@ -74,7 +74,7 @@ app.get("/service/type/(:type)?", authUser, getServiceByTypeController);
 app.post("/service/:id/comments", authUser, commentsFileController);
 
 //Eliminamos comentario TODO
-app.delete("/service/:id/comments/delete", authUser, deleteCommentsController)
+app.delete("/service/:id_s/comments/:id_c/delete", authUser, deleteCommentsController)
 
 //#endregion SERVICIO
 
