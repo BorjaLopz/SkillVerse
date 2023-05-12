@@ -99,7 +99,7 @@ const deleteUserController = async (req, res, next) => {
       throw generateError("Debes introducir nickname", 400);
     }
 
-    await deleteUserController(req.user.id, verifyNickname);
+    await deleteUserController(req.userId, verifyNickname);
 
     res.send({
       status: "ok",

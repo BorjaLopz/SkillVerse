@@ -2,21 +2,19 @@ const { getConnection } = require("./db");
 const { generateError } = require("../helpers");
 const bcrypt = require("bcrypt");
 const chalk = require("chalk");
-const faker  = require('@faker-js/faker');
+const faker = require("@faker-js/faker");
 
 const createUser = async () => {
   let connection;
- try {
-  const email = faker.internet.email();
-  const nickname = faker.internet.userName();
-  const name = faker.internet.firstName();
-  const surname = faker.interner.lastName();
-  const password = faker.internet.password();
-  const biography = faker.lorem.sentences();
-  const userPhoto = faker.image.avatar();
-  
+  try {
+    const email = faker.internet.email();
+    const nickname = faker.internet.userName();
+    const name = faker.internet.firstName();
+    const surname = faker.interner.lastName();
+    const password = faker.internet.password();
+    const biography = faker.lorem.sentences();
+    const userPhoto = faker.image.avatar();
 
- 
     connection = await getConnection();
 
     const [user] = await connection.query(
@@ -65,12 +63,6 @@ const createUser = async () => {
     if (connection) connection.release();
   }
 };
-
-
-
-
-
-
 
 //Devuelve la informacion del usuario por email
 const getUserByEmail = async (email) => {
@@ -147,7 +139,7 @@ const deleteUser = async (idUser, verifyNickname) => {
   try {
     connection = await getConnection();
     const [user] = await connection.query(
-      `SELECT id, nickname, deleted FROM users WHERE id = ?`,
+      `SELECT id, nickname, active FROM users WHERE id = ?`,
       [idUser]
     );
 
@@ -159,17 +151,13 @@ const deleteUser = async (idUser, verifyNickname) => {
       throw generateError("Usuario incorrecto", 401);
     }
 
-    if (user[0].deleted === 1) {
+    if (user[0].active === 0) {
       throw generateError("Usuario ya eliminado", 404);
     }
 
-    const deletedNickname = `deleted_user_${user[0].id}`;
-    const deletedEmail = `deleted_email_${user[0].id}`;
-
-    await connection.query(
-      `UPDATE users SET deleted = 1, password = "", email = ?, nickname = ? WHERE id = ?`,
-      [deletedNickname, deletedEmail, idUser]
-    );
+    await connection.query(`UPDATE users SET active = 0 WHERE id = ?`, [
+      idUser,
+    ]);
   } finally {
     if (connection) connection.release();
   }
