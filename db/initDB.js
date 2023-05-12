@@ -3,7 +3,9 @@
 require("dotenv").config();
 const { getConnection } = require("./db");
 const chalk = require("chalk");
-const { faker } = require('@faker-js/faker');
+const { faker } = require('@faker-js/faker/locale/es');
+const bcrypt = require("bcrypt");
+
 const addData = process.argv[2] === "--data";
 
 async function main() {
@@ -30,7 +32,7 @@ async function main() {
     CREATE TABLE users(
       id INT AUTO_INCREMENT PRIMARY KEY,
       email VARCHAR(100) NOT NULL UNIQUE,
-      nickname VARCHAR(30) NOT NULL UNIQUE CHECK (LENGTH(nickname) >= 4),
+      nickname VARCHAR(100) NOT NULL UNIQUE CHECK (LENGTH(nickname) >= 4),
       name VARCHAR(30),
       surname VARCHAR(60),
       password VARCHAR(100) NOT NULL CHECK (LENGTH(password) >= 8 AND password REGEXP '[A-Z]' AND password REGEXP '[a-z]' AND password REGEXP '[0-9]'),
@@ -72,14 +74,29 @@ async function main() {
       
     );
     `); //FOREIGN KEY (hide) REFERENCES requiredS (hide)
-// faker en proceso
-   /* if (addData) {
-      const passwordHash = await bcrypt.hash(password, 10);
+
+
+    if (addData) {
+      const hashedDefaultPassword = await bcrypt.hash("password", 10);
       await connection.query(`
   INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto)
-  VALUES('${faker.internet.email()}', '${passwordHash}', '${}, '${faker.name.firstName()}', '${faker.name.lastName()}', '${faker.internet.avatar()}', '${birthDate}')
-  `);
-    }*/
+   VALUES( 'user@user.com', '${faker.internet.userName()}', '${faker.person.firstName()}', '${faker.person.lastName()}', '${hashedDefaultPassword}', '${faker.lorem.sentences()}','${faker.internet.avatar()}' )
+          `); 
+      
+      const users = 20;
+
+      for (let i = 0; i < users; i++) {
+        const password = await bcrypt.hash(faker.internet.password(), 10);
+    
+        await connection.query(`
+  INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto)VALUES(?, ?, ?, ?, ?, ?, ?)`,
+          [faker.internet.email(), faker.internet.userName(), faker.person.firstName(), faker.person.lastName(), password, faker.lorem.sentences(), faker.image.avatar()]
+        );
+        console.log(chalk.green(`Inserted user ${i + 1}`));
+      }
+      
+    }
+
 
 
     console.log(chalk.green("Tables created"));
