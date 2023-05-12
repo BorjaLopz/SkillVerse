@@ -7,6 +7,7 @@ const {
   updateServiceStatus,
   getServiceByType,
   createComment,
+  deleteComment,
 } = require("../db/services");
 const {
   generateError,
@@ -71,8 +72,12 @@ const newServiceController = async (req, res, next) => {
       // console.log(sampleFile);
 
       //Comprobamos si la extension es valida.
-      if(!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))){
-        throw generateError(`Documento no valido. Tipos de ficheros permitidos: ${ALLOWED_EXTENSIONS}`, 415)  //415 - Unsopported media type
+      console.log(chalk.red(getExtensionFile(sampleFile.name)));
+      if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
+        throw generateError(
+          `Documento no valido. Tipos de ficheros permitidos: ${ALLOWED_EXTENSIONS}`,
+          415
+        ); //415 - Unsopported media type
       }
 
       fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`; //Obtenemos la extension del fichero para guardarlo de la misma manera
@@ -287,12 +292,16 @@ const commentsFileController_deprecated = async (req, res, next) => {
 
 const deleteCommentsController = async (req, res, next) => {
   try {
+    const { id_s, id_c } = req.params;
+
+    const deletedComment = await deleteComment(id_s, id_c);
+
     res.send({
-      status: "error",
-      message: "Not implemented yet"
-    })
+      status: "ok",
+      data: deletedComment,
+    });
   } catch (e) {
-    next(e)
+    next(e);
   }
 };
 

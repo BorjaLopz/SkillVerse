@@ -7,6 +7,7 @@ const {
   getUserByEmail,
   getAllFieldsExceptPassword,
   editUser,
+  deleteUser,
 } = require("../db/users");
 const { getConnection } = require("../db/db");
 const chalk = require("chalk");
@@ -93,13 +94,7 @@ const loginController = async (req, res, next) => {
 
 const deleteUserController = async (req, res, next) => {
   try {
-    const { verifyNickname } = req.body;
-
-    if (!verifyNickname) {
-      throw generateError("Debes introducir nickname", 400);
-    }
-
-    await deleteUserController(req.userId, verifyNickname);
+    await deleteUser(req.userId);
 
     res.send({
       status: "ok",

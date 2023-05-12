@@ -42,7 +42,8 @@ function getExtensionFile(filename) {
 
 function checkIfExtensionIsAllowed(fileExtension)
 {
-  return ALLOWED_EXTENSIONS.includes(fileExtension);
+  const [ ext ] = fileExtension;
+  return ALLOWED_EXTENSIONS.includes(ext);
 }
 
 

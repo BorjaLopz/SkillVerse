@@ -3,9 +3,6 @@ const { generateError } = require("../helpers");
 const bcrypt = require("bcrypt");
 const chalk = require("chalk");
 
-
-
-
 const createUser = async (
   email,
   password,
@@ -16,13 +13,7 @@ const createUser = async (
   userPhoto = ""
 ) => {
   let connection;
-
-
- try {
- 
-
-
-
+  try {
     connection = await getConnection();
 
     const [user] = await connection.query(
@@ -143,22 +134,14 @@ const editUser = async (tmp_user) => {
   }
 };
 
-const deleteUser = async (idUser, verifyNickname) => {
+const deleteUser = async (idUser) => {
   let connection;
   try {
     connection = await getConnection();
     const [user] = await connection.query(
-      `SELECT id, nickname, active FROM users WHERE id = ?`,
-      [idUser]
+      `SELECT id, nickname, active FROM users WHERE id = ? AND active != ?`,
+      [idUser, 1]
     );
-
-    if (user.length === 0) {
-      throw generateError("Usuario no encontrado", 404);
-    }
-
-    if (verifyNickname != user[0].nickname) {
-      throw generateError("Usuario incorrecto", 401);
-    }
 
     if (user[0].active === 0) {
       throw generateError("Usuario ya eliminado", 404);

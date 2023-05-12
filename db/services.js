@@ -32,8 +32,8 @@ const createService = async (
     console.log(chalk.green("Servicio creado"));
 
     return newService.insertId;
-  } catch (e) {
-    throw generateError(chalk.red(`error: ${e.message}`, 400));
+  } finally {
+    if (connection) connection.release();
   }
 };
 
@@ -51,8 +51,8 @@ const getServiceByID = async (id) => {
       throw generateError("No hay ningun servicio con ese ID", 400);
     }
     return result[0];
-  } catch (e) {
-    throw generateError(`error: ${e.message}`, 400);
+  } finally {
+    if (connection) connection.release();
   }
 };
 
@@ -71,8 +71,8 @@ const getAllServices = async (user_id = -1) => {
     }
 
     return result;
-  } catch (e) {
-    throw generateError(`error: ${e.message}`, 400);
+  } finally {
+    if (connection) connection.release();
   }
 };
 
@@ -99,8 +99,8 @@ const updateServiceStatus = async (id, serviceValue) => {
     );
 
     return update;
-  } catch (e) {
-    throw generateError(`error: ${e.message}`, 400);
+  } finally {
+    if (connection) connection.release();
   }
 };
 
@@ -123,8 +123,8 @@ const getServiceByType = async (type) => {
     }
 
     return result;
-  } catch (e) {
-    throw generateError(`error: ${e.message}`, 400);
+  } finally {
+    if (connection) connection.release();
   }
 };
 
@@ -150,10 +150,46 @@ const createComment = async (
     console.log(chalk.green("Comentario creado"));
 
     return newComment.insertId;
-  } catch (e) {
-    throw generateError(chalk.red(`error: ${e.message}`, 400));
+  } finally {
+    if (connection) connection.release();
   }
 };
+
+const deleteComment = async (id_s, id_c) => {
+  let connection;
+  try {
+    connection = await getConnection();
+
+    const [getCommentByID_s] = await connection.query(
+      `SELECT * FROM comments WHERE requireds_id = ?`,
+      [id_s]
+    );
+
+    if(getCommentByID_s.length === 0) {
+      throw generateError("No hay comentarios de este servicio", 404);
+    }
+
+    const [getCommentByID_c] = await connection.query(
+      `SELECT * FROM comments WHERE id = ?`,
+      [id_c]
+    );
+
+    if (getCommentByID_c.length === 0) {
+      throw generateError("No hay comentarios con esta id", 404);
+    }
+
+    const [deletedComment] = await connection.query(`DELETE FROM comments WHERE requireds_id = ? AND id = ?`, [id_s, id_c]);
+
+    if(deletedComment.length === 0){
+      throw generateError("No hay nigun comentario", 400);
+    }
+
+    return deletedComment;
+
+  } finally {
+    if (connection) connection.release();
+  }
+}
 
 module.exports = {
   createService,
@@ -162,4 +198,5 @@ module.exports = {
   updateServiceStatus,
   getServiceByType,
   createComment,
+  deleteComment,
 };
