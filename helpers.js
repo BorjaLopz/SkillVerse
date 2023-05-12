@@ -6,12 +6,16 @@ const SERVICE_STATUS = Object.freeze({
   UNDONE: "UNDONE",
 });
 
+/* DICCIONARIO DE VALORES DE UN SERVICIO */
 const SERVICES_VALUES = Object.freeze({
   DONE: 1, 
   UNDONE: 0
 })
 
-//Genera errores personalizados que pueden enviarse como respuesta a una solicitu HTTP en caso de error en el server
+/* EXTENSION DE ARCHIVOS PERMITIDOS*/
+const ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "pdf", "doc"]
+
+//Genera errores personalizados que pueden enviarse como respuesta a una solicitud HTTP en caso de error en el server
 const generateError = (message, status) => {
   const error = new Error(message);
   error.httpStatus = status;
@@ -36,6 +40,11 @@ function getExtensionFile(filename) {
   return filename.split(".").slice(-1);
 }
 
+function checkIfExtensionIsAllowed(fileExtension)
+{
+  return ALLOWED_EXTENSIONS.includes(fileExtension);
+}
+
 
 // createPathIfNotExists("./uploads");
 
@@ -46,4 +55,6 @@ module.exports = {
   SERVICES_VALUES, //Exportamos el valor que tendra cada key,
   getKeyByValue,
   getExtensionFile,
+  checkIfExtensionIsAllowed,
+  ALLOWED_EXTENSIONS,
 };

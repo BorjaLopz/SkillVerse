@@ -125,11 +125,9 @@ const getUserController = async (req, res, next) => {
   }
 };
 
-async function prueba(id) {}
-
 const getAllFieldsExceptPasswordController = async (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
+  // console.log(id);
   try {
     connection = await getConnection();
 
@@ -169,7 +167,7 @@ const getUserByIdController = async (id) => {
 
 const editUserController = async (req, res, next) => {
   //Obtenemos el id por parametro
-  const { id_params } = req.params;
+  const id_params = +req.params.id;
 
   //Obtenemos el id por token
   const id = req.userId;
@@ -181,6 +179,8 @@ const editUserController = async (req, res, next) => {
     if (id !== id_params) {
       throw generateError("No puedes editar otro usuario", 403);
     }
+    console.log(id);
+    console.log(id_params);
 
     //Obtenemos la informacion del usuario por id
     const [user] = await getAllFieldsExceptPassword(id);

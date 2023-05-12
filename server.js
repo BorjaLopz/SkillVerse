@@ -16,8 +16,10 @@ const {
   getAllServicesController,
   updateServiceStatusByIDController,
   commentsFileController,
+  getServiceByTypeController,
+  deleteCommentsController,
 } = require("./controllers/services");
-const { authUser } = require("./middlewares/auth");
+const { authUser, checkHeaders } = require("./middlewares/auth");
 const { generalError, error404 } = require("./middlewares/handleErrors");
 
 const app = new express();
@@ -36,13 +38,16 @@ app.use(express.static("public"));
 app.post("/user/login", loginController);
 
 //Creamos un usuario
-app.post("/user/add", newUserController);
+app.post("/user/register", newUserController);
 
-//modificamos un user
+//Obtenemos todos los campos de un user excepto su id
 app.get("/user/:id", authUser, getAllFieldsExceptPasswordController);
 
 //modificamos un user
 app.put("/user/:id/edit", authUser, editUserController);
+
+//borramos un usuario
+app.delete("/user/delete", authUser, deleteUserController);
 
 //#endregion USER
 
@@ -52,20 +57,24 @@ app.put("/user/:id/edit", authUser, editUserController);
 //Creamos un servicio
 app.post("/service/add", authUser, newServiceController);
 
-//borramos un servicio
-app.delete("/service/delete", authUser, deleteUserController);
 
 //Obtenemos un servicio por ID
 app.get("/service/:id", getServiceByIDController);
 
 //Obtenemos todos los servicios
-app.get("/service", authUser, getAllServicesController);
+app.get("/service", checkHeaders, getAllServicesController);
 
 //Modificamos el estado de determinado servicio
 app.patch("/service/:id/:status", updateServiceStatusByIDController);
 
+//Obtenemos servicios en funcion de su tipo
+app.get("/service/type/(:type)?", authUser, getServiceByTypeController);
+
 //añadimos comentario fichero
-app.post("/comments/:id", authUser, commentsFileController);
+app.post("/service/:id/comments", authUser, commentsFileController);
+
+//Eliminamos comentario TODO
+app.delete("/service/:id/comments/delete", authUser, deleteCommentsController)
 
 //#endregion SERVICIO
 

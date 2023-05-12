@@ -2,19 +2,21 @@ const { getConnection } = require("./db");
 const { generateError } = require("../helpers");
 const bcrypt = require("bcrypt");
 const chalk = require("chalk");
+const faker  = require('@faker-js/faker');
 
-const createUser = async (
-  email,
-  password,
-  nickname,
-  name = "",
-  surname = "",
-  biography = "",
-  userPhoto = ""
-) => {
+const createUser = async () => {
   let connection;
+ try {
+  const email = faker.internet.email();
+  const nickname = faker.internet.userName();
+  const name = faker.internet.firstName();
+  const surname = faker.interner.lastName();
+  const password = faker.internet.password();
+  const biography = faker.lorem.sentences();
+  const userPhoto = faker.image.avatar();
+  
 
-  try {
+ 
     connection = await getConnection();
 
     const [user] = await connection.query(
@@ -64,6 +66,12 @@ const createUser = async (
   }
 };
 
+
+
+
+
+
+
 //Devuelve la informacion del usuario por email
 const getUserByEmail = async (email) => {
   let connection;
@@ -104,7 +112,7 @@ const getAllFieldsExceptPassword = async (id) => {
     // console.log(table_tmp_3);
 
     if (table_tmp_3.length === 0) {
-      throw generateError("No hay usuarios", 400);
+      throw generateError("No hay usuarios", 404);
     }
 
     return table_tmp_3;
