@@ -15,6 +15,8 @@ const {
   SERVICES_VALUES,
   getKeyByValue,
   getExtensionFile,
+  checkIfExtensionIsAllowed,
+  ALLOWED_EXTENSIONS,
 } = require("../helpers");
 const chalk = require("chalk");
 const path = require("path");
@@ -48,7 +50,7 @@ const newServiceController = async (req, res, next) => {
       throw generateError("Service type must be less than 20 characters", 400);
     }
 
-    console.log(chalk.magenta(req.userId));
+    // console.log(chalk.magenta(req.userId));
 
     //Tratamos el fichero
     let fileName;
@@ -64,6 +66,11 @@ const newServiceController = async (req, res, next) => {
       await createPathIfNotExists(uploadDir);
 
       // console.log(sampleFile);
+
+      //Comprobamos si la extension es valida.
+      if(!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))){
+        throw generateError(`Documento no valido. Tipos de ficheros permitidos: ${ALLOWED_EXTENSIONS}`, 415)  //415 - Unsopported media type
+      }
 
       fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`; //Obtenemos la extension del fichero para guardarlo de la misma manera
 
@@ -275,6 +282,17 @@ const commentsFileController_deprecated = async (req, res, next) => {
   }
 };
 
+const deleteCommentsController = async (req, res, next) => {
+  try {
+    res.send({
+      status: "error",
+      message: "Not implemented yet"
+    })
+  } catch (e) {
+    next(e)
+  }
+};
+
 module.exports = {
   newServiceController,
   getServiceByIDController,
@@ -282,4 +300,5 @@ module.exports = {
   updateServiceStatusByIDController,
   getServiceByTypeController,
   commentsFileController,
+  deleteCommentsController,
 };
