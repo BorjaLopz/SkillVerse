@@ -79,7 +79,6 @@ const newServiceController = async (req, res, next) => {
       fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`;
 
       uploadPath = uploadDir + "\\" + fileName;
-      //uploadPath = path.join(uploadDir, fileName);????
 
       //Subir el fichero
       sampleFile.mv(uploadPath, function (e) {
@@ -151,12 +150,6 @@ const updateServiceStatusByIDController = async (req, res, next) => {
       throw generateError("Invalid status", 401);
     }
 
-    /* dev */
-    // console.log(
-    //   SERVICES_VALUES[getKeyByValue(SERVICE_STATUS, status.toUpperCase())]
-    // );
-    // console.log(status);
-
     //Obtener el valor de la key (done: 1 o undone: 2) según el status que se le pase al endpoint
     const service = await updateServiceStatus(
       id,
@@ -215,7 +208,6 @@ const commentsFileController = async (req, res, next) => {
       fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`;
 
       uploadPath = uploadDir + "\\" + fileName;
-      // uploadPath = path.join(uploadDir, fileName);????
 
       //Subir el fichero
       sampleFile.mv(uploadPath, function (e) {

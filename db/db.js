@@ -20,7 +20,7 @@ const getConnection = async () => {
     return await pool.getConnection();
   } catch (error) {
     console.error(chalk.red(error));
-    throw new Error("Error connecting to MySQL");
+    throw new Error(`Error connecting to MySQL`);
   }
 };
 

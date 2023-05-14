@@ -206,7 +206,7 @@ const editUserController = async (req, res, next) => {
       user.surname = surname;
     }
     if (password != user.password) {
-      //Aqui tendremos que hacer un check para comprobar que la contraseña que introduce es igual a la antigua
+      //Aquí tendremos que hacer un check para comprobar que la contraseña que introduce es igual a la antigua
       user.password = password;
     }
     if (biography != user.biography) {

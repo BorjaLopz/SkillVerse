@@ -1,8 +1,13 @@
 const express = require("express");
+
 const bodyParser = require("body-parser");
+
 require("dotenv").config();
+
 const fileUpload = require("express-fileupload");
+
 const chalk = require("chalk");
+
 const {
   loginController,
   newUserController,
@@ -10,6 +15,7 @@ const {
   editUserController,
   getAllFieldsExceptPasswordController,
 } = require("./controllers/users");
+
 const {
   newServiceController,
   getServiceByIDController,
@@ -19,7 +25,9 @@ const {
   getServiceByTypeController,
   deleteCommentsController,
 } = require("./controllers/services");
+
 const { authUser, checkHeaders } = require("./middlewares/auth");
+
 const { generalError, error404 } = require("./middlewares/handleErrors");
 
 const app = new express();
