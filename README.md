@@ -22,7 +22,7 @@ _Segundo proyecto para HACK A BOSS - 2023: API que permite gestionar una web don
 * La información contenida no es sensible ya que se trata de un proyecto de ejemplo, pero por convención lo introducimos de esta forma.
 * La información necesaria se puede encontrar en el archivo .env.example.
 ### NPM necesarios
-* * Para instalar los módulos necesarios:
+* Debes instalar primero los módulos necesarios:
 ```
 npm install
 ```
