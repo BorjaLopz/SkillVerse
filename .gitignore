@@ -1,4 +1,4 @@
-**/node_modules
-**/.env/
-/uploads/*
-/requestfiles/*
+node_modules/
+.env
+uploads/
+requestfiles/
