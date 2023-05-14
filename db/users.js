@@ -23,7 +23,7 @@ const createUser = async (
     );
 
     if (user.length > 0) {
-      throw generateError(chalk.red("Email ya en uso", 409));
+      throw generateError("Email ya en uso", 409);
     }
 
     const [userNickname] = await connection.query(
@@ -33,16 +33,14 @@ const createUser = async (
     );
 
     if (userNickname.length > 0) {
-      throw generateError(chalk.red("Nickname ya en uso", 409));
+      throw generateError("Nickname ya en uso", 409);
     }
 
     const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,}$/;
     if (!passwordRegex.test(password)) {
       throw generateError(
-        chalk.red(
-          "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y tener al menos 8 caracteres",
-          400
-        )
+        "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y tener al menos 8 caracteres",
+        400
       );
     }
 
@@ -75,7 +73,7 @@ const getUserByEmail = async (email) => {
     );
 
     if (result.length === 0) {
-      throw generateError(chalk.red("No existe usuario con ese email", 404));
+      throw generateError("No existe usuario con ese email", 404);
     }
 
     return result[0];
