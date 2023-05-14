@@ -6,7 +6,7 @@ const authUser = (req, res, next) => {
   try {
     const { authorization } = req.headers;
     if (!authorization) {
-      throw generateError("Missing Authorization header", 401);
+      throw generateError(`Missing Authorization header`, 401);
     } else {
       let token;
 
@@ -14,7 +14,7 @@ const authUser = (req, res, next) => {
       try {
         token = jwt.verify(authorization, process.env.JWT_SECRET);
       } catch (error) {
-        throw generateError("Wrong token", 401);
+        throw generateError(`Wrong token`, 401);
       }
 
       //Meter la información del token en la request para usarla en el controlador

@@ -121,8 +121,6 @@ const editUser = async (tmp_user) => {
       [email, nickname, name, surname, biography, userPhoto, id]
     );
 
-    console.log(result);
-
     return result;
   } finally {
     if (connection) connection.release();

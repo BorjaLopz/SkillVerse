@@ -22,7 +22,7 @@ const generateError = (message, status) => {
   return error;
 };
 
-//Comprobar si un directorio existe en el sistema de archivos y lo crea si no.
+//Comprobar si un directorio existe en el sistema de archivos y lo crea si no
 const createPathIfNotExists = async (path) => {
   try {
     await fs.access(path);

@@ -79,9 +79,6 @@ const updateServiceStatus = async (id, serviceValue) => {
   let connection;
 
   try {
-    console.log(chalk.blue(id));
-    console.log(chalk.blue(serviceValue));
-
     connection = await getConnection();
     const [result] = await connection.query(
       `SELECT * FROM requireds WHERE id = ?`,
