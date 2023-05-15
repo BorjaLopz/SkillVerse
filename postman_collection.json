@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"borja@gmail.com\",\r\n    \"nickname\": \"nickname\",\r\n    \"password\": \"123dsadaA4\"\r\n}",
+							"raw": "{\r\n    \"email\": \"emailprueba@prueba.com\",\r\n    \"nickname\": \"apodo123\",\r\n    \"password\": \"Password123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -45,7 +45,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"borjaa@borjaa.com\",\r\n    \"password\": \"bbbB8888888\"\r\n}",
+							"raw": "{\r\n    \"email\": \"emailprueba@prueba.com\",\r\n    \"password\": \"Password123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -74,7 +74,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "not implemented",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg0MTQ4MTEwLCJleHAiOjE2ODY3NDAxMTB9.GGUkbjGbq74i8F9DqiVMioV_uJQYBNxwRUlZOupMG58",
 								"type": "text"
 							}
 						],
@@ -100,13 +100,13 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjgzNjU2NDk5LCJleHAiOjE2ODYyNDg0OTl9.m84C3E9SL1LF0pHZVjcdsSoi5yRL2GvHi2BZNLbkaIw",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg0MTQ4MTEwLCJleHAiOjE2ODY3NDAxMTB9.GGUkbjGbq74i8F9DqiVMioV_uJQYBNxwRUlZOupMG58",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{ \r\n    \"email\": \"borjaa@borjaa.com\"\r\n}",
+							"raw": "{ \r\n    \"email\": \"emailprueba@prueba.com\",\r\n    \"nickname\": \"123apodo\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -133,9 +133,15 @@
 					"name": "Delete User",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg0MTQ4MTEwLCJleHAiOjE2ODY3NDAxMTB9.GGUkbjGbq74i8F9DqiVMioV_uJQYBNxwRUlZOupMG58",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:3000/user/delete",
+							"raw": "http://localhost:3000/user/delete/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -143,7 +149,8 @@
 							"port": "3000",
 							"path": [
 								"user",
-								"delete"
+								"delete",
+								""
 							]
 						}
 					},
@@ -297,15 +304,22 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/comments/file",
+							"raw": "http://localhost:3000/service/:1/comments",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"comments",
-								"file"
+								"service",
+								":1",
+								"comments"
+							],
+							"variable": [
+								{
+									"key": "1",
+									"value": null
+								}
 							]
 						}
 					},
