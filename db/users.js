@@ -132,7 +132,7 @@ const deleteUser = async (idUser) => {
   try {
     connection = await getConnection();
     const [user] = await connection.query(
-      `SELECT id, nickname, active FROM users WHERE id = ? AND active != ?`,
+      `SELECT id, nickname, active FROM users WHERE id = ? AND active = ?`,
       [idUser, 1]
     );
 

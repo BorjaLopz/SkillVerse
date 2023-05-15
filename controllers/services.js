@@ -281,7 +281,7 @@ const deleteCommentsController = async (req, res, next) => {
   try {
     const { id_s, id_c } = req.params;
 
-    const deleteComment = await deleteComment(id_s, id_c);
+    await deleteComment(id_s, id_c);
 
     res.send({
       status: "ok",

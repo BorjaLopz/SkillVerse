@@ -112,7 +112,7 @@ const getServiceByType = async (type) => {
     );
 
     if (result.length === 0) {
-      throw generateError("No existe ningún servicio que contenga" + type, 400);
+      throw generateError("No existe ningún servicio que contenga " + type, 400);
     }
 
     return result;
@@ -154,8 +154,8 @@ const deleteComment = async (id_s, id_c) => {
     connection = await getConnection();
 
     const [getCommentByID_s] = await connection.query(
-      `SELECT * FROM comments WHERE requireds_id = ?`,
-      [id_s]
+      `SELECT * FROM comments WHERE requireds_id = ? AND id = ?`,
+      [id_s, id_c]
     );
 
     if (getCommentByID_s.length === 0) {
