@@ -81,7 +81,7 @@ app.patch("/service/:id/:status", updateServiceStatusByIDController);
 app.get("/service/type/(:type)?", authUser, getServiceByTypeController);
 
 //Añadir comentario fichero
-app.post("/service/:id/comments", authUser, commentsFileController);
+app.post("/comments/:id", authUser, commentsFileController);
 
 //Eliminar comentario
 app.delete(
