@@ -257,7 +257,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/service/type/type",
+							"raw": "http://localhost:3000/service/type/Tra",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -266,7 +266,7 @@
 							"path": [
 								"service",
 								"type",
-								"type"
+								"Tra"
 							]
 						}
 					},
@@ -302,24 +302,38 @@
 					"name": "Post comments/file",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg0MTUyMzg3LCJleHAiOjE2ODY3NDQzODd9.wkNCTEzdnAZXM8b4nwUW3NgASmKFsLhQLMv4fe8K-bo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "comments",
+									"value": "Comentario por defecto de una longitud adecuada",
+									"type": "text"
+								},
+								{
+									"key": "serviceFile",
+									"type": "file",
+									"src": "/C:/Users/anab9/Documents/HACK_A_BOSS/PROYECTO_2/portal-digital/README.md"
+								}
+							]
+						},
 						"url": {
-							"raw": "http://localhost:3000/service/:1/comments",
+							"raw": "http://localhost:3000/comments/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"service",
-								":1",
-								"comments"
-							],
-							"variable": [
-								{
-									"key": "1",
-									"value": null
-								}
+								"comments",
+								"1"
 							]
 						}
 					},
@@ -337,7 +351,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/service/1/comments/delete",
+							"raw": "http://localhost:3000/service/1/comments/1/delete",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -347,6 +361,7 @@
 								"service",
 								"1",
 								"comments",
+								"1",
 								"delete"
 							]
 						}
