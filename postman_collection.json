@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b0f75d09-763f-45d0-a601-cef6888ac88f",
+		"_postman_id": "11e90703-c3fc-44a7-af94-6351dccf6b54",
 		"name": "Proyecto 2 Portal Digital",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "27178854"
@@ -252,27 +252,6 @@
 					"response": []
 				},
 				{
-					"name": "Update Status of Service",
-					"request": {
-						"method": "PATCH",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/service/1/done",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"service",
-								"1",
-								"done"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Get service by type",
 					"request": {
 						"method": "GET",
@@ -288,6 +267,27 @@
 								"service",
 								"type",
 								"type"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status of Service",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/service/1/done",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"service",
+								"1",
+								"done"
 							]
 						}
 					},
