@@ -75,7 +75,12 @@ const loginController = async (req, res, next) => {
       throw generateError("La contraseña no coincide", 401);
     }
     //creo el payload del token
-    const payload = { id: user.id };
+  const payload = {
+  id: user.id,
+  email: user.email,
+  nickname: user.nickname,
+  userPhoto: user.userPhoto
+};
     //firmo el token
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "30d",
