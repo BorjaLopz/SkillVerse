@@ -3,7 +3,7 @@ import React from "react";
 function Services() {
   return (
     <>
-      <h1>Services</h1>
+      <h1 className="text-3xl font-bold underline">Services</h1>
     </>
   );
 }
