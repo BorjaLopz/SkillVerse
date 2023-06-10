@@ -11,7 +11,8 @@ import SignUp from "./pages/SignUp.jsx";
 import NavBar from "./components/NavBar.jsx";
 import PrivateRoutes from "./components/PrivateRoutes.jsx";
 import ResPas from "./pages/ResetPasword.jsx";
- 
+import Footer from "./components/Footer.jsx";
+import ContactPage from "./pages/Contact.jsx";
 
 function App() {
   return (
@@ -21,16 +22,17 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/passreset" element={<ResPas />} />
-        
+
         <Route element={<PrivateRoutes />}>
           <Route path="/profile" element={<Profile />} />
         </Route>
-
       </Routes>
+      <Footer />
     </>
   );
 }
