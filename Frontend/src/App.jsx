@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import { Toaster } from "sonner";
 
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
@@ -13,6 +14,7 @@ import NavBar from "./components/NavBar.jsx";
 function App() {
   return (
     <>
+    <Toaster position="top-right" />
     <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
