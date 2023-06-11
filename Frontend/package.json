@@ -18,7 +18,6 @@
     "react-router": "^6.12.1",
     "react-router-dom": "^6.12.1",
     "sonner": "^0.4.0",
-    "sooner": "^1.1.4",
     "toastr": "^2.1.4"
   },
   "devDependencies": {
