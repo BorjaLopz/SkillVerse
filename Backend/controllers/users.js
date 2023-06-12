@@ -172,18 +172,19 @@ const getUserByIdController = async (id) => {
 };
 
 const editUserController = async (req, res, next) => {
-  const id_params = +req.params.id;
+  const id_params = + req.params.id;
   const id = req.userId;
+  const admin = req.admin;
 
   let tmp_user = {}; //Objeto que le vamos a pasar a editUser();
 
   try {
     //Comprobacion para evitar que puedas editar otro usuario
-    if (id !== id_params) {
+    if (id !== id_params && !admin) {
       throw generateError("No puedes editar otro usuario", 403);
     }
 
-    const [user] = await getAllFieldsExceptPassword(id);
+    const [user] = await getAllFieldsExceptPassword(id_params);
     let { email, userPhoto, nickname, name, surname, password, biography } =
       req.body;
 
@@ -219,7 +220,7 @@ const editUserController = async (req, res, next) => {
     }
 
     //Añadimos campos al objeto
-    tmp_user.id = req.userId;
+    tmp_user.id = id_params;
     tmp_user.email = user.email;
     tmp_user.nickname = user.nickname;
     tmp_user.name = user.name;
