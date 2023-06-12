@@ -15,8 +15,8 @@ async function main() {
     console.log(chalk.green("Connection established"));
 
     //Crear BBDD
-    await connection.query("CREATE DATABASE IF NOT EXISTS portalDigital");
-    await connection.query("USE portalDigital");
+    await connection.query("CREATE DATABASE IF NOT EXISTS portaldigital");
+    await connection.query("USE portaldigital");
     console.log(chalk.green("Database created"));
 
     //Borrar tablas
