@@ -73,7 +73,7 @@ const getUserByEmail = async (email) => {
     );
 
     if (result.length === 0) {
-      throw generateError("No existe usuario con ese email", 404);
+      throw generateError("Usuario o contraseña incorrecta", 404);
     }
 
     return result[0];
