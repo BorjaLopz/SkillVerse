@@ -11,6 +11,8 @@ const {
 } = require("../db/users");
 const { getConnection } = require("../db/db");
 
+const { DB_DATABASE } = process.env;
+
 const newUserController = async (req, res, next) => {
   try {
     const { email, nickname, name, surname, password, biography, userPhoto } =
@@ -128,6 +130,7 @@ const getAllFieldsExceptPasswordController = async (req, res, next) => {
   const { id } = req.params;
   try {
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
 
     const userId = await getAllFieldsExceptPassword(id);
 
@@ -145,6 +148,7 @@ const getUserByIdController = async (id) => {
 
   try {
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
 
     const [result] = await connection.query(
       `

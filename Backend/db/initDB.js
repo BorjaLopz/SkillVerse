@@ -8,6 +8,23 @@ const bcrypt = require("bcrypt");
 
 const addData = process.argv[2] === "--data";
 
+const addAdmin = async (connection) => {
+  await connection.query(
+    `
+  INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      "admin@admin.com",
+      "admin",
+      "admin",
+      "admin_surname",
+      "admin",
+      "soy admin",
+      "",
+      true,
+    ]
+  );
+};
+
 async function main() {
   let connection;
   try {
@@ -38,9 +55,10 @@ async function main() {
       password VARCHAR(100) NOT NULL CHECK (LENGTH(password) >= 8 AND password REGEXP '[A-Z]' AND password REGEXP '[a-z]' AND password REGEXP '[0-9]'),
       biography VARCHAR(600),
       userPhoto VARCHAR(1000),
+      admin BOOLEAN DEFAULT FALSE,
+      active BOOLEAN DEFAULT TRUE,
       linkedin VARCHAR(100) NULL CHECK (linkedin IS NULL OR linkedin REGEXP 'linkedin'),
-      instagram VARCHAR(100) NULL CHECK (instagram IS NULL OR instagram REGEXP 'instagram'),
-      active BOOLEAN DEFAULT TRUE
+      instagram VARCHAR(100) NULL CHECK (instagram IS NULL OR instagram REGEXP 'instagram')
     );
     `);
 
@@ -75,11 +93,27 @@ async function main() {
     );
     `);
 
+    //Añadimos admin
+  //   await connection.query(
+  //     `
+  // INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+  //     [
+  //       "admin@admin.com",
+  //       "admin",
+  //       "admin",
+  //       "admin_surname",
+  //       "admin",
+  //       "soy admin",
+  //       "",
+  //       true,
+  //     ]
+  //   );
+
     if (addData) {
-      const hashedDefaultPassword = await bcrypt.hash("password", 10);
-      await connection.query(`
-  INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto) VALUES( '${faker.internet.email()}', '${faker.internet.userName()}', '${faker.person.firstName()}', '${faker.person.lastName()}', '${hashedDefaultPassword}', '${faker.lorem.sentences()}','${faker.internet.avatar()}' )
-          `);
+      //     const hashedDefaultPassword = await bcrypt.hash("password", 10);
+      //     await connection.query(`
+      // INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto) VALUES( '${faker.internet.email()}', '${faker.internet.userName()}', '${faker.person.firstName()}', '${faker.person.lastName()}', '${hashedDefaultPassword}', '${faker.lorem.sentences()}','${faker.internet.avatar()}' )
+      //         `);
 
       const users = 20;
 

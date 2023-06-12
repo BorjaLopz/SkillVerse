@@ -10,9 +10,6 @@ const chalk = require("chalk");
 
 const cors = require("cors");
 
-
-
-
 const {
   loginController,
   newUserController,
