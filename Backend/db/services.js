@@ -2,6 +2,8 @@ const { getConnection } = require("../db/db");
 const { generateError } = require("../helpers");
 const chalk = require("chalk");
 
+const { DB_DATABASE } = process.env;
+
 //Crear servicio en la BBDD
 const createService = async (
   title,
@@ -16,6 +18,7 @@ const createService = async (
 
   try {
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`)
 
     console.log(title);
     console.log(request_body);
@@ -24,7 +27,7 @@ const createService = async (
 
     const [newService] = await connection.query(
       `
-    INSERT INTO requireds (title, request_body, user_id, file_name, required_type, done, hide) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    INSERT INTO services (title, request_body, user_id, file_name, required_type, done, hide) VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [title, request_body, user_id, file_name, required_type, done, hide]
     );
 
@@ -41,8 +44,10 @@ const getServiceByID = async (id) => {
 
   try {
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
     const [result] = await connection.query(
-      `SELECT * FROM requireds WHERE id = ?`,
+      `SELECT * FROM services WHERE id = ?`,
       [id]
     );
 
@@ -61,8 +66,10 @@ const getAllServices = async (user_id = -1) => {
 
   try {
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
     const [result] = await connection.query(
-      `SELECT * FROM requireds WHERE user_id != ? AND done = ? ORDER BY creation_date ASC`,
+      `SELECT * FROM services WHERE user_id != ? AND done = ? ORDER BY creation_date ASC`,
       [user_id, 0]
     );
     if (result.length === 0) {
@@ -80,8 +87,10 @@ const updateServiceStatus = async (id, serviceValue) => {
 
   try {
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
     const [result] = await connection.query(
-      `SELECT * FROM requireds WHERE id = ?`,
+      `SELECT * FROM services WHERE id = ?`,
       [id]
     );
 
@@ -90,7 +99,7 @@ const updateServiceStatus = async (id, serviceValue) => {
     }
 
     const [update] = await connection.query(
-      `UPDATE requireds SET done = ? WHERE id = ?`,
+      `UPDATE services SET done = ? WHERE id = ?`,
       [serviceValue, id]
     );
 
@@ -105,9 +114,10 @@ const getServiceByType = async (type) => {
 
   try {
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
 
     const [result] = await connection.query(
-      `SELECT * FROM requireds WHERE required_type LIKE ? AND done = ?`,
+      `SELECT * FROM services WHERE required_type LIKE ? AND done = ?`,
       [`%${type}%`, 0]
     );
 
@@ -136,10 +146,11 @@ const createComment = async (
 
   try {
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
 
     const [newComment] = await connection.query(
       `
-    INSERT INTO comments (user_id, requiredS_id, comment, serviceFile, hide) VALUES (?, ?, ?, ?, ?)`,
+    INSERT INTO comments (user_id, services_id, comment, serviceFile, hide) VALUES (?, ?, ?, ?, ?)`,
       [user_id, service_id, comment, service_file, hide]
     );
 
@@ -155,9 +166,10 @@ const deleteComment = async (id_s, id_c) => {
   let connection;
   try {
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
 
     const [getCommentByID_s] = await connection.query(
-      `SELECT * FROM comments WHERE requireds_id = ? AND id = ?`,
+      `SELECT * FROM comments WHERE services_id = ? AND id = ?`,
       [id_s, id_c]
     );
 
@@ -175,7 +187,7 @@ const deleteComment = async (id_s, id_c) => {
     }
 
     const [deletedComment] = await connection.query(
-      `DELETE FROM comments WHERE requireds_id = ? AND id = ?`,
+      `DELETE FROM comments WHERE services_id = ? AND id = ?`,
       [id_s, id_c]
     );
 

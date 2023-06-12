@@ -3,6 +3,8 @@ const { generateError } = require("../helpers");
 const bcrypt = require("bcrypt");
 const chalk = require("chalk");
 
+const { DB_DATABASE } = process.env;
+
 const createUser = async (
   email,
   password,
@@ -15,6 +17,7 @@ const createUser = async (
   let connection;
   try {
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
 
     const [user] = await connection.query(
       `
@@ -66,6 +69,7 @@ const getUserByEmail = async (email) => {
   let connection;
   try {
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
     const [result] = await connection.query(
       `
     SELECT * FROM users WHERE email = ?`,
@@ -86,6 +90,8 @@ const getAllFieldsExceptPassword = async (id) => {
   let connection;
   try {
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
     const table_tmp = await connection.query(`
     DROP VIEW IF EXISTS user_tmp`);
     const table_tmp_2 = await connection.query(
@@ -115,6 +121,7 @@ const editUser = async (tmp_user) => {
     let { id, email, nickname, name, surname, password, biography, userPhoto } =
       tmp_user;
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
 
     const [result] = await connection.query(
       `UPDATE users SET email = ?, nickname = ?, name = ?, surname = ?, biography = ?, userPhoto = ? WHERE id = ?;`,
@@ -131,6 +138,8 @@ const deleteUser = async (idUser) => {
   let connection;
   try {
     connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+    
     const [user] = await connection.query(
       `SELECT id, nickname, active FROM users WHERE id = ? AND active = ?`,
       [idUser, 1]
