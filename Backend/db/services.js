@@ -112,7 +112,10 @@ const getServiceByType = async (type) => {
     );
 
     if (result.length === 0) {
-      throw generateError("No existe ningún servicio que contenga " + type, 400);
+      throw generateError(
+        "No existe ningún servicio que contenga " + type,
+        400
+      );
     }
 
     return result;
