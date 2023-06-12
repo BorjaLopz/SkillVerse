@@ -15,6 +15,9 @@ _Segundo proyecto para HACK A BOSS - 2023: API que permite gestionar una web don
   - Gestionar el perfil de usuario.
   - Borrar su usuario.
   - Borrar un comentario.
+  
+## ⚙ Inicialización
+Para inicializar la app debes seguir los pasos indicados en el ReadMe de la carpeta Backend y Frontend.
 
 # 👩‍💻 Autores
 * [@BorjaLopz](https://github.com/BorjaLopz)
