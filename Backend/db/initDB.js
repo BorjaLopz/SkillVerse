@@ -9,15 +9,16 @@ const bcrypt = require("bcrypt");
 const addData = process.argv[2] === "--data";
 
 const addAdmin = async (connection) => {
+  const hashedDefaultPassword = await bcrypt.hash("admin", 10);
   await connection.query(
     `
-  INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       "admin@admin.com",
       "admin",
       "admin",
       "admin_surname",
-      "admin",
+      hashedDefaultPassword,
       "soy admin",
       "",
       true,
@@ -94,29 +95,9 @@ async function main() {
     `);
 
     //Añadimos admin
-    const hashedDefaultPassword = await bcrypt.hash("admin", 10);
-    console.log(hashedDefaultPassword);
-    await connection.query(
-      `
-      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      [
-        "admin@admin.com",
-        "admin",
-        "admin",
-        "admin_surname",
-        hashedDefaultPassword,
-        "soy admin",
-        "",
-        true,
-      ]
-    );
+    addAdmin(connection)
 
     if (addData) {
-      //     const hashedDefaultPassword = await bcrypt.hash("password", 10);
-      //     await connection.query(`
-      // INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto) VALUES( '${faker.internet.email()}', '${faker.internet.userName()}', '${faker.person.firstName()}', '${faker.person.lastName()}', '${hashedDefaultPassword}', '${faker.lorem.sentences()}','${faker.internet.avatar()}' )
-      //         `);
-
       const users = 20;
 
       for (let i = 0; i < users; i++) {
