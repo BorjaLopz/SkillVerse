@@ -84,7 +84,9 @@ const loginController = async (req, res, next) => {
       email: user.email,
       nickname: user.nickname,
       userPhoto: user.userPhoto,
+      admin: user.admin,
     };
+
     //firmo el token
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "30d",
