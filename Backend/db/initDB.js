@@ -94,20 +94,22 @@ async function main() {
     `);
 
     //Añadimos admin
-  //   await connection.query(
-  //     `
-  // INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-  //     [
-  //       "admin@admin.com",
-  //       "admin",
-  //       "admin",
-  //       "admin_surname",
-  //       "admin",
-  //       "soy admin",
-  //       "",
-  //       true,
-  //     ]
-  //   );
+    const hashedDefaultPassword = await bcrypt.hash("admin", 10);
+    console.log(hashedDefaultPassword);
+    await connection.query(
+      `
+      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        "admin@admin.com",
+        "admin",
+        "admin",
+        "admin_surname",
+        hashedDefaultPassword,
+        "soy admin",
+        "",
+        true,
+      ]
+    );
 
     if (addData) {
       //     const hashedDefaultPassword = await bcrypt.hash("password", 10);
