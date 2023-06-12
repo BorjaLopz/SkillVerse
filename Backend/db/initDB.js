@@ -95,7 +95,7 @@ async function main() {
     `);
 
     //Añadimos admin
-    addAdmin(connection)
+    await addAdmin(connection)
 
     if (addData) {
       const users = 20;
