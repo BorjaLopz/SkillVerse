@@ -15,3 +15,17 @@ _Segundo proyecto para HACK A BOSS - 2023: API que permite gestionar una web don
   - Gestionar el perfil de usuario.
   - Borrar su usuario.
   - Borrar un comentario.
+
+# 👩‍💻 Autores
+* [@BorjaLopz](https://github.com/BorjaLopz)
+* [@AnaBelenBernardez](https://github.com/AnaBelenBernardez)
+* [@moirivilla](https://github.com/moirivilla)
+* [@FranciscoEsparraga](https://github.com/FranciscoEsparraga)
+
+## 💻 Tech Stack
+![MySQL](https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white)
+![NodeJS](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white)
+![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)
+![GIT](https://img.shields.io/badge/GIT-E44C30?style=for-the-badge&logo=git&logoColor=white)
+![VSC](https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white)
