@@ -181,8 +181,6 @@ const editUserController = async (req, res, next) => {
     if (id !== id_params) {
       throw generateError("No puedes editar otro usuario", 403);
     }
-    console.log(id);
-    console.log(id_params);
 
     //Obtenemos la informacion del usuario por id
     const [user] = await getAllFieldsExceptPassword(id);
