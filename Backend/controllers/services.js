@@ -9,6 +9,7 @@ const {
   getServiceByType,
   createComment,
   deleteComment,
+  getAllCommentsFromService,
 } = require("../db/services");
 const {
   generateError,
@@ -292,6 +293,21 @@ const deleteCommentsController = async (req, res, next) => {
   }
 };
 
+const getAllCommentsFromServiceController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const comments = await getAllCommentsFromService(id);
+
+    res.send({
+      status: "ok",
+      message: comments,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
 module.exports = {
   newServiceController,
   getServiceByIDController,
@@ -300,4 +316,5 @@ module.exports = {
   getServiceByTypeController,
   commentsFileController,
   deleteCommentsController,
+  getAllCommentsFromServiceController,
 };
