@@ -13,6 +13,7 @@ import PrivateRoutes from "./components/PrivateRoutes.jsx";
 import ResPas from "./pages/ResetPasword.jsx";
 import Footer from "./components/Footer.jsx";
 import ContactPage from "./pages/Contact.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/passreset" element={<ResPas />} />
+        <Route path="*" element={<NotFoundPage />} />
 
         <Route element={<PrivateRoutes />}>
           <Route path="/profile" element={<Profile />} />
