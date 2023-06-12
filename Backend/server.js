@@ -8,6 +8,11 @@ const fileUpload = require("express-fileupload");
 
 const chalk = require("chalk");
 
+const cors = require("cors");
+
+
+
+
 const {
   loginController,
   newUserController,
@@ -31,6 +36,8 @@ const { authUser, checkHeaders } = require("./middlewares/auth");
 const { generalError, error404 } = require("./middlewares/handleErrors");
 
 const app = new express();
+
+app.use(cors());
 
 //Parsear JSON y URL-encoded
 app.use(bodyParser.json());

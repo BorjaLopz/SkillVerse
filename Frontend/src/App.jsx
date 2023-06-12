@@ -2,14 +2,15 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 
+import NavBar from "./components/NavBar.jsx";
+import PrivateRoutes from "./components/PrivateRoutes.jsx";
+
 import Home from "./pages/Home.jsx";
 import About from "./pages/About.jsx";
 import Login from "./pages/Login.jsx";
 import Profile from "./pages/Profile.jsx";
 import Services from "./pages/Services.jsx";
 import SignUp from "./pages/SignUp.jsx";
-import NavBar from "./components/NavBar.jsx";
-import PrivateRoutes from "./components/PrivateRoutes.jsx";
 import ResPas from "./pages/ResetPasword.jsx";
 import Footer from "./components/Footer.jsx";
 import ContactPage from "./pages/Contact.jsx";
