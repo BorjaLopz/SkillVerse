@@ -1,7 +1,6 @@
 const { getConnection } = require("./db");
 const { generateError } = require("../helpers");
 const bcrypt = require("bcrypt");
-const chalk = require("chalk");
 
 const createUser = async (
   email,
