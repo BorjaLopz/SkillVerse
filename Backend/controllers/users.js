@@ -72,15 +72,15 @@ const loginController = async (req, res, next) => {
     const validPassword = await bcrypt.compare(password, user.password);
 
     if (!validPassword) {
-      throw generateError("La contraseña no coincide", 401);
+      throw generateError("Usuario o contraseña incorrecta", 401);
     }
     //creo el payload del token
-  const payload = {
-  id: user.id,
-  email: user.email,
-  nickname: user.nickname,
-  userPhoto: user.userPhoto
-};
+    const payload = {
+      id: user.id,
+      email: user.email,
+      nickname: user.nickname,
+      userPhoto: user.userPhoto,
+    };
     //firmo el token
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
       expiresIn: "30d",
