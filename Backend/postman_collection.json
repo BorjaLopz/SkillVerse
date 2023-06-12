@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "dd58308d-30e4-496e-aef2-642b2e8b084a",
-		"name": "Proyecto 2 Portal Digital",
+		"_postman_id": "183eaa78-b460-4010-9baa-70e9db62da6c",
+		"name": "Portal Digital",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "26978288"
+		"_exporter_id": "27178854"
 	},
 	"item": [
 		{
@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"emailpruebaa@prueba.com\",\r\n    \"nickname\": \"apodo1233\",\r\n    \"password\": \"Password123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"emailprueba@prueba.com\",\r\n    \"nickname\": \"apodo1233\",\r\n    \"password\": \"Password123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -45,7 +45,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"emailpruebaa@prueba.com\",\r\n    \"password\": \"Password123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"emailprueba@prueba.com\",\r\n    \"password\": \"Password123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -100,18 +100,59 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg0MTYzMjE0LCJleHAiOjE2ODY3NTUyMTR9.jF5-AKufKETlgfhyudQfc4GAyoEc_Um8Eycf_tiJHws",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJlbWFpbHBydWViYUBwcnVlYmEuY29tIiwibmlja25hbWUiOiJhcG9kbzEyMzMiLCJ1c2VyUGhvdG8iOiIuLi9Gcm9udGVuZC9wdWJsaWMvaW1hZ2VzL2RlZmF1bHRfYXZhdGFyLnBuZyIsImlhdCI6MTY4NjU5MjYxNywiZXhwIjoxNjg5MTg0NjE3fQ.L__jsIlu-v-dc4ma5Tt8TV-Tf98wglrY2xh3fyzxbig",
 								"type": "text"
 							}
 						],
 						"body": {
-							"mode": "raw",
-							"raw": "{ \r\n    \"email\": \"emailprueba@prueba.com\",\r\n    \"nickname\": \"123apodo\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "emailprueba@prueba.com",
+									"type": "text"
+								},
+								{
+									"key": "nickname",
+									"value": "123apodo",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Persona",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "De Incógnito",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "otraRegular666",
+									"type": "text"
+								},
+								{
+									"key": "biography",
+									"value": "Biografía de prueba donde cuento que soy una profesional del canto gregoriano y si necesitas un audio gritando en una iglesia dame un toque.",
+									"type": "text"
+								},
+								{
+									"key": "linkedin",
+									"value": "linkedin.com",
+									"type": "text"
+								},
+								{
+									"key": "instagram",
+									"value": "instagram.com",
+									"type": "text"
+								},
+								{
+									"key": "userPhoto",
+									"type": "file",
+									"src": "/C:/Users/anab9/Downloads/foto.jpg"
 								}
-							}
+							]
 						},
 						"url": {
 							"raw": "http://localhost:3000/user/1/edit",
@@ -193,7 +234,7 @@
 								{
 									"key": "file",
 									"type": "file",
-									"src": []
+									"src": "/C:/Users/anab9/Downloads/foto.jpg"
 								}
 							]
 						},
@@ -385,7 +426,10 @@
 					"name": "Get all comments from service",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": ""
+						}
 					},
 					"response": []
 				}

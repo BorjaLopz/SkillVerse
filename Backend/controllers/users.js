@@ -30,6 +30,8 @@ const newUserController = async (req, res, next) => {
         401
       );
     }
+    const defaultAvatar = "../Frontend/public/images/default_avatar.png";
+    const avatar = userPhoto || defaultAvatar;
 
     const id = await createUser(
       email,
@@ -38,7 +40,7 @@ const newUserController = async (req, res, next) => {
       name,
       surname,
       biography,
-      userPhoto
+      avatar
     );
 
     res.send({
@@ -168,10 +170,7 @@ const getUserByIdController = async (id) => {
 };
 
 const editUserController = async (req, res, next) => {
-  //Obtenemos el id por parametro
   const id_params = +req.params.id;
-
-  //Obtenemos el id por token
   const id = req.userId;
 
   let tmp_user = {}; //Objeto que le vamos a pasar a editUser();
@@ -182,10 +181,7 @@ const editUserController = async (req, res, next) => {
       throw generateError("No puedes editar otro usuario", 403);
     }
 
-    //Obtenemos la informacion del usuario por id
     const [user] = await getAllFieldsExceptPassword(id);
-
-    //Obtenemos todos los campos del body
     let { email, userPhoto, nickname, name, surname, password, biography } =
       req.body;
 
@@ -220,7 +216,7 @@ const editUserController = async (req, res, next) => {
       user.biography = biography;
     }
 
-    /* Añadimos campos al objeto */
+    //Añadimos campos al objeto
     tmp_user.id = req.userId;
     tmp_user.email = user.email;
     tmp_user.nickname = user.nickname;
@@ -240,7 +236,7 @@ const editUserController = async (req, res, next) => {
     } else {
       res.send({
         status: "ok",
-        data: "Profile updated",
+        data: "Perfil actualizado",
       });
     }
   } catch (error) {
