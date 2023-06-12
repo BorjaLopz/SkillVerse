@@ -201,6 +201,27 @@ const deleteComment = async (id_s, id_c) => {
   }
 };
 
+const getAllCommentsFromService = async (id) => {
+  let connection;
+  try {
+    connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
+    const [getCommentByID] = await connection.query(
+      `SELECT * FROM comments WHERE services_id = ?`,
+      [id]
+    );
+
+    if (getCommentByID.length === 0) {
+      throw generateError("No hay comentarios de este servicio", 404);
+    }
+
+    return getCommentByID;
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 module.exports = {
   createService,
   getServiceByID,
@@ -209,4 +230,5 @@ module.exports = {
   getServiceByType,
   createComment,
   deleteComment,
+  getAllCommentsFromService,
 };

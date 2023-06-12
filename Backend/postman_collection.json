@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "dd58308d-30e4-496e-aef2-642b2e8b084a",
-		"name": "Proyecto 2 Portal Digital Copy",
+		"name": "Proyecto 2 Portal Digital",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26978288"
 	},
@@ -318,7 +318,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg0MTYzMjE0LCJleHAiOjE2ODY3NTUyMTR9.jF5-AKufKETlgfhyudQfc4GAyoEc_Um8Eycf_tiJHws",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJlbWFpbHBydWViYWFhYUBwcnVlYmEuY29tIiwibmlja25hbWUiOiJhcG9kb2FhMTIzMyIsInVzZXJQaG90byI6IiIsImlhdCI6MTY4NjU4ODg5NiwiZXhwIjoxNjg5MTgwODk2fQ.TdOuxkHJO2KdDm1BOxtwPYdtoedBwJa-LYj7gweTsPI",
 								"type": "text"
 							}
 						],
@@ -338,7 +338,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/comments/1",
+							"raw": "http://localhost:3000/comments/2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -346,7 +346,7 @@
 							"port": "3000",
 							"path": [
 								"comments",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -378,6 +378,14 @@
 								"delete"
 							]
 						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all comments from service",
+					"request": {
+						"method": "GET",
+						"header": []
 					},
 					"response": []
 				}

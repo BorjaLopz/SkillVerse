@@ -26,6 +26,7 @@ const {
   commentsFileController,
   getServiceByTypeController,
   deleteCommentsController,
+  getAllCommentsFromServiceController,
 } = require("./controllers/services");
 
 const { authUser, checkHeaders } = require("./middlewares/auth");
@@ -86,6 +87,9 @@ app.get("/service/type/(:type)?", authUser, getServiceByTypeController);
 
 //Añadir comentario fichero
 app.post("/comments/:id", authUser, commentsFileController);
+
+//Obtener todos los comentarios de un servicio
+app.get("/service/:id/all", authUser, getAllCommentsFromServiceController);
 
 //Eliminar comentario
 app.delete(
