@@ -97,7 +97,7 @@ const newServiceController = async (req, res, next) => {
       fileName
     );
 
-    console.log(chalk.green("Servicio requerido creado"));
+    console.log(chalk.green("Servicio creado"));
     res.send({
       status: "ok",
       message: `Services created with id ${id_services}`,
@@ -218,11 +218,6 @@ const commentsFileController = async (req, res, next) => {
         console.log(chalk.green("Archivo subido"));
       });
     }
-
-    console.log(chalk.yellow(comments));
-    console.log(chalk.yellow(uploadPath));
-    console.log(chalk.yellow(id));
-    console.log(chalk.yellow(req.userId));
 
     const id_comment = await createComment(comments, fileName, req.userId, id);
 
