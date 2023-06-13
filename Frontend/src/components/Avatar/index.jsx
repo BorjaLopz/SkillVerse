@@ -1,13 +1,14 @@
-// import "./avatar.css";
+import "./avatar.css";
+// import { avatarURL } from "../../api";
 
-// const Avatar = ({ avatar, username }) => {
-//   if (!avatar) avatar = "default-avatar.jpg";
+const Avatar = ({ avatar, username }) => {
+  // if (!avatar) avatar = "default_avatar.png";
 
-//   return (
-//     <>
-//       <img className="avatar" src={avatarURL(avatar)} alt={username} />
-//     </>
-//   );
-// };
+  return (
+    <>
+      <img className="avatar" src={avatarURL(avatar)} alt={username} />
+    </>
+  );
+};
 
-// export default Avatar;
+export default Avatar;

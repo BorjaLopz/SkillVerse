@@ -1,8 +1,9 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
+import "./App.css";
 
-import NavBar from "./components/NavBar/index.jsx";
+import Header from "./components/Header.jsx";
 import PrivateRoutes from "./components/PrivateRoutes.jsx";
 
 import Home from "./pages/Home.jsx";
@@ -15,12 +16,13 @@ import ResPas from "./pages/ResetPasword.jsx";
 import Footer from "./components/Footer/index.jsx";
 import ContactPage from "./pages/Contact.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
+import NewService from "./pages/NewService.jsx";
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
+      <Header user={user} />
       <Toaster position="top-right" />
-      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -33,10 +35,11 @@ function App() {
 
         <Route element={<PrivateRoutes />}>
           <Route path="/profile" element={<Profile />} />
+          <Route path="/newService" element={<NewService />} />
         </Route>
       </Routes>
       <Footer />
-    </>
+    </BrowserRouter>
   );
 }
 
