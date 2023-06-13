@@ -9,7 +9,7 @@ const createService = async (
   title,
   request_body,
   user_id,
-  required_type,
+  service_type,
   file_name = "",
   hide = false,
   done = false
@@ -18,20 +18,13 @@ const createService = async (
 
   try {
     connection = await getConnection();
-    await connection.query(`USE ${DB_DATABASE}`)
-
-    console.log(title);
-    console.log(request_body);
-    console.log(user_id);
-    console.log(required_type);
+    await connection.query(`USE ${DB_DATABASE}`);
 
     const [newService] = await connection.query(
       `
-    INSERT INTO services (title, request_body, user_id, file_name, required_type, done, hide) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [title, request_body, user_id, file_name, required_type, done, hide]
+    INSERT INTO services (title, request_body, user_id, file_name, service_type, done, hide) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [title, request_body, user_id, file_name, service_type, done, hide]
     );
-
-    console.log(chalk.green("Servicio creado"));
 
     return newService.insertId;
   } finally {
@@ -62,7 +55,6 @@ const getServiceByID = async (id) => {
 
 const getAllServices = async (user_id = -1) => {
   let connection;
-  console.log(chalk.green(user_id));
 
   try {
     connection = await getConnection();
@@ -117,7 +109,7 @@ const getServiceByType = async (type) => {
     await connection.query(`USE ${DB_DATABASE}`);
 
     const [result] = await connection.query(
-      `SELECT * FROM services WHERE required_type LIKE ? AND done = ?`,
+      `SELECT * FROM services WHERE service_type LIKE ? AND done = ?`,
       [`%${type}%`, 0]
     );
 
@@ -154,8 +146,6 @@ const createComment = async (
       [user_id, service_id, comment, service_file, hide]
     );
 
-    console.log(chalk.green("Comentario creado"));
-
     return newComment.insertId;
   } finally {
     if (connection) connection.release();
@@ -167,6 +157,7 @@ const deleteComment = async (id_s, id_c) => {
   try {
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
+
 
     const [getCommentByID_s] = await connection.query(
       `SELECT * FROM comments WHERE services_id = ? AND id = ?`,

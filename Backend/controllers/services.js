@@ -24,7 +24,7 @@ const {
 
 const newServiceController = async (req, res, next) => {
   try {
-    const { title, request_body, required_type } = req.body;
+    const { title, request_body, service_type } = req.body;
 
     //Comprobar título
     if (!title || title.lenght > 50 || title.lenght < 15) {
@@ -46,8 +46,8 @@ const newServiceController = async (req, res, next) => {
       );
     }
 
-    //Comprobar required_type
-    if (!required_type || required_type.lenght > 20) {
+    //Comprobar service_type
+    if (!service_type || service_type.lenght > 20) {
       throw generateError(
         "El tipo de servicio requerido debe tener menos de 20 caracteres",
         400
@@ -93,11 +93,11 @@ const newServiceController = async (req, res, next) => {
       title,
       request_body,
       req.userId,
-      required_type,
+      service_type,
       fileName
     );
 
-    console.log(chalk.green("Servicio requerido creado"));
+    console.log(chalk.green("Servicio creado"));
     res.send({
       status: "ok",
       message: `Services created with id ${id_services}`,
@@ -219,11 +219,6 @@ const commentsFileController = async (req, res, next) => {
       });
     }
 
-    console.log(chalk.yellow(comments));
-    console.log(chalk.yellow(uploadPath));
-    console.log(chalk.yellow(id));
-    console.log(chalk.yellow(req.userId));
-
     const id_comment = await createComment(comments, fileName, req.userId, id);
 
     console.log(chalk.green("Comentario creado"));
@@ -268,7 +263,7 @@ const commentsFileController_deprecated = async (req, res, next) => {
       });
     }
 
-    const id_files = await createFile(requiredS_id, serviceFile);
+    const id_files = await createFile(services_id, serviceFile);
     res.send({
       status: "ok",
       message: `Comment created with id ${id_files}`,
@@ -278,61 +273,86 @@ const commentsFileController_deprecated = async (req, res, next) => {
   }
 };
 
+/*
 const deleteCommentsController = async (req, res, next) => {
   try {
     const { id_s, id_c } = req.params;
+    console.log(id_s);
+    console.log(id_c);
 
-    await deleteComment(id_s, id_c);
+    const token = req;
+    console.log("token.id_Primero: ", req.nickname);
+
+    const message = await deleteComment(id_s, id_c, token);
 
     res.send({
-      status: "ok",
-      message: `Comment deleted`,
+      status: "in progress",
+      message: message,
     });
   } catch (e) {
     next(e);
   }
 };
+*/
 
-/*
 const deleteCommentsController = async (req, res, next) => {
-    try {
-        const { id_s, id_c } = req.params;
-        const id = req.userId; 
-        const admin = req.admin; 
+  try {
+    const { id_s, id_c } = req.params;
+    const id = req.userId;
+    const admin = req.admin;
 
-        // Verificar si el usuario es propietario del comment o es administrador
-        if (await userCommentOwner(id, id_c) || admin) {
-            await deleteComment(id_s, id_c);
-            return res.send({
-                status: "ok",
-                message: "Comment deleted",
-            });
-        } else {
-            return res.status(403).json({
-                status: "error",
-                message: "You don't have permission to delete this comment.",
-            });
-        }
-    } catch (error) {
-        next(error);
+    //Comprobamos si el servicio existe
+    const service = await getServiceByID(id_s);
+    let comments;
+
+    //Si existe el servicio, comprobamos si el servicio tiene comentarios
+    if (service) {
+      comments = await getAllCommentsFromService(id_s);
+
+      const firstCommentOfUserInService = comments.findIndex(
+        (comment) => id === comment.user_id
+      );
+
+      //Si el servicio tiene comentarios, comprobamos si el usuario es el autor del servicio o admin
+      if (
+        admin ||
+        (service.user_id === id && firstCommentOfUserInService != -1)
+      ) {
+        await deleteComment(id_s, id_c);
+        return res.send({
+          status: "ok",
+          message: "Comment deleted",
+        });
+      } else {
+        return res.status(403).json({
+          status: "error",
+          message: "You don't have permission to delete this comment.",
+        });
+      }
     }
+
+    res.send({
+      status: "ok",
+      message: comments,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 // Función para verificar si el usuario es propietario del comment
 const userCommentOwner = async (id, id_c) => {
-    try {
-        const comment = await comment.findById(id_c);
+  try {
+    const comment = await comment.findById(id_c);
 
-        if (!comment) {
-           
-            return false;
-        }      
-        return comment.owner === id;
-    } catch (error) {
-        throw error;
+    if (!comment) {
+      return false;
     }
+    return comment.owner === id;
+  } catch (error) {
+    throw error;
+  }
 };
-*/
 
 const getAllCommentsFromServiceController = async (req, res, next) => {
   try {

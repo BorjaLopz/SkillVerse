@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"emailprueba@prueba.com\",\r\n    \"nickname\": \"apodo1233\",\r\n    \"password\": \"Password123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"emailprueba@prueba.com\",\r\n    \"nickname\": \"apodo123\",\r\n    \"password\": \"Password123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -74,12 +74,12 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg0MTQ4MTEwLCJleHAiOjE2ODY3NDAxMTB9.GGUkbjGbq74i8F9DqiVMioV_uJQYBNxwRUlZOupMG58",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImVtYWlsIjoiZW1haWxwcnVlYmFAcHJ1ZWJhLmNvbSIsIm5pY2tuYW1lIjoiYXBvZG8xMjMiLCJ1c2VyUGhvdG8iOiIuLi9Gcm9udGVuZC9wdWJsaWMvaW1hZ2VzL2RlZmF1bHRfYXZhdGFyLnBuZyIsImFkbWluIjowLCJpYXQiOjE2ODY2NzAyNTAsImV4cCI6MTY4OTI2MjI1MH0.iAd7Rk5EtzTjL58cR1O89HE-I49gp-bHrhwcohnGgPs",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:3000/user/1",
+							"raw": "http://localhost:3000/user/22",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -87,7 +87,7 @@
 							"port": "3000",
 							"path": [
 								"user",
-								"1"
+								"22"
 							]
 						}
 					},
@@ -100,7 +100,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJlbWFpbHBydWViYUBwcnVlYmEuY29tIiwibmlja25hbWUiOiJhcG9kbzEyMzMiLCJ1c2VyUGhvdG8iOiIuLi9Gcm9udGVuZC9wdWJsaWMvaW1hZ2VzL2RlZmF1bHRfYXZhdGFyLnBuZyIsImlhdCI6MTY4NjU5MjYxNywiZXhwIjoxNjg5MTg0NjE3fQ.L__jsIlu-v-dc4ma5Tt8TV-Tf98wglrY2xh3fyzxbig",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImVtYWlsIjoiZW1haWxwcnVlYmFAcHJ1ZWJhLmNvbSIsIm5pY2tuYW1lIjoiYXBvZG8xMjMiLCJ1c2VyUGhvdG8iOiIuLi9Gcm9udGVuZC9wdWJsaWMvaW1hZ2VzL2RlZmF1bHRfYXZhdGFyLnBuZyIsImFkbWluIjowLCJpYXQiOjE2ODY2NzAyNTAsImV4cCI6MTY4OTI2MjI1MH0.iAd7Rk5EtzTjL58cR1O89HE-I49gp-bHrhwcohnGgPs",
 								"type": "text"
 							}
 						],
@@ -109,7 +109,7 @@
 							"formdata": [
 								{
 									"key": "email",
-									"value": "emailprueba@prueba.com",
+									"value": "emailprueba@prueba.es",
 									"type": "text"
 								},
 								{
@@ -155,7 +155,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/user/1/edit",
+							"raw": "http://localhost:3000/user/22/edit",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -163,7 +163,7 @@
 							"port": "3000",
 							"path": [
 								"user",
-								"1",
+								"22",
 								"edit"
 							]
 						}
@@ -177,7 +177,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg0MTYzMjE0LCJleHAiOjE2ODY3NTUyMTR9.jF5-AKufKETlgfhyudQfc4GAyoEc_Um8Eycf_tiJHws",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImVtYWlsIjoiZW1haWxwcnVlYmFAcHJ1ZWJhLmNvbSIsIm5pY2tuYW1lIjoiYXBvZG8xMjMiLCJ1c2VyUGhvdG8iOiIuLi9Gcm9udGVuZC9wdWJsaWMvaW1hZ2VzL2RlZmF1bHRfYXZhdGFyLnBuZyIsImFkbWluIjowLCJpYXQiOjE2ODY2NzAyNTAsImV4cCI6MTY4OTI2MjI1MH0.iAd7Rk5EtzTjL58cR1O89HE-I49gp-bHrhwcohnGgPs",
 								"type": "text"
 							}
 						],
@@ -223,12 +223,12 @@
 								},
 								{
 									"key": "request_body",
-									"value": "descripcion del proyecto que tiene que tener 15 caracteres minimo",
+									"value": "Descripción del proyecto que tiene que tener 15 caracteres mínimo",
 									"type": "text"
 								},
 								{
-									"key": "required_type",
-									"value": "Edicion de fotos",
+									"key": "service_type",
+									"value": "Edición de fotos",
 									"type": "text"
 								},
 								{
