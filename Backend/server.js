@@ -27,6 +27,7 @@ const {
   getServiceByTypeController,
   deleteCommentsController,
   getAllCommentsFromServiceController,
+  deleteServiceController,
 } = require("./controllers/services");
 
 const { authUser, checkHeaders } = require("./middlewares/auth");
@@ -78,6 +79,9 @@ app.get("/service/:id", getServiceByIDController);
 
 //Obtener todos los servicios
 app.get("/service", checkHeaders, getAllServicesController);
+
+//Eliminamos un servicio
+app.delete("/service/:id/delete", authUser, deleteServiceController);
 
 //Modificar el estado de determinado servicio
 app.patch("/service/:id/:status", updateServiceStatusByIDController);

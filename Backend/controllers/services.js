@@ -10,6 +10,7 @@ const {
   createComment,
   deleteComment,
   getAllCommentsFromService,
+  deleteService,
 } = require("../db/services");
 const {
   generateError,
@@ -335,11 +336,6 @@ const deleteCommentsController = async (req, res, next) => {
         });
       }
     }
-
-    res.send({
-      status: "ok",
-      message: comments,
-    });
   } catch (error) {
     next(error);
   }
@@ -374,6 +370,33 @@ const getAllCommentsFromServiceController = async (req, res, next) => {
   }
 };
 
+const deleteServiceController = async (req, res, next) => {
+  try {
+    const id_service = +req.params.id;
+    const id = req.userId;
+    const admin = req.admin;
+
+    console.log("id_service: ", id_service);
+    console.log("id: ", id);
+    console.log("admin: ", admin);
+
+    let message;
+
+    if (admin || id_service === id) {
+      message = await deleteService(id_service);
+    } else {
+      throw generateError("You can not delete another user service", 401);
+    }
+
+    return res.send({
+      status: "ok",
+      message: message,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   newServiceController,
   getServiceByIDController,
@@ -383,4 +406,5 @@ module.exports = {
   commentsFileController,
   deleteCommentsController,
   getAllCommentsFromServiceController,
+  deleteServiceController,
 };
