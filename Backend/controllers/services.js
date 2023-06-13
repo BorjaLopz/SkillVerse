@@ -24,7 +24,7 @@ const {
 
 const newServiceController = async (req, res, next) => {
   try {
-    const { title, request_body, required_type } = req.body;
+    const { title, request_body, service_type } = req.body;
 
     //Comprobar título
     if (!title || title.lenght > 50 || title.lenght < 15) {
@@ -46,8 +46,8 @@ const newServiceController = async (req, res, next) => {
       );
     }
 
-    //Comprobar required_type
-    if (!required_type || required_type.lenght > 20) {
+    //Comprobar service_type
+    if (!service_type || service_type.lenght > 20) {
       throw generateError(
         "El tipo de servicio requerido debe tener menos de 20 caracteres",
         400
@@ -93,7 +93,7 @@ const newServiceController = async (req, res, next) => {
       title,
       request_body,
       req.userId,
-      required_type,
+      service_type,
       fileName
     );
 
@@ -268,7 +268,7 @@ const commentsFileController_deprecated = async (req, res, next) => {
       });
     }
 
-    const id_files = await createFile(requiredS_id, serviceFile);
+    const id_files = await createFile(services_id, serviceFile);
     res.send({
       status: "ok",
       message: `Comment created with id ${id_files}`,

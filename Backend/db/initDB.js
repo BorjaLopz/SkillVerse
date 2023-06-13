@@ -20,7 +20,7 @@ const addAdmin = async (connection) => {
       "admin_surname",
       hashedDefaultPassword,
       "soy admin",
-      "",
+      "../Frontend/public/images/default_avatar.png",
       true,
     ]
   );
@@ -71,7 +71,7 @@ async function main() {
       user_id INT NOT NULL,
       file_name VARCHAR(30),
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-      required_type VARCHAR(20) NOT NULL,
+      service_type VARCHAR(20) NOT NULL,
       done BOOLEAN DEFAULT FALSE,
       hide BOOLEAN DEFAULT FALSE,
       FOREIGN KEY (user_id) REFERENCES users (id)
@@ -95,7 +95,7 @@ async function main() {
     `);
 
     //Añadimos admin
-    await addAdmin(connection)
+    await addAdmin(connection);
 
     if (addData) {
       const users = 20;
