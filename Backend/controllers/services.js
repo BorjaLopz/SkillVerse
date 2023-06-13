@@ -293,6 +293,47 @@ const deleteCommentsController = async (req, res, next) => {
   }
 };
 
+/*
+const deleteCommentsController = async (req, res, next) => {
+    try {
+        const { id_s, id_c } = req.params;
+        const id = req.userId; 
+        const admin = req.admin; 
+
+        // Verificar si el usuario es propietario del comment o es administrador
+        if (await userCommentOwner(id, id_c) || admin) {
+            await deleteComment(id_s, id_c);
+            return res.send({
+                status: "ok",
+                message: "Comment deleted",
+            });
+        } else {
+            return res.status(403).json({
+                status: "error",
+                message: "You don't have permission to delete this comment.",
+            });
+        }
+    } catch (error) {
+        next(error);
+    }
+};
+
+// Función para verificar si el usuario es propietario del comment
+const userCommentOwner = async (id, id_c) => {
+    try {
+        const comment = await comment.findById(id_c);
+
+        if (!comment) {
+           
+            return false;
+        }      
+        return comment.owner === id;
+    } catch (error) {
+        throw error;
+    }
+};
+*/
+
 const getAllCommentsFromServiceController = async (req, res, next) => {
   try {
     const { id } = req.params;
