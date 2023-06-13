@@ -20,18 +20,11 @@ const createService = async (
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
 
-    console.log(title);
-    console.log(request_body);
-    console.log(user_id);
-    console.log(service_type);
-
     const [newService] = await connection.query(
       `
     INSERT INTO services (title, request_body, user_id, file_name, service_type, done, hide) VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [title, request_body, user_id, file_name, service_type, done, hide]
     );
-
-    console.log(chalk.green("Servicio creado"));
 
     return newService.insertId;
   } finally {
@@ -62,7 +55,6 @@ const getServiceByID = async (id) => {
 
 const getAllServices = async (user_id = -1) => {
   let connection;
-  console.log(chalk.green(user_id));
 
   try {
     connection = await getConnection();
@@ -153,8 +145,6 @@ const createComment = async (
     INSERT INTO comments (user_id, services_id, comment, serviceFile, hide) VALUES (?, ?, ?, ?, ?)`,
       [user_id, service_id, comment, service_file, hide]
     );
-
-    console.log(chalk.green("Comentario creado"));
 
     return newComment.insertId;
   } finally {
