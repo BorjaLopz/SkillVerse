@@ -1,7 +1,6 @@
 import React from "react";
 
-
-function AddService() {
+function AddComment() {
   return (
     <>
       <h1 className="text-3xl font-bold underline">Añade un servicio</h1>
@@ -9,4 +8,4 @@ function AddService() {
   );
 }
 
-export default AddService;
+export default AddComment;
