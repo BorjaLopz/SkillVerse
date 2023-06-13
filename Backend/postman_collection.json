@@ -1,373 +1,439 @@
 {
-  "info": {
-    "_postman_id": "183eaa78-b460-4010-9baa-70e9db62da6c",
-    "name": "Portal Digital",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "27178854"
-  },
-  "item": [
-    {
-      "name": "User",
-      "item": [
-        {
-          "name": "Register User",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"emailprueba@prueba.com\",\r\n    \"nickname\": \"apodo1233\",\r\n    \"password\": \"Password123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3000/user/register",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["user", "register"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Login",
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"email\": \"emailprueba@prueba.com\",\r\n    \"password\": \"Password123\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://localhost:3000/user/login",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["user", "login"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get user by ID",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg0MTQ4MTEwLCJleHAiOjE2ODY3NDAxMTB9.GGUkbjGbq74i8F9DqiVMioV_uJQYBNxwRUlZOupMG58",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:3000/user/1",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["user", "1"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Edit User",
-          "request": {
-            "method": "PUT",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJlbWFpbHBydWViYUBwcnVlYmEuY29tIiwibmlja25hbWUiOiJhcG9kbzEyMzMiLCJ1c2VyUGhvdG8iOiIuLi9Gcm9udGVuZC9wdWJsaWMvaW1hZ2VzL2RlZmF1bHRfYXZhdGFyLnBuZyIsImlhdCI6MTY4NjU5MjYxNywiZXhwIjoxNjg5MTg0NjE3fQ.L__jsIlu-v-dc4ma5Tt8TV-Tf98wglrY2xh3fyzxbig",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "email",
-                  "value": "emailprueba@prueba.com",
-                  "type": "text"
-                },
-                {
-                  "key": "nickname",
-                  "value": "123apodo",
-                  "type": "text"
-                },
-                {
-                  "key": "name",
-                  "value": "Persona",
-                  "type": "text"
-                },
-                {
-                  "key": "surname",
-                  "value": "De Incógnito",
-                  "type": "text"
-                },
-                {
-                  "key": "password",
-                  "value": "otraRegular666",
-                  "type": "text"
-                },
-                {
-                  "key": "biography",
-                  "value": "Biografía de prueba donde cuento que soy una profesional del canto gregoriano y si necesitas un audio gritando en una iglesia dame un toque.",
-                  "type": "text"
-                },
-                {
-                  "key": "linkedin",
-                  "value": "linkedin.com",
-                  "type": "text"
-                },
-                {
-                  "key": "instagram",
-                  "value": "instagram.com",
-                  "type": "text"
-                },
-                {
-                  "key": "userPhoto",
-                  "type": "file",
-                  "src": "/C:/Users/anab9/Downloads/foto.jpg"
-                }
-              ]
-            },
-            "url": {
-              "raw": "http://localhost:3000/user/1/edit",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["user", "1", "edit"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Delete User",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg0MTYzMjE0LCJleHAiOjE2ODY3NTUyMTR9.jF5-AKufKETlgfhyudQfc4GAyoEc_Um8Eycf_tiJHws",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:3000/user/delete/",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["user", "delete", ""]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Service",
-      "item": [
-        {
-          "name": "Add Service",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg0MTYzMjE0LCJleHAiOjE2ODY3NTUyMTR9.jF5-AKufKETlgfhyudQfc4GAyoEc_Um8Eycf_tiJHws",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "title",
-                  "value": "Prueba base de datos",
-                  "type": "text"
-                },
-                {
-                  "key": "request_body",
-                  "value": "descripcion del proyecto que tiene que tener 15 caracteres minimo",
-                  "type": "text"
-                },
-                {
-                  "key": "service_type",
-                  "value": "Edicion de fotos",
-                  "type": "text"
-                },
-                {
-                  "key": "file",
-                  "type": "file",
-                  "src": "/C:/Users/anab9/Downloads/foto.jpg"
-                }
-              ]
-            },
-            "url": {
-              "raw": "http://localhost:3000/service/add",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["service", "add"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get service by ID",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:3000/service/1",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["service", "1"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Obtener todos los servicios",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg0MTYzMjE0LCJleHAiOjE2ODY3NTUyMTR9.jF5-AKufKETlgfhyudQfc4GAyoEc_Um8Eycf_tiJHws",
-                "type": "text",
-                "disabled": true
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:3000/service",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["service"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get service by type",
-          "request": {
-            "method": "GET",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg0MTYyMjUxLCJleHAiOjE2ODY3NTQyNTF9.7hhrBEEYSEcHU4Pmw7MsnSi3dXScevPZUAYjyFJqKXY",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:3000/service/type/edicion",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["service", "type", "edicion"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Update Status of Service",
-          "request": {
-            "method": "PATCH",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:3000/service/1/done",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["service", "1", "done"]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "Comments",
-      "item": [
-        {
-          "name": "Post comments/file",
-          "request": {
-            "method": "POST",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJlbWFpbHBydWViYWFhYUBwcnVlYmEuY29tIiwibmlja25hbWUiOiJhcG9kb2FhMTIzMyIsInVzZXJQaG90byI6IiIsImlhdCI6MTY4NjU4ODg5NiwiZXhwIjoxNjg5MTgwODk2fQ.TdOuxkHJO2KdDm1BOxtwPYdtoedBwJa-LYj7gweTsPI",
-                "type": "text"
-              }
-            ],
-            "body": {
-              "mode": "formdata",
-              "formdata": [
-                {
-                  "key": "comments",
-                  "value": "Comentario por defecto de una longitud adecuada",
-                  "type": "text"
-                },
-                {
-                  "key": "serviceFile",
-                  "type": "file",
-                  "src": "/C:/Users/anab9/Documents/HACK_A_BOSS/PROYECTO_2/portal-digital/README.md"
-                }
-              ]
-            },
-            "url": {
-              "raw": "http://localhost:3000/comments/2",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["comments", "2"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Delete Comment",
-          "request": {
-            "method": "DELETE",
-            "header": [
-              {
-                "key": "Authorization",
-                "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg0MTYyMjUxLCJleHAiOjE2ODY3NTQyNTF9.7hhrBEEYSEcHU4Pmw7MsnSi3dXScevPZUAYjyFJqKXY",
-                "type": "text"
-              }
-            ],
-            "url": {
-              "raw": "http://localhost:3000/service/1/comments/1/delete",
-              "protocol": "http",
-              "host": ["localhost"],
-              "port": "3000",
-              "path": ["service", "1", "comments", "1", "delete"]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Get all comments from service",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": ""
-            }
-          },
-          "response": []
-        }
-      ]
-    }
-  ]
+	"info": {
+		"_postman_id": "183eaa78-b460-4010-9baa-70e9db62da6c",
+		"name": "Portal Digital",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27178854"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"emailprueba@prueba.com\",\r\n    \"nickname\": \"apodo123\",\r\n    \"password\": \"Password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"emailprueba@prueba.com\",\r\n    \"password\": \"Password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImVtYWlsIjoiZW1haWxwcnVlYmFAcHJ1ZWJhLmNvbSIsIm5pY2tuYW1lIjoiYXBvZG8xMjMiLCJ1c2VyUGhvdG8iOiIuLi9Gcm9udGVuZC9wdWJsaWMvaW1hZ2VzL2RlZmF1bHRfYXZhdGFyLnBuZyIsImFkbWluIjowLCJpYXQiOjE2ODY2NzAyNTAsImV4cCI6MTY4OTI2MjI1MH0.iAd7Rk5EtzTjL58cR1O89HE-I49gp-bHrhwcohnGgPs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/user/22",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImVtYWlsIjoiZW1haWxwcnVlYmFAcHJ1ZWJhLmNvbSIsIm5pY2tuYW1lIjoiYXBvZG8xMjMiLCJ1c2VyUGhvdG8iOiIuLi9Gcm9udGVuZC9wdWJsaWMvaW1hZ2VzL2RlZmF1bHRfYXZhdGFyLnBuZyIsImFkbWluIjowLCJpYXQiOjE2ODY2NzAyNTAsImV4cCI6MTY4OTI2MjI1MH0.iAd7Rk5EtzTjL58cR1O89HE-I49gp-bHrhwcohnGgPs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "emailprueba@prueba.es",
+									"type": "text"
+								},
+								{
+									"key": "nickname",
+									"value": "123apodo",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Persona",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "De Incógnito",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "otraRegular666",
+									"type": "text"
+								},
+								{
+									"key": "biography",
+									"value": "Biografía de prueba donde cuento que soy una profesional del canto gregoriano y si necesitas un audio gritando en una iglesia dame un toque.",
+									"type": "text"
+								},
+								{
+									"key": "linkedin",
+									"value": "linkedin.com",
+									"type": "text"
+								},
+								{
+									"key": "instagram",
+									"value": "instagram.com",
+									"type": "text"
+								},
+								{
+									"key": "userPhoto",
+									"type": "file",
+									"src": "/C:/Users/anab9/Downloads/foto.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/22/edit",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"22",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjIsImVtYWlsIjoiZW1haWxwcnVlYmFAcHJ1ZWJhLmNvbSIsIm5pY2tuYW1lIjoiYXBvZG8xMjMiLCJ1c2VyUGhvdG8iOiIuLi9Gcm9udGVuZC9wdWJsaWMvaW1hZ2VzL2RlZmF1bHRfYXZhdGFyLnBuZyIsImFkbWluIjowLCJpYXQiOjE2ODY2NzAyNTAsImV4cCI6MTY4OTI2MjI1MH0.iAd7Rk5EtzTjL58cR1O89HE-I49gp-bHrhwcohnGgPs",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/user/delete/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"delete",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Service",
+			"item": [
+				{
+					"name": "Add Service",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg0MTYzMjE0LCJleHAiOjE2ODY3NTUyMTR9.jF5-AKufKETlgfhyudQfc4GAyoEc_Um8Eycf_tiJHws",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Prueba base de datos",
+									"type": "text"
+								},
+								{
+									"key": "request_body",
+									"value": "Descripción del proyecto que tiene que tener 15 caracteres mínimo",
+									"type": "text"
+								},
+								{
+									"key": "service_type",
+									"value": "Edición de fotos",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/anab9/Downloads/foto.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/service/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"service",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get service by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/service/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"service",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener todos los servicios",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjg0MTYzMjE0LCJleHAiOjE2ODY3NTUyMTR9.jF5-AKufKETlgfhyudQfc4GAyoEc_Um8Eycf_tiJHws",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/service",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"service"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get service by type",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg0MTYyMjUxLCJleHAiOjE2ODY3NTQyNTF9.7hhrBEEYSEcHU4Pmw7MsnSi3dXScevPZUAYjyFJqKXY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/service/type/edicion",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"service",
+								"type",
+								"edicion"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Status of Service",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/service/1/done",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"service",
+								"1",
+								"done"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Post comments/file",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJlbWFpbHBydWViYWFhYUBwcnVlYmEuY29tIiwibmlja25hbWUiOiJhcG9kb2FhMTIzMyIsInVzZXJQaG90byI6IiIsImlhdCI6MTY4NjU4ODg5NiwiZXhwIjoxNjg5MTgwODk2fQ.TdOuxkHJO2KdDm1BOxtwPYdtoedBwJa-LYj7gweTsPI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "comments",
+									"value": "Comentario por defecto de una longitud adecuada",
+									"type": "text"
+								},
+								{
+									"key": "serviceFile",
+									"type": "file",
+									"src": "/C:/Users/anab9/Documents/HACK_A_BOSS/PROYECTO_2/portal-digital/README.md"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/comments/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"comments",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Comment",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg0MTYyMjUxLCJleHAiOjE2ODY3NTQyNTF9.7hhrBEEYSEcHU4Pmw7MsnSi3dXScevPZUAYjyFJqKXY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:3000/service/1/comments/1/delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"service",
+								"1",
+								"comments",
+								"1",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all comments from service",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
 }
