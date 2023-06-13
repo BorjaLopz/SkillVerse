@@ -64,7 +64,7 @@ app.get("/user/:id", authUser, getAllFieldsExceptPasswordController);
 app.put("/user/:id/edit", authUser, editUserController);
 
 //Borrar un user
-app.delete("/user/delete", authUser, deleteUserController);
+app.delete("/user/:id/delete", authUser, deleteUserController);
 
 //#endregion USER
 
