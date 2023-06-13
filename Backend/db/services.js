@@ -168,6 +168,7 @@ const deleteComment = async (id_s, id_c) => {
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
 
+
     const [getCommentByID_s] = await connection.query(
       `SELECT * FROM comments WHERE services_id = ? AND id = ?`,
       [id_s, id_c]
