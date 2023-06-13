@@ -104,7 +104,19 @@ const loginController = async (req, res, next) => {
 
 const deleteUserController = async (req, res, next) => {
   try {
-    await deleteUser(req.userId);
+    const id_params = +req.params.id;
+    const admin = req.admin;
+    const id = req.userId;
+
+    console.log("id_params: ", id_params);
+    console.log("admin: ", admin);
+    console.log("id: ", id);
+
+    if (id_params === id || admin) {
+      await deleteUser(id_params);
+    } else {
+      throw generateError("No puedes borrar otro usuario", 401);
+    }
 
     res.send({
       status: "ok",
@@ -172,7 +184,7 @@ const getUserByIdController = async (id) => {
 };
 
 const editUserController = async (req, res, next) => {
-  const id_params = + req.params.id;
+  const id_params = +req.params.id;
   const id = req.userId;
   const admin = req.admin;
 

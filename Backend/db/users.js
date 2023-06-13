@@ -144,6 +144,8 @@ const deleteUser = async (idUser) => {
       [idUser, 1]
     );
 
+    console.log(user);
+
     if (user[0].active === 0) {
       throw generateError("Usuario ya eliminado", 404);
     }
