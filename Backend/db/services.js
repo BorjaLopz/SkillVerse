@@ -18,7 +18,7 @@ const createService = async (
 
   try {
     connection = await getConnection();
-    await connection.query(`USE ${DB_DATABASE}`)
+    await connection.query(`USE ${DB_DATABASE}`);
 
     console.log(title);
     console.log(request_body);
@@ -167,6 +167,7 @@ const deleteComment = async (id_s, id_c) => {
   try {
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
+
 
     const [getCommentByID_s] = await connection.query(
       `SELECT * FROM comments WHERE services_id = ? AND id = ?`,
