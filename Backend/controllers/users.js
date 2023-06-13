@@ -112,7 +112,7 @@ const deleteUserController = async (req, res, next) => {
     console.log("admin: ", admin);
     console.log("id: ", id);
 
-    if (id_params === id) {
+    if (id_params === id || admin) {
       await deleteUser(id_params);
     } else {
       throw generateError("No puedes borrar otro usuario", 401);
