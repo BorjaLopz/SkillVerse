@@ -9,7 +9,7 @@ const createService = async (
   title,
   request_body,
   user_id,
-  required_type,
+  service_type,
   file_name = "",
   hide = false,
   done = false
@@ -18,17 +18,17 @@ const createService = async (
 
   try {
     connection = await getConnection();
-    await connection.query(`USE ${DB_DATABASE}`)
+    await connection.query(`USE ${DB_DATABASE}`);
 
     console.log(title);
     console.log(request_body);
     console.log(user_id);
-    console.log(required_type);
+    console.log(service_type);
 
     const [newService] = await connection.query(
       `
-    INSERT INTO services (title, request_body, user_id, file_name, required_type, done, hide) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [title, request_body, user_id, file_name, required_type, done, hide]
+    INSERT INTO services (title, request_body, user_id, file_name, service_type, done, hide) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [title, request_body, user_id, file_name, service_type, done, hide]
     );
 
     console.log(chalk.green("Servicio creado"));
@@ -117,7 +117,7 @@ const getServiceByType = async (type) => {
     await connection.query(`USE ${DB_DATABASE}`);
 
     const [result] = await connection.query(
-      `SELECT * FROM services WHERE required_type LIKE ? AND done = ?`,
+      `SELECT * FROM services WHERE service_type LIKE ? AND done = ?`,
       [`%${type}%`, 0]
     );
 
