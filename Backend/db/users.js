@@ -146,8 +146,8 @@ const deleteUser = async (idUser) => {
 
     console.log(user);
 
-    if (user[0].active === 0) {
-      throw generateError("Usuario ya eliminado", 404);
+    if(user.length === 0){
+      throw generateError("User already deleted", 404)
     }
 
     await connection.query(`UPDATE users SET active = 0 WHERE id = ?`, [

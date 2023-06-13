@@ -158,7 +158,6 @@ const deleteComment = async (id_s, id_c) => {
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
 
-
     const [getCommentByID_s] = await connection.query(
       `SELECT * FROM comments WHERE services_id = ? AND id = ?`,
       [id_s, id_c]
@@ -187,6 +186,33 @@ const deleteComment = async (id_s, id_c) => {
     }
 
     return deletedComment;
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+const deleteService = async (id) => {
+  let connection;
+  try {
+    connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
+    const [service] = await connection.query(
+      `SELECT * FROM services WHERE id = ?`,
+      [id]
+    );
+
+    if (service.length === 0) {
+      throw generateError("No hay ningun servicio con esa ID", 404);
+    }
+
+    const [deletedService] = await connection.query(
+      `DELETE FROM services WHERE id = ?`,
+      [id]
+    );
+
+    console.log(deletedService);
+    return deletedService;
   } finally {
     if (connection) connection.release();
   }
@@ -222,4 +248,5 @@ module.exports = {
   createComment,
   deleteComment,
   getAllCommentsFromService,
+  deleteService,
 };

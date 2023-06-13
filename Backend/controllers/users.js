@@ -108,10 +108,6 @@ const deleteUserController = async (req, res, next) => {
     const admin = req.admin;
     const id = req.userId;
 
-    console.log("id_params: ", id_params);
-    console.log("admin: ", admin);
-    console.log("id: ", id);
-
     if (id_params === id || admin) {
       await deleteUser(id_params);
     } else {
