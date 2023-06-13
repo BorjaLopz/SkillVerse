@@ -19,12 +19,13 @@ async function Http({ method = 'GET', url, token, body }) {
 
   if (body) {
     config.body = JSON.stringify(body)
+    console.log(body);
   }
 
   try {
-    console.log(fullURL.href);
     const res = await fetch(fullURL.href, config)
     const data = await res.json()
+    console.log(data);
     if (!res.ok) throw data.error
 
     return { data, loading: false, error: null }
