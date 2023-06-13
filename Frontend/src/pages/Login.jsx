@@ -12,7 +12,7 @@ function Login() {
     const form = e.target;
     const credentials = Object.fromEntries(new FormData(form));
     const { data } = await post({ url: "/user/login", body: credentials });
-    //if (data) return navigate("/");
+    if (data) return navigate("/");
   };
 
   return (
