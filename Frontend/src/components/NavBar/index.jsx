@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import HeaderAvatar from "";
+// import HeaderAvatar from "";
 
 function NavBar() {
   return (
@@ -11,7 +11,7 @@ function NavBar() {
       <NavLink to="/signup">Sing Up</NavLink> {" | "}
       <NavLink to="/login">Login</NavLink> {" | "}
       <NavLink to="/profile">Profile</NavLink> {" | "}
-      <HeaderAvatar />
+      {/* <HeaderAvatar /> */}
     </nav>
   );
 }

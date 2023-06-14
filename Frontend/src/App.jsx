@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 import "./App.css";
 
-import Header from "./components/Header.jsx";
+// import Header from "./components/Header.jsx";
 import PrivateRoutes from "./components/PrivateRoutes.jsx";
 
 import Home from "./pages/Home.jsx";
@@ -21,7 +21,7 @@ import NewService from "./pages/NewService.jsx";
 function App() {
   return (
     <BrowserRouter>
-      <Header user={user} />
+      {/* <Header user={user} /> */}
       <Toaster position="top-right" />
       <Routes>
         <Route path="/" element={<Home />} />
