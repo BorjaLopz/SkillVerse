@@ -144,12 +144,13 @@ const deleteUser = async (idUser) => {
       [idUser, 1]
     );
 
-    if(user[0].admin) {
-      throw generateError("You can not delete an admin", 401)
-    }
-
+    
     if(user.length === 0){
       throw generateError("User already deleted", 404)
+    }
+    
+    if(user[0].admin) {
+      throw generateError("You can not delete an admin", 401)
     }
 
     await connection.query(`UPDATE users SET active = 0 WHERE id = ?`, [
