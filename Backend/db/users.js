@@ -46,14 +46,14 @@ const createUser = async (
       );
     }
 
-    //Encriptar la contraseña
-    const passwordHash = await bcrypt.hash(password, 10);
+    // //Encriptar la contraseña
+    // const passwordHash = await bcrypt.hash(password, 10);
 
     //Crear usuario en la BBDD
     const [newUser] = await connection.query(
       `
     INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [email, nickname, name, surname, passwordHash, biography, userPhoto]
+      [email, nickname, name, surname, password, biography, userPhoto]
     );
 
     //Devolver el ID
@@ -91,16 +91,21 @@ const getAllFieldsExceptPassword = async (id) => {
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
 
-    const table_tmp = await connection.query(`
-    DROP VIEW IF EXISTS user_tmp`);
-    const table_tmp_2 = await connection.query(
-      `CREATE VIEW user_tmp AS
-    SELECT id, email, nickname, name, surname, biography, userPhoto
-    FROM users`
-    );
+    // const table_tmp = await connection.query(`
+    // DROP VIEW IF EXISTS user_tmp`);
+    // const table_tmp_2 = await connection.query(
+    //   `CREATE VIEW user_tmp AS
+    // SELECT id, email, nickname, name, surname, biography, userPhoto
+    // FROM users`
+    // );
+    // const [table_tmp_3] = await connection.query(
+    //   `SELECT * FROM user_tmp WHERE id = ? `,
+    //   id
+    // );
+
     const [table_tmp_3] = await connection.query(
-      `SELECT * FROM user_tmp WHERE id = ? `,
-      id
+      `SELECT * FROM users WHERE id = ?`,
+      [id]
     );
 
     if (table_tmp_3.length === 0) {
@@ -123,8 +128,8 @@ const editUser = async (tmp_user) => {
     await connection.query(`USE ${DB_DATABASE}`);
 
     const [result] = await connection.query(
-      `UPDATE users SET email = ?, nickname = ?, name = ?, surname = ?, biography = ?, userPhoto = ? WHERE id = ?;`,
-      [email, nickname, name, surname, biography, userPhoto, id]
+      `UPDATE users SET email = ?, nickname = ?, name = ?, surname = ?, password = ?, biography = ?, userPhoto = ? WHERE id = ?;`,
+      [email, nickname, name, surname, password, biography, userPhoto, id]
     );
 
     return result;

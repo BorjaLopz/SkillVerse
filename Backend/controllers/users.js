@@ -33,9 +33,12 @@ const newUserController = async (req, res, next) => {
     const defaultAvatar = "../Frontend/public/images/default_avatar.png";
     const avatar = userPhoto || defaultAvatar;
 
+    //Encriptar la contraseña
+    const passwordHash = await bcrypt.hash(password, 10);
+
     const id = await createUser(
       email,
-      password,
+      passwordHash,
       nickname,
       name,
       surname,
@@ -223,7 +226,9 @@ const editUserController = async (req, res, next) => {
     }
     if (password != user.password) {
       //Aquí tendremos que hacer un check para comprobar que la contraseña que introduce es igual a la antigua
-      user.password = password;
+      //Encriptar la contraseña
+      const passwordHash = await bcrypt.hash(password, 10);
+      user.password = passwordHash;
     }
     if (biography != user.biography) {
       user.biography = biography;

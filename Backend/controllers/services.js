@@ -189,16 +189,8 @@ const commentsFileController = async (req, res, next) => {
     const { comments } = req.body;
     const { id } = req.params;
 
-    // console.log("id: ", id);
-
     //Comprobamos si el servicio existe en la base de datos
     await getServiceByID(id);
-
-    // console.log(service);
-
-    // if (!service) {
-    //   throw generateError(`No existe un servicio con id ${id}`, 400);
-    // }
 
     //Comprobar título
     if (!comments) {
@@ -384,9 +376,15 @@ const deleteServiceController = async (req, res, next) => {
     const admin = req.admin;
 
     let message;
+    let serviceOwnerId;
+    const service = await getServiceByID(id_service);
 
-    if (admin || id_service === id) {
-      
+    if (service) {
+      serviceOwnerId = service.user_id;
+    }
+
+
+    if (admin || serviceOwnerId === id) {
       //Tenemos que comprobar si tiene comentarios para poder borrarlos primero
       await deleteAllCommentsFromService(id_service);
 

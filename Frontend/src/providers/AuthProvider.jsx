@@ -8,8 +8,6 @@ function AuthProvider({ children }) {
     JSON.parse(localStorage.getItem(localStorageKey)) || {}
   );
 
-  console.log(localStorageKey);
-
   const setUserHandler = (newUser = {}) => {
     if (Object.keys(newUser).length === 0) return;
 
