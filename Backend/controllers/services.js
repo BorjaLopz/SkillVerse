@@ -11,6 +11,7 @@ const {
   deleteComment,
   getAllCommentsFromService,
   deleteService,
+  deleteAllCommentsFromService,
 } = require("../db/services");
 const {
   generateError,
@@ -187,6 +188,17 @@ const commentsFileController = async (req, res, next) => {
   try {
     const { comments } = req.body;
     const { id } = req.params;
+
+    // console.log("id: ", id);
+
+    //Comprobamos si el servicio existe en la base de datos
+    await getServiceByID(id);
+
+    // console.log(service);
+
+    // if (!service) {
+    //   throw generateError(`No existe un servicio con id ${id}`, 400);
+    // }
 
     //Comprobar título
     if (!comments) {
@@ -371,13 +383,12 @@ const deleteServiceController = async (req, res, next) => {
     const id = req.userId;
     const admin = req.admin;
 
-    console.log("id_service: ", id_service);
-    console.log("id: ", id);
-    console.log("admin: ", admin);
-
     let message;
 
     if (admin || id_service === id) {
+      //Tenemos que comprobar si tiene comentarios para poder borrarlos primero
+      await deleteAllCommentsFromService(id_service);
+
       message = await deleteService(id_service);
     } else {
       throw generateError("You can not delete another user service", 401);
