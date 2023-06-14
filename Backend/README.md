@@ -10,6 +10,7 @@ npm install
 ```
 ## Base de datos
 * Es necesario tener previamente configurado el archivo .env.
+* Recomendamos crear la base de datos vacía (se crea un usuario admin por defecto id:1) y realizar las pruebas con Postman creando un usuario que tomará el id:2 y es el que se usa de ejemplo en las peticiones HTTP.
 * Para crear la base de datos con las tablas vacías:
 ```
 node db/initDB
