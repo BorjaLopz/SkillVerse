@@ -108,17 +108,17 @@ const deleteUserController = async (req, res, next) => {
     const admin = req.admin;
     const id = req.userId;
 
-    let idUserDeleted;
+    let userNickname;
 
     if (id_params === id || admin) {
-      idUserDeleted = await deleteUser(id_params);
+      userNickname = await deleteUser(id_params);
     } else {
       throw generateError("No puedes borrar otro usuario", 401);
     }
 
     res.send({
       status: "ok",
-      message: `User ${idUserDeleted} deleted`,
+      message: `User ${userNickname} deleted`,
     });
   } catch (error) {
     next(error);

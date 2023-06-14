@@ -386,6 +386,7 @@ const deleteServiceController = async (req, res, next) => {
     let message;
 
     if (admin || id_service === id) {
+      
       //Tenemos que comprobar si tiene comentarios para poder borrarlos primero
       await deleteAllCommentsFromService(id_service);
 
