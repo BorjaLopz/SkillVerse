@@ -84,7 +84,7 @@ app.get("/service", checkHeaders, getAllServicesController);
 app.delete("/service/:id/delete", authUser, deleteServiceController);
 
 //Modificar el estado de determinado servicio
-app.patch("/service/:id/:status", updateServiceStatusByIDController);
+app.patch("/service/:id/:status", authUser, updateServiceStatusByIDController);
 
 //Obtener servicios en funcion de su tipo
 app.get("/service/type/(:type)?", authUser, getServiceByTypeController);
