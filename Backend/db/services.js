@@ -44,9 +44,12 @@ const getServiceByID = async (id) => {
       [id]
     );
 
-    if (result.length === 0) {
-      throw generateError("No hay ningun servicio con ese ID", 400);
+    if (!result.length) {
+      throw generateError(`No hay ningun servicio con id ${id}`, 400);
     }
+
+    // console.log(result);
+
     return result[0];
   } finally {
     if (connection) connection.release();
@@ -239,6 +242,24 @@ const getAllCommentsFromService = async (id) => {
   }
 };
 
+const deleteAllCommentsFromService = async (id) => {
+  let connection;
+
+  try {
+    connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
+    const [commentsDeleted] = await connection.query(
+      `DELETE FROM comments WHERE services_id = ?;`,
+      [id]
+    );
+
+    return commentsDeleted;
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 module.exports = {
   createService,
   getServiceByID,
@@ -249,4 +270,5 @@ module.exports = {
   deleteComment,
   getAllCommentsFromService,
   deleteService,
+  deleteAllCommentsFromService,
 };
