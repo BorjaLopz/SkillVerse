@@ -34,6 +34,8 @@ const EditProfile = ({ id, admin }) => {
       });
 
       console.log(response.data);
+      //actualizar el estado con los datos recibidos del servidor
+      setFormData(response.data);
       // Establecer un mensaje de éxito en el estado del componente
       setSuccessMessage('Profile updated successfully!');
     } catch (error) {
