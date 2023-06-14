@@ -48,8 +48,6 @@ const getServiceByID = async (id) => {
       throw generateError(`No hay ningun servicio con id ${id}`, 400);
     }
 
-    // console.log(result);
-
     return result[0];
   } finally {
     if (connection) connection.release();
@@ -214,7 +212,6 @@ const deleteService = async (id) => {
       [id]
     );
 
-    console.log(deletedService);
     return deletedService;
   } finally {
     if (connection) connection.release();

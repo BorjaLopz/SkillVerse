@@ -1,38 +1,35 @@
-import { api_url } from '../config.js'
+import { api_url } from "../config.js";
 
-async function Http({ method = 'GET', url, token, body }) {
-  if (!url.startsWith('/')) throw new Error('La URL debe comenzar con un /')
+async function Http({ method = "GET", url, token, body }) {
+  if (!url.startsWith("/")) throw new Error("La URL debe comenzar con un /");
 
-  const fullURL = new URL(api_url + url)
+  const fullURL = new URL(api_url + url);
   const config = {
     method,
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  }
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  };
 
   if (token) {
     // config.headers.Authorization = token
-    config.headers.Authorization = `Bearer ${token}`
+    config.headers.Authorization = `Bearer ${token}`;
   }
 
   if (body) {
-    config.body = JSON.stringify(body)
-    console.log(body);
+    config.body = JSON.stringify(body);
   }
 
   try {
-    const res = await fetch(fullURL.href, config)
-    const data = await res.json()
-    console.log(data);
-    if (!res.ok) throw data.error
+    const res = await fetch(fullURL.href, config);
+    const data = await res.json();
+    if (!res.ok) throw data.error;
 
-    return { data, loading: false, error: null }
-    
+    return { data, loading: false, error: null };
   } catch (error) {
-    return { data: null, loading: false, error }
+    return { data: null, loading: false, error };
   }
 }
 
-export default Http
+export default Http;
