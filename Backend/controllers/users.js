@@ -54,6 +54,12 @@ const newUserController = async (req, res, next) => {
 
 const loginController = async (req, res, next) => {
   try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      throw generateError("Debes introducir email y contraseña", 400);
+    }
+
     //utilizamos validador de JOI
     const schema = Joi.object({
       email: Joi.string().email().required(),
@@ -62,12 +68,6 @@ const loginController = async (req, res, next) => {
     const { error } = schema.validate(req.body);
     if (error) {
       throw generateError(error.details.message, 400);
-    }
-
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-      throw generateError("Debes introducir email y contraseña", 400);
     }
 
     //recojo los datos de la base de datos del usuario con ese mail
