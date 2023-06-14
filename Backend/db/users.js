@@ -138,26 +138,27 @@ const deleteUser = async (idUser) => {
   try {
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
-    
+
     const [user] = await connection.query(
       `SELECT id, nickname, active, admin FROM users WHERE id = ? AND active = ?`,
       [idUser, 1]
     );
 
-    
-    if(user.length === 0){
-      throw generateError("User already deleted", 404)
+    console.log(user);
+
+    if (user.length === 0) {
+      throw generateError("User already deleted", 404);
     }
-    
-    if(user[0].admin) {
-      throw generateError("You can not delete an admin", 401)
+
+    if (user[0].admin) {
+      throw generateError("You can not delete an admin", 401);
     }
 
     await connection.query(`UPDATE users SET active = 0 WHERE id = ?`, [
       idUser,
     ]);
 
-    return idUser;
+    return user[0].nickname;
   } finally {
     if (connection) connection.release();
   }
