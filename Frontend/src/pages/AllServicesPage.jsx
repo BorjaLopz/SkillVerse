@@ -6,7 +6,7 @@ import SearchBar from "../components/SearchBar.jsx";
 import ServicesList from "../components/ServicesList.jsx";
 import Footer from "../components/Footer/index.jsx";
 
-function Services() {
+function AllServicesPage() {
   return (
     <>
       <Header />
@@ -21,4 +21,4 @@ function Services() {
   );
 }
 
-export default Services;
+export default AllServicesPage;

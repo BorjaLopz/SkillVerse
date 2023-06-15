@@ -4,7 +4,7 @@ import SearchBar from "../components/SearchBar";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 
-function Home() {
+function HomePage() {
   return (
     <>
       <Header />
@@ -16,4 +16,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default HomePage;
