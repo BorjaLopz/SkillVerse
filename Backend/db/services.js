@@ -102,7 +102,7 @@ const updateServiceStatus = async (id, serviceValue) => {
   }
 };
 
-const getServiceByType = async (type) => {
+const getServiceByType = async (type, id) => {
   let connection;
 
   try {
@@ -110,8 +110,8 @@ const getServiceByType = async (type) => {
     await connection.query(`USE ${DB_DATABASE}`);
 
     const [result] = await connection.query(
-      `SELECT * FROM services WHERE service_type LIKE ? AND done = ?`,
-      [`%${type}%`, 0]
+      `SELECT * FROM services WHERE service_type LIKE ? AND done = ? AND user_id != ?`,
+      [`%${type}%`, 0, id]
     );
 
     if (result.length === 0) {
