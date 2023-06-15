@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import useServer from "../hooks/useServer.js";
 
-function Login() {
+function SignUp() {
   const navigate = useNavigate();
   const { post } = useServer();
 
@@ -11,7 +11,7 @@ function Login() {
 
     const form = e.target;
     const credentials = Object.fromEntries(new FormData(form));
-    const { data } = await post({ url: "/user/login", body: credentials });
+    const { data } = await post({ url: "/user/register", body: credentials });
     if (data) return navigate("/");
   };
 
@@ -41,6 +41,22 @@ function Login() {
                   name="email"
                   type="email"
                   autoComplete="email"
+                  required
+                  className="input"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="nickname" className="label">
+                Nickname
+              </label>
+              <div className="mt-2">
+                <input
+                  id="nickname"
+                  name="nickname"
+                  type="text"
+                  autoComplete="nickname"
                   required
                   className="input"
                 />
@@ -86,7 +102,7 @@ function Login() {
               to="/signup"
               className="leading-6 font-semibold text-indigo-600 hover:text-indigo-500"
             >
-              Regístrate
+              <button>Regístrate</button>
             </Link>
           </p>
         </div>
@@ -95,4 +111,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignUp;

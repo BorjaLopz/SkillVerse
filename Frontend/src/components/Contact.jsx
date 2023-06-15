@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-const ContactPage = () => {
+const Contact = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -75,4 +75,4 @@ const ContactPage = () => {
   );
 };
 
-export default ContactPage;
+export default Contact;

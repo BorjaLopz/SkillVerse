@@ -2,17 +2,17 @@ import React from "react";
 import PageTitle from "../components/PageTitle";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import ContactPage from "../components/ContactPage";
+import SignUp from "../components/SignUp";
 
-function Contact() {
+function SignUpPage() {
   return (
     <>
       <Header />
       <PageTitle />
-      <ContactPage />
+      <SignUp />
       <Footer />
     </>
   );
 }
 
-export default Contact;
+export default SignUpPage;
