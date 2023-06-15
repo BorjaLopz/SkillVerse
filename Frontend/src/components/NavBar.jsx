@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import HomeButton from "../HomeButton";
+import HomeButton from "./HomeButton";
 // import HeaderAvatar from "";
 
 function NavBar() {

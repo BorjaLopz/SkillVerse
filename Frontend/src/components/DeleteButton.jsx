@@ -3,7 +3,7 @@ import React from "react";
 const DeleteButton = () => {
   return (
     <div>
-      <button className="delete_button">Delete account</button>
+      <button className="delete_button">Delete</button>
     </div>
   );
 };
