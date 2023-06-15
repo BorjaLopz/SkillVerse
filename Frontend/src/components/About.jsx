@@ -4,7 +4,6 @@ function About() {
   return (
     <>
       <div>
-        <h1 className="text-3xl font-bold underline">About</h1>
         <h2>Bienvenid@s a Portal Digital</h2>
         <p>
           ¿Necesitas ayuda con un proyecto digital? ¡Estás en el lugar correcto!
