@@ -149,9 +149,6 @@ const updateServiceStatusByIDController = async (req, res, next) => {
     const { id, status } = req.params;
     const admin = req.admin;
 
-    console.log("admin: ", admin);
-    console.log("id: ", id);
-
     //Comprobar si el estado es válido
     if (!Object.values(SERVICE_STATUS).includes(status.toUpperCase())) {
       throw generateError("Invalid status", 401);
@@ -159,8 +156,6 @@ const updateServiceStatusByIDController = async (req, res, next) => {
 
     //Comprobamos si el servicio existe en la base de datos
     const serviceRequested = await getServiceByID(id);
-
-    console.log("serviceRequested.user_id: ", serviceRequested.user_id);
 
     //Comprobamos si somos admin o somos el propietario del servicio
     if (!admin && id !== serviceRequested.user_id) {
