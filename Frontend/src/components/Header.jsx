@@ -9,6 +9,7 @@
 //   const { token, setToken } = useUserTokenContext();
 
 //   return (
+    
 //     <header className="header">
 //       <Link to="/">
 //         <h1>Freelance Services Platform</h1>
@@ -60,6 +61,7 @@
 //         </ul>
 //       </nav>
 //     </header>
+    
 //   );
 // };
 
