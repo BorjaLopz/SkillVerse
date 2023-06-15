@@ -21,7 +21,8 @@ import NotFoundPage from "./pages/NotFoundPage.jsx";
 import Footer from "./components/Footer/index.jsx";
 
 function App() {
-  return <>
+  return (
+    <>
       {/* <ServicesList /> */}
       {/* <Header user={user} /> */}
       <Toaster position="top-right" />
