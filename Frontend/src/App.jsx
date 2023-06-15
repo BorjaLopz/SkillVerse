@@ -16,11 +16,11 @@ import ResPas from "./pages/ResetPasword.jsx";
 import Footer from "./components/Footer/index.jsx";
 import ContactPage from "./pages/Contact.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
-// import NewService from "./pages/NewService.jsx";
+//import NewService from "./pages/NewService.jsx";
 
 function App() {
-  return (
-    <BrowserRouter>
+  return <>
+
       {/* <Header user={user} /> */}
       <Toaster position="top-right" />
       <Routes>
@@ -39,8 +39,8 @@ function App() {
         </Route>
       </Routes>
       <Footer />
-    </BrowserRouter>
-  );
+
+  </>;
 }
 
 export default App;
