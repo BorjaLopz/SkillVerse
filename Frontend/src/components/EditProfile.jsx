@@ -58,6 +58,7 @@ const EditProfile = ({ id, admin }) => {
   
   
   return (
+    <>
     <div>
       <h2>Edit Profile</h2>
       <form onSubmit={handleSubmit}>
@@ -134,7 +135,8 @@ const EditProfile = ({ id, admin }) => {
       </form>
        {successMessage && <p>{successMessage}</p>}
       {renderAdminContent()}
-    </div>
+      </div>
+      </>
   );
 };
 

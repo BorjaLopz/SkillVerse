@@ -43,6 +43,7 @@ const AddService = () => {
   };
 
   return (
+    <>
     <div>
       <h2>Add Service</h2>
       <form onSubmit={handleSubmit}>
@@ -75,7 +76,8 @@ const AddService = () => {
         </div>
         <button type="submit">Save</button>
       </form>
-    </div>
+      </div>
+      </>
   );
 };
 
