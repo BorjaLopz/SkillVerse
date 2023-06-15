@@ -390,7 +390,10 @@ const deleteServiceController = async (req, res, next) => {
 
       message = await deleteService(id_service);
     } else {
-      throw generateError("You can not delete another user service", 401);
+      throw generateError(
+        "No puedes borrar los servicios creados por otro usuario",
+        401
+      );
     }
 
     return res.send({

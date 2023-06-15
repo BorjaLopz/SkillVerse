@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 // import "./style.css";
 
 const Footer = () => {
@@ -6,8 +7,23 @@ const Footer = () => {
     <footer>
       <div>
         <p>
-          Ana Belén Bernárdez Martínez, Francisco Espárraga Álvarez, Mónica
-          Irimia Villarmea y Borja López Díaz para HACK A BOSS en 2023
+          <Link to="https://www.linkedin.com/in/anabelenbernardez/">
+            Ana Belén Bernárdez Martínez
+          </Link>
+          ,{" "}
+          <Link to="https://www.linkedin.com/in/fesparal/">
+            Francisco Espárraga Álvarez
+          </Link>
+          ,{" "}
+          <Link to="https://www.linkedin.com/in/monica-irimia/">
+            Mónica Irimia Villarmea
+          </Link>
+          , y{" "}
+          <Link to="https://www.linkedin.com/in/borjalopezdiaz/">
+            Borja López Díaz
+          </Link>{" "}
+          para
+          <Link to="https://www.hackaboss.com/">Hack A Boss</Link> en 2023
         </p>
       </div>
     </footer>

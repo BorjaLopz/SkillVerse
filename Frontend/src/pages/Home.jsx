@@ -1,11 +1,15 @@
-import React from "react"
+import React from "react";
+import PageTitle from "../components/PageTitle";
+import SearchBar from "../components/SearchBar";
 
 function Home() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Home</h1>
+      <PageTitle />
+      <SearchBar />
+      {/* <div>Contenido de la página, logo, fotos, etc</div> */}
     </>
   );
 }
 
-export default Home
+export default Home;

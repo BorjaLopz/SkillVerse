@@ -204,7 +204,7 @@ const deleteService = async (id) => {
     );
 
     if (service.length === 0) {
-      throw generateError("No hay ningun servicio con esa ID", 404);
+      throw generateError("No hay ningún servicio con ese ID", 404);
     }
 
     const [deletedService] = await connection.query(
