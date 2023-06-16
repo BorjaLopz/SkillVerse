@@ -76,7 +76,8 @@ const AddService = () => {
         </div>
         <button type="submit">Save</button>
       </form>
-    </div>
+      </div>
+      </>
   );
 };
 

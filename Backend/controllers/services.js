@@ -147,10 +147,22 @@ const updateServiceStatusByIDController = async (req, res, next) => {
   try {
     //Obtener el ID del servicio y del estado
     const { id, status } = req.params;
+    const admin = req.admin;
 
     //Comprobar si el estado es válido
     if (!Object.values(SERVICE_STATUS).includes(status.toUpperCase())) {
       throw generateError("Invalid status", 401);
+    }
+
+    //Comprobamos si el servicio existe en la base de datos
+    const serviceRequested = await getServiceByID(id);
+
+    //Comprobamos si somos admin o somos el propietario del servicio
+    if (!admin && id !== serviceRequested.user_id) {
+      throw generateError(
+        "No puedes cambiar el estado del servicio de otros usuarios.",
+        401
+      );
     }
 
     //Obtener el valor de la key (done: 1 o undone: 2) según el status que se le pase al endpoint
@@ -172,8 +184,9 @@ const updateServiceStatusByIDController = async (req, res, next) => {
 const getServiceByTypeController = async (req, res, next) => {
   try {
     const { type } = req.params;
+    const id = req.userId;
 
-    const service = await getServiceByType(type);
+    const service = await getServiceByType(type, id);
 
     res.send({
       status: "ok",
@@ -321,7 +334,8 @@ const deleteCommentsController = async (req, res, next) => {
       //Si el servicio tiene comentarios, comprobamos si el usuario es el autor del servicio o admin
       if (
         admin ||
-        (service.user_id === id && firstCommentOfUserInService != -1)
+        service.user_id === id ||
+        firstCommentOfUserInService !== -1
       ) {
         await deleteComment(id_s, id_c);
         return res.send({
@@ -382,7 +396,6 @@ const deleteServiceController = async (req, res, next) => {
     if (service) {
       serviceOwnerId = service.user_id;
     }
-
 
     if (admin || serviceOwnerId === id) {
       //Tenemos que comprobar si tiene comentarios para poder borrarlos primero

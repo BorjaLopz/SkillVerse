@@ -132,7 +132,8 @@ const EditProfile = ({ id, admin }) => {
       </form>
       {successMessage && <p>{successMessage}</p>}
       {renderAdminContent()}
-    </div>
+      </div>
+      </>
   );
 };
 
