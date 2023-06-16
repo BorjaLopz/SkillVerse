@@ -23,7 +23,7 @@ const Footer = () => {
             Borja López Díaz
           </Link>{" "}
           para
-          <Link to="https://www.hackaboss.com/">Hack A Boss</Link> en 2023
+          <Link to="https://www.hackaboss.com/"> Hack A Boss</Link> en 2023
         </p>
       </div>
     </footer>

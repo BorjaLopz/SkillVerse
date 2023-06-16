@@ -17,7 +17,7 @@ import SignUpPage from "./pages/SignUpPage.jsx";
 import ResPas from "./pages/ResetPasword.jsx";
 import ContactPage from "./pages/ContactPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
-//import AddService from "./pages/AddService.jsx";
+import AddService from "./pages/AddService.jsx";
 import Footer from "./components/Footer/index.jsx";
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
 
         <Route element={<PrivateRoutes />}>
           <Route path="/profile" element={<ProfilePage />} />
-          {/* <Route path="/addService" element={<AddService />} /> */}
+          <Route path="/addService" element={<AddService />} />
         </Route>
       </Routes>
       <Footer />

@@ -8,7 +8,7 @@ function useServer() {
   const { token, setUser } = useAuth()
 
   const handleResponse = ({ data, loading, error }) => {
-    // console.log(data);
+    console.log(data);
     if (data?.data) {
       const user = jwt_decode(data.data);
       setUser({ user, token: data.data });
