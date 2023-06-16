@@ -18,8 +18,6 @@ import ContactPage from "./pages/ContactPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 //import AddService from "./pages/AddService.jsx";
 import Footer from "./components/Footer/index.jsx";
-import Loading from "./components/Loading";
-import ErrorMessage from "./components/ErrorMessage/index";
 
 function App() {
   return (
