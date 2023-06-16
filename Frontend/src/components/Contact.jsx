@@ -32,7 +32,7 @@ const Contact = () => {
   };
 
   return (
-    <div>
+    <div className="contact_form">
       <h1>Contacto</h1>
       <p>Utiliza el siguiente formulario para contactarnos:</p>
       <form onSubmit={handleSubmit}>

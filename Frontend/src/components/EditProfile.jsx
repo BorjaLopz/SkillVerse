@@ -1,25 +1,25 @@
-import{ useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "axios";
 
 //el error que da id y admin pone que es porque no tenemos instalado el paquete prop-types para definir la validacion de las props
 //veo que tambien pasa en otros componentes asi que esto hay que mirarlo
 const EditProfile = ({ id, admin }) => {
   const [formData, setFormData] = useState({
-    email: '',
-    userPhoto: '',
-    nickname: '',
-    name: '',
-    surname: '',
-    password: '',
-    biography: ''
+    email: "",
+    userPhoto: "",
+    nickname: "",
+    name: "",
+    surname: "",
+    password: "",
+    biography: "",
   });
 
-  const [successMessage, setSuccessMessage] = useState(''); 
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const handleChange =  (event) => {
+  const handleChange = (event) => {
     setFormData({
       ...formData,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
   };
 
@@ -29,36 +29,34 @@ const EditProfile = ({ id, admin }) => {
     try {
       const response = await axios.put(`/user/${id}/edit`, formData, {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
 
       console.log(response.data);
       //actualizar el estado con los datos recibidos del servidor
       setFormData(response.data);
       // Establecer un mensaje de éxito en el estado del componente
-      setSuccessMessage('Profile updated successfully!');
+      setSuccessMessage("Profile updated successfully!");
     } catch (error) {
       console.error(error);
-      //  manejar el error 
+      //  manejar el error
       if (error.response && error.response.status === 401) {
         // Redireccionar al usuario a la página de inicio de sesión
-        window.location.href = '/login';
+        window.location.href = "/login";
       }
     }
   };
 
-    const renderAdminContent = () => {
+  const renderAdminContent = () => {
     if (admin) {
       return <div>Additional content for administrators</div>;
     }
     return null;
   };
 
-  
-  
   return (
-    <div>
+    <div className="edit_profile">
       <h2>Edit Profile</h2>
       <form onSubmit={handleSubmit}>
         <label>
@@ -130,9 +128,9 @@ const EditProfile = ({ id, admin }) => {
           />
         </label>
         <br />
-        <button type="submit">Save Changes</button>   
+        <button type="submit">Save Changes</button>
       </form>
-       {successMessage && <p>{successMessage}</p>}
+      {successMessage && <p>{successMessage}</p>}
       {renderAdminContent()}
     </div>
   );
