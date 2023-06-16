@@ -60,11 +60,14 @@ const newServiceController = async (req, res, next) => {
     let fileName;
     let uploadPath;
 
-    if (req.files && req.files.file) {
+    if (req.files?.file) {
       let sampleFile = req.files.file;
+
+      console.log("estamos aqui!")
 
       //Crear el path
       const uploadDir = path.join(__dirname, "../uploads");
+      console.log(uploadDir)
 
       //Crear directorio si no existe
       await createPathIfNotExists(uploadDir);
@@ -89,6 +92,9 @@ const newServiceController = async (req, res, next) => {
           throw generateError("No se pudo enviar el archivo", 400);
         }
       });
+    }
+    else {
+      console.log("req.files es ", req.files?.file)
     }
 
     const id_services = await createService(
