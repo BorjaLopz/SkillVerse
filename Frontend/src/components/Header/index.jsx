@@ -2,7 +2,11 @@ import NavBar from ".";
 // import "style.css";
 
 function Header() {
-  return <NavBar />;
+  return (
+    <header>
+      <NavBar />
+    </header>
+  );
 }
 
 export default Header;
