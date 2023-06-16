@@ -1,10 +1,9 @@
-
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const AddService = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [requiredType, setRequiredType] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [requiredType, setRequiredType] = useState("");
   const [file, setFile] = useState(null);
 
   const handleSubmit = async (event) => {
@@ -12,39 +11,37 @@ const AddService = () => {
 
     try {
       const formData = new FormData();
-      formData.append('title', title);
-      formData.append('request_body', description);
-      formData.append('required_type', requiredType);
-      formData.append('file', file);
+      formData.append("title", title);
+      formData.append("request_body", description);
+      formData.append("required_type", requiredType);
+      formData.append("file", file);
 
-      const response = await fetch('/service/add', {
-        method: 'POST',
+      const response = await fetch("/service/add", {
+        method: "POST",
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
         body: formData,
       });
 
       if (response.ok) {
         const data = await response.json();
-          console.log(data);
-          
+        console.log(data);
       } else {
-        throw new Error('Error adding the service');
+        throw new Error("Error adding the service");
       }
 
-      setTitle('');
-      setDescription('');
-      setRequiredType('');
+      setTitle("");
+      setDescription("");
+      setRequiredType("");
       setFile(null);
     } catch (error) {
-      console.error('Error sending the new service:', error);
+      console.error("Error sending the new service:", error);
     }
   };
 
   return (
-    <>
-    <div>
+    <div className="add_service">
       <h2>Add Service</h2>
       <form onSubmit={handleSubmit}>
         <div>
@@ -72,7 +69,10 @@ const AddService = () => {
         </div>
         <div>
           <label>File:</label>
-          <input type="file" onChange={(event) => setFile(event.target.files[0])} />
+          <input
+            type="file"
+            onChange={(event) => setFile(event.target.files[0])}
+          />
         </div>
         <button type="submit">Save</button>
       </form>
@@ -82,4 +82,3 @@ const AddService = () => {
 };
 
 export default AddService;
-

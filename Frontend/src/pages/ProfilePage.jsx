@@ -7,10 +7,8 @@ import Profile from "../components/Profile";
 function ProfilePage() {
   return (
     <>
-      <Header />
       <PageTitle />
       <Profile />
-      <Footer />
     </>
   );
 }
