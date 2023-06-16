@@ -56,6 +56,7 @@ const EditProfile = ({ id, admin }) => {
   };
 
   return (
+    <>
     <div className="edit_profile">
       <h2>Edit Profile</h2>
       <form onSubmit={handleSubmit}>
