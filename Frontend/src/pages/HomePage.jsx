@@ -3,11 +3,19 @@ import PageTitle from "../components/PageTitle";
 import SearchBar from "../components/SearchBar";
 
 function HomePage() {
+  if (loading)
+    return (
+      <p>
+        <Loading />
+      </p>
+    );
+  if (error) return <ErrorMessage message={error} />;
+
   return (
     <>
       <PageTitle />
       <SearchBar />
-      {/* <div>Contenido de la página, logo, fotos, etc</div> */}
+      {/* <section>Contenido de la página, logo, fotos, etc</section> */}
     </>
   );
 }

@@ -12,7 +12,7 @@ const Search = ({ onSearch, services }) => {
   };
 
   return (
-    <div>
+    <div className="search_bar">
       <select value={selectedService} onChange={handleSelectChange}>
         {services.map((service, index) => (
           <option key={index} value={service}>

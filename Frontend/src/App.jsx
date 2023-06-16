@@ -7,7 +7,6 @@ import "./App.css";
 // import Header from "./components/Header.jsx";
 import PrivateRoutes from "./components/PrivateRoutes.jsx";
 
-import Header from "./components/Header";
 import HomePage from "./pages/HomePage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -35,7 +34,6 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/passreset" element={<ResPas />} />
         <Route path="*" element={<NotFoundPage />} />
-
         <Route element={<PrivateRoutes />}>
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/addService" element={<AddService />} />

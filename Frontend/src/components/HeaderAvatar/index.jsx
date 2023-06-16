@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const HeaderAvatar = ({ user }) => {
   return (
-    <div>
+    <div className="headerAvatar">
       <Avatar avatar={user.picture} username={user.name} />
       <NavLink to="/profile">Profile</NavLink> {" | "}
     </div>

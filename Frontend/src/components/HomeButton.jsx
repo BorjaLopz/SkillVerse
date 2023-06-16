@@ -3,7 +3,10 @@ import { NavLink } from "react-router-dom";
 function HomeButton() {
   return (
     <nav>
-      <NavLink to="/">Home</NavLink> {" | "}
+      <NavLink className="home_button" to="/">
+        Home
+      </NavLink>{" "}
+      {" | "}
     </nav>
   );
 }
