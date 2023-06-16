@@ -1,7 +1,10 @@
-import "./style.css";
+import { Link } from "react-router-dom";
 
-const ErrorMessage = ({ error }) => {
-  return <p className="error_message">{error}</p>;
+export const ErrorMessage = ({ message }) => {
+  return (
+    <>
+      <p className="error_message">{message}</p>
+      <Link to="/">Volver a la página de inicio</Link>
+    </>
+  );
 };
-
-export default ErrorMessage;

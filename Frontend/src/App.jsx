@@ -7,7 +7,6 @@ import "./App.css";
 // import Header from "./components/Header.jsx";
 import PrivateRoutes from "./components/PrivateRoutes.jsx";
 
-import Header from "./components/Header";
 import HomePage from "./pages/HomePage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -19,6 +18,8 @@ import ContactPage from "./pages/ContactPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 //import AddService from "./pages/AddService.jsx";
 import Footer from "./components/Footer/index.jsx";
+import Loading from "./components/Loading";
+import ErrorMessage from "./components/ErrorMessage/index";
 
 function App() {
   return (
@@ -35,7 +36,6 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/passreset" element={<ResPas />} />
         <Route path="*" element={<NotFoundPage />} />
-
         <Route element={<PrivateRoutes />}>
           <Route path="/profile" element={<ProfilePage />} />
           {/* <Route path="/addService" element={<AddService />} /> */}
