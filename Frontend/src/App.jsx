@@ -18,10 +18,14 @@ import ContactPage from "./pages/ContactPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import AddService from "./pages/AddService.jsx";
 import Footer from "./components/Footer/index.jsx";
+//import CommentForm from "./components/CommentForm";
+//import CommentCard from "./components/CommentCard";
 
 function App() {
   return (
     <>
+      {/*<CommentForm onCommentSubmit={handleCommentSubmit}*/}
+      {/*<CommentCard key={index} comment={comment} />*/}
       {/* <ServicesList /> */}
       {/* <Header user={user} /> */}
       <Toaster position="top-right" />
@@ -39,6 +43,8 @@ function App() {
           <Route path="/addService" element={<AddService />} />
         </Route>
       </Routes>
+
+
       <Footer />
     </>
   );

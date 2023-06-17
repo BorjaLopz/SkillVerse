@@ -15,6 +15,8 @@ function ServicePage() {
         <div>Archivo del servicio (component)</div>
         <div>Comentarios del servicio (component commentCard)</div>
       </div>
+      <Footer />
+      <Header />
     </>
   );
 }

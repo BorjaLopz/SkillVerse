@@ -9,6 +9,8 @@ function ProfilePage() {
     <>
       <PageTitle />
       <Profile />
+      <Footer />
+      <Header />
     </>
   );
 }
