@@ -1,6 +1,6 @@
 import "./avatar.css";
-// import { avatarURL } from "../../api";
 
+//getUserPhoto desde backend
 const Avatar = ({ avatar, username }) => {
   // if (!avatar) avatar = "default_avatar.png";
 
