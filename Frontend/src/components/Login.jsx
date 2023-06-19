@@ -1,10 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import useServer from "../hooks/useServer.js";
+import { useState } from "react";
 
 function Login() {
   const navigate = useNavigate();
   const { post } = useServer();
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -13,6 +15,10 @@ function Login() {
     const credentials = Object.fromEntries(new FormData(form));
     const { data } = await post({ url: "/user/login", body: credentials });
     if (data) return navigate("/");
+  };
+
+  const togglePassword = () => {
+    setPasswordVisibility(!passwordVisibility);
   };
 
   return (
@@ -65,11 +71,13 @@ function Login() {
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={passwordVisibility ? "text" : "password"}
                   autoComplete="current-password"
                   required
                   className="input"
                 />
+                <input type="checkbox" onChange={togglePassword} />
+                {/* Conmutamos la visibilidad de la contraseña */}
               </div>
             </div>
 
