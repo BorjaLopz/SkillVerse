@@ -1,7 +1,14 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Joi = require("@hapi/joi");
-const { generateError } = require("../helpers");
+const path = require("path");
+const { nanoid } = require("nanoid");
+const {
+  generateError,
+  createPathIfNotExists,
+  getExtensionFile,
+  uploadFilesInFolder,
+} = require("../helpers");
 const {
   createUser,
   getUserByEmail,
@@ -198,8 +205,9 @@ const editUserController = async (req, res, next) => {
     }
 
     const [user] = await getAllFieldsExceptPassword(id_params);
-    let { email, userPhoto, nickname, name, surname, password, biography } =
-      req.body;
+    let { email, nickname, name, surname, password, biography } = req.body;
+
+    let userPhoto = await uploadFilesInFolder(req, "userPhoto", "user");
 
     email = email || user.email;
     userPhoto = userPhoto || user.userPhoto;

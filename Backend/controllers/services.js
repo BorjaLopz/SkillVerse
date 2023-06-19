@@ -22,6 +22,7 @@ const {
   getExtensionFile,
   checkIfExtensionIsAllowed,
   ALLOWED_EXTENSIONS,
+  uploadFilesInFolder,
 } = require("../helpers");
 
 const newServiceController = async (req, res, next) => {
@@ -56,46 +57,46 @@ const newServiceController = async (req, res, next) => {
       );
     }
 
-    //Tratar el fichero
-    let fileName;
-    let uploadPath;
+    // //Tratar el fichero
+    // let fileName;
+    // let uploadPath;
 
-    if (req.files?.file) {
-      let sampleFile = req.files.file;
+    // if (req.files?.file) {
+    //   let sampleFile = req.files.file;
 
-      console.log("estamos aqui!")
+    //   //Crear el path
+    //   const uploadDir = path.join(__dirname, "../uploads");
 
-      //Crear el path
-      const uploadDir = path.join(__dirname, "../uploads");
-      console.log(uploadDir)
+    //   //Crear directorio si no existe
+    //   await createPathIfNotExists(uploadDir);
 
-      //Crear directorio si no existe
-      await createPathIfNotExists(uploadDir);
+    //   //Comprobar si la extension es valida.
+    //   console.log(chalk.red(getExtensionFile(sampleFile.name)));
+    //   if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
+    //     throw generateError(
+    //       `Formato no válido. Tipos de formatos permitidos: ${ALLOWED_EXTENSIONS}`,
+    //       415
+    //     );
+    //   }
 
-      //Comprobar si la extension es valida.
-      console.log(chalk.red(getExtensionFile(sampleFile.name)));
-      if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
-        throw generateError(
-          `Formato no válido. Tipos de formatos permitidos: ${ALLOWED_EXTENSIONS}`,
-          415
-        );
-      }
+    //   //Obtener la extensión del fichero para guardarlo de la misma manera
+    //   fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`;
 
-      //Obtener la extensión del fichero para guardarlo de la misma manera
-      fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`;
+    //   uploadPath = uploadDir + "\\" + fileName;
 
-      uploadPath = uploadDir + "\\" + fileName;
+    //   //Subir el fichero
+    //   sampleFile.mv(uploadPath, function (e) {
+    //     if (e) {
+    //       throw generateError("No se pudo enviar el archivo", 400);
+    //     }
+    //   });
+    // }
+    // else {
+    //   console.log("req.files es ", req.files?.file)
+    // }
 
-      //Subir el fichero
-      sampleFile.mv(uploadPath, function (e) {
-        if (e) {
-          throw generateError("No se pudo enviar el archivo", 400);
-        }
-      });
-    }
-    else {
-      console.log("req.files es ", req.files?.file)
-    }
+    const fileName = await uploadFilesInFolder(req, "file", "service");
+    console.log("fileName: ", fileName);
 
     const id_services = await createService(
       title,
@@ -245,7 +246,7 @@ const commentsFileController = async (req, res, next) => {
 
     const id_comment = await createComment(comments, fileName, req.userId, id);
 
-    console.log(chalk.green("Comentario creado"));
+    // console.log(chalk.green("Comentario creado"));
     res.send({
       status: "ok",
       message: `Comment created with id ${id_comment}`,
