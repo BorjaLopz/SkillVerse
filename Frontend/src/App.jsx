@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 import "./App.css";
@@ -7,6 +7,7 @@ import "./App.css";
 // import Header from "./components/Header.jsx";
 import PrivateRoutes from "./components/PrivateRoutes.jsx";
 
+import Loading from "./components/Loading";
 import HomePage from "./pages/HomePage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -43,7 +44,6 @@ function App() {
           <Route path="/addService" element={<AddService />} />
         </Route>
       </Routes>
-
 
       <Footer />
     </>
