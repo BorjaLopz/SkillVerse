@@ -15,7 +15,6 @@ const AddService = () => {
     event.preventDefault();
 
     try {
-
       //#region //formData por implementar bien
       const formData = new FormData();
 
@@ -33,21 +32,22 @@ const AddService = () => {
         file,
       };
 
-      const { data } = await post({ url: "/service/add", body: currentService });
+      const { data } = await post({
+        url: "/service/add",
+        body: currentService,
+      });
 
-      if(data) {
+      if (data) {
         toast.success(`Servicio ${title} creado con exito`);
         setTitle("");
         setDescription("");
         setRequiredType("");
         setFile(null);
-      }
-      else
-      {
-        toast.error(`No se ha podido crear el servicio. Intentalo de nuevo`)
+      } else {
+        toast.error(`No se ha podido crear el servicio. Intentalo de nuevo`);
       }
 
-      // let object = localStorage.getItem("portalDigital");
+      // let object = localStorage.getItem("portaldigital");
       // const objectParsed = JSON.parse(object);
       // console.log(`${objectParsed.token}`);
 
@@ -67,8 +67,6 @@ const AddService = () => {
       // } else {
       //   throw new Error("Error adding the service");
       // }
-
-      
     } catch (error) {
       console.error("Error sending the new service:", error);
     }

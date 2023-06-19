@@ -1,4 +1,4 @@
 const api_url = "http://localhost:3000";
-const localStorageKey = "portalDigital";
+const localStorageKey = "portaldigital";
 
 export { api_url, localStorageKey };
