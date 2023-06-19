@@ -20,6 +20,7 @@ const authUser = (req, res, next) => {
       //Meter la información del token en la request para usarla en el controlador
       req.userId = token.id;
       req.admin = token.admin;
+      req.nickname = token.nickname;
 
       next();
     }

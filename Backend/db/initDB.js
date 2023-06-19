@@ -5,6 +5,10 @@ const { getConnection } = require("./db");
 const chalk = require("chalk");
 const { faker } = require("@faker-js/faker/locale/es");
 const bcrypt = require("bcrypt");
+const path = require("path");
+const fs = require("fs");
+
+const { removeFile } = require("../helpers");
 
 const addData = process.argv[2] === "--data";
 
@@ -24,6 +28,19 @@ const addAdmin = async (connection) => {
       true,
     ]
   );
+};
+
+const deleteFilesFromDirectory = async (pathFile) => {
+  const directoryPath = path.join(__dirname, pathFile);
+  fs.readdir(directoryPath, (e, files) => {
+    if (e) {
+      console.log("No se puede leer el directorio");
+    }
+    files.forEach(async (file) => {
+      const filePath = path.join(directoryPath, `/${file}`);
+      await removeFile(filePath);
+    });
+  });
 };
 
 async function main() {
@@ -55,7 +72,7 @@ async function main() {
       surname VARCHAR(60),
       password VARCHAR(100) NOT NULL CHECK (LENGTH(password) >= 8 AND password REGEXP '[A-Z]' AND password REGEXP '[a-z]' AND password REGEXP '[0-9]'),
       biography VARCHAR(600),
-      userPhoto VARCHAR(1000),
+      userPhoto VARCHAR(200),
       admin BOOLEAN DEFAULT FALSE,
       active BOOLEAN DEFAULT TRUE,
       linkedin VARCHAR(100) NULL CHECK (linkedin IS NULL OR linkedin REGEXP 'linkedin'),
@@ -69,7 +86,7 @@ async function main() {
       title VARCHAR(50) NOT NULL CHECK (LENGTH(title) >= 15),
       request_body VARCHAR(500) NOT NULL CHECK (LENGTH(request_body) >= 15),
       user_id INT NOT NULL,
-      file_name VARCHAR(30),
+      file_name VARCHAR(200),
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
       service_type VARCHAR(20) NOT NULL,
       done BOOLEAN DEFAULT FALSE,
@@ -96,6 +113,10 @@ async function main() {
 
     //Añadimos admin
     await addAdmin(connection);
+
+    //Borramos fotos de usuarios y archivos de los servicios
+    deleteFilesFromDirectory("../uploads");
+    deleteFilesFromDirectory("../../Frontend/public/fotosUsuario");
 
     if (addData) {
       const users = 20;

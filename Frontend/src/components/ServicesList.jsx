@@ -14,9 +14,7 @@ const ServicesList = () => {
         // const { data } = await get({ url: "/service" });
         // console.log(data);
         const resp = await fetch(`http://localhost:3000/service`);
-        console.log(resp);
         const { message: data } = await resp.json();
-        console.log(data);
 
         const services = data.map((s) => ({
           id: s.id,
