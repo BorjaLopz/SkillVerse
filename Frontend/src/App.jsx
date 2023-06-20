@@ -1,4 +1,3 @@
-
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 import "./App.css";
@@ -8,6 +7,7 @@ import "./App.css";
 import PrivateRoutes from "./components/PrivateRoutes.jsx";
 
 //import Loading from "./components/Loading";
+import Header from "./components/Header";
 import HomePage from "./pages/HomePage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -25,30 +25,33 @@ import Shopping from "./pages/Shopping.jsx";
 
 function App() {
   return (
-    <>
+    <div className="app">
       {/*<CommentForm onCommentSubmit={handleCommentSubmit}*/}
       {/*<CommentCard key={index} comment={comment} />*/}
       {/* <ServicesList /> */}
       {/* <Header user={user} /> */}
-      <Shopping />
+      {/* <Shopping /> */}
       <Toaster position="top-right" />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/services" element={<AllServicesPage />} />
-        <Route path="/contact" element={<ContactPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/passreset" element={<ResPas />} />
-        <Route path="*" element={<NotFoundPage />} />
-        <Route element={<PrivateRoutes />}>
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/addService" element={<AddService />} />
-        </Route>
-      </Routes>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/services" element={<AllServicesPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/passreset" element={<ResPas />} />
+          <Route path="*" element={<NotFoundPage />} />
+          <Route element={<PrivateRoutes />}>
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/addService" element={<AddService />} />
+          </Route>
+        </Routes>
+      </main>
 
       <Footer />
-    </>
+    </div>
   );
 }
 

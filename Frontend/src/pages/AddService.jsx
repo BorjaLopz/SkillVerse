@@ -38,13 +38,13 @@ const AddService = () => {
       });
 
       if (data) {
-        toast.success(`Servicio ${title} creado con exito`);
+        toast.success(`Servicio ${title} creado con éxito`);
         setTitle("");
         setDescription("");
         setRequiredType("");
         setFile(null);
       } else {
-        toast.error(`No se ha podido crear el servicio. Intentalo de nuevo`);
+        toast.error(`No se ha podido crear el servicio. Inténtalo de nuevo.`);
       }
 
       // let object = localStorage.getItem("portaldigital");
@@ -72,13 +72,23 @@ const AddService = () => {
     }
   };
 
+  const categories = [
+    "Diseño Gráfico",
+    "Traducción",
+    "Copywriting",
+    "Programación",
+    "Fotografía",
+    "Audio",
+    "Vídeo",
+  ];
+
   return (
     <>
       <div>
-        <h2>Add Service</h2>
+        <h2>Añadir servicio</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <label>Title:</label>
+            <label>Título:</label>
             <input
               type="text"
               value={title}
@@ -86,28 +96,34 @@ const AddService = () => {
             />
           </div>
           <div>
-            <label>Description:</label>
+            <label>Descripción:</label>
             <textarea
               value={description}
               onChange={(event) => setDescription(event.target.value)}
             />
           </div>
           <div>
-            <label>Required Type:</label>
-            <input
-              type="text"
+            <label>Categoría del servicio:</label>
+            <select
               value={requiredType}
               onChange={(event) => setRequiredType(event.target.value)}
-            />
+            >
+              <option value="">Selecciona una categoría</option>{" "}
+              {categories.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
           </div>
           <div>
-            <label>File:</label>
+            <label>Archivo:</label>
             <input
               type="file"
               onChange={(event) => setFile(event.target.files[0])}
             />
           </div>
-          <button type="submit">Save</button>
+          <button type="submit">Guardar</button>
         </form>
       </div>
     </>

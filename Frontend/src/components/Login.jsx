@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import useServer from "../hooks/useServer.js";
 import { useState } from "react";
+import { toast } from "sonner";
 
 function Login() {
   const navigate = useNavigate();
@@ -14,7 +15,11 @@ function Login() {
     const form = e.target;
     const credentials = Object.fromEntries(new FormData(form));
     const { data } = await post({ url: "/user/login", body: credentials });
-    if (data) return navigate("/");
+    if (data) {
+      navigate("/");
+    } else {
+      toast.error("Usuario no registrado");
+    }
   };
 
   const togglePassword = () => {
@@ -31,7 +36,7 @@ function Login() {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Inicia sesión con tu usuario
+            Iniciar sesión
           </h2>
         </div>
 
@@ -39,7 +44,7 @@ function Login() {
           <form className="login-form" onSubmit={submitHandler}>
             <div>
               <label htmlFor="email" className="label">
-                Dirección Email
+                Correo electrónico
               </label>
               <div className="mt-2">
                 <input

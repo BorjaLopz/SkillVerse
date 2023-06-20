@@ -4,9 +4,8 @@ function HomeButton() {
   return (
     <nav>
       <NavLink className="home_button" to="/">
-        Home
+        Inicio
       </NavLink>{" "}
-      {" | "}
     </nav>
   );
 }

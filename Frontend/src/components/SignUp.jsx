@@ -25,7 +25,7 @@ function SignUp() {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Inicia sesión con tu usuario
+            Regístrate
           </h2>
         </div>
 
@@ -33,7 +33,7 @@ function SignUp() {
           <form className="login-form" onSubmit={submitHandler}>
             <div>
               <label htmlFor="email" className="label">
-                Dirección Email
+                Correo electrónico
               </label>
               <div className="mt-2">
                 <input
@@ -68,14 +68,6 @@ function SignUp() {
                 <label htmlFor="password" className="label">
                   Contraseña
                 </label>
-                <div className="text-sm">
-                  <Link
-                    to="/passreset"
-                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                  >
-                    ¿Olvidó su contraseña?
-                  </Link>
-                </div>
               </div>
               <div className="mt-2">
                 <input
@@ -91,20 +83,10 @@ function SignUp() {
 
             <div>
               <button type="submit" className="button">
-                Inicia Sesión
+                Registrarse
               </button>
             </div>
           </form>
-
-          <p className="mt-10 text-center text-sm text-gray-500">
-            ¿No tienes cuenta?{" "}
-            <Link
-              to="/signup"
-              className="leading-6 font-semibold text-indigo-600 hover:text-indigo-500"
-            >
-              <button>Regístrate</button>
-            </Link>
-          </p>
         </div>
       </div>
     </>
