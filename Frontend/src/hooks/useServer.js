@@ -1,11 +1,11 @@
-import { toast } from 'sonner'
-import jwt_decode from 'jwt-decode'
+import { toast } from "sonner";
+import jwt_decode from "jwt-decode";
 
-import Http from '../services/Http.js'
-import useAuth from './useAuth.js'
+import Http from "../services/Http.js";
+import useAuth from "./useAuth.js";
 
 function useServer() {
-  const { token, setUser } = useAuth()
+  const { token, setUser } = useAuth();
 
   const handleResponse = ({ data, loading, error }) => {
     console.log("data");
@@ -21,15 +21,19 @@ function useServer() {
     }
 
     return { data, loading, error };
-  }
+  };
 
   return {
-    get: ({ url }) => Http({ method: 'GET', url, token }).then(handleResponse),
-    post: ({ url, body }) => Http({ method: 'POST', url, body, token }).then(handleResponse),
-    put: ({ url, body }) => Http({ method: 'PUT', url, body, token }).then(handleResponse),
-    patch: ({ url, body }) => Http({ method: 'PATCH', url, body, token }).then(handleResponse),
-    delete: ({ url }) => Http({ method: 'DELETE', url, token }).then(handleResponse)
-  }
+    get: ({ url }) => Http({ method: "GET", url, token }).then(handleResponse),
+    post: ({ url, body }) =>
+      Http({ method: "POST", url, body, token }).then(handleResponse),
+    put: ({ url, body }) =>
+      Http({ method: "PUT", url, body, token }).then(handleResponse),
+    patch: ({ url, body }) =>
+      Http({ method: "PATCH", url, body, token }).then(handleResponse),
+    delete: ({ url }) =>
+      Http({ method: "DELETE", url, token }).then(handleResponse),
+  };
 }
 
-export default useServer
+export default useServer;

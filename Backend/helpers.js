@@ -1,9 +1,8 @@
 const fs = require("fs/promises");
-const fs_no_promises = require("fs");
 const path = require("path");
 const { nanoid } = require("nanoid");
-var { glob } = require("glob");
 const { unlink } = require("fs/promises");
+const jwt = require("jsonwebtoken");
 
 // DICCIONARIO DE ESTADOS DE UN SERVICIO //
 const SERVICE_STATUS = Object.freeze({
@@ -74,10 +73,8 @@ function checkIfTypeOfServiceIsAllowed(typeOfFile) {
   });
 }*/
 
-
-
 async function checkIfProfilePictureExists(nickname = "") {
-  const USER_PATH = "../Frontend/public/fotosUsuario"; 
+  const USER_PATH = "../Frontend/public/fotosUsuario";
   const directoryPath = path.join(__dirname, USER_PATH);
   try {
     const files = await fs.readdir(directoryPath);
@@ -91,10 +88,6 @@ async function checkIfProfilePictureExists(nickname = "") {
     console.log("No se pudo leer el directorio:", e);
   }
 }
-
-
-
-
 
 async function removeFile(filepath) {
   try {
@@ -157,7 +150,9 @@ async function uploadFilesInFolder(req, fieldNamePostman, typeOfFile) {
         }
       });
 
-      return `${USER_PATH}/${fileName}`;
+      const [halfPath] = USER_PATH.split("Frontend").slice(-1);
+
+      return `..${halfPath}/${fileName}`;
     } else {
       console.log("SERVICE");
       //Comprobar si la extension es valida.
@@ -184,8 +179,6 @@ async function uploadFilesInFolder(req, fieldNamePostman, typeOfFile) {
     }
   }
 }
-
-checkIfProfilePictureExists();
 
 module.exports = {
   generateError,
