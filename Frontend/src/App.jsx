@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 import "./App.css";
@@ -7,7 +7,7 @@ import "./App.css";
 // import Header from "./components/Header.jsx";
 import PrivateRoutes from "./components/PrivateRoutes.jsx";
 
-import Loading from "./components/Loading";
+//import Loading from "./components/Loading";
 import HomePage from "./pages/HomePage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
@@ -19,6 +19,7 @@ import ContactPage from "./pages/ContactPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import AddService from "./pages/AddService.jsx";
 import Footer from "./components/Footer/index.jsx";
+import Shopping from "./pages/Shopping.jsx";
 //import CommentForm from "./components/CommentForm";
 //import CommentCard from "./components/CommentCard";
 
@@ -29,6 +30,7 @@ function App() {
       {/*<CommentCard key={index} comment={comment} />*/}
       {/* <ServicesList /> */}
       {/* <Header user={user} /> */}
+      <Shopping />
       <Toaster position="top-right" />
       <Routes>
         <Route path="/" element={<HomePage />} />
