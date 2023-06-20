@@ -24,7 +24,7 @@ const addAdmin = async (connection) => {
       "admin_surname",
       hashedDefaultPassword,
       "soy admin",
-      "../Frontend/public/images/default_admin_avatar.png",
+      "../public/images/default_admin_avatar.png",
       true,
     ]
   );

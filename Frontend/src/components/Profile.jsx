@@ -11,7 +11,7 @@ function Profile() {
       <PageTitle />
       <section className="user_info">
         <h2>My profile info</h2>
-        {/* <Avatar /> */}
+        <Avatar />
         <ProfileCard />
       </section>
       <EditProfile />

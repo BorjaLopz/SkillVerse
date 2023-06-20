@@ -298,28 +298,6 @@ const commentsFileController_deprecated = async (req, res, next) => {
   }
 };
 
-/*
-const deleteCommentsController = async (req, res, next) => {
-  try {
-    const { id_s, id_c } = req.params;
-    console.log(id_s);
-    console.log(id_c);
-
-    const token = req;
-    console.log("token.id_Primero: ", req.nickname);
-
-    const message = await deleteComment(id_s, id_c, token);
-
-    res.send({
-      status: "in progress",
-      message: message,
-    });
-  } catch (e) {
-    next(e);
-  }
-};
-*/
-
 const deleteCommentsController = async (req, res, next) => {
   try {
     const { id_s, id_c } = req.params;

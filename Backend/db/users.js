@@ -56,6 +56,9 @@ const createUser = async (
       [email, nickname, name, surname, password, biography, userPhoto]
     );
 
+    console.log("newUser");
+    console.log(newUser);
+
     //Devolver el ID
     return newUser.insertId;
   } finally {
