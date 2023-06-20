@@ -6,7 +6,7 @@ const chalk = require("chalk");
 const { faker } = require("@faker-js/faker/locale/es");
 const bcrypt = require("bcrypt");
 const path = require("path");
-const fs = require("fs/promises");
+const fs = require("fs"); //Con promesa no funciona el borrar ficheros
 
 const { removeFile } = require("../helpers");
 
@@ -24,7 +24,7 @@ const addAdmin = async (connection) => {
       "admin_surname",
       hashedDefaultPassword,
       "soy admin",
-      "../Frontend/public/images/default_avatar.png",
+      "../Frontend/public/images/default_admin_avatar.png",
       true,
     ]
   );
@@ -42,12 +42,6 @@ const deleteFilesFromDirectory = async (pathFile) => {
     });
   });
 };
-
-
-
-
-
-
 
 async function main() {
   let connection;

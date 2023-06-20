@@ -37,8 +37,11 @@ const newUserController = async (req, res, next) => {
         401
       );
     }
-    const defaultAvatar = "../Frontend/public/images/default_avatar.png";
+    const defaultAvatar = "../../Frontend/public/images/default_avatar.png";
     const avatar = userPhoto || defaultAvatar;
+
+    console.log("avatar");
+    console.log(avatar);
 
     //Encriptar la contraseña
     const passwordHash = await bcrypt.hash(password, 10);
