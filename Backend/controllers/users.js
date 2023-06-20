@@ -37,7 +37,7 @@ const newUserController = async (req, res, next) => {
         401
       );
     }
-    const defaultAvatar = "../Frontend/public/images/default_avatar.png";
+    const defaultAvatar = "../public/images/default_avatar.png";
     const avatar = userPhoto || defaultAvatar;
 
     //Encriptar la contraseña
@@ -190,6 +190,10 @@ const getUserByIdController = async (id) => {
     if (connection) connection.release();
   }
 };
+
+const getNicknameFromUserId = async (req, res, next) => {
+
+}
 
 const editUserController = async (req, res, next) => {
   const id_params = +req.params.id;
