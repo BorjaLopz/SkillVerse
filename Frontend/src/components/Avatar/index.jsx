@@ -5,13 +5,12 @@ import useAuth from "../../hooks/useAuth";
 
 //getUserPhoto desde backend
 const Avatar = ({ avatar, username }) => {
-  // if (!avatar) avatar = "default_avatar.png";
   const { isAuthenticated, user } = useAuth();
 
   console.log(user.user.nickname);
   console.log(user);
   console.log(user.user.admin);
-
+  
   return (
     <>
       <img

@@ -1,12 +1,9 @@
-import React, { useState } from 'react';
-import "./style.css"
-
+import React, { useState } from "react";
+import "./style.css";
 
 const ShoppingCart = ({ services }) => {
   const [selectedServices, setSelectedServices] = useState([]);
 
-
-  
   const addToCart = (service) => {
     setSelectedServices([...selectedServices, service]);
   };
@@ -15,41 +12,43 @@ const ShoppingCart = ({ services }) => {
     setSelectedServices(selectedServices.filter((s) => s !== service));
   };
 
+  return (
+    <>
+      <div className="container">
+        <h2>Carrito de compra</h2>
 
-
- 
-  
-    return (
-      <>
-   <div className="container">
-      <h2>Carrito de Compra</h2>
-
-      <h3>Servicios Disponibles:</h3>
-      <ul>
-        {services.map((service) => (
-           <li key={service} className="service-item">
-            <span className="service-name">{service}</span>
-           <button className="button" onClick={() => addToCart(service)}>Añadir al carrito</button> 
-          </li>
-        ))}
-      </ul>
-
-      
-    <h3 className="selected-services">Servicios seleccionados:</h3>
-      {selectedServices.length === 0 ? (
-        <p>No hay servicios seleccionados.</p>
-      ) : (
+        <h3>Servicios disponibles:</h3>
         <ul>
-          {selectedServices.map((service) => (
-            <li key={service}>
-              {service}
-             <button className="remove-button" onClick={() => removeFromCart(service)}>Eliminar</button> 
+          {services.map((service) => (
+            <li key={service} className="service-item">
+              <span className="service-name">{service}</span>
+              <button className="button" onClick={() => addToCart(service)}>
+                Añadir al carrito
+              </button>
             </li>
           ))}
         </ul>
-      )}
-            </div>
-          </>  
+
+        <h3 className="selected-services">Servicios seleccionados:</h3>
+        {selectedServices.length === 0 ? (
+          <p>No hay servicios seleccionados</p>
+        ) : (
+          <ul>
+            {selectedServices.map((service) => (
+              <li key={service}>
+                {service}
+                <button
+                  className="remove-button"
+                  onClick={() => removeFromCart(service)}
+                >
+                  Eliminar
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   );
 };
 

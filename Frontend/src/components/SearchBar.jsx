@@ -20,13 +20,15 @@ const Search = ({ onSearch, services }) => {
           </option>
         ))}
       </select>
-      <button onClick={handleSearch}>Buscar</button>
+      <button onClick={handleSearch} className="search_button">
+        Buscar
+      </button>
     </div>
   );
 };
 
 const SearchBar = () => {
-  const services = [
+  const categories = [
     "Todos los servicios",
     "Diseño Gráfico",
     "Traducción",
@@ -43,7 +45,7 @@ const SearchBar = () => {
 
   return (
     <div>
-      <Search services={services} onSearch={handleSearch} />
+      <Search services={categories} onSearch={handleSearch} />
     </div>
   );
 };

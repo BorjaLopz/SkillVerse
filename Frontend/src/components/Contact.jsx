@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import axios from "axios";
 
-const Contact = () => {
+const ContactPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [description, setDescription] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (event) => {
@@ -13,17 +12,22 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await axios.post("/api/contact", {
-        name,
-        email,
-        message,
+      const response = await fetch("http://localhost:3000/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, description }),
       });
 
-      console.log("Respuesta del servidor:", response.data);
-
-      setName("");
-      setEmail("");
-      setMessage("");
+      if (response.ok) {
+        console.log("Formulario enviado correctamente");
+        setName("");
+        setEmail("");
+        setDescription("");
+      } else {
+        console.error("Error al enviar el formulario");
+      }
     } catch (error) {
       console.error("Error al enviar el formulario:", error);
     }
@@ -32,9 +36,8 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact_form">
-      <h1>Contacto</h1>
-      <p>Utiliza el siguiente formulario para contactarnos:</p>
+    <div>
+      <h2>Utiliza el siguiente formulario para contactarnos</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="name">Nombre:</label>
@@ -47,7 +50,7 @@ const Contact = () => {
           />
         </div>
         <div>
-          <label htmlFor="email">Email:</label>
+          <label htmlFor="email">Correo electrónico:</label>
           <input
             type="email"
             id="email"
@@ -57,13 +60,13 @@ const Contact = () => {
           />
         </div>
         <div>
-          <label htmlFor="message">Mensaje:</label>
+          <label htmlFor="description">Mensaje:</label>
           <textarea
-            id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             required
-          />
+          ></textarea>
         </div>
         <button type="submit" disabled={isSubmitting}>
           Enviar
@@ -75,4 +78,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default ContactPage;

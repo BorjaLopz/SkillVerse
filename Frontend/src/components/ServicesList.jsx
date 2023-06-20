@@ -64,7 +64,7 @@ const ServicesList = () => {
   return (
     <>
       <div>
-        <h1>Services List</h1>
+        <h2>Lista de servicios</h2>
         <SearchBar services={services} onFilterChange={handleFilterChange} />
         {/* {filteredServices.map((service) => (
           <div key={service.id}>
