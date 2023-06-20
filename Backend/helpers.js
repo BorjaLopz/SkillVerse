@@ -59,7 +59,7 @@ function checkIfTypeOfServiceIsAllowed(typeOfFile) {
   return TYPE_OF_SERVICE.includes(typeOfFile);
 }
 
-async function checkIfProfilePictureExists(nickname = "") {
+/*async function checkIfProfilePictureExists(nickname = "") {
   const directoryPath = path.join(__dirname, USER_PATH);
   fs_no_promises.readdir(directoryPath, (e, files) => {
     if (e) {
@@ -72,7 +72,29 @@ async function checkIfProfilePictureExists(nickname = "") {
       }
     });
   });
+}*/
+
+
+
+async function checkIfProfilePictureExists(nickname = "") {
+  const USER_PATH = "../Frontend/public/fotosUsuario"; 
+  const directoryPath = path.join(__dirname, USER_PATH);
+  try {
+    const files = await fs.readdir(directoryPath);
+    for (const file of files) {
+      if (file.startsWith(`${nickname} -`)) {
+        const filePath = path.join(directoryPath, file);
+        await fs.unlink(filePath);
+      }
+    }
+  } catch (e) {
+    console.log("No se pudo leer el directorio:", e);
+  }
 }
+
+
+
+
 
 async function removeFile(filepath) {
   try {

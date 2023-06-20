@@ -6,7 +6,7 @@ const chalk = require("chalk");
 const { faker } = require("@faker-js/faker/locale/es");
 const bcrypt = require("bcrypt");
 const path = require("path");
-const fs = require("fs");
+const fs = require("fs/promises");
 
 const { removeFile } = require("../helpers");
 
@@ -42,6 +42,12 @@ const deleteFilesFromDirectory = async (pathFile) => {
     });
   });
 };
+
+
+
+
+
+
 
 async function main() {
   let connection;
