@@ -17,6 +17,8 @@ const Avatar = ({ avatar, username }) => {
         className="avatar"
         src={user.user.userPhoto}
         alt={user.user.nickname}
+        aria-label={`Imagen de avatar de ${user.user.nickname}`}
+        title={`Imagen de avatar de ${user.user.nickname}`}
       />
       <h1>AVATAR de {user.user.nickname}</h1>
     </>
