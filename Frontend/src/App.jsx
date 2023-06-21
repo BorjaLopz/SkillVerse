@@ -20,6 +20,7 @@ import NotFoundPage from "./pages/NotFoundPage.jsx";
 import AddService from "./pages/AddService.jsx";
 import Footer from "./components/Footer/index.jsx";
 import Shopping from "./pages/Shopping.jsx";
+import LogOut from "./pages/LogOut";
 //import CommentForm from "./components/CommentForm";
 //import CommentCard from "./components/CommentCard";
 
@@ -30,7 +31,7 @@ function App() {
       {/*<CommentCard key={index} comment={comment} />*/}
       {/* <ServicesList /> */}
       {/* <Header user={user} /> */}
-      
+
       <Toaster position="top-right" />
       <Header />
       <main>
@@ -41,6 +42,7 @@ function App() {
           <Route path="/services" element={<AllServicesPage />} />
           {/* <Route path="/contact" element={<ContactPage />} /> */}
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/logout" element={<LogOut />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/passreset" element={<ResPas />} />
           <Route path="*" element={<NotFoundPage />} />
