@@ -14,6 +14,7 @@ function NavBar() {
         {/* LogOut cuando el user esté logueado en vez de SignUp*/}
         <NavLink to="/login">Inicia sesión</NavLink> {" || "}
         <NavLink to="/profile">Perfil</NavLink> {" || "}
+        <NavLink to="/shopping">Tienda</NavLink> {"||"}
         {/* <HeaderAvatar /> cuando el user esté logueado, le lleva al Profile, sino es un Login */}
       </nav>
     </div>
