@@ -132,7 +132,7 @@ const EditProfile = ({ id, admin }) => {
           <button type="submit">Guardar cambios</button>
         </form>
         {successMessage && <p>{successMessage}</p>}
-        {renderAdminContent()}
+        {/* {renderAdminContent()} */}
       </div>
     </>
   );

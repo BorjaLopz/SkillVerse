@@ -10,7 +10,7 @@ function Profile() {
       <PageTitle />
       <section className="user_info">
         <h2>Mi información de usuario</h2>
-        {/* <Avatar /> */}
+        <Avatar />
         <ProfileCard />
       </section>
       <section className="user_edit">
