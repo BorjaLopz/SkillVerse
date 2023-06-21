@@ -15,6 +15,7 @@ const {
   newUserController,
   deleteUserController,
   editUserController,
+  getUserPhotoController,
   getAllFieldsExceptPasswordController,
 } = require("./controllers/users");
 

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer>
-      <div className="footer">
+      <div className="linkedin">
         <p>
           <Link to="https://www.linkedin.com/in/anabelenbernardez/">
             Ana Belén Bernárdez Martínez
@@ -25,6 +25,9 @@ const Footer = () => {
           para
           <Link to="https://www.hackaboss.com/"> Hack A Boss</Link> en 2023
         </p>
+      </div>
+      <div>
+        <a href="mailto:portaldigital@help.es">Contáctanos</a>
       </div>
     </footer>
   );

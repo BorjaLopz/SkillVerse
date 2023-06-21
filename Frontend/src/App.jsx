@@ -15,7 +15,7 @@ import ProfilePage from "./pages/ProfilePage.jsx";
 import AllServicesPage from "./pages/AllServicesPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import ResPas from "./pages/ResetPasword.jsx";
-import ContactPage from "./pages/ContactPage.jsx";
+// import ContactPage from "./pages/ContactPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import AddService from "./pages/AddService.jsx";
 import Footer from "./components/Footer/index.jsx";
@@ -39,7 +39,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<AllServicesPage />} />
-          <Route path="/contact" element={<ContactPage />} />
+          {/* <Route path="/contact" element={<ContactPage />} /> */}
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/passreset" element={<ResPas />} />
