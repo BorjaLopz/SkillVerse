@@ -83,50 +83,48 @@ const AddService = () => {
   ];
 
   return (
-    <>
-      <div>
-        <h2>Añadir servicio</h2>
-        <form onSubmit={handleSubmit}>
-          <div>
-            <label>Título:</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(event) => setTitle(event.target.value)}
-            />
-          </div>
-          <div>
-            <label>Descripción:</label>
-            <textarea
-              value={description}
-              onChange={(event) => setDescription(event.target.value)}
-            />
-          </div>
-          <div>
-            <label>Categoría del servicio:</label>
-            <select
-              value={requiredType}
-              onChange={(event) => setRequiredType(event.target.value)}
-            >
-              <option value="">Selecciona una categoría</option>{" "}
-              {categories.map((category, index) => (
-                <option key={index} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label>Archivo:</label>
-            <input
-              type="file"
-              onChange={(event) => setFile(event.target.files[0])}
-            />
-          </div>
-          <button type="submit">Guardar</button>
-        </form>
-      </div>
-    </>
+    <div>
+      <h2>Añadir servicio</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Título:</label>
+          <input
+            type="text"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          />
+        </div>
+        <div>
+          <label>Descripción:</label>
+          <textarea
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
+          />
+        </div>
+        <div>
+          <label>Categoría del servicio:</label>
+          <select
+            value={requiredType}
+            onChange={(event) => setRequiredType(event.target.value)}
+          >
+            <option value="">Selecciona una categoría</option>{" "}
+            {categories.map((category, index) => (
+              <option key={index} value={category}>
+                {category}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label>Archivo:</label>
+          <input
+            type="file"
+            onChange={(event) => setFile(event.target.files[0])}
+          />
+        </div>
+        <button type="submit">Guardar</button>
+      </form>
+    </div>
   );
 };
 

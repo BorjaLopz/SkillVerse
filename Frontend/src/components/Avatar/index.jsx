@@ -12,14 +12,11 @@ const Avatar = ({ avatar, username }) => {
   // console.log(user.user.admin); //Si es admin
 
   return (
-    <>
-      <img
-        className="avatar"
-        src={user.user.userPhoto}
-        alt={user.user.nickname}
-      />
-      <h1>AVATAR de {user.user.nickname}</h1>
-    </>
+    <img
+      className="avatar"
+      src={user.user.userPhoto}
+      alt={user.user.nickname}
+    />
   );
 };
 
