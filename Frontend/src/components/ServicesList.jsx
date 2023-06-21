@@ -64,27 +64,25 @@ const ServicesList = () => {
   };
 
   return (
-    <>
-      <div>
-        <h2>Lista de servicios</h2>
-        <SearchBar services={services} onFilterChange={handleFilterChange} />
-        {/* {filteredServices.map((service) => (
+    <div>
+      <h2>Lista de servicios</h2>
+      <SearchBar services={services} onFilterChange={handleFilterChange} />
+      {/* {filteredServices.map((service) => (
           <div key={service.id}>
             <h2>{service.title}</h2>
             <p>{service.request_body}</p>
             <p>{service.service_type}</p>
           </div>
         ))} */}
-        {!services.length && <p>No hay ningún servicio aún</p>}
-        {services.map((service) => (
-          <div key={service.id}>
-            <h2>{service.title}</h2>
-            <p>{service.request_body}</p>
-            <p>{service.service_type}</p>
-          </div>
-        ))}
-      </div>
-    </>
+      {!services.length && <p>No hay ningún servicio aún</p>}
+      {services.map((service) => (
+        <div key={service.id}>
+          <h2>{service.title}</h2>
+          <p>{service.request_body}</p>
+          <p>{service.service_type}</p>
+        </div>
+      ))}
+    </div>
   );
 };
 

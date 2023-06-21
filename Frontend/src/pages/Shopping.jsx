@@ -13,14 +13,9 @@ const Shopping = () => {
   ];
 
   return (
-    <>
-      <div>
-       
-        <div className="content">
-          <ShoppingCart services={categories} />
-        </div>
-      </div>
-    </>
+    <div className="content">
+      <ShoppingCart services={categories} />
+    </div>
   );
 };
 

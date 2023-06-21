@@ -56,85 +56,83 @@ const EditProfile = ({ id, admin }) => {
   // };
 
   return (
-    <>
-      <div className="edit_profile">
-        <h2>Editar perfil</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            Correo electrónico:
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            Avatar:
-            <input
-              type="text"
-              name="userPhoto"
-              value={formData.userPhoto}
-              onChange={handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            Nickname:
-            <input
-              type="text"
-              name="nickname"
-              value={formData.nickname}
-              onChange={handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            Nombre:
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            Apellido:
-            <input
-              type="text"
-              name="surname"
-              value={formData.surname}
-              onChange={handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            Contraseña:
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </label>
-          <br />
-          <label>
-            Biografía:
-            <textarea
-              name="biography"
-              value={formData.biography}
-              onChange={handleChange}
-            />
-          </label>
-          <br />
-          <button type="submit">Guardar cambios</button>
-        </form>
-        {successMessage && <p>{successMessage}</p>}
-        {/* {renderAdminContent()} */}
-      </div>
-    </>
+    <div className="edit_profile">
+      <h2>Editar perfil</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Correo electrónico:
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </label>
+        <br />
+        <label>
+          Avatar:
+          <input
+            type="text"
+            name="userPhoto"
+            value={formData.userPhoto}
+            onChange={handleChange}
+          />
+        </label>
+        <br />
+        <label>
+          Nickname:
+          <input
+            type="text"
+            name="nickname"
+            value={formData.nickname}
+            onChange={handleChange}
+          />
+        </label>
+        <br />
+        <label>
+          Nombre:
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+        </label>
+        <br />
+        <label>
+          Apellido:
+          <input
+            type="text"
+            name="surname"
+            value={formData.surname}
+            onChange={handleChange}
+          />
+        </label>
+        <br />
+        <label>
+          Contraseña:
+          <input
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+          />
+        </label>
+        <br />
+        <label>
+          Biografía:
+          <textarea
+            name="biography"
+            value={formData.biography}
+            onChange={handleChange}
+          />
+        </label>
+        <br />
+        <button type="submit">Guardar cambios</button>
+      </form>
+      {successMessage && <p>{successMessage}</p>}
+      {/* {renderAdminContent()} */}
+    </div>
   );
 };
 
