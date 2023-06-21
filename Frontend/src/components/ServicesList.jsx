@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import SearchBar from "./SearchBar";
 import useServer from "../hooks/useServer";
@@ -64,27 +65,59 @@ const ServicesList = () => {
   };
 
   return (
-    <>
-      <div>
-        <h2>Lista de servicios</h2>
-        <SearchBar services={services} onFilterChange={handleFilterChange} />
-        {/* {filteredServices.map((service) => (
-          <div key={service.id}>
-            <h2>{service.title}</h2>
-            <p>{service.request_body}</p>
-            <p>{service.service_type}</p>
-          </div>
-        ))} */}
-        {!services.length && <p>No hay ningún servicio aún</p>}
-        {services.map((service) => (
-          <div key={service.id}>
-            <h2>{service.title}</h2>
-            <p>{service.request_body}</p>
-            <p>{service.service_type}</p>
-          </div>
-        ))}
+    // <>
+    //   <div>
+    //     <h2>Lista de servicios</h2>
+    //     <SearchBar services={services} onFilterChange={handleFilterChange} />
+    //     {/* {filteredServices.map((service) => (
+    //       <div key={service.id}>
+    //         <h2>{service.title}</h2>
+    //         <p>{service.request_body}</p>
+    //         <p>{service.service_type}</p>
+    //       </div>
+    //     ))} */}
+    //     {!services.length && <p>No hay ningún servicio aún</p>}
+    //     {services.map((service) => (
+    //       <div key={service.id}>
+    //         <h2>{service.title}</h2>
+    //         <p>{service.request_body}</p>
+    //         <p>{service.service_type}</p>
+    //       </div>
+    //     ))}
+    //   </div>
+    // </>
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 bg-gray">
+        <h3 className="text-2xl font-bold tracking-tight text-gray-900">
+          SERVICES
+        </h3>
+
+        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 ">
+          {services.map((service) => (
+            <div key={service.id} className="group relative">
+              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80"></div>
+              <div className="mt-4 flex justify-between bg-slate-400 p-8">
+                <div>
+                  <h3 className="text-sm text-gray-700">
+                    <p>{service.title}</p>
+                    <p>{service.request_body}</p>
+                    <p>{service.service_type}</p>
+                    <Link href={service.title}>
+                      <span aria-hidden="true" className="absolute inset-0" />
+                      {service.name}
+                    </Link>
+                  </h3>
+                  {/* <p className="mt-1 text-sm text-gray-500">{service.title}</p> */}
+                </div>
+                {/* <p className="text-sm font-medium text-gray-900">
+                  {service.title}
+                </p> */}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 
