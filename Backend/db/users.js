@@ -141,6 +141,27 @@ const editUser = async (tmp_user) => {
   }
 };
 
+const getUserPhoto = async (idUser) => {
+  let connection;
+  try {
+    connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
+    const [result] = await connection.query(
+      `SELECT userPhoto FROM users WHERE id = ?`,
+      [idUser]
+    );
+
+    if (result.length === 0) {
+      throw generateError("No se encontró el usuario", 404);
+    }
+
+    return result[0].userPhoto;
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 const deleteUser = async (idUser) => {
   let connection;
   try {
@@ -175,5 +196,6 @@ module.exports = {
   getUserByEmail,
   getAllFieldsExceptPassword,
   editUser,
+  getUserPhoto,
   deleteUser,
 };
