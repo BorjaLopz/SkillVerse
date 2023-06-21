@@ -66,6 +66,7 @@ const getAllServices = async (user_id = -1) => {
       [user_id, 0]
     );
     if (result.length === 0) {
+      return "No hay ningún servicio aún";
       throw generateError("No hay ningún servicio aún", 404);
     }
 

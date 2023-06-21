@@ -7,16 +7,18 @@ import { toast } from "sonner";
 function LogOut() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  // localStorage.removeItem(localStorageKey);
-  toast.error(`Adios ${user.user.nickname}`);
 
   useEffect(() => {
+    toast.message("Cerrando sesión", {
+      description: `Adios ${user.user.nickname}`,
+    });
+
+    // clearTimeout(timerToast);
     const timer = setTimeout(() => {
       localStorage.removeItem(localStorageKey);
       navigate("/");
-      console.log("VAMOS AQUI 5000");
       window.location.reload();
-    }, 2000);
+    }, 1500);
     return () => clearTimeout(timer);
     // window.location.reload();
   }, []);

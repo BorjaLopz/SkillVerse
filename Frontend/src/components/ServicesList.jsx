@@ -16,14 +16,16 @@ const ServicesList = () => {
         const resp = await fetch(`http://localhost:3000/service`);
         const { message: data } = await resp.json();
 
-        const services = data.map((s) => ({
-          id: s.id,
-          title: s.title,
-          request_body: s.request_body,
-          service_type: s.service_type,
-          user_id: s.user_id,
-        }));
-        setServices(services);
+        if (data.length) {
+          const services = data.map((s) => ({
+            id: s.id,
+            title: s.title,
+            request_body: s.request_body,
+            service_type: s.service_type,
+            user_id: s.user_id,
+          }));
+          setServices(services);
+        }
       } catch (e) {
         console.log("Error getting services: ", e);
       }
@@ -73,6 +75,7 @@ const ServicesList = () => {
             <p>{service.service_type}</p>
           </div>
         ))} */}
+        {!services.length && <p>No hay ningún servicio aún</p>}
         {services.map((service) => (
           <div key={service.id}>
             <h2>{service.title}</h2>
