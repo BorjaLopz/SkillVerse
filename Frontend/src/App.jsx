@@ -30,11 +30,12 @@ function App() {
       {/*<CommentCard key={index} comment={comment} />*/}
       {/* <ServicesList /> */}
       {/* <Header user={user} /> */}
-      {/* <Shopping /> */}
+      
       <Toaster position="top-right" />
       <Header />
       <main>
         <Routes>
+          <Route path="/shopping" element={<Shopping />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<AllServicesPage />} />

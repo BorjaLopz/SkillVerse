@@ -15,7 +15,7 @@ const Shopping = () => {
   return (
     <>
       <div>
-        <h1>Página de compra</h1>
+       
         <div className="content">
           <ShoppingCart services={categories} />
         </div>
