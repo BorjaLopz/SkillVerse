@@ -15,9 +15,9 @@ const ShoppingCart = ({ services }) => {
   return (
     <>
       <div className="container">
-        <h2>Carrito de compra</h2>
+        <h1>Carrito de compra</h1>
 
-        <h3>Servicios disponibles:</h3>
+        <h2>Servicios disponibles:</h2>
         <ul>
           {services.map((service) => (
             <li key={service} className="service-item">
@@ -29,7 +29,7 @@ const ShoppingCart = ({ services }) => {
           ))}
         </ul>
 
-        <h3 className="selected-services">Servicios seleccionados:</h3>
+        <h2 className="selected-services">Servicios seleccionados:</h2>
         {selectedServices.length === 0 ? (
           <p>No hay servicios seleccionados</p>
         ) : (
