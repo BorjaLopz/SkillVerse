@@ -18,7 +18,7 @@ function Login() {
     if (data) {
       navigate("/");
     } else {
-      toast.error("Usuario no registrado");
+      toast.error("Usuario o contraseña incorrecta");
     }
   };
 

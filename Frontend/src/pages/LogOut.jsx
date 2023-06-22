@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { localStorageKey } from "../config";
 import useAuth from "../hooks/useAuth";
@@ -10,17 +10,15 @@ function LogOut() {
 
   useEffect(() => {
     toast.message("Cerrando sesión", {
-      description: `Adios ${user.user.nickname}`,
+      description: `Hasta pronto ${user.user.nickname}`,
     });
 
-    // clearTimeout(timerToast);
     const timer = setTimeout(() => {
       localStorage.removeItem(localStorageKey);
       navigate("/");
       window.location.reload();
     }, 1500);
     return () => clearTimeout(timer);
-    // window.location.reload();
   }, []);
 }
 

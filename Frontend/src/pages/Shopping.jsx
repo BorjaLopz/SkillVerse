@@ -10,6 +10,7 @@ const Shopping = () => {
     "Fotografía",
     "Audio",
     "Vídeo",
+    "Otros",
   ];
 
   return (

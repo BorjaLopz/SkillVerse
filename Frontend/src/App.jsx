@@ -46,15 +46,14 @@ function App() {
           <Route path="/logout" element={<LogOut />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/passreset" element={<ResPas />} />
-          <Route path="*" element={<NotFoundPage />} />
           <Route path="/service/:id" element={<ServiceDetail />} /> 
+          <Route path="*" element={<NotFoundPage />} />
           <Route element={<PrivateRoutes />}>
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/addService" element={<AddService />} />
           </Route>
         </Routes>
       </main>
-
       <Footer />
     </div>
   );

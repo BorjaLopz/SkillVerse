@@ -37,6 +37,7 @@ const SearchBar = () => {
     "Fotografía",
     "Audio",
     "Vídeo",
+    "Otros",
   ];
 
   const handleSearch = (selectedService) => {
