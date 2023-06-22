@@ -80,6 +80,7 @@ const AddService = () => {
     "Fotografía",
     "Audio",
     "Vídeo",
+    "Otros",
   ];
 
   return (
