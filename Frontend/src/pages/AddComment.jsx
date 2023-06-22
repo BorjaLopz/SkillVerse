@@ -5,8 +5,20 @@ import toast from "react-hot-toast";
 
 const AddComment = () => {
   const [comment, setComment] = useState("");
-
+  const [file, setFile] = useState(null);
   const { post } = useServer();
+  const { post } = useServer();
+  const getServiceIdFromURL = () => {
+    const url = window.location.href;
+    const parts = url.split("/");
+    const serviceIdIndex = parts.findIndex((part) => part === "service");
+    if (serviceIdIndex !== -1 && serviceIdIndex + 1 < parts.length) {
+      return parts[serviceIdIndex + 1];
+    }
+    return null;
+  };
+
+  const serviceId = getServiceIdFromURL(); // Obtener el identificador del servicio de la URL
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -15,10 +27,11 @@ const AddComment = () => {
       const currentComment = {
         comment,
         file,
+        serviceId,
       };
 
       const { data } = await post({
-        url: "/comments/:id",
+        url: `/comments/${serviceId}`, // Utilizar el identificador del servicio en la URL
         body: currentComment,
       });
 
@@ -41,8 +54,8 @@ const AddComment = () => {
         <div>
           <label>Comentario:</label>
           <textarea
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
+            value={comment}
+            onChange={(event) => setComment(event.target.value)}
           />
         </div>
         <div>
@@ -58,4 +71,4 @@ const AddComment = () => {
   );
 };
 
-export default AddComent;
+export default AddComment;
