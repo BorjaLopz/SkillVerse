@@ -1,10 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import useServer from "../hooks/useServer.js";
+import { useState } from "react";
+import { toast } from "sonner";
 
 function SignUp() {
   const navigate = useNavigate();
   const { post } = useServer();
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -13,6 +16,10 @@ function SignUp() {
     const credentials = Object.fromEntries(new FormData(form));
     const { data } = await post({ url: "/user/register", body: credentials });
     if (data) return navigate("/");
+  };
+
+  const togglePassword = () => {
+    setPasswordVisibility(!passwordVisibility);
   };
 
   return (
@@ -72,11 +79,12 @@ function SignUp() {
               <input
                 id="password"
                 name="password"
-                type="password"
+                type={passwordVisibility ? "text" : "password"}
                 autoComplete="current-password"
                 required
                 className="input"
               />
+              <input type="checkbox" onChange={togglePassword} />
             </div>
           </div>
 
