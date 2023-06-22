@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import useServer from "../hooks/useServer";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 const AddComment = () => {
   const [comment, setComment] = useState("");
   const [file, setFile] = useState(null);
   const { post } = useServer();
-
+  const { post } = useServer();
   const getServiceIdFromURL = () => {
     const url = window.location.href;
     const parts = url.split("/");

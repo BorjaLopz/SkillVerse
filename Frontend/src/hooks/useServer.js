@@ -1,4 +1,4 @@
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 import jwt_decode from "jwt-decode";
 
 import Http from "../services/Http.js";

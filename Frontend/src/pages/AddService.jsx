@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import useServer from "../hooks/useServer";
-import { toast } from "sonner";
+import toast from "react-hot-toast";
 
 const AddService = () => {
   const [title, setTitle] = useState("");
@@ -123,7 +123,7 @@ const AddService = () => {
             onChange={(event) => setFile(event.target.files[0])}
           />
         </div>
-        <button type="submit">Guardar</button>
+        <button type="submit">Crear servicio</button>
       </form>
     </div>
   );

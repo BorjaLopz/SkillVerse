@@ -23,10 +23,9 @@ const Avatar = ({ id = "" }) => {
         <img
           className="avatar"
           src={user.user.user.userPhoto}
-          alt={user.user.user.nickname}
+          alt={`Avatar de ${user.user.user.nickname}`}
         />
       )}
-      {!id && <h1>AVATAR de {user.user.user.nickname}</h1>}
 
       {id && <p>Imagen del usuario{`${id}`}</p>}
     </>
