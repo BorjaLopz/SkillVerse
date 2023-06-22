@@ -1,10 +1,9 @@
-import React from 'react';
+import React from "react";
 
 const CommentCard = ({ comment }) => {
   const { comment: commentText, creation_date, serviceFile } = comment;
 
-    return (
-      <>
+  return (
     <div className="comment-card">
       <p>{commentText}</p>
       {serviceFile && (
@@ -13,11 +12,8 @@ const CommentCard = ({ comment }) => {
         </p>
       )}
       <p>Fecha de creación: {creation_date}</p>
-            </div>
-          </>  
+    </div>
   );
 };
 
 export default CommentCard;
-
-

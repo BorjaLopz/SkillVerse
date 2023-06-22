@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const CommentForm = ({ onCommentSubmit }) => {
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
   const [file, setFile] = useState(null);
 
   const handleCommentChange = (e) => {
@@ -15,25 +15,27 @@ const CommentForm = ({ onCommentSubmit }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('comment', comment);
+    formData.append("comment", comment);
     if (file) {
-      formData.append('serviceFile', file);
+      formData.append("serviceFile", file);
     }
     onCommentSubmit(formData);
-    setComment('');
+    setComment("");
     setFile(null);
   };
 
-    return (
-      <>
+  return (
     <form onSubmit={handleSubmit}>
-      <textarea value={comment} onChange={handleCommentChange} placeholder="Escribe tu comentario" required />
+      <textarea
+        value={comment}
+        onChange={handleCommentChange}
+        placeholder="Escribe tu comentario"
+        required
+      />
       <input type="file" onChange={handleFileChange} />
       <button type="submit">Enviar comentario</button>
-            </form>
-            </>
+    </form>
   );
 };
 
 export default CommentForm;
-
