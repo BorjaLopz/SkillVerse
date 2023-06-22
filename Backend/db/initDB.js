@@ -122,7 +122,7 @@ async function main() {
       const users = 20;
 
       for (let i = 0; i < users; i++) {
-        const password = await bcrypt.hash(faker.internet.password(), 10);
+        const password = await bcrypt.hash("Password123", 10);
 
         await connection.query(
           `

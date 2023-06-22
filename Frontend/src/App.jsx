@@ -21,6 +21,7 @@ import AddService from "./pages/AddService.jsx";
 import Footer from "./components/Footer/index.jsx";
 import Shopping from "./pages/Shopping.jsx";
 import LogOut from "./pages/LogOut";
+import ServiceDetail from "./pages/ServiceDetail";
 //import CommentForm from "./components/CommentForm";
 //import CommentCard from "./components/CommentCard";
 
@@ -46,6 +47,7 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/passreset" element={<ResPas />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="/service/:id" element={<ServiceDetail />} /> 
           <Route element={<PrivateRoutes />}>
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/addService" element={<AddService />} />

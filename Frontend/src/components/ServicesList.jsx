@@ -17,6 +17,8 @@ const ServicesList = () => {
         const resp = await fetch(`http://localhost:3000/service`);
         const { message: data } = await resp.json();
 
+        console.log(data);
+
         if (data.length) {
           const services = data.map((s) => ({
             id: s.id,
@@ -95,23 +97,19 @@ const ServicesList = () => {
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 ">
           {services.map((service) => (
             <div key={service.id} className="group relative">
-              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80"></div>
-              <div className="mt-4 flex justify-between bg-slate-400 p-8">
+              <div className="aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between bg-slate-400 p-8">
                 <div>
                   <h3 className="text-sm text-gray-700">
                     <p>{service.title}</p>
                     <p>{service.request_body}</p>
                     <p>{service.service_type}</p>
-                    <Link href={service.title}>
+
+                    <Link to={`/service/${service.id}`}>
                       <span aria-hidden="true" className="absolute inset-0" />
                       {service.name}
                     </Link>
                   </h3>
-                  {/* <p className="mt-1 text-sm text-gray-500">{service.title}</p> */}
                 </div>
-                {/* <p className="text-sm font-medium text-gray-900">
-                  {service.title}
-                </p> */}
               </div>
             </div>
           ))}

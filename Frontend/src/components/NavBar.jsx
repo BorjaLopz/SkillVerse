@@ -7,8 +7,6 @@ import Avatar from "./Avatar";
 function NavBar() {
   const { isAuthenticated } = useAuth();
 
-  console.log(isAuthenticated);
-
   return (
     <div className="navbar">
       <nav>
