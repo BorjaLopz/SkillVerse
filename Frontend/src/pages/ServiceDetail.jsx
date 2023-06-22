@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import useGetTokenValues from "../hooks/useGetTokenValues";
 import Avatar from "../components/Avatar";
 import useAvatar from "../hooks/useAvatar";
+import AddComent from "./AddComment";
 
 function ServiceDetail() {
   const [service, setService] = useState([]);
@@ -45,7 +46,7 @@ function ServiceDetail() {
 
   // console.log(service);
 
-  return (
+  return <>
     <div className="p-8">
       <div className="shadow-xl rounded-lg">
         <div className="h-64 bg-gray-200 bg-cover bg-center rounded-t-lg flex items-center justify-center">
@@ -72,7 +73,8 @@ function ServiceDetail() {
         </div>
       </div>
     </div>
-  );
+<AddComent />
+</>;
 }
 
 export default ServiceDetail;
