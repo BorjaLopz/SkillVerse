@@ -117,7 +117,6 @@ app.use(generalError);
 
 //#region SERVER
 
-
 const PORT = process.env.APP_PORT || 3000;
 app.listen(PORT, async () => {
   console.log(

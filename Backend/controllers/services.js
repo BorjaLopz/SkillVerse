@@ -123,6 +123,7 @@ const getServiceByIDController = async (req, res, next) => {
 
     //Obtener el servicio
     const service = await getServiceByID(id);
+    // console.log(service);
 
     //Enviarlo a postman
     res.send({

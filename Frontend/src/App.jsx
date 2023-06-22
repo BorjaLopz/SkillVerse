@@ -21,6 +21,7 @@ import AddService from "./pages/AddService.jsx";
 import Footer from "./components/Footer/index.jsx";
 import Shopping from "./pages/Shopping.jsx";
 import LogOut from "./pages/LogOut";
+import ServiceDetail from "./pages/ServiceDetail";
 //import CommentForm from "./components/CommentForm";
 //import CommentCard from "./components/CommentCard";
 
@@ -34,21 +35,25 @@ function App() {
 
       <Toaster position="top-right" />
       <Header />
-      <Routes>
-        <Route path="/shopping" element={<Shopping />} />
-        <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="/services" element={<AllServicesPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/logout" element={<LogOut />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/passreset" element={<ResPas />} />
-        <Route path="*" element={<NotFoundPage />} />
-        <Route element={<PrivateRoutes />}>
-          <Route path="/profile" element={<ProfilePage />} />
-          <Route path="/addService" element={<AddService />} />
-        </Route>
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/shopping" element={<Shopping />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/services" element={<AllServicesPage />} />
+          {/* <Route path="/contact" element={<ContactPage />} /> */}
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/logout" element={<LogOut />} />
+          <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/passreset" element={<ResPas />} />
+          <Route path="/service/:id" element={<ServiceDetail />} /> 
+          <Route path="*" element={<NotFoundPage />} />
+          <Route element={<PrivateRoutes />}>
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/addService" element={<AddService />} />
+          </Route>
+        </Routes>
+      </main>
       <Footer />
     </div>
   );
