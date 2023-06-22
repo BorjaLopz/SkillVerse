@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Toaster } from "sonner";
+import { Toaster } from "react-hot-toast";
 import "./App.css";
 
 // import ServicesList from "./components/ServicesList.jsx"
@@ -31,9 +31,8 @@ function App() {
       {/*<CommentForm onCommentSubmit={handleCommentSubmit}*/}
       {/*<CommentCard key={index} comment={comment} />*/}
       {/* <ServicesList /> */}
-      {/* <Header user={user} /> */}
 
-      <Toaster position="top-right" />
+      <Toaster position="top-right" reverseOrder={false} />
       <Header />
       <main>
         <Routes>
@@ -46,7 +45,7 @@ function App() {
           <Route path="/logout" element={<LogOut />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/passreset" element={<ResPas />} />
-          <Route path="/service/:id" element={<ServiceDetail />} /> 
+          <Route path="/service/:id" element={<ServiceDetail />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route element={<PrivateRoutes />}>
             <Route path="/profile" element={<ProfilePage />} />
