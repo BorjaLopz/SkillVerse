@@ -15,7 +15,6 @@ function NavBar() {
         <HomeButton />
         <NavLink to="/about">Sobre nosotr@s</NavLink> {" || "}
         <NavLink to="/services">Servicios</NavLink> {" || "}
-        <NavLink to="/contact">Contacto</NavLink> {" || "}
         {!isAuthenticated && <NavLink to="/signup">Regístrate</NavLink>}
         {!isAuthenticated && " || "}
         {!isAuthenticated && <NavLink to="/login">Inicia sesión</NavLink>}

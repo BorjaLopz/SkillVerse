@@ -1,11 +1,8 @@
 import React from "react";
-import PageTitle from "../components/PageTitle";
 import SearchBar from "../components/SearchBar";
 import Loading from "../components/Loading";
 import { ErrorMessage } from "../components/ErrorMessage";
 import useServer from "../hooks/useServer";
-
-
 
 function HomePage() {
   const { error, loading } = useServer;
@@ -19,9 +16,10 @@ function HomePage() {
 
   return (
     <>
-      <PageTitle />
-      <SearchBar />
-      {/* <section>Contenido de la página, logo, fotos, etc</section> */}
+      <main>
+        <SearchBar />
+        {/* <section>Contenido de la página, logo, fotos, etc</section> */}
+      </main>
     </>
   );
 }

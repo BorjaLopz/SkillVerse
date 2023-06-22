@@ -15,10 +15,9 @@ function About() {
       <ul>
         <li>
           Explora nuestros servicios: Descubre una amplia variedad de servicios
-          digitales disponibles en [Nombre del Sitio]. Ya sea que necesites
-          diseño gráfico, redacción de contenido, desarrollo web, marketing
-          digital o cualquier otra habilidad, ¡seguro encontrarás lo que estás
-          buscando!
+          digitales disponibles en nuestra web. Ya sea que necesites diseño
+          gráfico, traducción, programación, fotografía o cualquier otra
+          habilidad, ¡seguro encontrarás lo que estás buscando!
         </li>
         <li>
           Selecciona a tu profesional: Examina los perfiles de nuestros

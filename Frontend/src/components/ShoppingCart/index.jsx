@@ -14,9 +14,9 @@ const ShoppingCart = ({ services }) => {
 
   return (
     <div className="container">
-      <h1>Carrito de compra</h1>
+      <h2>Carrito de compra</h2>
 
-      <h2>Servicios disponibles:</h2>
+      <h3>Servicios disponibles:</h3>
       <ul>
         {services.map((service) => (
           <li key={service} className="service-item">

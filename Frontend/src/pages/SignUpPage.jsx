@@ -1,13 +1,11 @@
 import React from "react";
-import PageTitle from "../components/PageTitle";
 import SignUp from "../components/SignUp";
 
 function SignUpPage() {
   return (
-    <>
-      <PageTitle />
+    <main>
       <SignUp />
-    </>
+    </main>
   );
 }
 
