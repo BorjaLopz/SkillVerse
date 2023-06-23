@@ -28,6 +28,7 @@ const ServicesList = () => {
             user_id: s.user_id,
           }));
           setServices(services);
+          setFilteredServices(services);
         }
       } catch (e) {
         console.log("Error getting services: ", e);
@@ -50,13 +51,38 @@ const ServicesList = () => {
     fetchServices();
   }, []);
 
-  const getToken = () => {
-    console.log("token: ", localStorage.getItem("token"));
-    return localStorage.getItem("token");
-  };
+  useEffect(() => {
+    const fetchUser = async (service) => {
+      try {
+        const { data } = await axios.get(`/user/${service.user_id}`);
+        const user = data.user;
+
+        const updatedServices = services.map((s) => {
+          if (s.id === service.id) {
+            return {
+              ...s,
+              createdBy: user.user.user.nickname,
+            };
+          }
+          return s;
+        });
+
+        setServices(updatedServices);
+        setFilteredServices(updatedServices);
+      } catch (error) {
+        console.error(`Error fetching user with id ${service.user_id}:`, error);
+      }
+    };
+
+    services.forEach((service) => {
+      if (!service.createdBy) {
+        fetchUser(service);
+      }
+    });
+  }, [services]);
 
   const handleFilterChange = (selectedService) => {
-    if (selectedService === "All services") {
+    if (selectedService === "Todos los servicios") {
       setFilteredServices(services);
     } else {
       const filtered = services.filter(
@@ -103,7 +129,7 @@ const ServicesList = () => {
                     <p>{service.title}</p>
                     <p>{service.request_body}</p>
                     <p>{service.service_type}</p>
-
+                    <p>Creado por: {service.createdBy}</p>
                     <Link to={`/service/${service.id}`}>
                       <span aria-hidden="true" className="absolute inset-0" />
                       {service.name}

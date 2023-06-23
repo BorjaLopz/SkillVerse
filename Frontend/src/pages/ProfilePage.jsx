@@ -3,11 +3,9 @@ import Profile from "../components/Profile";
 
 function ProfilePage() {
   return (
-    <>
-      <main>
-        <Profile />
-      </main>
-    </>
+    <main>
+      <Profile />
+    </main>
   );
 }
 
