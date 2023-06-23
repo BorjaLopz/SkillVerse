@@ -46,35 +46,37 @@ function ServiceDetail() {
 
   // console.log(service);
 
-  return <>
-    <div className="p-8">
-      <div className="shadow-xl rounded-lg">
-        <div className="h-64 bg-gray-200 bg-cover bg-center rounded-t-lg flex items-center justify-center">
-          <p className="text-black font-bold text-4xl">
-            {service.service_type}
-          </p>
-        </div>
-        <div className="bg-white rounded-b-lg px-8">
-          <div className="relative">
-            <img
-              className="right-0 w-16 h-16 rounded-full mr-4 shadow-lg absolute -mt-8 bg-gray-100"
-              src=""
-              alt="Imagen usuario"
-            />
+  return (
+    <>
+      <div className="p-8">
+        <div className="shadow-xl rounded-lg">
+          <div className="h-64 bg-gray-200 bg-cover bg-center rounded-t-lg flex items-center justify-center">
+            <p className="text-black font-bold text-4xl">
+              {service.service_type}
+            </p>
           </div>
-          <div className="pt-8 pb-8">
-            <h1 className="text-2xl font-bold text-gray-700">
-              {service.title}
-            </h1>
-            <p className="text-sm text-gray-600">Nombre de usuario</p>
+          <div className="bg-white rounded-b-lg px-8">
+            <div className="relative">
+              <img
+                className="right-0 w-16 h-16 rounded-full mr-4 shadow-lg absolute -mt-8 bg-gray-100"
+                src=""
+                alt="Imagen usuario"
+              />
+            </div>
+            <div className="pt-8 pb-8">
+              <h1 className="text-2xl font-bold text-gray-700">
+                {service.title}
+              </h1>
+              <p className="text-sm text-gray-600">Nombre de usuario</p>
 
-            <p className="mt-6 text-gray-700">{service.request_body}</p>
+              <p className="mt-6 text-gray-700">{service.request_body}</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-<AddComent />
-</>;
+      <AddComent />
+    </>
+  );
 }
 
 export default ServiceDetail;
