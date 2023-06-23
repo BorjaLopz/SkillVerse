@@ -7,7 +7,6 @@ const AddComment = () => {
   const [comment, setComment] = useState("");
   const [file, setFile] = useState(null);
   const { post } = useServer();
-  const { post } = useServer();
   const getServiceIdFromURL = () => {
     const url = window.location.href;
     const parts = url.split("/");
