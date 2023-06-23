@@ -18,8 +18,6 @@ function LogOut() {
     toast
       .promise(new Promise((resolve) => setTimeout(resolve, 1500)), {
         loading: "Cerrando sesión...",
-        success: `Hasta pronto ${user.user.nickname}`,
-        error: "Error al cerrar sesión",
       })
       .then(logout);
 
