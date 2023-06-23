@@ -136,40 +136,6 @@ const deleteUserController = async (req, res, next) => {
   }
 };
 
-
-/*const deleteUserController = async (req, res, next) => {
-  try {
-    const id_params = +req.params.id;
-    const admin = req.admin;
-    const id = req.userId;
-
-    let userNickname;
-
-    if (id_params === id || admin) {
-      // Eliminar completamente el registro del usuario de la base de datos
-
-      const result = await User.destroy({ where: { id: id_params } });
-      
-      if (result === 0) {
-        throw generateError("Usuario no encontrado", 404);
-      }
-
-      userNickname = result.nickname;
-    } else {
-      throw generateError("No puedes borrar otro usuario", 401);
-    }
-
-    res.send({
-      status: "ok",
-      message: `Usuario ${userNickname} eliminado`,
-    });
-  } catch (error) {
-    next(error);
-  }
-};*/
-
-
-
 const getUserController = async (req, res, next) => {
   try {
     const { id } = req.params;

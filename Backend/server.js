@@ -68,10 +68,6 @@ app.put("/user/:id/edit", authUser, editUserController);
 //Borrar un user
 app.delete("/user/:id/delete", authUser, deleteUserController);
 
-// Borrar un usuario permanentemente
-//app.delete("/user/:id/delete_permanently", authUser, deletePermanentlyUserController);
-
-
 //#endregion USER
 
 //#region SERVICES

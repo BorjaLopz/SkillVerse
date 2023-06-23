@@ -162,6 +162,7 @@ const getUserPhoto = async (idUser) => {
   }
 };
 
+
 const deleteUser = async (idUser) => {
   let connection;
   try {
@@ -178,10 +179,10 @@ const deleteUser = async (idUser) => {
     }
 
     if (user[0].admin) {
-      throw generateError("You can not delete an admin", 401);
+      throw generateError("You cannot delete an admin", 401);
     }
 
-    await connection.query(`UPDATE users SET active = 0 WHERE id = ?`, [
+    await connection.query(`DELETE FROM users WHERE id = ?`, [
       idUser,
     ]);
 
@@ -190,6 +191,11 @@ const deleteUser = async (idUser) => {
     if (connection) connection.release();
   }
 };
+
+
+
+
+
 
 module.exports = {
   createUser,
