@@ -83,12 +83,12 @@ async function main() {
     await connection.query(`
     CREATE TABLE services(
       id INT AUTO_INCREMENT PRIMARY KEY,
-      title VARCHAR(50) NOT NULL CHECK (LENGTH(title) >= 15),
+      title VARCHAR(255) NOT NULL CHECK (LENGTH(title) >= 15),
       request_body VARCHAR(500) NOT NULL CHECK (LENGTH(request_body) >= 15),
       user_id INT NOT NULL,
       file_name VARCHAR(200),
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-      service_type VARCHAR(20) NOT NULL,
+      service_type VARCHAR(200) NOT NULL,
       done BOOLEAN DEFAULT FALSE,
       hide BOOLEAN DEFAULT FALSE,
       FOREIGN KEY (user_id) REFERENCES users (id)
@@ -102,7 +102,7 @@ async function main() {
       services_id INT NOT NULL,
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
       comment VARCHAR(500) NOT NULL,
-      serviceFile VARCHAR(30),
+      serviceFile VARCHAR(50),
       hide BOOLEAN DEFAULT FALSE,
       solution BOOLEAN DEFAULT FALSE,
       FOREIGN KEY (user_id) REFERENCES users (id),
@@ -120,13 +120,17 @@ async function main() {
 
     if (addData) {
       const users = 20;
+      const services = 10;
+      const commentsPerService = 5;
 
       for (let i = 0; i < users; i++) {
         const password = await bcrypt.hash("Password123", 10);
 
-        await connection.query(
+        const [userResult] = await connection.query(
           `
-  INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto) 
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+      `,
           [
             faker.internet.email(),
             faker.internet.userName(),
@@ -137,9 +141,55 @@ async function main() {
             faker.image.avatar(),
           ]
         );
-        console.log(chalk.green(`Inserted user ${i + 1}`));
+
+        const userId = userResult.insertId;
+        console.log(chalk.green(`Inserted user with ID ${userId}`));
+
+
+        for (let j = 0; j < services; j++) {
+          // Generar un servicio aleatorio
+          await connection.query(
+            `
+        INSERT INTO services(title, request_body, file_name, user_id, service_type, done, hide)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+        `,
+            [
+              faker.lorem.words(6),
+              faker.lorem.paragraph(),
+              faker.system.fileName(),
+              userId, 
+              faker.lorem.word(),
+              faker.datatype.boolean(),
+              faker.datatype.boolean(),
+            ]
+          );
+
+          console.log(chalk.green(`Inserted service ${j + 1} for user ${userId}`));
+
+
+          for (let k = 0; k < commentsPerService; k++) {
+            // Generar un comentario aleatorio
+            await connection.query(
+              `
+          INSERT INTO comments(user_id, services_id, comment, serviceFile, hide, solution)
+          VALUES (?, ?, ?, ?, ?, ?)
+          `,
+              [
+                userId, 
+                j + 1,    
+                faker.lorem.sentences(),
+                faker.system.fileName(),
+                faker.datatype.boolean(),
+                faker.datatype.boolean(),
+              ]
+            );
+
+            console.log(chalk.green(`Inserted comment ${k + 1} for service ${j + 1}`));
+          }
+        }
       }
     }
+
 
     console.log(chalk.green("Tables created"));
   } catch (error) {
