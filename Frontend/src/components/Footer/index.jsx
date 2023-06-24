@@ -27,7 +27,12 @@ const Footer = () => {
         </p>
       </div>
       <div>
-        <a href="mailto:portaldigital@help.es">Contáctanos</a>
+        <a
+          href="mailto:portaldigital@help.es"
+          style={{ textDecoration: "underline", color: "blue" }}
+        >
+          Contáctanos
+        </a>
       </div>
     </footer>
   );
