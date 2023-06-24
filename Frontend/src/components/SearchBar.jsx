@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const Search = ({ onSearch, services }) => {
-  const [selectedService, setSelectedService] = useState("");
+const Search = ({ onSearch, categories }) => {
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const handleSelectChange = (event) => {
-    setSelectedService(event.target.value);
+    setSelectedCategory(event.target.value);
   };
 
   const handleSearch = () => {
-    onSearch(selectedService);
+    onSearch(selectedCategory);
   };
 
   return (
     <div className="search_bar">
-      <select value={selectedService} onChange={handleSelectChange}>
-        {services.map((service, index) => (
-          <option key={index} value={service}>
-            {service}
+      <select value={selectedCategory} onChange={handleSelectChange}>
+        {categories.map((category, index) => (
+          <option key={index} value={category}>
+            {category}
           </option>
         ))}
       </select>
@@ -40,13 +40,45 @@ const SearchBar = () => {
     "Otros",
   ];
 
-  const handleSearch = (selectedService) => {
-    console.log("Selected service:", selectedService);
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    // Realizar la solicitud POST para obtener los servicios y sus categorías
+    fetch("URL_DE_TU_API", {
+      method: "POST",
+      // Agregar cualquier encabezado o cuerpo de solicitud necesario
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        // Actualizar la lista de servicios en el estado
+        setServices(data.services);
+      })
+      .catch((error) => {
+        console.error("Error al obtener los servicios:", error);
+      });
+  }, []);
+
+  const [filteredServices, setFilteredServices] = useState([]);
+
+  const handleSearch = (selectedCategory) => {
+    if (selectedCategory === "Todos los servicios") {
+      setFilteredServices(services);
+    } else {
+      const filtered = services.filter(
+        (service) => service.categoria === selectedCategory
+      );
+      setFilteredServices(filtered);
+    }
   };
 
   return (
     <div>
-      <Search services={categories} onSearch={handleSearch} />
+      <Search categories={categories} onSearch={handleSearch} />
+      <ul>
+        {filteredServices.map((service, index) => (
+          <li key={index}>{service.nombre}</li>
+        ))}
+      </ul>
     </div>
   );
 };

@@ -19,11 +19,9 @@ function NavBar() {
         {!isAuthenticated && " || "}
         {isAuthenticated && <NavLink to="/logout">Cerrar sesión</NavLink>}
         {isAuthenticated && " || "}
-        {/* LogOut cuando el user esté logueado en vez de SignUp*/}
         {isAuthenticated && <NavLink to="/profile">Perfil</NavLink>}
         {isAuthenticated && " || "}
-        {isAuthenticated && <NavLink to="/shopping">Tienda</NavLink>}
-        {isAuthenticated && " || "}
+        {/* {isAuthenticated && <NavLink to="/shopping">Tienda</NavLink>} */}
         {isAuthenticated && <Avatar />}
         {/* <HeaderAvatar /> cuando el user esté logueado, le lleva al Profile, sino es un Login */}
       </nav>

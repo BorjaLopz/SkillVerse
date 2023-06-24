@@ -35,7 +35,7 @@ function App() {
       <Toaster position="top-right" reverseOrder={false} />
       <Header />
       <Routes>
-        <Route path="/shopping" element={<Shopping />} />
+        {/* <Route path="/shopping" element={<Shopping />} /> */}
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<AllServicesPage />} />
