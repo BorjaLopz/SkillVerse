@@ -16,9 +16,10 @@ function ServiceDetail() {
   const getService = async () => {
     try {
       const { data } = await get({ url: `/service/${id}` });
+      console.log(data);
       setService(data.message);
 
-      getUserOwner(15);
+      getUserOwner(data.message.user_id);
     } catch (e) {
       console.log("error: ", e.message);
     }
@@ -27,7 +28,7 @@ function ServiceDetail() {
   const getUserOwner = async (userId) => {
     try {
       const { data } = await get({ url: `/userdata/${userId}` }); //Tarda en
-      console.log(data.userData);
+      console.log(data);
       setUserData(data.userData);
     } catch (e) {
       console.log("error: ", e.message);
