@@ -11,7 +11,7 @@ function LogOut() {
   useEffect(() => {
     const logout = () => {
       localStorage.removeItem(localStorageKey);
-      navigate("/");
+      navigate("/login");
       window.location.reload();
     };
 
@@ -26,7 +26,8 @@ function LogOut() {
     };
   }, [user.user.nickname, navigate]);
 
-  return null;
+  // return null;
+  return <main></main>;
 }
 
 export default LogOut;

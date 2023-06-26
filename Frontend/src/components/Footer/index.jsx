@@ -7,26 +7,50 @@ const Footer = () => {
     <footer>
       <div className="linkedin">
         <p>
-          <Link to="https://www.linkedin.com/in/anabelenbernardez/">
+          <Link
+            to="https://www.linkedin.com/in/anabelenbernardez/"
+            target="_blank"
+            style={{ textDecoration: "underline", color: "blue" }}
+          >
             Ana Belén Bernárdez Martínez
           </Link>
           ,{" "}
-          <Link to="https://www.linkedin.com/in/fesparal/">
-            Francisco Espárraga Álvarez
-          </Link>
-          ,{" "}
-          <Link to="https://www.linkedin.com/in/monica-irimia/">
+          <Link
+            to="https://www.linkedin.com/in/monica-irimia/"
+            target="_blank"
+            style={{ textDecoration: "underline", color: "blue" }}
+          >
             Mónica Irimia Villarmea
           </Link>
-          , y{" "}
-          <Link to="https://www.linkedin.com/in/borjalopezdiaz/">
+          ,{" "}
+          <Link
+            to="https://www.linkedin.com/in/borjalopezdiaz/"
+            target="_blank"
+            style={{ textDecoration: "underline", color: "blue" }}
+          >
             Borja López Díaz
           </Link>{" "}
+          y{" "}
+          <Link
+            to="https://www.linkedin.com/in/fesparal/"
+            target="_blank"
+            style={{ textDecoration: "underline", color: "blue" }}
+          >
+            Francisco Espárraga Álvarez
+          </Link>{" "}
           para
-          <Link to="https://www.hackaboss.com/"> Hack A Boss</Link> en 2023
+          <Link
+            to="https://www.hackaboss.com/"
+            target="_blank"
+            style={{ textDecoration: "underline", color: "blue" }}
+          >
+            {" "}
+            HACK A BOSS
+          </Link>{" "}
+          en 2023
         </p>
       </div>
-      <div>
+      <div className="footer-contact">
         <a
           href="mailto:portaldigital@help.es"
           style={{ textDecoration: "underline", color: "blue" }}

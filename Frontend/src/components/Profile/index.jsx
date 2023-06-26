@@ -1,7 +1,8 @@
 import React from "react";
-import Avatar from "./Avatar";
-import EditProfile from "./EditProfile";
-import ProfileCard from "./ProfileCard";
+import Avatar from "../Avatar";
+import EditProfile from "../EditProfile";
+import ProfileCard from "../ProfileCard";
+import DeleteAccount from "../DeleteAccount";
 
 function Profile() {
   return (
@@ -15,7 +16,7 @@ function Profile() {
         <EditProfile />
       </section>
       <section className="delete_user">
-        <button className="delete_account_button">Borrar cuenta</button>
+        <DeleteAccount />
       </section>
     </>
   );

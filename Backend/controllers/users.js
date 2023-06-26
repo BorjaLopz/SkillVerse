@@ -207,10 +207,6 @@ const getUserPhotoController = async (req, res, next) => {
   }
 };
 
-// const getNicknameFromUserId = async (req, res, next) => {
-
-// }
-
 const editUserController = async (req, res, next) => {
   const id_params = +req.params.id;
   const id = req.userId;

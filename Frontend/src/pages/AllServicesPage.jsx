@@ -1,7 +1,7 @@
 import React from "react";
-import AddService from "./AddService.jsx";
+import AddService from "../components/AddService.jsx";
 import ServicesList from "../components/ServicesList.jsx";
-import SearchBar from "../components/SearchBar.jsx";
+// import SearchBar from "../components/SearchBar.jsx";
 import useAuth from "../hooks/useAuth";
 import { NavLink } from "react-router-dom";
 
@@ -10,10 +10,8 @@ function AllServicesPage() {
   return (
     <>
       <main>
-        <SearchBar />
+        {/* <SearchBar /> */}
         <ServicesList />
-        {isAuthenticated && <AddService />}{" "}
-        {/* Muestra AddService solo si el usuario está autenticado */}
         {!isAuthenticated && (
           <p>
             <NavLink
@@ -32,6 +30,7 @@ function AllServicesPage() {
             para agregar servicios.
           </p>
         )}
+        {isAuthenticated && <AddService />}{" "}
       </main>
     </>
   );

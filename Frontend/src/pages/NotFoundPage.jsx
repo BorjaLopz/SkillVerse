@@ -7,7 +7,7 @@ const NotFoundPage = () => {
         <img
           alt="not_found_image"
           className="not-found-image"
-          src="../public/icons/frown.png"
+          src="../icons/frown.png"
         />
         <h2>404 - Página no encontrada</h2>
         <p>La página que está buscando no existe</p>
