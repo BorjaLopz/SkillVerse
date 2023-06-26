@@ -19,7 +19,6 @@ import ResPas from "./pages/ResetPasword.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import AddService from "./pages/AddService.jsx";
 import Footer from "./components/Footer/index.jsx";
-import Shopping from "./pages/Shopping.jsx";
 import LogOut from "./pages/LogOut";
 import ServiceDetail from "./pages/ServiceDetail";
 //import CommentForm from "./components/CommentForm";
@@ -35,7 +34,6 @@ function App() {
       <Toaster position="top-right" reverseOrder={false} />
       <Header />
       <Routes>
-        {/* <Route path="/shopping" element={<Shopping />} /> */}
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/services" element={<AllServicesPage />} />
