@@ -115,13 +115,13 @@ async function main() {
     await addAdmin(connection);
 
     //Borramos fotos de usuarios y archivos de los servicios
-    deleteFilesFromDirectory("../uploads");
-    deleteFilesFromDirectory("../../Frontend/public/fotosUsuario");
+    // deleteFilesFromDirectory("../uploads");
+    // deleteFilesFromDirectory("../../Frontend/public/fotosUsuario");
 
     if (addData) {
       const users = 20;
-      const services = 10;
-      const commentsPerService = 5;
+      const services = 2;
+      const commentsPerService = 2;
 
       for (let i = 0; i < users; i++) {
         const password = await bcrypt.hash("Password123", 10);

@@ -1,12 +1,15 @@
 import React from "react";
 import AddService from "../components/AddService.jsx";
 import ServicesList from "../components/ServicesList.jsx";
-// import SearchBar from "../components/SearchBar.jsx";
+//
 import useAuth from "../hooks/useAuth";
+
+// import SearchBar from "../components/SearchBar.jsx";
 import { NavLink } from "react-router-dom";
 
 function AllServicesPage() {
   const { isAuthenticated } = useAuth();
+
   return (
     <>
       <main>

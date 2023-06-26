@@ -16,6 +16,7 @@ const {
   editUser,
   deleteUser,
   getUserPhoto,
+  getUserData,
 } = require("../db/users");
 const { getConnection } = require("../db/db");
 
@@ -161,7 +162,7 @@ const getAllFieldsExceptPasswordController = async (req, res, next) => {
 
     res.send({
       status: "ok",
-      data: userId,
+      information: userId,
     });
   } catch (e) {
     next(e);
@@ -201,6 +202,22 @@ const getUserPhotoController = async (req, res, next) => {
     res.send({
       status: "ok",
       data: userPhoto,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getUserDataController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const userData = await getUserData(id);
+    // console.log("CONTROLLER");
+    // console.log(userData);
+    res.send({
+      status: "ok",
+      userData: userData,
     });
   } catch (error) {
     next(error);
@@ -295,4 +312,5 @@ module.exports = {
   getUserPhotoController,
   editUserController,
   getAllFieldsExceptPasswordController,
+  getUserDataController,
 };

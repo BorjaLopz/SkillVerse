@@ -6,6 +6,8 @@ import Avatar from "./Avatar";
 
 function NavBar() {
   const { isAuthenticated } = useAuth();
+  
+  const user = useAuth();
 
   return (
     <div className="navbar">
@@ -19,7 +21,14 @@ function NavBar() {
         {!isAuthenticated && " || "}
         {isAuthenticated && <NavLink to="/logout">Cerrar sesión</NavLink>}
         {isAuthenticated && " || "}
-        {isAuthenticated && <NavLink to="/profile">Perfil</NavLink>}
+        {isAuthenticated && (
+          <NavLink
+            to={{ pathname: `/profile/${user.user.user.nickname}` }}
+            state={{ from: `${user.user.user.nickname}` }}
+          >
+            Perfil
+          </NavLink>
+        )}
         {isAuthenticated && " || "}
         {isAuthenticated && <Avatar />}
       </nav>

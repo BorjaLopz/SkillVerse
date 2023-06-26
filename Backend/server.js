@@ -17,6 +17,7 @@ const {
   editUserController,
   getUserPhotoController,
   getAllFieldsExceptPasswordController,
+  getUserDataController,
 } = require("./controllers/users");
 
 const {
@@ -58,6 +59,9 @@ app.post("/user/login", loginController);
 
 //Crear un user
 app.post("/user/register", newUserController);
+
+/* PRUEBA OBTENCION FOTO */
+app.get("/userdata/:id", getUserDataController);
 
 //Obtener todos los campos de un user excepto su ID
 app.get("/user/:id", authUser, getAllFieldsExceptPasswordController);
