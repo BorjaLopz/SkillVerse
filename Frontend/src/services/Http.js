@@ -15,6 +15,7 @@ async function Http({ method = "GET", url, token, body }) {
   if (token) {
     // config.headers.Authorization = token
     // config.headers.Authorization = `Bearer ${token}`;
+    // console.log(token);
     config.headers.Authorization = `${token}`;
   }
 

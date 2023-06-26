@@ -17,7 +17,7 @@ const ServicesList = () => {
         const resp = await fetch(`http://localhost:3000/service`);
         const { message: data } = await resp.json();
 
-        console.log(data);
+        // console.log(data);
 
         if (data.length) {
           const services = data.map((s) => ({
@@ -51,35 +51,37 @@ const ServicesList = () => {
     fetchServices();
   }, []);
 
-  useEffect(() => {
-    const fetchUser = async (service) => {
-      try {
-        const { data } = await axios.get(`/user/${service.user_id}`);
-        const user = data.user;
+  // useEffect(() => {
+  //   const fetchUser = async (service) => {
+  //     try {
+  //       const { data } = await axios.get(`/user/${service.user_id}`);
+  //       const user = data.user;
 
-        const updatedServices = services.map((s) => {
-          if (s.id === service.id) {
-            return {
-              ...s,
-              createdBy: user.user.user.nickname,
-            };
-          }
-          return s;
-        });
+  //       const updatedServices = services.map((s) => {
+  //         if (s.id === service.id) {
+  //           return {
+  //             ...s,
+  //             createdBy: user.user.user.nickname,
+  //           };
+  //         }
+  //         return s;
+  //       });
 
-        setServices(updatedServices);
-        setFilteredServices(updatedServices);
-      } catch (error) {
-        console.error(`Error fetching user with id ${service.user_id}:`, error);
-      }
-    };
+  //       console.log(updatedServices);
 
-    services.forEach((service) => {
-      if (!service.createdBy) {
-        fetchUser(service);
-      }
-    });
-  }, [services]);
+  //       setServices(updatedServices);
+  //       setFilteredServices(updatedServices);
+  //     } catch (error) {
+  //       console.error(`Error fetching user with id ${service.user_id}:`, error);
+  //     }
+  //   };
+
+  //   services.forEach((service) => {
+  //     if (!service.createdBy) {
+  //       fetchUser(service);
+  //     }
+  //   });
+  // }, [services]);
 
   const handleFilterChange = (selectedService) => {
     if (selectedService === "Todos los servicios") {
@@ -123,20 +125,18 @@ const ServicesList = () => {
         <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 ">
           {services.map((service) => (
             <div key={service.id} className="group relative">
-              <div className="aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between bg-slate-400 p-8">
-                <div>
-                  <h3 className="text-sm text-gray-700">
-                    <p>{service.title}</p>
-                    <p>{service.request_body}</p>
-                    <p>{service.service_type}</p>
-                    <p>Creado por: {service.createdBy}</p>
-                    <Link to={`/service/${service.id}`}>
-                      <span aria-hidden="true" className="absolute inset-0" />
-                      {service.name}
-                    </Link>
-                  </h3>
+              <Link to={`/service/${service.id}`}>
+                <div className="aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between bg-slate-400 p-8">
+                  <div>
+                    <h3 className="text-sm text-gray-700">
+                      <p>{service.title}</p>
+                      <p>{service.request_body}</p>
+                      <p>{service.service_type}</p>
+                      <p>Creado por: {service.createdBy}</p>
+                    </h3>
+                  </div>
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>

@@ -162,7 +162,6 @@ const getUserPhoto = async (idUser) => {
   }
 };
 
-
 const deleteUser = async (idUser) => {
   let connection;
   try {
@@ -182,9 +181,7 @@ const deleteUser = async (idUser) => {
       throw generateError("You cannot delete an admin", 401);
     }
 
-    await connection.query(`DELETE FROM users WHERE id = ?`, [
-      idUser,
-    ]);
+    await connection.query(`DELETE FROM users WHERE id = ?`, [idUser]);
 
     return user[0].nickname;
   } finally {
@@ -192,10 +189,26 @@ const deleteUser = async (idUser) => {
   }
 };
 
+const getUserData = async (idUser) => {
+  let connection;
+  try {
+    connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
 
+    const [result] = await connection.query(
+      `SELECT * FROM users WHERE id = ?`,
+      [idUser]
+    );
 
+    if (result.length === 0) {
+      throw generateError("No se encontró el usuario", 404);
+    }
 
-
+    return result[0];
+  } finally {
+    if (connection) connection.release();
+  }
+};
 
 module.exports = {
   createUser,
@@ -204,4 +217,5 @@ module.exports = {
   editUser,
   getUserPhoto,
   deleteUser,
+  getUserData,
 };
