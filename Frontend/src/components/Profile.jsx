@@ -18,7 +18,7 @@ function Profile({ user }) {
         <EditProfile />
       </section>
       <section className="delete_user">
-        <button className="deleteaccount_button">Borrar cuenta</button>
+        <button className="delete_account_button">Borrar cuenta</button>
       </section>
     </>
   );

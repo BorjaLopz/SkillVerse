@@ -2,6 +2,7 @@ const { getConnection } = require("../db/db");
 const { generateError } = require("../helpers");
 const chalk = require("chalk");
 
+
 const { DB_DATABASE } = process.env;
 
 //Crear servicio en la BBDD
@@ -153,6 +154,8 @@ const createComment = async (
     if (connection) connection.release();
   }
 };
+
+
 
 const deleteComment = async (id_s, id_c) => {
   let connection;
