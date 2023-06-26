@@ -16,6 +16,7 @@ const {
   editUser,
   deleteUser,
   getUserPhoto,
+  getUserData,
 } = require("../db/users");
 const { getConnection } = require("../db/db");
 
@@ -207,9 +208,21 @@ const getUserPhotoController = async (req, res, next) => {
   }
 };
 
-// const getNicknameFromUserId = async (req, res, next) => {
+const getUserDataController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
 
-// }
+    const userData = await getUserData(id);
+    // console.log("CONTROLLER");
+    // console.log(userData);
+    res.send({
+      status: "ok",
+      userData: userData,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
 const editUserController = async (req, res, next) => {
   const id_params = +req.params.id;
@@ -299,4 +312,5 @@ module.exports = {
   getUserPhotoController,
   editUserController,
   getAllFieldsExceptPasswordController,
+  getUserDataController,
 };
