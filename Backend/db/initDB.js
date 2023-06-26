@@ -115,8 +115,8 @@ async function main() {
     await addAdmin(connection);
 
     //Borramos fotos de usuarios y archivos de los servicios
-    deleteFilesFromDirectory("../uploads");
-    deleteFilesFromDirectory("../../Frontend/public/fotosUsuario");
+    // deleteFilesFromDirectory("../uploads");
+    // deleteFilesFromDirectory("../../Frontend/public/fotosUsuario");
 
     if (addData) {
       const users = 20;

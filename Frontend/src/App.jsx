@@ -42,16 +42,12 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/passreset" element={<ResPas />} />
 
-       
         {/* <Route path="/service/:id" element={<ServiceDetail />} /> */}
-        <Route
-            path="/user/:nickname"
-            element={<ProfilePage />}
-          />
+        <Route path="/user/:nickname" element={<ProfilePage />} />
 
         <Route path="*" element={<NotFoundPage />} />
         <Route element={<PrivateRoutes />}>
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/profile/:nickname" element={<ProfilePage />} />
           <Route path="/addService" element={<AddService />} />
         </Route>
       </Routes>
