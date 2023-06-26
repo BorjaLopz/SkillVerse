@@ -47,24 +47,28 @@ const AddComment = () => {
   };
 
   return (
-    <div>
+    <div className="add-comment">
       <h2>Añadir Comentario</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="comment">
           <label>Comentario:</label>
           <textarea
+            placeholder="Escriba aquí su comentario..."
+            required
             value={comment}
             onChange={(event) => setComment(event.target.value)}
           />
         </div>
-        <div>
+        <div className="file">
           <label>Archivo:</label>
           <input
-            type="file"
+            type="comment-file"
             onChange={(event) => setFile(event.target.files[0])}
           />
         </div>
-        <button type="submit">Publicar</button>
+        <button className="publish-comment" type="submit">
+          Publicar
+        </button>
       </form>
     </div>
   );

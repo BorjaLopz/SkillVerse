@@ -83,10 +83,10 @@ const AddService = () => {
   ];
 
   return (
-    <div>
+    <div className="add-service">
       <h2>Añadir servicio</h2>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="title">
           <label>Título:</label>
           <input
             type="text"
@@ -94,14 +94,15 @@ const AddService = () => {
             onChange={(event) => setTitle(event.target.value)}
           />
         </div>
-        <div>
+        <div className="description">
           <label>Descripción:</label>
           <textarea
+            placeholder="Escriba aquí la descripción de su servicio..."
             value={description}
             onChange={(event) => setDescription(event.target.value)}
           />
         </div>
-        <div>
+        <div className="service-category">
           <label>Categoría del servicio:</label>
           <select
             value={requiredType}
@@ -115,14 +116,16 @@ const AddService = () => {
             ))}
           </select>
         </div>
-        <div>
+        <div className="service-file">
           <label>Archivo:</label>
           <input
             type="file"
             onChange={(event) => setFile(event.target.files[0])}
           />
         </div>
-        <button type="submit">Crear servicio</button>
+        <button className="publish-service" type="submit">
+          Crear servicio
+        </button>
       </form>
     </div>
   );
