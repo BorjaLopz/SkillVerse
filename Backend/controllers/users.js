@@ -162,7 +162,7 @@ const getAllFieldsExceptPasswordController = async (req, res, next) => {
 
     res.send({
       status: "ok",
-      data: userId,
+      information: userId,
     });
   } catch (e) {
     next(e);

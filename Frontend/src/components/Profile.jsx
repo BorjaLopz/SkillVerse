@@ -5,8 +5,6 @@ import ProfileCard from "./ProfileCard";
 import { useParams } from "react-router";
 
 function Profile({ user }) {
-  console.log("PROFILE");
-  console.log(user);
   return (
     <>
       <section className="user_info">

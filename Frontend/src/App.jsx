@@ -42,7 +42,7 @@ function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/passreset" element={<ResPas />} />
 
-        {/* <Route path="/service/:id" element={<ServiceDetail />} /> */}
+        <Route path="/service/:id" element={<ServiceDetail />} />
         <Route path="/user/:nickname" element={<ProfilePage />} />
 
         <Route path="*" element={<NotFoundPage />} />
