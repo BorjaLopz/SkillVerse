@@ -7,9 +7,11 @@ import { Link } from "react-router-dom";
 // import DoneCheck from "./Done";
 
 function ServiceCard() {
-  const [service, setService] = useState({});
+  const [service, setService] = useState([]);
+  const [userServiceOwner, setUserServiceOwner] = useState();
   const [userData, setUserData] = useState({});
-  const { isAuthenticated } = useAuth();
+
+  const avatar = useAvatar(service.user_id);
 
   const { id } = useParams();
   const { get } = useServer();
@@ -17,9 +19,8 @@ function ServiceCard() {
   const getService = async () => {
     try {
       const { data } = await get({ url: `/service/${id}` });
-      console.log(data);
-      setService(data.message);
 
+      setService(data.message);
       getUserOwner(data.message.user_id);
     } catch (e) {
       console.log("error: ", e.message);
@@ -29,7 +30,6 @@ function ServiceCard() {
   const getUserOwner = async (userId) => {
     try {
       const { data } = await get({ url: `/userdata/${userId}` }); //Tarda en
-      console.log(data);
       setUserData(data.userData);
     } catch (e) {
       console.log("error: ", e.message);
@@ -52,19 +52,19 @@ function ServiceCard() {
           </div>
           <div className="bg-white rounded-b-lg px-8">
             <Link to={`/user/${userData.nickname}`}>
-              <div className="relative">
-                <img
-                  className="right-0 w-16 h-16 rounded-full mr-4 shadow-lg absolute -mt-8 bg-gray-100"
-                  src={`${userData.userPhoto}`}
-                  alt="Imagen usuario"
-                />
-              </div>
-            </Link>
+
+            <div className="relative">
+              <img
+                className="right-0 w-16 h-16 rounded-full mr-4 shadow-lg absolute -mt-8 bg-gray-100"
+                src={userData.userPhoto}
+                alt={`Foto de perfil de ${userData.nickname}`}
+              />
+            </div>
             <div className="pt-8 pb-8">
               <h1 className="text-2xl font-bold text-gray-700">
                 {service.title}
               </h1>
-              <p className="text-sm text-gray-600">{userData.nickname}</p>
+              <p className="text-sm text-gray-600">{`${userData.nickname}`}</p>
 
               <p className="mt-6 text-gray-700">{service.request_body}</p>
             </div>
