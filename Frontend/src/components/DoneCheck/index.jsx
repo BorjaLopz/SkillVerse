@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
-import useServer from "../hooks/useServer";
+import useServer from "../../hooks/useServer";
 import toast from "react-hot-toast";
 
 function DoneCheck({ id, markDone }) {
@@ -14,7 +14,8 @@ function DoneCheck({ id, markDone }) {
 
     try {
       const { data, error } = await server.patch({
-        url: `service/${id}/done`,
+        // url: `/service/${id}/:status`,
+        url: `/service/${id}/done`,
         body: { id },
       });
 
@@ -46,9 +47,15 @@ function DoneCheck({ id, markDone }) {
             checked={isChecked}
             onChange={handleCheckboxChange}
           />
-          Marcar como completado
+          Completado
         </label>
-        <button className="accept" type="submit" disabled={isLoading}>
+        {"//"}
+        <button
+          className="accept"
+          type="submit"
+          disabled={isLoading}
+          style={{ backgroundColor: "red" }}
+        >
           {isLoading ? "Completando..." : "Aceptar"}
         </button>
       </form>
