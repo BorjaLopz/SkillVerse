@@ -17,6 +17,7 @@ const {
   deleteUser,
   getUserPhoto,
   getUserData,
+  getUserAvatar,
 } = require("../db/users");
 const { getConnection } = require("../db/db");
 
@@ -224,6 +225,24 @@ const getUserDataController = async (req, res, next) => {
   }
 };
 
+const getUserAvatarController = async (req, res, next) => {
+  try {
+    const { nickname } = req.params;
+
+    const userAvatar = await getUserAvatar(nickname);
+    // console.log("CONTROLLER");
+    // console.log(userAvatar);
+    res.send({
+      status: "ok",
+      userAvatar: userAvatar,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+
+
 const editUserController = async (req, res, next) => {
   const id_params = +req.params.id;
   const id = req.userId;
@@ -313,4 +332,5 @@ module.exports = {
   editUserController,
   getAllFieldsExceptPasswordController,
   getUserDataController,
+  getUserAvatarController,
 };
