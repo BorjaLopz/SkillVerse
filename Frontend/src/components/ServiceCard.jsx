@@ -9,6 +9,7 @@ import AddComent from "../components/AddComment";
 function ServiceCard() {
   const [service, setService] = useState([]);
   const [userServiceOwner, setUserServiceOwner] = useState();
+  const [userData, setUserData] = useState({});
 
   const avatar = useAvatar(service.user_id);
 
@@ -31,10 +32,17 @@ function ServiceCard() {
   const getService = async () => {
     try {
       const { data } = await get({ url: `/service/${id}` });
-      setUserServiceOwner(data.message.user_id);
-      // useAvatar(data.message.user_id);
-      // await getUserServiceOwner(data.message.user_id);
       setService(data.message);
+      getUserOwner(data.message.user_id);
+    } catch (e) {
+      console.log("error: ", e.message);
+    }
+  };
+
+  const getUserOwner = async (userId) => {
+    try {
+      const { data } = await get({ url: `/userdata/${userId}` }); //Tarda en
+      setUserData(data.userData);
     } catch (e) {
       console.log("error: ", e.message);
     }
@@ -59,15 +67,15 @@ function ServiceCard() {
             <div className="relative">
               <img
                 className="right-0 w-16 h-16 rounded-full mr-4 shadow-lg absolute -mt-8 bg-gray-100"
-                src=""
-                alt="Imagen usuario"
+                src={userData.userPhoto}
+                alt={`Foto de perfil de ${userData.nickname}`}
               />
             </div>
             <div className="pt-8 pb-8">
               <h1 className="text-2xl font-bold text-gray-700">
                 {service.title}
               </h1>
-              <p className="text-sm text-gray-600">Nombre de usuario</p>
+              <p className="text-sm text-gray-600">{`${userData.nickname}`}</p>
 
               <p className="mt-6 text-gray-700">{service.request_body}</p>
             </div>
