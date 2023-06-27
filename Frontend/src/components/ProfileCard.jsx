@@ -1,4 +1,6 @@
-function ProfileCard() {}
+import { useParams } from "react-router";
+
+function ProfileCard({ user }) {}
 
 //información actual del user
 // email: "",

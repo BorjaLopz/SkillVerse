@@ -133,7 +133,8 @@ const ServicesList = () => {
                       <p>{service.title}</p>
                       <p>{service.request_body}</p>
                       <p>{service.service_type}</p>
-                      <p>Creado por: {service.nickname}</p>
+                      <p>Creado por: </p>
+                      {/* {userData.nickname} */}
                       <p>Creado por: {service.user_id}</p>
                     </h3>
                   </div>
