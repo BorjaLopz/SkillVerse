@@ -3,6 +3,7 @@ import Avatar from "../Avatar";
 import EditProfile from "../EditProfile";
 import ProfileCard from "../ProfileCard";
 import DeleteAccount from "../DeleteAccount";
+import ServicesByUser from "../ServicesByUser";
 
 function Profile({ user }) {
   return (
@@ -17,6 +18,11 @@ function Profile({ user }) {
       </section>
       <section className="delete-user">
         <DeleteAccount />
+      </section>
+
+      <section>
+        <p className="text-center text-4xl">Servicios de {`${user}`}</p>
+        <ServicesByUser nickname={user} />
       </section>
     </>
   );
