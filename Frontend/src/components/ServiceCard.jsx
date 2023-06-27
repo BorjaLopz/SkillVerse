@@ -51,7 +51,7 @@ function ServiceCard() {
             </p>
           </div>
           <div className="bg-white rounded-b-lg px-8">
-            <Link to={`/user/${userData.nickname}`}>
+            <Link to={`/user/${userData.nickname}`} />
 
             <div className="relative">
               <img
