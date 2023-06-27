@@ -31,7 +31,6 @@ function NavBar() {
         )}
         {isAuthenticated && " || "}
         {isAuthenticated && <Avatar />}
-        {/* <HeaderAvatar /> cuando el user esté logueado, le lleva al Profile, sino es un Login */}
       </nav>
     </div>
   );

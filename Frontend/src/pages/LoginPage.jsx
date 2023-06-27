@@ -3,11 +3,9 @@ import Login from "../components/Login";
 
 function LoginPage() {
   return (
-    <>
-      <main>
-        <Login />
-      </main>
-    </>
+    <main>
+      <Login />
+    </main>
   );
 }
 

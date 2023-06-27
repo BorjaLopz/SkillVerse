@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
-import useServer from "../hooks/useServer.js";
+import useServer from "../../hooks/useServer.js";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -57,14 +57,14 @@ function Login() {
               <label htmlFor="password" className="label">
                 Contraseña
               </label>
-              <div className="text-sm">
+              {/* <div className="text-sm">
                 <Link
                   to="/passreset"
                   className="font-semibold text-indigo-600 hover:text-indigo-500"
                 >
                   ¿Olvidó su contraseña?
                 </Link>
-              </div>
+              </div> */}
             </div>
             <div className="mt-2">
               <input

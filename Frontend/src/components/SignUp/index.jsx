@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
-import useServer from "../hooks/useServer.js";
+import useServer from "../../hooks/useServer.js";
 import { useState } from "react";
 import toast from "react-hot-toast";
 
@@ -15,7 +15,7 @@ function SignUp() {
     const form = e.target;
     const credentials = Object.fromEntries(new FormData(form));
     const { data } = await post({ url: "/user/register", body: credentials });
-    if (data) return navigate("/");
+    if (data) return navigate("/login");
   };
 
   const togglePassword = () => {

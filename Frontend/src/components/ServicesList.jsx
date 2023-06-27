@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import SearchBar from "./SearchBar";
+// import SearchBar from "./SearchBar";
 import useServer from "../hooks/useServer";
 
 const ServicesList = () => {
