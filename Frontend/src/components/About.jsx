@@ -3,7 +3,7 @@ import React from "react";
 function About() {
   return (
     <div className="about">
-      <h2>Bienvenid@s a Portal Digital</h2>
+      <h2>¡Bienvenid@s!</h2>
       <p>
         ¿Necesitas ayuda con un proyecto digital? ¡Estás en el lugar correcto!
         Somos una plataforma que conecta a personas que necesitan servicios

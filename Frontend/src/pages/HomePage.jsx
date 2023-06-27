@@ -4,9 +4,7 @@ import Loading from "../components/Loading";
 function HomePage() {
   return (
     <main>
-      <p>
-        <Loading />
-      </p>
+      <Loading />
     </main>
   );
 }

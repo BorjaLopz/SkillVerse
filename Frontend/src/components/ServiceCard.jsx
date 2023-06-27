@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import AddComent from "./AddComment";
 import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
-// import DoneCheck from "./Done";
+import DoneCheck from "./DoneCheck";
 
 function ServiceCard() {
   const [service, setService] = useState([]);
@@ -74,10 +74,10 @@ function ServiceCard() {
             </div>
           </div>
         </div>
-        {/* <DoneCheck /> */}
+        <DoneCheck />
       </div>
 
-      {isAuthenticated && <AddComent />}
+      {/* {isAuthenticated && <AddComent />} */}
     </>
   );
 }
