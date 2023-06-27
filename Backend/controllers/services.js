@@ -7,6 +7,7 @@ const {
   getAllServices,
   updateServiceStatus,
   getServiceByType,
+  getServiceByNickname,
   createComment,
   deleteComment,
   getAllCommentsFromService,
@@ -199,6 +200,22 @@ const getServiceByTypeController = async (req, res, next) => {
     res.send({
       status: "ok",
       message: service,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
+const getServiceByNicknameController = async (req, res, next) => {
+  try {
+    const { nickname } = req.params;
+
+    console.log(nickname);
+    const services = await getServiceByNickname(nickname);
+
+    res.send({
+      status: "ok",
+      message: services,
     });
   } catch (e) {
     next(e);
@@ -414,4 +431,5 @@ module.exports = {
   deleteCommentsController,
   getAllCommentsFromServiceController,
   deleteServiceController,
+  getServiceByNicknameController,
 };
