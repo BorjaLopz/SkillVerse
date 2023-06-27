@@ -210,6 +210,27 @@ const getUserData = async (idUser) => {
   }
 };
 
+const getUserAvatar = async (nickname) => {
+  let connection;
+  try {
+    connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
+    const [result] = await connection.query(
+      `SELECT * FROM users WHERE nickname = ?`,
+      [nickname]
+    );
+
+    if (result.length === 0) {
+      throw generateError("No se encontró el usuario", 404);
+    }
+
+    return result[0];
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 module.exports = {
   createUser,
   getUserByEmail,
@@ -218,4 +239,5 @@ module.exports = {
   getUserPhoto,
   deleteUser,
   getUserData,
+  getUserAvatar,
 };

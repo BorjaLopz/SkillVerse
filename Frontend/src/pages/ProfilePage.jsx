@@ -4,13 +4,11 @@ import { useParams } from "react-router";
 import { useLocation } from "react-router-dom";
 
 function ProfilePage() {
-  const location = useLocation();
-  const { state } = location;
-  const user = state.from;
+  const { nickname } = useParams();
 
   return (
     <main>
-      <Profile user={user} />
+      <Profile user={nickname} />
     </main>
   );
 }

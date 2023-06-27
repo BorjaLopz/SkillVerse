@@ -6,7 +6,7 @@ import Avatar from "./Avatar";
 
 function NavBar() {
   const { isAuthenticated } = useAuth();
-  
+
   const user = useAuth();
 
   return (
@@ -30,7 +30,7 @@ function NavBar() {
           </NavLink>
         )}
         {isAuthenticated && " || "}
-        {isAuthenticated && <Avatar />}
+        {isAuthenticated && <Avatar user={`${user.user.user.nickname}`} />}
       </nav>
     </div>
   );

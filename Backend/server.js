@@ -18,6 +18,7 @@ const {
   getUserPhotoController,
   getAllFieldsExceptPasswordController,
   getUserDataController,
+  getUserAvatarController,
 } = require("./controllers/users");
 
 const {
@@ -62,6 +63,8 @@ app.post("/user/register", newUserController);
 
 /* PRUEBA OBTENCION FOTO */
 app.get("/userdata/:id", getUserDataController);
+
+app.get("/useravatar/:nickname", getUserAvatarController);
 
 //Obtener todos los campos de un user excepto su ID
 app.get("/user/:id", authUser, getAllFieldsExceptPasswordController);
