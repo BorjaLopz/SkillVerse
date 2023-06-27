@@ -1,5 +1,5 @@
 function DeleteComment() {
-  return <button className="delete_comment_button">Borrar comentario</button>;
+  return <button className="delete-comment-button">Borrar comentario</button>;
 }
 
 export default DeleteComment;

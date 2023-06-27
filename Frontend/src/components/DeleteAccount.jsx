@@ -1,5 +1,5 @@
 function DeleteAccount() {
-  return <button className="delete_account_button">Borrar cuenta</button>;
+  return <button className="delete-account-button">Borrar cuenta</button>;
 }
 
 export default DeleteAccount;

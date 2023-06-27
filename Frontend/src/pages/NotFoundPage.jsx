@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const NotFoundPage = () => {
   return (
     <main>
-      <div className="not_found">
+      <div className="not-found">
         <img
           alt="not_found_image"
           className="not-found-image"

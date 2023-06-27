@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import useServer from "../hooks/useServer";
 import { useEffect, useState } from "react";
-import useGetTokenValues from "../hooks/useGetTokenValues";
-import Avatar from "./Avatar";
-import useAvatar from "../hooks/useAvatar";
-import AddComent from "../components/AddComment";
+import AddComent from "./AddComment";
+import useAuth from "../hooks/useAuth";
+import { Link } from "react-router-dom";
+// import DoneCheck from "./Done";
 
 function ServiceCard() {
   const [service, setService] = useState([]);
@@ -16,22 +16,10 @@ function ServiceCard() {
   const { id } = useParams();
   const { get } = useServer();
 
-  const token = useGetTokenValues();
-
-  // const getUserServiceOwner = async (param) => {
-  //   try {
-  //     const id = parseInt(param);
-  //     const { data } = await get({ url: `/user/${id}` });
-  //     console.log(data);
-  //     setUserServiceOwner(data);
-  //   } catch (e) {
-  //     console.log("error: ", e.message);
-  //   }
-  // };
-
   const getService = async () => {
     try {
       const { data } = await get({ url: `/service/${id}` });
+
       setService(data.message);
       getUserOwner(data.message.user_id);
     } catch (e) {
@@ -49,10 +37,9 @@ function ServiceCard() {
   };
 
   useEffect(() => {
+    // getUserOwner();
     getService();
   }, []);
-
-  // console.log(service);
 
   return (
     <>
@@ -64,6 +51,8 @@ function ServiceCard() {
             </p>
           </div>
           <div className="bg-white rounded-b-lg px-8">
+            <Link to={`/user/${userData.nickname}`}>
+
             <div className="relative">
               <img
                 className="right-0 w-16 h-16 rounded-full mr-4 shadow-lg absolute -mt-8 bg-gray-100"
@@ -81,8 +70,10 @@ function ServiceCard() {
             </div>
           </div>
         </div>
+        {/* <DoneCheck /> */}
       </div>
-      <AddComent />
+
+      {isAuthenticated && <AddComent />}
     </>
   );
 }

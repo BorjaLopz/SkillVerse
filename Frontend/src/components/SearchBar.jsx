@@ -12,7 +12,7 @@
 //   };
 
 //   return (
-//     <div className="search_bar">
+//     <div className="search-bar">
 //       <select value={selectedCategory} onChange={handleSelectChange}>
 //         {categories.map((category, index) => (
 //           <option key={index} value={category}>
@@ -20,7 +20,7 @@
 //           </option>
 //         ))}
 //       </select>
-//       <button onClick={handleSearch} className="search_button">
+//       <button onClick={handleSearch} className="search-button">
 //         Buscar
 //       </button>
 //     </div>

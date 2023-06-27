@@ -1,5 +1,5 @@
 function DeleteService() {
-  return <button className="delete_service_button">Borrar servicio</button>;
+  return <button className="delete-service-button">Borrar servicio</button>;
 }
 
 export default DeleteService;
