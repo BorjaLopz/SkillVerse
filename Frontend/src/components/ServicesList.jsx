@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-// import SearchBar from "./SearchBar";
 import useServer from "../hooks/useServer";
 
 const ServicesList = () => {
@@ -31,57 +29,18 @@ const ServicesList = () => {
       } catch (e) {
         console.log("Error getting services: ", e);
       }
-      // try {
-      //   const response = await axios.get("/service", {
-      //     headers: { Authorization: "Bearer " + getToken() },
-      //   });
-
-      //   const { data } = response;
-      //   const { services } = data;
-
-      //   setServices(services);
-      //   setFilteredServices(services);
-      // } catch (error) {
-      //   console.error("Error getting services:", error);
-      // }
+   
     };
 
     fetchServices();
-  }, []);
+        const intervalId = setInterval(() => {
+      fetchServices();
+    }, 500);
 
-  // console.log(services);
+    return () => clearInterval(intervalId);
 
-  // useEffect(() => {
-  //   const fetchUser = async (service) => {
-  //     try {
-  //       const { data } = await axios.get(`/user/${service.user_id}`);
-  //       const user = data.user;
-
-  //       const updatedServices = services.map((s) => {
-  //         if (s.id === service.id) {
-  //           return {
-  //             ...s,
-  //             createdBy: user.user.user.nickname,
-  //           };
-  //         }
-  //         return s;
-  //       });
-
-  //       console.log(updatedServices);
-
-  //       setServices(updatedServices);
-  //       setFilteredServices(updatedServices);
-  //     } catch (error) {
-  //       console.error(`Error fetching user with id ${service.user_id}:`, error);
-  //     }
-  //   };
-
-  //   services.forEach((service) => {
-  //     if (!service.createdBy) {
-  //       fetchUser(service);
-  //     }
-  //   });
-  // }, [services]);
+  }, [])
+  
 
   const handleFilterChange = (selectedService) => {
     if (selectedService === "Todos los servicios") {
@@ -95,27 +54,7 @@ const ServicesList = () => {
   };
 
   return (
-    // <>
-    //   <div>
-    //     <h2>Lista de servicios</h2>
-    //     <SearchBar services={services} onFilterChange={handleFilterChange} />
-    //     {/* {filteredServices.map((service) => (
-    //       <div key={service.id}>
-    //         <h2>{service.title}</h2>
-    //         <p>{service.request_body}</p>
-    //         <p>{service.service_type}</p>
-    //       </div>
-    //     ))} */}
-    //     {!services.length && <p>No hay ningún servicio aún</p>}
-    //     {services.map((service) => (
-    //       <div key={service.id}>
-    //         <h2>{service.title}</h2>
-    //         <p>{service.request_body}</p>
-    //         <p>{service.service_type}</p>
-    //       </div>
-    //     ))}
-    //   </div>
-    // </>
+   
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 bg-gray">
         <h2 className="text-4xl font-bold tracking-tight text-gray-900 text-center">
