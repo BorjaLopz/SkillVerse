@@ -3,7 +3,6 @@ import { api_url } from "../config.js";
 async function Http({ method = "GET", url, token, body }) {
   if (!url.startsWith("/")) throw new Error("La URL debe comenzar con un /");
 
-
   const fullURL = new URL(api_url + url);
   const config = {
     method,
@@ -22,19 +21,19 @@ async function Http({ method = "GET", url, token, body }) {
 
   if (body) {
     // config.body = body;
-    console.log(body);
+    // console.log(body);
     config.body = JSON.stringify(body);
-    console.log(config);
+    // console.log(config);
   }
 
   try {
     // console.log(fullURL.href);
     const res = await fetch(fullURL.href, config);
-    console.log("res");
-    console.log(res);
+    // console.log("res");
+    // console.log(res);
     const data = await res.json();
-    console.log("data");
-    console.log(data);
+    // console.log("data");
+    // console.log(data);
     if (!res.ok) throw data.error;
 
     return { data, loading: false, error: null };
