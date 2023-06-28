@@ -23,20 +23,7 @@ async function Http({
   }
 
   if (body) {
-    if (body?.file) {
-      const currentFile = {
-        lastModified: body.file.lastModified,
-        name: body.file.name,
-        size: body.file.size,
-        type: body.file.type,
-      };
-
-      config.file = JSON.stringify(currentFile);
-    }
-    console.log("body");
-    console.log(body);
     config.body = JSON.stringify(body);
-    console.log(config);
   }
 
   try {

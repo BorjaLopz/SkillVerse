@@ -3,24 +3,25 @@ import "./style.css";
 import useServer from "../../hooks/useServer";
 import toast from "react-hot-toast";
 
-function DoneCheck({ id, markDone }) {
+function DoneCheck({ id, complete, setService }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
   const server = useServer();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleMarkAsDone = async () => {
     setIsLoading(true);
 
     try {
       const { data, error } = await server.patch({
-        // url: `/service/${id}/:status`,
         url: `/service/${id}/done`,
-        body: { id },
+        body: { done: 1 }, // Actualiza el valor de 'done' a 1
       });
 
       if (!error) {
-        markDone({ serviceId: id, complete: true });
+        setService((prevService) => ({
+          ...prevService,
+          complete: true,
+        }));
+
         toast.success(`Servicio ${id} completado con éxito`);
       } else {
         toast.error(
@@ -34,31 +35,15 @@ function DoneCheck({ id, markDone }) {
     }
   };
 
-  const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-  };
-
   return (
-    <div className={`container ${isChecked ? "checked" : ""}`}>
-      <form className="form" onSubmit={handleSubmit}>
-        <label>
-          <input
-            type="checkbox"
-            checked={isChecked}
-            onChange={handleCheckboxChange}
-          />
-          Completado
-        </label>
-        {"//"}
-        <button
-          className="accept"
-          type="submit"
-          disabled={isLoading}
-          style={{ backgroundColor: "red" }}
-        >
-          {isLoading ? "Completando..." : "Aceptar"}
-        </button>
-      </form>
+    <div className="button-done">
+      <button
+        className="completado"
+        onClick={handleMarkAsDone}
+        style={{ backgroundColor: "red" }}
+      >
+        Marcar como hecho
+      </button>
     </div>
   );
 }

@@ -1,9 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import useServer from "../hooks/useServer";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddComent from "./AddComment";
 import useAuth from "../hooks/useAuth";
-import { Link } from "react-router-dom";
 import DoneCheck from "./DoneCheck";
 import { useNavigate } from "react-router-dom";
 
@@ -37,7 +36,7 @@ function ServiceCard() {
 
   const getUserOwner = async (userId) => {
     try {
-      const { data } = await get({ url: `/userdata/${userId}` }); //Tarda en
+      const { data } = await get({ url: `/userdata/${userId}` });
       setUserData(data.userData);
     } catch (e) {
       console.log("error: ", e.message);
@@ -48,6 +47,13 @@ function ServiceCard() {
     // getUserOwner();
     getService();
   }, []);
+
+  const markDone = ({ serviceId, complete }) => {
+    // LÓGIKA
+    console.log(
+      `Service ${serviceId} marked as ${complete ? "done" : "undone"}`
+    );
+  };
 
   return (
     <>
@@ -81,7 +87,11 @@ function ServiceCard() {
             </div>
           </div>
         </div>
-        {/* <DoneCheck /> */}
+        <DoneCheck
+          id={service.id}
+          complete={service.complete}
+          setService={setService}
+        />
       </div>
 
       {isAuthenticated && <AddComent />}
