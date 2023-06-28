@@ -28,7 +28,7 @@ const {
 
 const newServiceController = async (req, res, next) => {
   try {
-    const { title, request_body, service_type } = req.body;
+    let { title, request_body, required_type } = req.body;
 
     //Comprobar título
     if (!title || title.lenght > 50 || title.lenght < 15) {
@@ -50,8 +50,8 @@ const newServiceController = async (req, res, next) => {
       );
     }
 
-    //Comprobar service_type
-    if (!service_type || service_type.lenght > 20) {
+    //Comprobar required_type
+    if (!required_type || required_type.lenght > 20) {
       throw generateError(
         "El tipo de servicio requerido debe tener menos de 20 caracteres",
         400
@@ -96,6 +96,9 @@ const newServiceController = async (req, res, next) => {
     //   console.log("req.files es ", req.files?.file)
     // }
 
+    // console.log("req.files desde controllers");
+    // console.log(req);
+
     const fileName = await uploadFilesInFolder(req, "file", "service");
     console.log("fileName: ", fileName);
 
@@ -103,7 +106,7 @@ const newServiceController = async (req, res, next) => {
       title,
       request_body,
       req.userId,
-      service_type,
+      required_type,
       fileName
     );
 
@@ -157,6 +160,7 @@ const updateServiceStatusByIDController = async (req, res, next) => {
     //Obtener el ID del servicio y del estado
     const { id, status } = req.params;
     const admin = req.admin;
+    const userId = req.userId;
 
     //Comprobar si el estado es válido
     if (!Object.values(SERVICE_STATUS).includes(status.toUpperCase())) {
@@ -167,7 +171,7 @@ const updateServiceStatusByIDController = async (req, res, next) => {
     const serviceRequested = await getServiceByID(id);
 
     //Comprobamos si somos admin o somos el propietario del servicio
-    if (!admin && id !== serviceRequested.user_id) {
+    if (!admin && userId !== serviceRequested.user_id) {
       throw generateError(
         "No puedes cambiar el estado del servicio de otros usuarios.",
         401
