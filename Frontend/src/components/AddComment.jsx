@@ -20,51 +20,13 @@ const AddComment = () => {
 
   const serviceId = getServiceIdFromURL(); // Obtener el identificador del servicio de la URL
 
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-
-  //   try {
-  //     const currentComment = {
-  //       comment,
-  //       file,
-  //       serviceId,
-  //     };
-
-  //     const { data } = await post({
-  //       url: `/comments/${serviceId}`, // Utilizar el identificador del servicio en la URL
-  //       body: currentComment,
-  //     });
-
-  //     console.log(data);
-
-  //     if (data) {
-  //       toast.success(`Comentario creado con éxito`);
-  //       setComment("");
-  //       setFile(null);
-  //     } else {
-  //       toast.error(`No se ha podido crear el comentario. Inténtalo de nuevo.`);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error sending the new comment:", error);
-  //   }
-  // };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-      // //#region //formData por implementar bien
-      // const formData = new FormData();
-
-      // formData.append("title", title);
-      // formData.append("request_body", description);
-      // formData.append("required_type", requiredType);
-      // formData.append("file", file);
-
-      // //#endregion //formData
-
       const currentComment = {
         comment,
+        file,
       };
 
       const { data } = await post({
