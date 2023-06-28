@@ -156,6 +156,7 @@ const updateServiceStatusByIDController = async (req, res, next) => {
     //Obtener el ID del servicio y del estado
     const { id, status } = req.params;
     const admin = req.admin;
+    const userId = req.userId;
 
     //Comprobar si el estado es válido
     if (!Object.values(SERVICE_STATUS).includes(status.toUpperCase())) {
@@ -166,7 +167,7 @@ const updateServiceStatusByIDController = async (req, res, next) => {
     const serviceRequested = await getServiceByID(id);
 
     //Comprobamos si somos admin o somos el propietario del servicio
-    if (!admin && id !== serviceRequested.user_id) {
+    if (!admin && userId !== serviceRequested.user_id) {
       throw generateError(
         "No puedes cambiar el estado del servicio de otros usuarios.",
         401
