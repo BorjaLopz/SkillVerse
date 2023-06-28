@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useServer from "../hooks/useServer";
 import toast from "react-hot-toast";
+import { categories } from "../config";
 
 const AddService = () => {
   const [title, setTitle] = useState("");
@@ -51,17 +52,6 @@ const AddService = () => {
       console.error("Error sending the new service:", error);
     }
   };
-
-  const categories = [
-    "Diseño Gráfico",
-    "Traducción",
-    "Copywriting",
-    "Programación",
-    "Fotografía",
-    "Audio",
-    "Vídeo",
-    "Otros",
-  ];
 
   return (
     <div className="add-service">

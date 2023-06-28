@@ -24,6 +24,17 @@ const TYPE_OF_SERVICE = ["SERVICE", "USER"];
 const USER_PATH = "../Frontend/public/fotosUsuario";
 const SERVICE_PATH = "/uploads";
 
+const categories = [
+  "Diseño Gráfico",
+  "Traducción",
+  "Copywriting",
+  "Programación",
+  "Fotografía",
+  "Audio",
+  "Vídeo",
+  "Otros",
+];
+
 //Generar errores personalizados en respuesta a una solicitud HTTP en caso de error en el server
 const generateError = (message, status) => {
   const error = new Error(message);
@@ -38,6 +49,13 @@ const createPathIfNotExists = async (path) => {
   } catch {
     await fs.mkdir(path);
   }
+};
+
+//Obtenemos una categoria aleatoria para el generador de servicios
+const getRandomCategory = () => {
+  const maxNumber = categories.length;
+  const random = Math.floor(Math.random() * maxNumber);
+  return categories[random];
 };
 
 //Obtener la key de un diccionario por su value
@@ -191,4 +209,5 @@ module.exports = {
   ALLOWED_EXTENSIONS,
   uploadFilesInFolder,
   removeFile,
+  getRandomCategory,
 };

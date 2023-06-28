@@ -8,7 +8,7 @@ const bcrypt = require("bcrypt");
 const path = require("path");
 const fs = require("fs"); //Con promesa no funciona el borrar ficheros
 
-const { removeFile } = require("../helpers");
+const { removeFile, getRandomCategory } = require("../helpers");
 
 const addData = process.argv[2] === "--data";
 
@@ -145,7 +145,6 @@ async function main() {
         const userId = userResult.insertId;
         console.log(chalk.green(`Inserted user with ID ${userId}`));
 
-
         for (let j = 0; j < services; j++) {
           // Generar un servicio aleatorio
           await connection.query(
@@ -157,15 +156,16 @@ async function main() {
               faker.lorem.words(6),
               faker.lorem.paragraph(),
               faker.system.fileName(),
-              userId, 
-              faker.lorem.word(),
+              userId,
+              getRandomCategory(),
               faker.datatype.boolean(),
               faker.datatype.boolean(),
             ]
           );
 
-          console.log(chalk.green(`Inserted service ${j + 1} for user ${userId}`));
-
+          console.log(
+            chalk.green(`Inserted service ${j + 1} for user ${userId}`)
+          );
 
           for (let k = 0; k < commentsPerService; k++) {
             // Generar un comentario aleatorio
@@ -175,8 +175,8 @@ async function main() {
           VALUES (?, ?, ?, ?, ?, ?)
           `,
               [
-                userId, 
-                j + 1,    
+                userId,
+                j + 1,
                 faker.lorem.sentences(),
                 faker.system.fileName(),
                 faker.datatype.boolean(),
@@ -184,12 +184,13 @@ async function main() {
               ]
             );
 
-            console.log(chalk.green(`Inserted comment ${k + 1} for service ${j + 1}`));
+            console.log(
+              chalk.green(`Inserted comment ${k + 1} for service ${j + 1}`)
+            );
           }
         }
       }
     }
-
 
     console.log(chalk.green("Tables created"));
   } catch (error) {
