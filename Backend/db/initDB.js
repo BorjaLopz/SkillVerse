@@ -75,8 +75,7 @@ async function main() {
       userPhoto VARCHAR(200),
       admin BOOLEAN DEFAULT FALSE,
       active BOOLEAN DEFAULT TRUE,
-      linkedin VARCHAR(100) NULL CHECK (linkedin IS NULL OR linkedin REGEXP 'linkedin'),
-      instagram VARCHAR(100) NULL CHECK (instagram IS NULL OR instagram REGEXP 'instagram')
+     ko_fi VARCHAR(100) NULL 
     );
     `);
 

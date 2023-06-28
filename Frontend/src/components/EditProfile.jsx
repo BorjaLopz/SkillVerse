@@ -1,8 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
 
-//el error que da id y admin pone que es porque no tenemos instalado el paquete prop-types para definir la validacion de las props
-//veo que tambien pasa en otros componentes asi que esto hay que mirarlo
 const EditProfile = ({ id, admin }) => {
   const [formData, setFormData] = useState({
     email: "",
@@ -12,9 +10,11 @@ const EditProfile = ({ id, admin }) => {
     surname: "",
     password: "",
     biography: "",
+    ko_fi: "",
   });
 
   const [successMessage, setSuccessMessage] = useState("");
+  const [error, setError] = useState("");
 
   const handleChange = (event) => {
     setFormData({
@@ -23,8 +23,18 @@ const EditProfile = ({ id, admin }) => {
     });
   };
 
+  const validateKoFiURL = (value) => {
+    const koFiURLRegex = /^https?:\/\/(?:www\.)?ko-fi\.com\/[a-zA-Z0-9]+$/;
+    return koFiURLRegex.test(value);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!validateKoFiURL(formData.ko_fi)) {
+      setError("Por favor, introduce una URL válida de Ko-fi.");
+      return;
+    }
 
     try {
       const response = await axios.put(`/user/${id}/edit`, formData, {
@@ -33,28 +43,15 @@ const EditProfile = ({ id, admin }) => {
         },
       });
 
-      console.log(response.data);
-      //actualizar el estado con los datos recibidos del servidor
       setFormData(response.data);
-      // Establecer un mensaje de éxito en el estado del componente
-      setSuccessMessage("Profile updated successfully!");
+      setSuccessMessage("¡Perfil actualizado exitosamente!");
     } catch (error) {
       console.error(error);
-      //  manejar el error
       if (error.response && error.response.status === 401) {
-        // Redireccionar al usuario a la página de inicio de sesión
         window.location.href = "/login";
       }
     }
   };
-
-  // const renderAdminContent = () => {
-  //   if (admin) {
-  //     return <div>Additional content for administrators</div>;
-  //   }
-  //   return null;
-  // };
-
   return (
     <div className="edit-profile">
       <h2>Editar perfil</h2>
@@ -128,12 +125,28 @@ const EditProfile = ({ id, admin }) => {
           />
         </label>
         <br />
+         <label>
+         Ko-Fi:
+          <div>
+            < a href={"https://ko-fi.com/monica77156"} target="_blank" rel="noopener noreferrer">
+          <img
+              src="/fotosUsuario/ko-fi-icon.svg"
+              alt="Ko-fi"
+              style={{ width: "40px", height: "40px" }}
+            />
+             </a>
+          </div>
+        </label>
+        <br />
+
         <button type="submit">Guardar cambios</button>
       </form>
-      {successMessage && <p>{successMessage}</p>}
+      {error && <p className="error-message">{error}</p>}
+            {successMessage && <p>{successMessage}</p>}
       {/* {renderAdminContent()} */}
     </div>
   );
 };
 
-export default EditProfile;
+export default EditProfile
+
