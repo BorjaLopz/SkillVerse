@@ -174,7 +174,7 @@ async function uploadFilesInFolder(req, fieldNamePostman, typeOfFile) {
     } else {
       console.log("SERVICE");
       //Comprobar si la extension es valida.
-      console.log(getExtensionFile(sampleFile.name));
+      // console.log(getExtensionFile(sampleFile.name));
       if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
         throw generateError(
           `Formato no válido. Tipos de formatos permitidos: ${ALLOWED_EXTENSIONS}`,
