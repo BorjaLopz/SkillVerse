@@ -5,7 +5,7 @@ import AddComent from "./AddComment";
 import useAuth from "../hooks/useAuth";
 import DoneCheck from "./DoneCheck";
 
-function ServiceCard() { 
+function ServiceCard() {
   const [service, setService] = useState([]);
   const [userServiceOwner, setUserServiceOwner] = useState();
   const [userData, setUserData] = useState({});
@@ -80,11 +80,11 @@ function ServiceCard() {
             </div>
           </div>
         </div>
-        {/* <DoneCheck
+        <DoneCheck
           id={service.id}
           complete={service.complete}
           setService={setService}
-        /> */}
+        />
       </div>
 
       {isAuthenticated && <AddComent />}
