@@ -6,7 +6,7 @@ import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 import DoneCheck from "./DoneCheck";
 
-function ServiceCard() {
+function ServiceCard() { 
   const [service, setService] = useState([]);
   const [userServiceOwner, setUserServiceOwner] = useState();
   const [userData, setUserData] = useState({});

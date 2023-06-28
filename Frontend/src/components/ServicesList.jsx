@@ -29,18 +29,15 @@ const ServicesList = () => {
       } catch (e) {
         console.log("Error getting services: ", e);
       }
-   
     };
 
     fetchServices();
-        const intervalId = setInterval(() => {
+    const intervalId = setInterval(() => {
       fetchServices();
     }, 500);
 
     return () => clearInterval(intervalId);
-
-  }, [])
-  
+  }, []);
 
   const handleFilterChange = (selectedService) => {
     if (selectedService === "Todos los servicios") {
@@ -54,7 +51,6 @@ const ServicesList = () => {
   };
 
   return (
-   
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 bg-gray">
         <h2 className="text-4xl font-bold tracking-tight text-gray-900 text-center">
