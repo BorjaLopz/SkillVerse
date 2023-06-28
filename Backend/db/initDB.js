@@ -119,9 +119,9 @@ async function main() {
     // deleteFilesFromDirectory("../../Frontend/public/fotosUsuario");
 
     if (addData) {
-      const users = 20;
-      const services = 2;
-      const commentsPerService = 2;
+      const users = 10;
+      const services = 1;
+      const commentsPerService = 1;
 
       for (let i = 0; i < users; i++) {
         const password = await bcrypt.hash("Password123", 10);
