@@ -2,7 +2,6 @@ const { getConnection } = require("../db/db");
 const { generateError } = require("../helpers");
 const chalk = require("chalk");
 
-
 const { DB_DATABASE } = process.env;
 
 //Crear servicio en la BBDD
@@ -62,13 +61,17 @@ const getAllServices = async (user_id = -1) => {
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
 
+    // const [result] = await connection.query(
+    //   `SELECT * FROM services WHERE user_id != ? AND done = ? ORDER BY creation_date ASC`,
+    //   [user_id, 0]
+    // );
+
     const [result] = await connection.query(
-      `SELECT * FROM services WHERE user_id != ? AND done = ? ORDER BY creation_date ASC`,
-      [user_id, 0]
+      `SELECT * FROM services WHERE user_id != ? ORDER BY creation_date ASC`,
+      [user_id]
     );
     if (result.length === 0) {
       return "No hay ningún servicio aún";
-      throw generateError("No hay ningún servicio aún", 404);
     }
 
     return result;
@@ -129,6 +132,61 @@ const getServiceByType = async (type, id) => {
   }
 };
 
+const getUserIdByNickname = async (nickname) => {
+  let connection;
+
+  try {
+    connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
+    const [result] = await connection.query(
+      `SELECT * FROM users WHERE nickname = ?`,
+      [nickname]
+    );
+
+    if (result.length === 0) {
+      throw generateError("No existen servicios de " + nickname, 400);
+    }
+
+    return result;
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+const getServiceByNickname = async (nickname) => {
+  let connection;
+
+  try {
+    connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
+    const [prueba] = await getUserIdByNickname(nickname);
+    const { id } = prueba;
+
+    const [result] = await connection.query(
+      `SELECT * FROM services WHERE user_id = ?`,
+      [id]
+    );
+
+    // const [result] = await connection.query(
+    //   `SELECT * FROM services WHERE service_type LIKE ? AND done = ? AND user_id != ?`,
+    //   [`%${type}%`, 0, id]
+    // );
+
+    // if (result.length === 0) {
+    //   throw generateError(
+    //     "No existe ningún servicio que contenga " + type,
+    //     400
+    //   );
+    // }
+
+    return result;
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 const createComment = async (
   comment,
   service_file = "",
@@ -154,8 +212,6 @@ const createComment = async (
     if (connection) connection.release();
   }
 };
-
-
 
 const deleteComment = async (id_s, id_c) => {
   let connection;
@@ -267,6 +323,7 @@ module.exports = {
   getAllServices,
   updateServiceStatus,
   getServiceByType,
+  getServiceByNickname,
   createComment,
   deleteComment,
   getAllCommentsFromService,

@@ -18,6 +18,7 @@ const {
   getUserPhotoController,
   getAllFieldsExceptPasswordController,
   getUserDataController,
+  getUserAvatarController,
 } = require("./controllers/users");
 
 const {
@@ -30,6 +31,7 @@ const {
   deleteCommentsController,
   getAllCommentsFromServiceController,
   deleteServiceController,
+  getServiceByNicknameController,
 } = require("./controllers/services");
 
 const { authUser, checkHeaders } = require("./middlewares/auth");
@@ -62,6 +64,8 @@ app.post("/user/register", newUserController);
 
 /* PRUEBA OBTENCION FOTO */
 app.get("/userdata/:id", getUserDataController);
+
+app.get("/useravatar/:nickname", getUserAvatarController);
 
 //Obtener todos los campos de un user excepto su ID
 app.get("/user/:id", authUser, getAllFieldsExceptPasswordController);
@@ -99,6 +103,9 @@ app.post("/comments/:id", authUser, commentsFileController);
 
 //Obtener todos los comentarios de un servicio
 app.get("/service/:id/all", authUser, getAllCommentsFromServiceController);
+
+//Obtener todos los servicios por nickname
+app.get("/service/nickname/:nickname",  getServiceByNicknameController);
 
 //Eliminar comentario
 app.delete(

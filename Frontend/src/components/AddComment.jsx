@@ -7,6 +7,7 @@ const AddComment = () => {
   const [comment, setComment] = useState("");
   const [file, setFile] = useState(null);
   const { post } = useServer();
+
   const getServiceIdFromURL = () => {
     const url = window.location.href;
     const parts = url.split("/");
@@ -26,23 +27,24 @@ const AddComment = () => {
       const currentComment = {
         comment,
         file,
-        serviceId,
       };
 
       const { data } = await post({
-        url: `/comments/${serviceId}`, // Utilizar el identificador del servicio en la URL
+        url: `/comments/${serviceId}`,
         body: currentComment,
       });
 
+      console.log(data);
+
       if (data) {
-        toast.success(`Comentario creado con éxito`);
+        toast.success(`Comentario enviado con exito`);
         setComment("");
         setFile(null);
       } else {
         toast.error(`No se ha podido crear el comentario. Inténtalo de nuevo.`);
       }
     } catch (error) {
-      console.error("Error sending the new comment:", error);
+      console.error("Error sending the new service:", error);
     }
   };
 

@@ -2,32 +2,30 @@ import "./avatar.css";
 // import { getTokenFromLocalStorage } from "../../../../Backend/helpers";
 import useGetTokenValues from "../../hooks/useGetTokenValues";
 import useAuth from "../../hooks/useAuth";
+import { useEffect, useState } from "react";
+import useServer from "../../hooks/useServer";
 
 //getUserPhoto desde backend
-const Avatar = ({ id = "" }) => {
-  let user = {};
-  if (!id) {
-    user = useAuth();
-  } else {
-    // console.log(newProfile);
-    user = "";
-  }
+const Avatar = ({ user = "" }) => {
+  const [userAvatar, setUserAvatar] = useState("");
 
-  // console.log(user); //Token
-  // console.log(user.user.nickname);  //Nickname
-  // console.log(user.user.admin); //Si es admin
+  const { get } = useServer();
+  const fetchUserImg = async (user) => {
+    try {
+      const { data } = await get({ url: `/userAvatar/${user}` });
+      setUserAvatar(data.userAvatar.userPhoto);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserImg(user);
+  }, []);
 
   return (
     <>
-      {!id && (
-        <img
-          className="avatar"
-          src={user.user.user.userPhoto}
-          alt={`Avatar de ${user.user.user.nickname}`}
-        />
-      )}
-
-      {id && <p>Imagen del usuario{`${id}`}</p>}
+      <img className="avatar" src={userAvatar} alt={`Avatar de ${user}`} />
     </>
   );
 };

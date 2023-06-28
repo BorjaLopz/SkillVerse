@@ -18,13 +18,14 @@ import AddService from "./components/AddService.jsx";
 import Footer from "./components/Footer/index.jsx";
 import LogOut from "./components/LogOut";
 import ServiceCard from "./components/ServiceCard";
+//import ServicesList from "./components/ServicesList";
 //import CommentCard from "./components/CommentCard";
 
 function App() {
   return (
     <div className="app">
       {/*<CommentCard key={index} comment={comment} />*/}
-      {/* <ServicesList /> */}
+      {/*<ServicesList /> */}
 
       <Toaster position="top-right" reverseOrder={false} />
       <Header />

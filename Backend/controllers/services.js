@@ -7,6 +7,7 @@ const {
   getAllServices,
   updateServiceStatus,
   getServiceByType,
+  getServiceByNickname,
   createComment,
   deleteComment,
   getAllCommentsFromService,
@@ -206,16 +207,31 @@ const getServiceByTypeController = async (req, res, next) => {
   }
 };
 
+const getServiceByNicknameController = async (req, res, next) => {
+  try {
+    const { nickname } = req.params;
+
+    const services = await getServiceByNickname(nickname);
+
+    res.send({
+      status: "ok",
+      message: services,
+    });
+  } catch (e) {
+    next(e);
+  }
+};
+
 const commentsFileController = async (req, res, next) => {
   try {
-    const { comments } = req.body;
+    const { comment } = req.body;
     const { id } = req.params;
 
     //Comprobamos si el servicio existe en la base de datos
     await getServiceByID(id);
 
     //Comprobar título
-    if (!comments) {
+    if (!comment) {
       throw generateError("Debes introducir un comentario", 400);
     }
 
@@ -246,7 +262,7 @@ const commentsFileController = async (req, res, next) => {
       });
     }
 
-    const id_comment = await createComment(comments, fileName, req.userId, id);
+    const id_comment = await createComment(comment, fileName, req.userId, id);
 
     // console.log(chalk.green("Comentario creado"));
     res.send({
@@ -415,4 +431,5 @@ module.exports = {
   deleteCommentsController,
   getAllCommentsFromServiceController,
   deleteServiceController,
+  getServiceByNicknameController,
 };
