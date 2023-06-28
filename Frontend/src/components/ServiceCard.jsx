@@ -74,10 +74,10 @@ function ServiceCard() {
             </div>
           </div>
         </div>
-        <DoneCheck />
+        {/* <DoneCheck /> */}
       </div>
 
-      {/* {isAuthenticated && <AddComent />} */}
+      {isAuthenticated && <AddComent />}
     </>
   );
 }

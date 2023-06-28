@@ -7,7 +7,6 @@ function ServicesByUser({ nickname }) {
   const [serviceUser, setServiceUser] = useState([]);
 
   const fetchServicesByNickname = async (nickname) => {
-    console.log(nickname);
     try {
       const { data } = await get({ url: `/service/nickname/${nickname}` });
       setServiceUser(data.message);
