@@ -46,26 +46,7 @@ const AddService = () => {
         toast.error(`No se ha podido crear el servicio. Inténtalo de nuevo.`);
       }
 
-      // let object = localStorage.getItem("portaldigital");
-      // const objectParsed = JSON.parse(object);
-      // console.log(`${objectParsed.token}`);
-
-      // const response = await fetch("http://localhost:3000/service/add", {
-      //   method: "POST",
-      //   headers: {
-      //     Authorization: `${objectParsed.token}`,
-      //   },
-      //   body: "prueba que estamos haciendo ahora mismo",
-      // });
-
-      // console.log(response);
-
-      // if (response.ok) {
-      //   const data = await response.json();
-      //   console.log(data);
-      // } else {
-      //   throw new Error("Error adding the service");
-      // }
+      
     } catch (error) {
       console.error("Error sending the new service:", error);
     }
