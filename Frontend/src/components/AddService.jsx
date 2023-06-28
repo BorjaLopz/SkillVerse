@@ -36,6 +36,8 @@ const AddService = () => {
         body: currentService,
       });
 
+      console.log(data);
+
       if (data) {
         toast.success(`Servicio ${title} creado con éxito`);
         setTitle("");
@@ -45,8 +47,6 @@ const AddService = () => {
       } else {
         toast.error(`No se ha podido crear el servicio. Inténtalo de nuevo.`);
       }
-
-      
     } catch (error) {
       console.error("Error sending the new service:", error);
     }
