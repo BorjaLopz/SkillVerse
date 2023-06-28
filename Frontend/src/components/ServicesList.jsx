@@ -13,7 +13,6 @@ const ServicesList = () => {
       try {
         const resp = await fetch(`http://localhost:3000/service`);
         const { message: data } = await resp.json();
-
         if (typeof data === "object") {
           const service = data.map((s) => ({
             id: s.id,
@@ -21,6 +20,7 @@ const ServicesList = () => {
             request_body: s.request_body,
             service_type: s.service_type,
             user_id: s.user_id,
+            done: s.done,
           }));
           setServices(service);
           setFilteredServices(service);
@@ -62,7 +62,13 @@ const ServicesList = () => {
           {services.map((service) => (
             <div key={service.id} className="group relative">
               <Link to={`/service/${service.id}`}>
-                <div className="aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between bg-slate-400 p-8">
+                <div
+                  className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
+                    service.done ? "bg-slate-400" : "bg-slate-200"
+                  }`}
+                >
+                  {" "}
+                  {/* bg-slate-400*/}
                   <div>
                     <h3 className="text-sm text-gray-700">
                       <p>{service.title}</p>
