@@ -210,7 +210,6 @@ const getServiceByNicknameController = async (req, res, next) => {
   try {
     const { nickname } = req.params;
 
-    console.log(nickname);
     const services = await getServiceByNickname(nickname);
 
     res.send({

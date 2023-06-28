@@ -61,9 +61,14 @@ const getAllServices = async (user_id = -1) => {
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
 
+    // const [result] = await connection.query(
+    //   `SELECT * FROM services WHERE user_id != ? AND done = ? ORDER BY creation_date ASC`,
+    //   [user_id, 0]
+    // );
+
     const [result] = await connection.query(
-      `SELECT * FROM services WHERE user_id != ? AND done = ? ORDER BY creation_date ASC`,
-      [user_id, 0]
+      `SELECT * FROM services WHERE user_id != ? ORDER BY creation_date ASC`,
+      [user_id]
     );
     if (result.length === 0) {
       return "No hay ningún servicio aún";
@@ -163,8 +168,6 @@ const getServiceByNickname = async (nickname) => {
       `SELECT * FROM services WHERE user_id = ?`,
       [id]
     );
-
-    console.log(result);
 
     // const [result] = await connection.query(
     //   `SELECT * FROM services WHERE service_type LIKE ? AND done = ? AND user_id != ?`,
