@@ -38,10 +38,6 @@ function DoneCheck({ id, complete, setService, currentUser }) {
     }
   };
 
-  if (!isAuthenticated || currentUser !== user.id) {
-    return null;
-  }
-
   return (
     <div className="button-done">
       <button
