@@ -47,20 +47,19 @@ const createUser = async (
     }
 
     // //Encriptar la contraseña
-    // const passwordHash = await bcrypt.hash(password, 10);
+    const passwordHash = await bcrypt.hash(password, 10);
 
     //Crear usuario en la BBDD
     const [newUser] = await connection.query(
       `
     INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [email, nickname, name, surname, password, biography, userPhoto]
+      [email, nickname, name, surname, passwordHash, biography, userPhoto]
     );
-
-    console.log("newUser");
-    console.log(newUser);
 
     //Devolver el ID
     return newUser.insertId;
+  } catch (e) {
+    throw e;
   } finally {
     if (connection) connection.release();
   }
