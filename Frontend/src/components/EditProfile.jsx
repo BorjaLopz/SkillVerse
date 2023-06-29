@@ -1,6 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
 
+const validateKoFiURL = (value) => {
+        if (value.trim() === "") {
+    return true; // No se valida si está vacío
+    }
+    const koFiURLRegex = /^https?:\/\/(?:www\.)?ko-fi\.com\/[a-zA-Z0-9]+$/;
+    return koFiURLRegex.test(value);
+  };
+
 const EditProfile = ({ id, admin }) => {
   const [formData, setFormData] = useState({
     email: "",
@@ -16,17 +24,40 @@ const EditProfile = ({ id, admin }) => {
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
 
-  const handleChange = (event) => {
+  /*const handleChange = (event) => {
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
-  };
+  };*/
+  const handleChange = (event) => {
+ 
+    
+  const { name, value } = event.target;
+  setFormData((prevFormData) =>({
+    ...prevFormData,
+    [name]: value,
+  }));
 
-  const validateKoFiURL = (value) => {
-    const koFiURLRegex = /^https?:\/\/(?:www\.)?ko-fi\.com\/[a-zA-Z0-9]+$/;
-    return koFiURLRegex.test(value);
-  };
+
+ 
+
+  /*if (name === "ko_fi") {
+    if (!validateKoFiURL(value)) {
+      setError("Por favor, introduce una URL válida de Ko-fi.");
+    } else {
+      setError("");*/
+  
+  
+   if (name === "ko_fi" && value.trim() !== "") {
+    if (!validateKoFiURL(value)) {
+      setError("Por favor, introduce una URL válida de Ko-fi.");
+    } else {
+      setError("");
+    }
+  }
+};
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -46,7 +77,7 @@ const EditProfile = ({ id, admin }) => {
       setFormData(response.data);
       setSuccessMessage("¡Perfil actualizado exitosamente!");
     } catch (error) {
-      console.error(error);
+      //console.error(error);
       if (error.response && error.response.status === 401) {
         window.location.href = "/login";
       }
@@ -125,12 +156,25 @@ const EditProfile = ({ id, admin }) => {
           />
         </label>
         <br />
-         <label>
-         Ko-Fi:
+   <label>
+          Ko-fi:
+          <input
+            type="URL"
+            name="ko_fi"
+            value={formData.ko_fi}
+            onChange={handleChange}
+          />
+        </label>
+
+
+
+        <label>
+          <br />
+        
           <div>
-            < a href={"https://ko-fi.com/monica77156"} target="_blank" rel="noopener noreferrer">
+            < a href={formData.ko_fi} target="_blank" rel="noopener noreferrer">
           <img
-              src="/fotosUsuario/ko-fi-icon.svg"
+              src="/icons/ko-fi-icon.svg"
               alt="Ko-fi"
               style={{ width: "40px", height: "40px" }}
             />

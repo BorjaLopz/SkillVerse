@@ -219,9 +219,11 @@ const getServiceByTypeController = async (req, res, next) => {
 const getServiceByNicknameController = async (req, res, next) => {
   try {
     const { nickname } = req.params;
-
+    //const userId = await getUserIdByNickname(nickname);
     const services = await getServiceByNickname(nickname);
-
+    /*if (services.length === 0) {
+      throw generateError("No existen servicios para este usuario", 400);
+    }*/
     res.send({
       status: "ok",
       message: services,

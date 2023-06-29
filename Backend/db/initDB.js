@@ -142,10 +142,16 @@ async function main() {
       for (let i = 0; i < users; i++) {
         const password = await bcrypt.hash("Password123", 10);
 
+        const koFi = "https://ko-fi.com"
+       
+        
+
+
+
         const [userResult] = await connection.query(
           `
-      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto) 
-      VALUES (?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO users(email, nickname, name, surname, password, biography,  userPhoto, admin, active, ko_fi) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
           [
             faker.internet.email(),
@@ -155,6 +161,9 @@ async function main() {
             password,
             faker.lorem.sentences(),
             faker.image.avatar(),
+            true,
+            true,
+            koFi,
           ]
         );
 

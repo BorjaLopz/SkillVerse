@@ -6,6 +6,8 @@ import DeleteAccount from "../DeleteAccount";
 import ServicesByUser from "../ServicesByUser";
 
 function Profile({ user }) {
+
+    
   return (
     <>
       <section className="user-info">
@@ -14,7 +16,7 @@ function Profile({ user }) {
         <ProfileCard />
       </section>
       <section className="user-edit">
-        <EditProfile />
+        <EditProfile   />
       </section>
       <section className="delete-user">
         <DeleteAccount />
