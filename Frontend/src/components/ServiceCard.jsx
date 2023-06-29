@@ -1,11 +1,13 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import useServer from "../hooks/useServer";
 import React, { useEffect, useState } from "react";
 import AddComment from "./AddComment";
 import useAuth from "../hooks/useAuth";
+import { Link } from "react-router-dom";
 import DoneCheck from "./DoneCheck";
+import ViewComments from "./ViewComments";
 
-function ServiceCard() {
+function ServiceCard() { 
   const [service, setService] = useState([]);
   const [userServiceOwner, setUserServiceOwner] = useState();
   const [userData, setUserData] = useState({});
@@ -28,7 +30,7 @@ function ServiceCard() {
 
   const getUserOwner = async (userId) => {
     try {
-      const { data } = await get({ url: `/userdata/${userId}` });
+      const { data } = await get({ url: `/userdata/${userId}` }); //Tarda en
       setUserData(data.userData);
     } catch (e) {
       console.log("error: ", e.message);

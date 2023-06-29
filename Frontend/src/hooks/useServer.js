@@ -23,8 +23,8 @@ function useServer() {
 
   return {
     get: ({ url }) => Http({ method: "GET", url, token }).then(handleResponse),
-    post: ({ url, body }) =>
-      Http({ method: "POST", url, body, token }).then(handleResponse),
+    post: ({ url, body, headers }) =>
+      Http({ method: "POST", url, body, token, headers }).then(handleResponse),
     put: ({ url, body }) =>
       Http({ method: "PUT", url, body, token }).then(handleResponse),
     patch: ({ url, body }) =>

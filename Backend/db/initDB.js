@@ -8,9 +8,16 @@ const bcrypt = require("bcrypt");
 const path = require("path");
 const fs = require("fs"); //Con promesa no funciona el borrar ficheros
 
-const { removeFile, getRandomCategory } = require("../helpers");
+const {
+  removeFile,
+  getRandomCategory,
+  createPathIfNotExists,
+} = require("../helpers");
 
 const addData = process.argv[2] === "--data";
+
+const uploadsDirectory = "../uploads";
+const avatarsDirectory = "../../Frontend/public/fotosUsuario";
 
 const addAdmin = async (connection) => {
   const hashedDefaultPassword = await bcrypt.hash("admin", 10);
@@ -28,6 +35,12 @@ const addAdmin = async (connection) => {
       true,
     ]
   );
+};
+
+async function createDirectories (pathFile) {
+  //Creamos el path
+  const uploadDir = path.join(__dirname, pathFile);
+  await createPathIfNotExists(uploadDir);
 };
 
 const deleteFilesFromDirectory = async (pathFile) => {
@@ -75,8 +88,7 @@ async function main() {
       userPhoto VARCHAR(200),
       admin BOOLEAN DEFAULT FALSE,
       active BOOLEAN DEFAULT TRUE,
-      linkedin VARCHAR(100) NULL CHECK (linkedin IS NULL OR linkedin REGEXP 'linkedin'),
-      instagram VARCHAR(100) NULL CHECK (instagram IS NULL OR instagram REGEXP 'instagram')
+     ko_fi VARCHAR(100) NULL 
     );
     `);
 
@@ -114,9 +126,13 @@ async function main() {
     //Añadimos admin
     await addAdmin(connection);
 
+    //Generamos las carpetas en caso de que no existan
+    await createDirectories("../uploads");
+    await createDirectories("../../Frontend/public/fotosUsuario");
+
     //Borramos fotos de usuarios y archivos de los servicios
-    // deleteFilesFromDirectory("../uploads");
-    // deleteFilesFromDirectory("../../Frontend/public/fotosUsuario");
+    deleteFilesFromDirectory("../uploads");
+    deleteFilesFromDirectory("../../Frontend/public/fotosUsuario");
 
     if (addData) {
       const users = 10;

@@ -32,6 +32,7 @@ const ServicesList = () => {
     };
 
     fetchServices();
+    
     const intervalId = setInterval(() => {
       fetchServices();
     }, 500);

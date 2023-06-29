@@ -102,7 +102,7 @@ app.get("/service/type/(:type)?", authUser, getServiceByTypeController);
 app.post("/comments/:id", authUser, commentsFileController);
 
 //Obtener todos los comentarios de un servicio
-app.get("/service/:id/all", authUser, getAllCommentsFromServiceController);
+app.get("/comments/:id", authUser, getAllCommentsFromServiceController);
 
 //Obtener todos los servicios por nickname
 app.get("/service/nickname/:nickname",  getServiceByNicknameController);

@@ -9,5 +9,6 @@ function ProfileCard({ user }) {}
 // surname: "",
 // password: "",
 // biography: "",
+//ko_fi: "",
 
 export default ProfileCard;

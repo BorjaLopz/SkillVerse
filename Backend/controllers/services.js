@@ -28,7 +28,7 @@ const {
 
 const newServiceController = async (req, res, next) => {
   try {
-    const { title, request_body, service_type } = req.body;
+    let { title, request_body, required_type } = req.body;
 
     //Comprobar título
     if (!title || title.lenght > 50 || title.lenght < 15) {
@@ -50,8 +50,8 @@ const newServiceController = async (req, res, next) => {
       );
     }
 
-    //Comprobar service_type
-    if (!service_type || service_type.lenght > 20) {
+    //Comprobar required_type
+    if (!required_type || required_type.lenght > 20) {
       throw generateError(
         "El tipo de servicio requerido debe tener menos de 20 caracteres",
         400
@@ -96,6 +96,9 @@ const newServiceController = async (req, res, next) => {
     //   console.log("req.files es ", req.files?.file)
     // }
 
+    // console.log("req.files desde controllers");
+    // console.log(req);
+
     const fileName = await uploadFilesInFolder(req, "file", "service");
     console.log("fileName: ", fileName);
 
@@ -103,7 +106,7 @@ const newServiceController = async (req, res, next) => {
       title,
       request_body,
       req.userId,
-      service_type,
+      required_type,
       fileName
     );
 
