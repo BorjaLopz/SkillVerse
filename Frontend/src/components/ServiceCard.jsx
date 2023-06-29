@@ -79,6 +79,10 @@ function ServiceCard() {
     console.log("Componente handleMarkAsDone renderizado");
   };
 
+  const dowloadFile = (file) => {
+    console.log(`Nos vamos a descargar ${file}`);
+  };
+
   return (
     <>
       <div className="p-8">
@@ -108,6 +112,18 @@ function ServiceCard() {
                 <p className="text-sm text-gray-600">{`${userData.nickname}`}</p>
               </Link>
               <p className="mt-6 text-gray-700">{service.request_body}</p>
+              {service.file_name !== "" && (
+                // <div className="downloadFile">
+                //   <button
+                //     id="downloadButton"
+                //     onClick={() => dowloadFile(service.file_name)}
+                //     value="download"
+                //   >{`Download ${service.file_name}`}</button>
+                // </div>
+                <Link to={`${service.file_name}`} target="_blank">
+                  Download
+                </Link>
+              )}
             </div>
           </div>
         </div>

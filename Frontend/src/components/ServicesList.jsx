@@ -14,7 +14,6 @@ const ServicesList = () => {
         const resp = await fetch(`http://localhost:3000/service`);
         const { message: data } = await resp.json();
 
-        console.log(data);
         if (typeof data === "object") {
           const service = data.map((s) => ({
             id: s.id,

@@ -27,38 +27,7 @@ const AddService = () => {
       formData.append("required_type", requiredType);
       formData.append("file", file);
 
-      console.log(typeof formData.get("required_type"));
-      console.log(formData.get("required_type"));
-
       //#endregion //formData
-
-      const currentService = {
-        title,
-        request_body: description,
-        service_type: requiredType,
-        file: file,
-      };
-
-      // await axios({
-      //   method: "post",
-      //   url: "/service/add",
-      //   data: formData,
-      //   headers: { "Content-Type": "multipart/form-data" },
-      // })
-      //   .then(function (response) {
-      //     //handle success
-      //     console.log(response);
-      //   })
-      //   .catch(function (response) {
-      //     //handle error
-      //     console.log(response);
-      //   });
-
-      // const { data } = await post({
-      //   url: "/service/add",
-      //   body: formData,
-      //   headers: { "content-type": "multipart/form-data" },
-      // });
 
       /* Config para el axios (le pasamos token, y multipart para los archivos) */
       const config = {
@@ -69,54 +38,19 @@ const AddService = () => {
         },
       };
 
-      const data = axios
+      await axios
         .post("http://localhost:3000/service/add", formData, config)
         .then((resp) => {
-          console.log(resp.data);
+          toast.success(`Servicio ${title} creado con éxito`);
+          setTitle("");
+          setDescription("");
+          setRequiredType("");
+          setFile(null);
         });
-
-      // console.log(data);
-
-      if (data) {
-        toast.success(`Servicio ${title} creado con éxito`);
-        // setTitle("");
-        // setDescription("");
-        // setRequiredType("");
-        // setFile("");
-      } else {
-        toast.error(`No se ha podido crear el servicio. Inténtalo de nuevo.`);
-      }
     } catch (error) {
-      console.error("Error sending the new service:", error);
+      toast.error(`No se ha podido generaro el servicio. ${error}`);
     }
   };
-
-  /* PRUEBAS */
-  const handleFileChange = (e) => {
-    //define file change
-    console.log(e.target.files[0]);
-    setFile(e.target.files[0]);
-  };
-
-  const handleUpload = async (e) => {
-    e.preventDefault();
-    console.log(e.target);
-
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("request_body", description);
-    formData.append("service_type", "requiredType");
-    formData.append("file", file);
-
-    const { message: data } = await post({
-      url: "/service/add",
-      body: formData,
-    });
-
-    // const data = new FormData();
-    // data.append("file", file)
-  };
-  /* FIN PRUEBAS */
 
   return (
     <>
