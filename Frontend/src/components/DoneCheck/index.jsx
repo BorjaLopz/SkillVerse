@@ -22,7 +22,8 @@ function DoneCheck({ id, complete, setService }) {
           complete: true,
         }));
 
-        toast.success(`Servicio ${id} completado con éxito`);
+        toast.success(`Servicio marcado como completado`);
+        console.log(`Servicio ${id} completado`);
       } else {
         toast.error(
           `No se ha podido completar el servicio. Inténtalo de nuevo.`

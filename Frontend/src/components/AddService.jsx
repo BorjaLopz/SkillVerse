@@ -37,7 +37,7 @@ const AddService = () => {
         body: currentService,
       });
 
-      console.log(data);
+      // console.log(data);
 
       if (data) {
         toast.success(`Servicio ${title} creado con éxito`);
