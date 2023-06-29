@@ -136,9 +136,8 @@ function ServiceCard() {
               complete={service.complete}
               setService={setService}
               handleMarkAsDone={handleMarkAsDone}
-            />
-             <AddComment />
-          ))}*/ */}
+            /><AddComment />
+          ))}*/}
         {isAuthenticated && <AddComment />}
         {isAuthenticated && (
           <DoneCheck
