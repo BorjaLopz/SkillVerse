@@ -66,7 +66,7 @@ const ServicesList = () => {
               <Link to={`/service/${service.id}`}>
                 <div
                   className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
-                    service.done ? "bg-slate-400" : "bg-slate-200"
+                    service.done ? "bg-green-400" : "bg-red-400"
                   }`}
                 >
                   {" "}

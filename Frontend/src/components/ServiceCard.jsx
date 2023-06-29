@@ -1,23 +1,24 @@
-import { useParams } from "react-router-dom";
+import { useParams, NavLink, Link } from "react-router-dom";
 import useServer from "../hooks/useServer";
 import React, { useEffect, useState } from "react";
 import AddComment from "./AddComment";
 import useAuth from "../hooks/useAuth";
-import { Link } from "react-router-dom";
 import DoneCheck from "./DoneCheck";
 import ViewComments from "./ViewComments";
 import { useNavigate } from "react-router-dom";
 
 function ServiceCard() {
   const [service, setService] = useState([]);
+  const [userOwner, setUserOwner] = useState();
   const [userServiceOwner, setUserServiceOwner] = useState();
   const [userData, setUserData] = useState({});
   const [isDone, setIsDone] = useState(false);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const { id } = useParams();
   const { get, patch } = useServer();
   const navigate = useNavigate();
 
+  console.log(user.user.id);
   const getService = async () => {
     try {
       const { data } = await get({ url: `/service/${id}` });
@@ -27,9 +28,10 @@ function ServiceCard() {
       if (!data) {
         navigate("/404");
       }
-
+      setIsDone(data.message.done);
       setService(data.message);
       getUserOwner(data.message.user_id);
+      setUserOwner(data.message.user_id);
     } catch (e) {
       console.log("error: ", e.message);
     }
@@ -37,7 +39,7 @@ function ServiceCard() {
 
   const getUserOwner = async (userId) => {
     try {
-      const { data } = await get({ url: `/userdata/${userId}` }); //Tarda en
+      const { data } = await get({ url: `/userdata/${userId}` });
       setUserData(data.userData);
     } catch (e) {
       console.log("error: ", e.message);
@@ -48,40 +50,38 @@ function ServiceCard() {
     getService();
   }, []);
 
-  const handleMarkAsDone = async () => {
-    try {
-      const { data, error } = await patch({
-        url: `/service/${id}/done`,
-        body: { done: 1 },
-      });
-      console.log(`desde handleMarkAsDone`);
-      if (!error) {
-        setService((prevService) => ({
-          ...prevService,
-          complete: true,
-        }));
+  // const handleMarkAsDone = async () => {
+  //   try {
+  //     const { data, error } = await patch({
+  //       url: `/service/${id}/done`,
+  //       body: { done: 1 },
+  //     });
+  //     console.log(`desde handleMarkAsDone`);
+  //     if (!error) {
+  //       setService((prevService) => ({
+  //         ...prevService,
+  //         complete: true,
+  //       }));
 
-        toast.success(`Servicio ${id} completado con éxito`);
-        console.log(`success desde handleMarkAsDone`);
+  //       toast.success(`Servicio ${id} completado con éxito`);
+  //       console.log(`success desde handleMarkAsDone`);
+  //     } else {
+  //       toast.error(
+  //         `No se ha podido completar el servicio. Inténtalo de nuevo.`
+  //       );
+  //       console.log(`error desde handleMarkAsDone`);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error completing the service:", error);
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  //   console.log("Componente handleMarkAsDone renderizado");
+  // };
 
-        setIsDone(true);
-      } else {
-        toast.error(
-          `No se ha podido completar el servicio. Inténtalo de nuevo.`
-        );
-        console.log(`error desde handleMarkAsDone`);
-      }
-    } catch (error) {
-      console.error("Error completing the service:", error);
-    } finally {
-      setIsLoading(false);
-    }
-    console.log("Componente handleMarkAsDone renderizado");
-  };
-
-  const dowloadFile = (file) => {
-    console.log(`Nos vamos a descargar ${file}`);
-  };
+  // const dowloadFile = (file) => {
+  //   console.log(`Nos vamos a descargar ${file}`);
+  // };
 
   return (
     <>
@@ -113,13 +113,6 @@ function ServiceCard() {
               </Link>
               <p className="mt-6 text-gray-700">{service.request_body}</p>
               {service.file_name !== "" && (
-                // <div className="downloadFile">
-                //   <button
-                //     id="downloadButton"
-                //     onClick={() => dowloadFile(service.file_name)}
-                //     value="download"
-                //   >{`Download ${service.file_name}`}</button>
-                // </div>
                 <Link to={`${service.file_name}`} target="_blank">
                   Download
                 </Link>
@@ -127,26 +120,54 @@ function ServiceCard() {
             </div>
           </div>
         </div>
-        <ViewComments />
-
-        {/* /* {isDone ||
-          (isAuthenticated && !isDone && (
-            <DoneCheck
-              id={service.id}
-              complete={service.complete}
-              setService={setService}
-              handleMarkAsDone={handleMarkAsDone}
-            /><AddComment />
-          ))}*/}
-        {isAuthenticated && <AddComment />}
-        {isAuthenticated && (
-          <DoneCheck
-            id={service.id}
-            complete={service.complete}
-            setService={setService}
-            handleMarkAsDone={handleMarkAsDone}
-          />
-        )}
+        {/* <ViewComments /> */}
+        <div
+          className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
+            service.done ? "bg-green-400" : "bg-red-400"
+          }`}
+        >
+          {!isAuthenticated && (
+            <p>
+              <NavLink
+                to="/signup"
+                style={{ textDecoration: "underline", color: "blue" }}
+              >
+                Regístrate
+              </NavLink>{" "}
+              o{" "}
+              <NavLink
+                to="/login"
+                style={{ textDecoration: "underline", color: "blue" }}
+              >
+                inicia sesión
+              </NavLink>{" "}
+              para visualizar y agregar comentarios.
+            </p>
+          )}
+          {/* {isAuthenticated && !isDone && <AddComment />}
+          {isAuthenticated &&
+            !isDone &&
+            (userOwner === user.user.id || user.user.admin) && (
+              <DoneCheck
+                id={service.id}
+                complete={service.complete}
+                setService={setService}
+                // handleMarkAsDone={handleMarkAsDone}
+              />
+            )} */}
+          {isAuthenticated && !isDone && <AddComment />}
+          {isAuthenticated && !isDone && (
+            <>
+              {(userOwner === user.user.id || user.user.admin) && (
+                <DoneCheck
+                  id={service.id}
+                  complete={service.complete}
+                  setService={setService}
+                />
+              )}
+            </>
+          )}
+        </div>
       </div>
     </>
   );
