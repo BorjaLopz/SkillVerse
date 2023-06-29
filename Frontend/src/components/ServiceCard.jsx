@@ -129,15 +129,25 @@ function ServiceCard() {
         </div>
         <ViewComments />
 
-        {isDone ||
+        {/* /* {isDone ||
           (isAuthenticated && !isDone && (
             <DoneCheck
               id={service.id}
               complete={service.complete}
               setService={setService}
+              handleMarkAsDone={handleMarkAsDone}
             />
-          ))}
-        {isDone || (isAuthenticated && !isDone && <AddComment />)}
+             <AddComment />
+          ))}*/ */}
+        {isAuthenticated && <AddComment />}
+        {isAuthenticated && (
+          <DoneCheck
+            id={service.id}
+            complete={service.complete}
+            setService={setService}
+            handleMarkAsDone={handleMarkAsDone}
+          />
+        )}
       </div>
     </>
   );

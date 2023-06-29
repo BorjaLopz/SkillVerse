@@ -15,7 +15,7 @@ function DoneCheck({ id, complete, setService, currentUser }) {
     try {
       const { data, error } = await server.patch({
         url: `/service/${id}/done`,
-        body: { done: 1 }, // Actualiza el valor de 'done' a 1
+        body: { done: 1 },
       });
 
       if (!error) {
