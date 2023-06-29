@@ -6,6 +6,7 @@ import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 import DoneCheck from "./DoneCheck";
 import ViewComments from "./ViewComments";
+import { useNavigate } from "react-router-dom";
 
 function ServiceCard() {
   const [service, setService] = useState([]);
@@ -15,10 +16,17 @@ function ServiceCard() {
   const { isAuthenticated } = useAuth();
   const { id } = useParams();
   const { get, patch } = useServer();
+  const navigate = useNavigate();
 
   const getService = async () => {
     try {
       const { data } = await get({ url: `/service/${id}` });
+      console.log(data);
+
+      //Si no hay ningun servicio con dicha id (usuarios malos que quieren romper el proyecto), nos movemos a la pagina 404 directamente
+      if (!data) {
+        navigate("/404");
+      }
 
       setService(data.message);
       getUserOwner(data.message.user_id);

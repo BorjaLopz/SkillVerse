@@ -13,6 +13,8 @@ const ServicesList = () => {
       try {
         const resp = await fetch(`http://localhost:3000/service`);
         const { message: data } = await resp.json();
+
+        console.log(data);
         if (typeof data === "object") {
           const service = data.map((s) => ({
             id: s.id,
@@ -32,7 +34,7 @@ const ServicesList = () => {
     };
 
     fetchServices();
-    
+
     const intervalId = setInterval(() => {
       fetchServices();
     }, 500);

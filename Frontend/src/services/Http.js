@@ -30,7 +30,7 @@ async function Http({
     // console.log(fullURL.href);
     const res = await fetch(fullURL.href, config);
     const data = await res.json();
-    if (!res.ok) throw data.error;
+    if (!res.ok) throw data;
 
     return { data, loading: false, error: null };
   } catch (error) {

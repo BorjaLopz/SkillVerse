@@ -44,11 +44,11 @@ const newUserController = async (req, res, next) => {
     const avatar = userPhoto || defaultAvatar;
 
     //Encriptar la contraseña
-    const passwordHash = await bcrypt.hash(password, 10);
+    // const passwordHash = await bcrypt.hash(password, 10);
 
     const id = await createUser(
       email,
-      passwordHash,
+      password,
       nickname,
       name,
       surname,
@@ -61,6 +61,8 @@ const newUserController = async (req, res, next) => {
       message: `User created with id ${id}`,
     });
   } catch (e) {
+    console.log("Hola");
+    // throw generateError("Debes introducir email y contraseña", 400);
     next(e);
   }
 };
@@ -240,8 +242,6 @@ const getUserAvatarController = async (req, res, next) => {
     next(error);
   }
 };
-
-
 
 const editUserController = async (req, res, next) => {
   const id_params = +req.params.id;
