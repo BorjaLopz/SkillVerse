@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import useServer from "../hooks/useServer";
 import toast from "react-hot-toast";
 import { categories } from "../config";
+import axios from "axios";
+import useAuth from "../hooks/useAuth";
 
 const AddService = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [requiredType, setRequiredType] = useState("");
   const [file, setFile] = useState(null);
+  const { user } = useAuth();
+  // console.log(user);
 
   const { post } = useServer();
 
@@ -25,80 +29,88 @@ const AddService = () => {
 
       //#endregion //formData
 
-      const currentService = {
-        title,
-        request_body: description,
-        service_type: requiredType,
-        file,
+      /* Config para el axios (le pasamos token, y multipart para los archivos) */
+      const config = {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "content-type": "multipart/form-data",
+          Authorization: `${user.token}`,
+        },
       };
 
-      const { data } = await post({
-        url: "/service/add",
-        body: currentService,
-      });
-
-      console.log(data);
-
-      if (data) {
-        toast.success(`Servicio ${title} creado con éxito`);
-        setTitle("");
-        setDescription("");
-        setRequiredType("");
-        setFile(null);
-      } else {
-        toast.error(`No se ha podido crear el servicio. Inténtalo de nuevo.`);
-      }
+      await axios
+        .post("http://localhost:3000/service/add", formData, config)
+        .then((resp) => {
+          toast.success(`Servicio ${title} creado con éxito`);
+          setTitle("");
+          setDescription("");
+          setRequiredType("");
+          setFile(null);
+        });
     } catch (error) {
-      console.error("Error sending the new service:", error);
+      toast.error(`No se ha podido generaro el servicio. ${error}`);
     }
   };
 
   return (
-    <div className="add-service">
-      <h2>Añadir servicio</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="title">
-          <label>Título:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-          />
-        </div>
-        <div className="description">
-          <label>Descripción:</label>
-          <textarea
-            placeholder="Escriba aquí la descripción de su servicio..."
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
-          />
-        </div>
-        <div className="service-category">
-          <label>Categoría del servicio:</label>
-          <select
-            value={requiredType}
-            onChange={(event) => setRequiredType(event.target.value)}
-          >
-            <option value="">Selecciona una categoría</option>{" "}
-            {categories.map((category, index) => (
-              <option key={index} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className="service-file">
-          <label>Archivo:</label>
-          <input
-            type="file"
-            onChange={(event) => setFile(event.target.files[0])}
-          />
-        </div>
-        <button className="publish-service" type="submit">
-          Crear servicio
-        </button>
-      </form>
-    </div>
+    <>
+      <div className="add-service">
+        <h2>Añadir servicio</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="title">
+            <label>Título:</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+            />
+          </div>
+          <div className="description">
+            <label>Descripción:</label>
+            <textarea
+              placeholder="Escriba aquí la descripción de su servicio..."
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
+            />
+          </div>
+          <div className="service-category">
+            <label>Categoría del servicio:</label>
+            <select
+              value={requiredType}
+              onChange={(event) => setRequiredType(event.target.value)}
+            >
+              <option value="">Selecciona una categoría</option>{" "}
+              {categories.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="service-file">
+            <label>Archivo:</label>
+            <input
+              type="file"
+              name="file"
+              onChange={(event) => setFile(event.target.files[0])}
+            />
+          </div>
+
+          {/* <div className="service-file">
+            <label>Archivo:</label>
+            <input
+              type="file"
+              id="file"
+              name="file"
+              onChange={(event) => handleFileChange(event)}
+            />
+          </div> */}
+          <button className="publish-service" type="submit">
+            Crear servicio
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 

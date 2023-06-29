@@ -1,25 +1,32 @@
 import { useParams } from "react-router-dom";
 import useServer from "../hooks/useServer";
-import { useEffect, useState } from "react";
-import AddComent from "./AddComment";
+import React, { useEffect, useState } from "react";
+import AddComment from "./AddComment";
 import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 import DoneCheck from "./DoneCheck";
+import ViewComments from "./ViewComments";
+import { useNavigate } from "react-router-dom";
 
-function ServiceCard() { 
+function ServiceCard() {
   const [service, setService] = useState([]);
   const [userServiceOwner, setUserServiceOwner] = useState();
   const [userData, setUserData] = useState({});
+  const [isDone, setIsDone] = useState(false);
   const { isAuthenticated } = useAuth();
-
-  // const avatar = useAvatar(service.user_id);
-
   const { id } = useParams();
-  const { get } = useServer();
+  const { get, patch } = useServer();
+  const navigate = useNavigate();
 
   const getService = async () => {
     try {
       const { data } = await get({ url: `/service/${id}` });
+      console.log(data);
+
+      //Si no hay ningun servicio con dicha id (usuarios malos que quieren romper el proyecto), nos movemos a la pagina 404 directamente
+      if (!data) {
+        navigate("/404");
+      }
 
       setService(data.message);
       getUserOwner(data.message.user_id);
@@ -38,9 +45,43 @@ function ServiceCard() {
   };
 
   useEffect(() => {
-    // getUserOwner();
     getService();
   }, []);
+
+  const handleMarkAsDone = async () => {
+    try {
+      const { data, error } = await patch({
+        url: `/service/${id}/done`,
+        body: { done: 1 },
+      });
+      console.log(`desde handleMarkAsDone`);
+      if (!error) {
+        setService((prevService) => ({
+          ...prevService,
+          complete: true,
+        }));
+
+        toast.success(`Servicio ${id} completado con éxito`);
+        console.log(`success desde handleMarkAsDone`);
+
+        setIsDone(true);
+      } else {
+        toast.error(
+          `No se ha podido completar el servicio. Inténtalo de nuevo.`
+        );
+        console.log(`error desde handleMarkAsDone`);
+      }
+    } catch (error) {
+      console.error("Error completing the service:", error);
+    } finally {
+      setIsLoading(false);
+    }
+    console.log("Componente handleMarkAsDone renderizado");
+  };
+
+  const dowloadFile = (file) => {
+    console.log(`Nos vamos a descargar ${file}`);
+  };
 
   return (
     <>
@@ -71,13 +112,42 @@ function ServiceCard() {
                 <p className="text-sm text-gray-600">{`${userData.nickname}`}</p>
               </Link>
               <p className="mt-6 text-gray-700">{service.request_body}</p>
+              {service.file_name !== "" && (
+                // <div className="downloadFile">
+                //   <button
+                //     id="downloadButton"
+                //     onClick={() => dowloadFile(service.file_name)}
+                //     value="download"
+                //   >{`Download ${service.file_name}`}</button>
+                // </div>
+                <Link to={`${service.file_name}`} target="_blank">
+                  Download
+                </Link>
+              )}
             </div>
           </div>
         </div>
-        {/* <DoneCheck /> */}
-      </div>
+        <ViewComments />
 
-      {isAuthenticated && <AddComent />}
+        {/* /* {isDone ||
+          (isAuthenticated && !isDone && (
+            <DoneCheck
+              id={service.id}
+              complete={service.complete}
+              setService={setService}
+              handleMarkAsDone={handleMarkAsDone}
+            /><AddComment />
+          ))}*/}
+        {isAuthenticated && <AddComment />}
+        {isAuthenticated && (
+          <DoneCheck
+            id={service.id}
+            complete={service.complete}
+            setService={setService}
+            handleMarkAsDone={handleMarkAsDone}
+          />
+        )}
+      </div>
     </>
   );
 }

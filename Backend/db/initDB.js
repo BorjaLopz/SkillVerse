@@ -8,9 +8,16 @@ const bcrypt = require("bcrypt");
 const path = require("path");
 const fs = require("fs"); //Con promesa no funciona el borrar ficheros
 
-const { removeFile, getRandomCategory } = require("../helpers");
+const {
+  removeFile,
+  getRandomCategory,
+  createPathIfNotExists,
+} = require("../helpers");
 
 const addData = process.argv[2] === "--data";
+
+const uploadsDirectory = "../uploads";
+const avatarsDirectory = "../../Frontend/public/fotosUsuario";
 
 const addAdmin = async (connection) => {
   const hashedDefaultPassword = await bcrypt.hash("admin", 10);
@@ -29,6 +36,12 @@ const addAdmin = async (connection) => {
     ]
   );
 };
+
+async function createDirectories(pathFile) {
+  //Creamos el path
+  const uploadDir = path.join(__dirname, pathFile);
+  await createPathIfNotExists(uploadDir);
+}
 
 const deleteFilesFromDirectory = async (pathFile) => {
   const directoryPath = path.join(__dirname, pathFile);
@@ -75,7 +88,7 @@ async function main() {
       userPhoto VARCHAR(200),
       admin BOOLEAN DEFAULT FALSE,
       active BOOLEAN DEFAULT TRUE,
-     ko_fi VARCHAR(100) NULL 
+      ko_fi VARCHAR(100) NULL 
     );
     `);
 
@@ -113,9 +126,13 @@ async function main() {
     //Añadimos admin
     await addAdmin(connection);
 
+    //Generamos las carpetas en caso de que no existan
+    await createDirectories("../../Frontend/public/publicServices");
+    await createDirectories("../../Frontend/public/fotosUsuario");
+
     //Borramos fotos de usuarios y archivos de los servicios
-    // deleteFilesFromDirectory("../uploads");
-    // deleteFilesFromDirectory("../../Frontend/public/fotosUsuario");
+    deleteFilesFromDirectory("../../Frontend/public/publicServices");
+    deleteFilesFromDirectory("../../Frontend/public/fotosUsuario");
 
     if (addData) {
       const users = 10;
@@ -183,8 +200,8 @@ async function main() {
           VALUES (?, ?, ?, ?, ?, ?)
           `,
               [
-                userId,
-                j + 1,
+                userId + j,
+                i + 1, 
                 faker.lorem.sentences(),
                 faker.system.fileName(),
                 faker.datatype.boolean(),
@@ -193,7 +210,7 @@ async function main() {
             );
 
             console.log(
-              chalk.green(`Inserted comment ${k + 1} for service ${j + 1}`)
+              chalk.green(`Inserted comment ${k + 1} for service ${i + 1}`)
             );
           }
         }

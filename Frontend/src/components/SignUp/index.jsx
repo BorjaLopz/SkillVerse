@@ -79,7 +79,11 @@ function SignUp() {
                 required
                 className="input"
               />
-              <input type="checkbox" onChange={togglePassword} />
+              <input
+                type="checkbox"
+                id="ojoPassword"
+                onChange={togglePassword}
+              />
             </div>
           </div>
 

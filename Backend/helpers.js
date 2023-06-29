@@ -22,7 +22,7 @@ const ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "pdf", "doc"];
 const TYPE_OF_SERVICE = ["SERVICE", "USER"];
 
 const USER_PATH = "../Frontend/public/fotosUsuario";
-const SERVICE_PATH = "/uploads";
+const SERVICE_PATH = "../Frontend/public/publicServices";
 
 const categories = [
   "Diseño Gráfico",
@@ -116,7 +116,13 @@ async function removeFile(filepath) {
   }
 }
 
-async function uploadFilesInFolder(req, fieldNamePostman, typeOfFile) {
+async function uploadFilesInFolder(
+  req,
+  fieldNamePostman,
+  typeOfFile,
+  titleOfService,
+  userId
+) {
   /* 
     fieldNamePostman = Nombre que tiene el campo en postman
 
@@ -174,7 +180,6 @@ async function uploadFilesInFolder(req, fieldNamePostman, typeOfFile) {
     } else {
       console.log("SERVICE");
       //Comprobar si la extension es valida.
-      console.log(getExtensionFile(sampleFile.name));
       if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
         throw generateError(
           `Formato no válido. Tipos de formatos permitidos: ${ALLOWED_EXTENSIONS}`,
@@ -183,9 +188,15 @@ async function uploadFilesInFolder(req, fieldNamePostman, typeOfFile) {
       }
 
       //Obtener la extensión del fichero para guardarlo de la misma manera
-      fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`;
+      fileName = `${titleOfService} - ${userId} - ${nanoid(
+        5
+      )}.${getExtensionFile(sampleFile.name)}`;
 
       uploadPath = uploadDir + "\\" + fileName;
+      const [halfPath] = SERVICE_PATH.split("Frontend").slice(-1);
+
+      console.log("halfPath");
+      console.log(halfPath);
 
       //Subir el fichero
       sampleFile.mv(uploadPath, function (e) {
@@ -193,7 +204,7 @@ async function uploadFilesInFolder(req, fieldNamePostman, typeOfFile) {
           throw generateError("No se pudo enviar el archivo", 400);
         }
       });
-      return `${SERVICE_PATH}/${fileName}`;
+      return `${halfPath}/${fileName}`;
     }
   }
 }
