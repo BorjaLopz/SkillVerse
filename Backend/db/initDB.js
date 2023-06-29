@@ -37,11 +37,11 @@ const addAdmin = async (connection) => {
   );
 };
 
-async function createDirectories (pathFile) {
+async function createDirectories(pathFile) {
   //Creamos el path
   const uploadDir = path.join(__dirname, pathFile);
   await createPathIfNotExists(uploadDir);
-};
+}
 
 const deleteFilesFromDirectory = async (pathFile) => {
   const directoryPath = path.join(__dirname, pathFile);
@@ -88,7 +88,7 @@ async function main() {
       userPhoto VARCHAR(200),
       admin BOOLEAN DEFAULT FALSE,
       active BOOLEAN DEFAULT TRUE,
-     ko_fi VARCHAR(100) NULL 
+      ko_fi VARCHAR(100) NULL 
     );
     `);
 
@@ -191,7 +191,7 @@ async function main() {
           VALUES (?, ?, ?, ?, ?, ?)
           `,
               [
-                userId,
+                userId + j,
                 j + 1,
                 faker.lorem.sentences(),
                 faker.system.fileName(),

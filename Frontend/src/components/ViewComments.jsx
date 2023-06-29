@@ -29,6 +29,8 @@ function ViewComments() {
       const { data } = await get({ url: `/comments/${serviceId}` });
       setComments(data.message);
 
+      console.log(data.message)
+
       if (data.message.length > 0) {
         getUserOwner(data.message[0].user_id);
       }
@@ -40,6 +42,7 @@ function ViewComments() {
   const getUserOwner = async (userId) => {
     try {
       const { data } = await get({ url: `/userdata/${userId}` });
+      console.log(data);
       setUserData(data.userData);
     } catch (e) {
       console.log(

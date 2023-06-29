@@ -23,7 +23,11 @@ function ServicesByUser({ nickname }) {
       {serviceUser.map((service) => (
         <div key={service.id} className="group relative">
           <Link to={`/service/${service.id}`}>
-            <div className="aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between bg-slate-400 p-8">
+            <div
+              className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
+                service.done ? "bg-slate-400" : "bg-slate-200"
+              }`}
+            >
               <div>
                 <h3 className="text-sm text-gray-700">
                   <p>{service.title}</p>
