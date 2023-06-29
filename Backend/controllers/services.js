@@ -99,7 +99,13 @@ const newServiceController = async (req, res, next) => {
     // console.log("req.files desde controllers");
     // console.log(req);
 
-    const fileName = await uploadFilesInFolder(req, "file", "service");
+    const fileName = await uploadFilesInFolder(
+      req,
+      "file",
+      "service",
+      title,
+      req.userId
+    );
     console.log("fileName: ", fileName);
 
     const id_services = await createService(

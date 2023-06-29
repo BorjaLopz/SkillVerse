@@ -27,6 +27,8 @@ const createService = async (
     );
 
     return newService.insertId;
+  } catch (e) {
+    throw e;
   } finally {
     if (connection) connection.release();
   }

@@ -127,11 +127,11 @@ async function main() {
     await addAdmin(connection);
 
     //Generamos las carpetas en caso de que no existan
-    await createDirectories("../uploads");
+    await createDirectories("../../Frontend/public/publicServices");
     await createDirectories("../../Frontend/public/fotosUsuario");
 
     //Borramos fotos de usuarios y archivos de los servicios
-    deleteFilesFromDirectory("../uploads");
+    deleteFilesFromDirectory("../../Frontend/public/publicServices");
     deleteFilesFromDirectory("../../Frontend/public/fotosUsuario");
 
     if (addData) {
@@ -192,7 +192,7 @@ async function main() {
           `,
               [
                 userId + j,
-                j + 1,
+                i + 1, 
                 faker.lorem.sentences(),
                 faker.system.fileName(),
                 faker.datatype.boolean(),
@@ -201,7 +201,7 @@ async function main() {
             );
 
             console.log(
-              chalk.green(`Inserted comment ${k + 1} for service ${j + 1}`)
+              chalk.green(`Inserted comment ${k + 1} for service ${i + 1}`)
             );
           }
         }
