@@ -11,7 +11,8 @@ const createUser = async (
   name = "",
   surname = "",
   biography = "",
-  userPhoto = ""
+  userPhoto = "",
+  ko_fi = "",
 ) => {
   let connection;
   try {
@@ -52,8 +53,8 @@ const createUser = async (
     //Crear usuario en la BBDD
     const [newUser] = await connection.query(
       `
-    INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [email, nickname, name, surname, password, biography, userPhoto]
+    INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, ko_fi) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      [email, nickname, name, surname, password, biography, userPhoto, ko_fi]
     );
 
     console.log("newUser");
@@ -125,14 +126,14 @@ const editUser = async (tmp_user) => {
   let connection;
 
   try {
-    let { id, email, nickname, name, surname, password, biography, userPhoto } =
+    let { id, email, nickname, name, surname, password, biography, userPhoto, ko_fi } =
       tmp_user;
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
 
     const [result] = await connection.query(
-      `UPDATE users SET email = ?, nickname = ?, name = ?, surname = ?, password = ?, biography = ?, userPhoto = ? WHERE id = ?;`,
-      [email, nickname, name, surname, password, biography, userPhoto, id]
+      `UPDATE users SET email = ?, nickname = ?, name = ?, surname = ?, password = ?, biography = ?, userPhoto = ?, ko_fi = ? WHERE id = ?;`,
+      [email, nickname, name, surname, password, biography, userPhoto, ko_fi, id ]
     );
 
     return result;

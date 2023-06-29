@@ -25,7 +25,7 @@ const { DB_DATABASE } = process.env;
 
 const newUserController = async (req, res, next) => {
   try {
-    const { email, nickname, name, surname, password, biography, userPhoto } =
+    const { email, nickname, name, surname, password, biography, userPhoto, ko_fi } =
       req.body;
 
     const schema = Joi.object({
@@ -53,7 +53,8 @@ const newUserController = async (req, res, next) => {
       name,
       surname,
       biography,
-      avatar
+      avatar,
+      ko_fi
     );
 
     res.send({
@@ -257,7 +258,7 @@ const editUserController = async (req, res, next) => {
     }
 
     const [user] = await getAllFieldsExceptPassword(id_params);
-    let { email, nickname, name, surname, password, biography } = req.body;
+    let { email, nickname, name, surname, password, biography, ko_fi } = req.body;
 
     let userPhoto = await uploadFilesInFolder(req, "userPhoto", "user");
 
@@ -268,6 +269,7 @@ const editUserController = async (req, res, next) => {
     surname = surname || user.surname;
     password = password || user.password;
     biography = biography || user.biography;
+    ko_fi = ko_fi || user.ko_fi;
 
     if (email != user.email) {
       user.email = email;
@@ -293,6 +295,9 @@ const editUserController = async (req, res, next) => {
     if (biography != user.biography) {
       user.biography = biography;
     }
+    if (ko_fi != user.ko_fi) {
+      user.ko_fi = ko_fi;
+    }
 
     //Añadimos campos al objeto
     tmp_user.id = id_params;
@@ -303,6 +308,7 @@ const editUserController = async (req, res, next) => {
     tmp_user.password = user.password;
     tmp_user.biography = user.biography;
     tmp_user.userPhoto = user.userPhoto;
+    tmp_user.ko_fi = user.ko_fi;
 
     const updatedUser = await editUser(tmp_user);
 
