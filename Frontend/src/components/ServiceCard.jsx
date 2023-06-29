@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import useServer from "../hooks/useServer";
-import { useEffect, useState } from "react";
-import AddComent from "./AddComment";
+import React, { useEffect, useState } from "react";
+import AddComment from "./AddComment";
 import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 import DoneCheck from "./DoneCheck";
@@ -11,9 +11,8 @@ function ServiceCard() {
   const [service, setService] = useState([]);
   const [userServiceOwner, setUserServiceOwner] = useState();
   const [userData, setUserData] = useState({});
+  const [isDone, setIsDone] = useState(false);
   const { isAuthenticated } = useAuth();
-
-  // const avatar = useAvatar(service.user_id);
 
   const { id } = useParams();
   const { get } = useServer();
@@ -39,9 +38,36 @@ function ServiceCard() {
   };
 
   useEffect(() => {
-    // getUserOwner();
     getService();
   }, []);
+
+  const handleMarkAsDone = async () => {
+    try {
+      const { data, error } = await server.patch({
+        url: `/service/${id}/done`,
+        body: { done: 1 },
+      });
+
+      if (!error) {
+        setService((prevService) => ({
+          ...prevService,
+          complete: true,
+        }));
+
+        toast.success(`Servicio ${id} completado con éxito`);
+
+        setIsDone(true);
+      } else {
+        toast.error(
+          `No se ha podido completar el servicio. Inténtalo de nuevo.`
+        );
+      }
+    } catch (error) {
+      console.error("Error completing the service:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
@@ -75,12 +101,16 @@ function ServiceCard() {
             </div>
           </div>
         </div>
-        {/* <DoneCheck /> */}
+        {!isDone && (
+          <DoneCheck
+            id={service.id}
+            complete={service.complete}
+            setService={setService}
+            handleMarkAsDone={handleMarkAsDone}
+          />
+        )}
+        {!isDone && isAuthenticated && <AddComment />}
       </div>
-
-      <ViewComments />
-
-      {isAuthenticated && <AddComent />}
     </>
   );
 }

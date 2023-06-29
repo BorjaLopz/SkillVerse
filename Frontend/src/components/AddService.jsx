@@ -75,7 +75,7 @@ const AddService = () => {
           console.log(resp.data);
         });
 
-      console.log(data);
+      // console.log(data);
 
       if (data) {
         toast.success(`Servicio ${title} creado con éxito`);
