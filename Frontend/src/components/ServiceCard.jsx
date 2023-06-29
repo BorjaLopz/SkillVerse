@@ -7,15 +7,14 @@ import { Link } from "react-router-dom";
 import DoneCheck from "./DoneCheck";
 import ViewComments from "./ViewComments";
 
-function ServiceCard() { 
+function ServiceCard() {
   const [service, setService] = useState([]);
   const [userServiceOwner, setUserServiceOwner] = useState();
   const [userData, setUserData] = useState({});
   const [isDone, setIsDone] = useState(false);
   const { isAuthenticated } = useAuth();
-
   const { id } = useParams();
-  const { get } = useServer();
+  const { get, patch } = useServer();
 
   const getService = async () => {
     try {
@@ -43,11 +42,11 @@ function ServiceCard() {
 
   const handleMarkAsDone = async () => {
     try {
-      const { data, error } = await server.patch({
+      const { data, error } = await patch({
         url: `/service/${id}/done`,
         body: { done: 1 },
       });
-
+      console.log(`desde handleMarkAsDone`);
       if (!error) {
         setService((prevService) => ({
           ...prevService,
@@ -55,18 +54,21 @@ function ServiceCard() {
         }));
 
         toast.success(`Servicio ${id} completado con éxito`);
+        console.log(`success desde handleMarkAsDone`);
 
         setIsDone(true);
       } else {
         toast.error(
           `No se ha podido completar el servicio. Inténtalo de nuevo.`
         );
+        console.log(`error desde handleMarkAsDone`);
       }
     } catch (error) {
       console.error("Error completing the service:", error);
     } finally {
       setIsLoading(false);
     }
+    console.log("Componente handleMarkAsDone renderizado");
   };
 
   return (
@@ -101,15 +103,17 @@ function ServiceCard() {
             </div>
           </div>
         </div>
-        {!isDone && (
-          <DoneCheck
-            id={service.id}
-            complete={service.complete}
-            setService={setService}
-            handleMarkAsDone={handleMarkAsDone}
-          />
-        )}
-        {!isDone && isAuthenticated && <AddComment />}
+        <ViewComments />
+
+        {isDone ||
+          (isAuthenticated && !isDone && (
+            <DoneCheck
+              id={service.id}
+              complete={service.complete}
+              setService={setService}
+            />
+          ))}
+        {isDone || (isAuthenticated && !isDone && <AddComment />)}
       </div>
     </>
   );

@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import "./style.css";
 import useServer from "../../hooks/useServer";
 import toast from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 
-function DoneCheck({ id, complete, setService }) {
+function DoneCheck({ id, complete, setService, currentUser }) {
   const [isLoading, setIsLoading] = useState(false);
   const server = useServer();
+  const { isAuthenticated, user } = useAuth();
 
   const handleMarkAsDone = async () => {
     setIsLoading(true);
@@ -35,6 +37,10 @@ function DoneCheck({ id, complete, setService }) {
       setIsLoading(false);
     }
   };
+
+  if (!isAuthenticated || currentUser !== user.id) {
+    return null;
+  }
 
   return (
     <div className="button-done">
