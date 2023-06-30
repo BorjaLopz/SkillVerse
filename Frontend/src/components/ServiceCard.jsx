@@ -6,6 +6,7 @@ import useAuth from "../hooks/useAuth";
 import DoneCheck from "./DoneCheck";
 import ViewComments from "./ViewComments";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function ServiceCard() {
   const [service, setService] = useState([]);
@@ -13,17 +14,17 @@ function ServiceCard() {
   const [userServiceOwner, setUserServiceOwner] = useState();
   const [userData, setUserData] = useState({});
   const [isDone, setIsDone] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { isAuthenticated, user } = useAuth();
   const { id } = useParams();
   const { get, patch } = useServer();
   const navigate = useNavigate();
+  const [reloadCard, setReloadCard] = useState(false);
 
   const getService = async () => {
     try {
       const { data } = await get({ url: `/service/${id}` });
-      console.log(data);
 
-      //Si no hay ningun servicio con dicha id (usuarios malos que quieren romper el proyecto), nos movemos a la pagina 404 directamente
       if (!data) {
         navigate("/404");
       }
@@ -45,42 +46,38 @@ function ServiceCard() {
     }
   };
 
+  const handleMarkAsDone = async () => {
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await patch({
+        url: `/service/${id}/done`,
+        body: { done: 1 },
+      });
+
+      if (!error) {
+        setService((prevService) => ({
+          ...prevService,
+          done: true,
+        }));
+
+        setIsDone(true);
+        toast.success("Servicio marcado como hecho");
+      } else {
+        toast.error(
+          "No se ha podido marcar como hecho el servicio. Inténtalo de nuevo."
+        );
+      }
+    } catch (error) {
+      console.error("Error completing the service:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     getService();
   }, []);
-
-  // const handleMarkAsDone = async () => {
-  //   try {
-  //     const { data, error } = await patch({
-  //       url: `/service/${id}/done`,
-  //       body: { done: 1 },
-  //     });
-  //     console.log(`desde handleMarkAsDone`);
-  //     if (!error) {
-  //       setService((prevService) => ({
-  //         ...prevService,
-  //         complete: true,
-  //       }));
-
-  //       toast.success(`Servicio ${id} completado con éxito`);
-  //       console.log(`success desde handleMarkAsDone`);
-  //     } else {
-  //       toast.error(
-  //         `No se ha podido completar el servicio. Inténtalo de nuevo.`
-  //       );
-  //       console.log(`error desde handleMarkAsDone`);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error completing the service:", error);
-  //   } finally {
-  //     setIsLoading(false);
-  //   }
-  //   console.log("Componente handleMarkAsDone renderizado");
-  // };
-
-  // const dowloadFile = (file) => {
-  //   console.log(`Nos vamos a descargar ${file}`);
-  // };
 
   return (
     <>
@@ -119,7 +116,7 @@ function ServiceCard() {
             </div>
           </div>
         </div>
-        <ViewComments />
+        {/* <ViewComments /> */}
         <div
           className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
             service.done ? "bg-green-400" : "bg-red-400"
@@ -133,6 +130,8 @@ function ServiceCard() {
               id={service.id}
               complete={service.complete}
               setService={setService}
+              isLoading={isLoading}
+              handleMarkAsDone={handleMarkAsDone}
             />
           ) : null}
         </div>
