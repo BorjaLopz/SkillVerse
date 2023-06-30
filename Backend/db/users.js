@@ -29,6 +29,10 @@ const createUser = async (
       throw generateError("Email ya en uso", 409);
     }
 
+    if (nickname.length < 4) {
+      throw generateError("El nickname debe tener al menos 4 caracteres", 400);
+    }
+
     const [userNickname] = await connection.query(
       `
     SELECT id FROM users WHERE nickname = ?`,

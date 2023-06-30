@@ -1,6 +1,10 @@
+.avatar-container {
+  display: inline-flex;
+}
+
 .avatar {
-  width: 10rem;
-  height: 10rem;
+  width: 5rem;
+  height: 5rem;
   object-fit: cover;
   border-radius: 50%;
 }
