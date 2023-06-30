@@ -18,6 +18,7 @@ const {
   getUserPhoto,
   getUserData,
   getUserAvatar,
+  getAllUsers,
 } = require("../db/users");
 const { getConnection } = require("../db/db");
 
@@ -232,6 +233,19 @@ const getUserDataController = async (req, res, next) => {
   }
 };
 
+const getAllUsersController = async (req, res, next) => {
+  try {
+
+    const userData = await getAllUsers();
+    res.send({
+      status: "ok",
+      userData: userData,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const getUserAvatarController = async (req, res, next) => {
   try {
     const { nickname } = req.params;
@@ -343,4 +357,5 @@ module.exports = {
   getAllFieldsExceptPasswordController,
   getUserDataController,
   getUserAvatarController,
+  getAllUsersController,
 };
