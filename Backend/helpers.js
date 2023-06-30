@@ -120,8 +120,8 @@ async function uploadFilesInFolder(
   req,
   fieldNamePostman,
   typeOfFile,
-  titleOfService,
-  userId
+  titleOfService = "",
+  nickname = ""
 ) {
   /* 
     fieldNamePostman = Nombre que tiene el campo en postman
@@ -188,15 +188,12 @@ async function uploadFilesInFolder(
       }
 
       //Obtener la extensión del fichero para guardarlo de la misma manera
-      fileName = `${titleOfService} - ${userId} - ${nanoid(
+      fileName = `${nickname} - ${titleOfService} - ${nanoid(
         5
       )}.${getExtensionFile(sampleFile.name)}`;
 
       uploadPath = uploadDir + "\\" + fileName;
       const [halfPath] = SERVICE_PATH.split("Frontend").slice(-1);
-
-      console.log("halfPath");
-      console.log(halfPath);
 
       //Subir el fichero
       sampleFile.mv(uploadPath, function (e) {

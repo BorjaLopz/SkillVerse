@@ -8,6 +8,8 @@ function SignUp() {
   const navigate = useNavigate();
   const { post } = useServer();
   const [passwordVisibility, setPasswordVisibility] = useState(false);
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [mainPassword, setMainPassword] = useState("");
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -21,6 +23,11 @@ function SignUp() {
   const togglePassword = () => {
     setPasswordVisibility(!passwordVisibility);
   };
+
+  console.log("mainPassword");
+  console.log(mainPassword);
+  console.log("repeatPassword");
+  console.log(repeatPassword);
 
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
@@ -78,6 +85,7 @@ function SignUp() {
                 autoComplete="current-password"
                 required
                 className="input"
+                onChange={(event) => setMainPassword(event.target.value)}
               />
               <input
                 type="checkbox"
@@ -86,6 +94,36 @@ function SignUp() {
               />
             </div>
           </div>
+
+          <div>
+            <div className="flex items-center justify-between">
+              <label htmlFor="password" className="label">
+                Repetir contraseña
+              </label>
+            </div>
+            <div className="mt-2">
+              <input
+                id="repeat-password"
+                name="repeat-password"
+                type={passwordVisibility ? "text" : "password"}
+                autoComplete="current-password"
+                required
+                className="input"
+                onChange={(event) => setRepeatPassword(event.target.value)}
+              />
+              <input
+                type="checkbox"
+                id="ojoPassword"
+                onChange={togglePassword}
+              />
+            </div>
+          </div>
+
+          {repeatPassword === mainPassword ? (
+            ""
+          ) : (
+            <p className="bg-red-400">Las contraseñas no coinciden</p>
+          )}
 
           <div>
             <button type="submit" className="button">
