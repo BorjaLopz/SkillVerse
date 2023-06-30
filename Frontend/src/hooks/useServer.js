@@ -11,7 +11,7 @@ function useServer() {
     if (data?.data) {
       const user = jwt_decode(data.data);
       setUser({ user, token: data.data });
-      toast.success(`Bienvenid@ ${user.nickname}`);
+      toast.success(`Bienvenid@ ${user.nickname}`, { duration: 5000 });
     }
 
     if (error) {
