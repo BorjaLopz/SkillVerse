@@ -53,10 +53,7 @@ const newServiceController = async (req, res, next) => {
 
     //Comprobar required_type
     if (!required_type || required_type.lenght > 20) {
-      throw generateError(
-        "El tipo de servicio requerido debe tener menos de 20 caracteres",
-        400
-      );
+      throw generateError("Debes seleccionar una categoría", 400);
     }
 
     const user = await getUserData(req.userId);
@@ -84,6 +81,8 @@ const newServiceController = async (req, res, next) => {
       message: `Services created with id ${id_services}`,
     });
   } catch (e) {
+    console.log("error desde service");
+    console.log(e);
     next(e);
   }
 };

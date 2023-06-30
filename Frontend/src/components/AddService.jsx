@@ -38,14 +38,23 @@ const AddService = () => {
         },
       };
 
+      // await axios
+      //   .post("http://localhost:3000/service/add", formData, config)
+      //   .then((resp) => {
+      //     toast.success(`Servicio ${title} creado con éxito`);
+      //     setTitle("");
+      //     setDescription("");
+      //     setRequiredType("");
+      //     setFile(null);
+      //   });
+
       await axios
         .post("http://localhost:3000/service/add", formData, config)
-        .then((resp) => {
-          toast.success(`Servicio ${title} creado con éxito`);
-          setTitle("");
-          setDescription("");
-          setRequiredType("");
-          setFile(null);
+        .catch(function (e) {
+          if (e.response) {
+            console.log(e.response.data);
+            toast.error(e.response.data.message);
+          }
         });
     } catch (error) {
       toast.error(`No se ha podido generaro el servicio. ${error}`);
@@ -58,19 +67,25 @@ const AddService = () => {
         <h2>Añadir servicio</h2>
         <form onSubmit={handleSubmit}>
           <div className="title">
-            <label>Título:</label>
+            <label htmlFor="title">Título:</label>
             <input
               type="text"
+              id="title"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
+              required
+              minLength={15}
             />
           </div>
           <div className="description">
-            <label>Descripción:</label>
+            <label htmlFor="description">Descripción:</label>
             <textarea
               placeholder="Escriba aquí la descripción de su servicio..."
+              id="description"
               value={description}
               onChange={(event) => setDescription(event.target.value)}
+              required
+              minLength={15}
             />
           </div>
           <div className="service-category">
@@ -88,9 +103,10 @@ const AddService = () => {
             </select>
           </div>
           <div className="service-file">
-            <label>Archivo:</label>
+            <label htmlFor="file">Archivo:</label>
             <input
               type="file"
+              id="file"
               name="file"
               onChange={(event) => setFile(event.target.files[0])}
             />

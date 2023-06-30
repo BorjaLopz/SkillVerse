@@ -70,8 +70,6 @@ const newUserController = async (req, res, next) => {
       message: `User created with id ${id}`,
     });
   } catch (e) {
-    console.log("Hola");
-    // throw generateError("Debes introducir email y contraseña", 400);
     next(e);
   }
 };
