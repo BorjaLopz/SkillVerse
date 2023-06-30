@@ -12,7 +12,7 @@ const createUser = async (
   surname = "",
   biography = "",
   userPhoto = "",
-  ko_fi = "",
+  ko_fi = ""
 ) => {
   let connection;
   try {
@@ -55,8 +55,16 @@ const createUser = async (
       `
 
     INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, ko_fi) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      [email, nickname, name, surname, password, biography, userPhoto, ko_fi]
-
+      [
+        email,
+        nickname,
+        name,
+        surname,
+        passwordHash,
+        biography,
+        userPhoto,
+        ko_fi,
+      ]
     );
 
     //Devolver el ID
@@ -127,14 +135,33 @@ const editUser = async (tmp_user) => {
   let connection;
 
   try {
-    let { id, email, nickname, name, surname, password, biography, userPhoto, ko_fi } =
-      tmp_user;
+    let {
+      id,
+      email,
+      nickname,
+      name,
+      surname,
+      password,
+      biography,
+      userPhoto,
+      ko_fi,
+    } = tmp_user;
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
 
     const [result] = await connection.query(
       `UPDATE users SET email = ?, nickname = ?, name = ?, surname = ?, password = ?, biography = ?, userPhoto = ?, ko_fi = ? WHERE id = ?;`,
-      [email, nickname, name, surname, password, biography, userPhoto, ko_fi, id ]
+      [
+        email,
+        nickname,
+        name,
+        surname,
+        password,
+        biography,
+        userPhoto,
+        ko_fi,
+        id,
+      ]
     );
 
     return result;

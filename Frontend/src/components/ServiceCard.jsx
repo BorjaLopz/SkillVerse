@@ -120,53 +120,22 @@ function ServiceCard() {
             </div>
           </div>
         </div>
-        {/* <ViewComments /> */}
+        <ViewComments />
         <div
           className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
             service.done ? "bg-green-400" : "bg-red-400"
           }`}
         >
-          {!isAuthenticated && (
-            <p>
-              <NavLink
-                to="/signup"
-                style={{ textDecoration: "underline", color: "blue" }}
-              >
-                Regístrate
-              </NavLink>{" "}
-              o{" "}
-              <NavLink
-                to="/login"
-                style={{ textDecoration: "underline", color: "blue" }}
-              >
-                inicia sesión
-              </NavLink>{" "}
-              para visualizar y agregar comentarios.
-            </p>
-          )}
-          {/* {isAuthenticated && !isDone && <AddComment />}
-          {isAuthenticated &&
-            !isDone &&
-            (userOwner === user.user.id || user.user.admin) && (
-              <DoneCheck
-                id={service.id}
-                complete={service.complete}
-                setService={setService}
-                // handleMarkAsDone={handleMarkAsDone}
-              />
-            )} */}
           {isAuthenticated && !isDone && <AddComment />}
-          {isAuthenticated && !isDone && (
-            <>
-              {(userOwner === user.user.id || user.user.admin) && (
-                <DoneCheck
-                  id={service.id}
-                  complete={service.complete}
-                  setService={setService}
-                />
-              )}
-            </>
-          )}
+          {isAuthenticated &&
+          !isDone &&
+          (userOwner === user.user.id || user.user.admin) ? (
+            <DoneCheck
+              id={service.id}
+              complete={service.complete}
+              setService={setService}
+            />
+          ) : null}
         </div>
       </div>
     </>
