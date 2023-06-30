@@ -2,12 +2,12 @@ import { useState } from "react";
 import axios from "axios";
 
 const validateKoFiURL = (value) => {
-        if (value.trim() === "") {
+  if (value.trim() === "") {
     return true; // No se valida si está vacío
-    }
-    const koFiURLRegex = /^https?:\/\/(?:www\.)?ko-fi\.com\/[a-zA-Z0-9]+$/;
-    return koFiURLRegex.test(value);
-  };
+  }
+  const koFiURLRegex = /^https?:\/\/(?:www\.)?ko-fi\.com\/[a-zA-Z0-9]+$/;
+  return koFiURLRegex.test(value);
+};
 
 const EditProfile = ({ id, admin }) => {
   const [formData, setFormData] = useState({
@@ -31,33 +31,26 @@ const EditProfile = ({ id, admin }) => {
     });
   };*/
   const handleChange = (event) => {
- 
-    
-  const { name, value } = event.target;
-  setFormData((prevFormData) =>({
-    ...prevFormData,
-    [name]: value,
-  }));
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
 
-
- 
-
-  /*if (name === "ko_fi") {
+    /*if (name === "ko_fi") {
     if (!validateKoFiURL(value)) {
       setError("Por favor, introduce una URL válida de Ko-fi.");
     } else {
       setError("");*/
-  
-  
-   if (name === "ko_fi" && value.trim() !== "") {
-    if (!validateKoFiURL(value)) {
-      setError("Por favor, introduce una URL válida de Ko-fi.");
-    } else {
-      setError("");
-    }
-  }
-};
 
+    if (name === "ko_fi" && value.trim() !== "") {
+      if (!validateKoFiURL(value)) {
+        setError("Por favor, introduce una URL válida de Ko-fi.");
+      } else {
+        setError("");
+      }
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -156,7 +149,7 @@ const EditProfile = ({ id, admin }) => {
           />
         </label>
         <br />
-   <label>
+        <label>
           Ko-fi:
           <input
             type="URL"
@@ -166,19 +159,17 @@ const EditProfile = ({ id, admin }) => {
           />
         </label>
 
-
-
         <label>
           <br />
-        
+
           <div>
-            < a href={formData.ko_fi} target="_blank" rel="noopener noreferrer">
-          <img
-              src="/icons/ko-fi-icon.svg"
-              alt="Ko-fi"
-              style={{ width: "40px", height: "40px" }}
-            />
-             </a>
+            <a href={formData.ko_fi} target="_blank" rel="noopener noreferrer">
+              <img
+                src="/icons/ko-fi-icon.svg"
+                alt="Ko-fi"
+                style={{ width: "40px", height: "40px" }}
+              />
+            </a>
           </div>
         </label>
         <br />
@@ -186,11 +177,10 @@ const EditProfile = ({ id, admin }) => {
         <button type="submit">Guardar cambios</button>
       </form>
       {error && <p className="error-message">{error}</p>}
-            {successMessage && <p>{successMessage}</p>}
+      {successMessage && <p>{successMessage}</p>}
       {/* {renderAdminContent()} */}
     </div>
   );
 };
 
-export default EditProfile
-
+export default EditProfile;

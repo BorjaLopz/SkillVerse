@@ -86,6 +86,7 @@ function SignUp() {
                 required
                 className="input"
                 onChange={(event) => setMainPassword(event.target.value)}
+                minLength={8}
               />
               <input
                 type="checkbox"
@@ -110,6 +111,7 @@ function SignUp() {
                 required
                 className="input"
                 onChange={(event) => setRepeatPassword(event.target.value)}
+                minLength={8}
               />
               <input
                 type="checkbox"
