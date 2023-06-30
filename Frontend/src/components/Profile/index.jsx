@@ -16,7 +16,7 @@ function Profile({ user }) {
         <ProfileCard />
       </section>
       <section className="user-edit">
-        <EditProfile   />
+        <EditProfile />
       </section>
       <section className="delete-user">
         <DeleteAccount />

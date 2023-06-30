@@ -59,6 +59,7 @@ const createUser = async (
       `
 
     INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, ko_fi) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+
       [
         email,
         nickname,
@@ -69,6 +70,7 @@ const createUser = async (
         userPhoto,
         ko_fi,
       ]
+
     );
 
     //Devolver el ID
