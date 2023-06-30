@@ -40,11 +40,7 @@ const newServiceController = async (req, res, next) => {
     }
 
     //Comprobar request_body
-    if (
-      !request_body ||
-      request_body.lenght > 500 ||
-      request_body.lenght < 15
-    ) {
+    if (request_body.lenght < 15) {
       throw generateError(
         "La descripción debe tener más de 15 caracteres y menos de 500 ",
         400
