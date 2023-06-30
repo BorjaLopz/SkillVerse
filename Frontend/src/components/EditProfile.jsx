@@ -3,7 +3,7 @@ import axios from "axios";
 import useAuth from "../hooks/useAuth";
 
 const validateKoFiURL = (value) => {
-        if (value.trim() === "") {
+        if (!value || value.trim() === "") {
     return true; // No se valida si está vacío
     }
     const koFiURLRegex = /^https?:\/\/(?:www\.)?ko-fi\.com\/[a-zA-Z0-9]+$/;
@@ -24,10 +24,11 @@ const EditProfile = ({id}) => {
  
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
- 
+  const [koFiURL, setKoFiURL] = useState("");
 
   const { user } = useAuth();
 
+  
   const handleChange = (event) => {   
   const { name, value } = event.target;
   setFormData((prevFormData) =>({
@@ -35,12 +36,12 @@ const EditProfile = ({id}) => {
     [name]: value,
   }));
 
-   if (name === "ko_fi") {
+   if (name === "ko_fi" && value.trim() !== "") {
     if (!validateKoFiURL(value)) {
       setError("Por favor, introduce una URL válida de Ko-fi.");
     } else {
       setError("");
-      
+      setKoFiURL(value);
     }
   }
 };
@@ -56,13 +57,18 @@ const EditProfile = ({id}) => {
     try {
       const response = await axios.put(`http://localhost:3000/user/${user.user.id}/edit`, formData, {
         headers: {
-           "Access-Control-Allow-Origin": "*",
+         "Access-Control-Allow-Origin": "*",
           Authorization: `${user.token}`,
         },
       });
 
       setFormData(response.data);
       setSuccessMessage("¡Perfil actualizado exitosamente!");
+
+        if (formData.ko_fi.trim() !== "") {
+        setKoFiURL(formData.ko_fi);
+      }
+    
     } catch (error) {
       //console.error(error);
       if (error.response && error.response.status === 401) {
@@ -70,8 +76,6 @@ const EditProfile = ({id}) => {
       }
     }
   };
-
-
 
   return (
     <div className="edit-profile">
@@ -156,21 +160,20 @@ const EditProfile = ({id}) => {
           />
         </label>
 
-
-
         <label>
           <br />
-        
-          <div>
-            < a href= "https://ko-fi.com" target="_blank" rel="noopener noreferrer">
-          <img
-              src="/icons/ko-fi-icon.svg"
-              alt="Ko-fi"
-              style={{ width: "40px", height: "40px" }}
-            />
-             </a>
-          </div>
+          {koFiURL && (
+            <a href={koFiURL} target="_blank" rel="noopener noreferrer">
+              <img
+                src="/icons/ko-fi-icon.svg"
+                alt="Ko-fi"
+                style={{ width: "40px", height: "40px" }}
+              />
+            </a>
+          )}
         </label>
+
+       
         <br />
 
         <button type="submit">Guardar cambios</button>

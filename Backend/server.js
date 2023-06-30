@@ -76,6 +76,7 @@ app.put("/user/:id/edit", authUser, editUserController);
 //Borrar un user
 app.delete("/user/:id/delete", authUser, deleteUserController);
 
+
 //#endregion USER
 
 //#region SERVICES
