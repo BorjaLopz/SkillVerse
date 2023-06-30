@@ -64,7 +64,12 @@ const AddService = () => {
   return (
     <>
       <div className="add-service">
-        <h2>Añadir servicio</h2>
+        <h2
+          className="text-4xl font-bold tracking-tight text-center"
+          style={{ color: "#523d80" }}
+        >
+          Añadir servicio
+        </h2>
         <form onSubmit={handleSubmit}>
           {/* <div className="title">
             <label htmlFor="title">Título:</label>
@@ -79,12 +84,12 @@ const AddService = () => {
           </div> */}
 
           <label for="title" class="block mb-2 font-medium text-gray-900 ">
-            Your title
+            Título:
           </label>
           <input
             id="title"
             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Escriba aquí la descripción de su servicio..."
+            placeholder="Escriba aquí el título del servicio.."
             value={title}
             onChange={(event) => setTitle(event.target.value)}
             required
@@ -107,21 +112,17 @@ const AddService = () => {
             for="description"
             class="block mb-2 font-medium text-gray-900 "
           >
-            Your description
+            Descripción:
           </label>
           <textarea
             id="description"
             rows="4"
             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Escriba aquí la descripción de su servicio..."
+            placeholder="Escriba aquí la descripción del servicio..."
             value={description}
             onChange={(event) => setDescription(event.target.value)}
             required
           ></textarea>
-
-          <label for="categories" class="block mb-2 font-medium text-gray-900">
-            Select an option
-          </label>
           <select
             id="categories"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -156,7 +157,7 @@ const AddService = () => {
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             htmlFor="file"
           >
-            Upload file
+            Subir archivo:
           </label>
           <input
             className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
@@ -182,7 +183,7 @@ const AddService = () => {
           </button> */}
           <div>
             <button
-              className="publish-comment bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded content-center"
+              className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-indigo-700"
               type="submit"
             >
               Crear servicio

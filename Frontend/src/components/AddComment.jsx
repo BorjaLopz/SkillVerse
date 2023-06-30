@@ -49,7 +49,12 @@ const AddComment = () => {
 
   return (
     <div className="add-comment p-8">
-      <h2 className="text-2xl font-bold mb-4">Añadir Comentario</h2>
+      <h2
+        className="text-4xl font-bold tracking-tight text-center"
+        style={{ color: "#523d80" }}
+      >
+        Añadir comentarios
+      </h2>
       <form onSubmit={handleSubmit} className="bg-white rounded-lg px-8">
         <div className="comment mb-4">
           <label className="block mb-2 text-gray-800 font-bold">
@@ -72,7 +77,7 @@ const AddComment = () => {
           />
         </div>
         <button
-          className="publish-comment bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+          className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-indigo-700"
           type="submit"
         >
           Publicar

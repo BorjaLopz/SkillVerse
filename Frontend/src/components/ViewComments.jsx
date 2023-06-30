@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import useServer from "../hooks/useServer";
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function ViewComments() {
   const [comments, setComments] = useState([]);
@@ -29,7 +29,7 @@ function ViewComments() {
       const { data } = await get({ url: `/comments/${serviceId}` });
       setComments(data.message);
 
-      console.log(data.message)
+      console.log(data.message);
 
       if (data.message.length > 0) {
         getUserOwner(data.message[0].user_id);
@@ -60,6 +60,24 @@ function ViewComments() {
 
   return (
     <>
+      {!isAuthenticated && (
+        <p>
+          <NavLink
+            to="/signup"
+            style={{ textDecoration: "underline", color: "blue" }}
+          >
+            Regístrate
+          </NavLink>{" "}
+          o{" "}
+          <NavLink
+            to="/login"
+            style={{ textDecoration: "underline", color: "blue" }}
+          >
+            inicia sesión
+          </NavLink>{" "}
+          para ver y hacer comentarios.
+        </p>
+      )}
       {isAuthenticated && (
         <div className="p-8">
           {comments.map((comment) => (

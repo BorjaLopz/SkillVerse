@@ -21,7 +21,12 @@ function ServicesByUser({ nickname }) {
   return (
     <>
       {serviceUser.length !== 0 ? (
-        <p className="text-center text-4xl">Servicios de {`${nickname}`}</p>
+        <p
+          className="text-4xl font-bold tracking-tight text-center"
+          style={{ color: "#523d80" }}
+        >
+          Servicios de {`${nickname}`}
+        </p>
       ) : (
         <p className="text-center text-4xl">
           {`${nickname}`} aún no ha subido ningún servicio
