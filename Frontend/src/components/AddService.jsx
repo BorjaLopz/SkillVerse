@@ -80,12 +80,12 @@ const AddService = () => {
           <div className="description">
             <label htmlFor="description">Descripción:</label>
             <textarea
+              minLength={20}
               placeholder="Escriba aquí la descripción de su servicio..."
               id="description"
               value={description}
               onChange={(event) => setDescription(event.target.value)}
               required
-              minLength={15}
             />
           </div>
           <div className="service-category">

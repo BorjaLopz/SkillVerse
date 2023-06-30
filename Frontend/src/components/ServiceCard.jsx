@@ -110,13 +110,13 @@ function ServiceCard() {
               <p className="mt-6 text-gray-700">{service.request_body}</p>
               {service.file_name !== "" && (
                 <Link to={`${service.file_name}`} target="_blank">
-                  Download
+                  <img src="../../public/icons/download.png" />
                 </Link>
               )}
             </div>
           </div>
         </div>
-        {/* <ViewComments /> */}
+        <ViewComments />
         <div
           className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
             service.done ? "bg-green-400" : "bg-red-400"
