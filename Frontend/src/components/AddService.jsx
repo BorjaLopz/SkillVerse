@@ -83,18 +83,18 @@ const AddService = () => {
             />
           </div> */}
 
-          <label for="title" class="block mb-2 font-medium text-gray-900 ">
-            Título:
+          <label className="block">
+            <span className="text-gray-700">Título:</span>
+            <input
+              id="title"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              placeholder="Escriba aquí el título del servicio.."
+              value={title}
+              onChange={(event) => setTitle(event.target.value)}
+              required
+              minLength={15}
+            />
           </label>
-          <input
-            id="title"
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Escriba aquí el título del servicio.."
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-            required
-            minLength={15}
-          ></input>
           {/* ANTIGUO TEXT AREA */}
           {/* <div className="description">
             <label htmlFor="description">Descripción:</label>
@@ -108,24 +108,21 @@ const AddService = () => {
             />
           </div> */}
 
-          <label
-            for="description"
-            class="block mb-2 font-medium text-gray-900 "
-          >
-            Descripción:
+          <label for="description" className="block">
+            <span className="text-gray-700">Descripción:</span>
+            <textarea
+              id="description"
+              rows="4"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              placeholder="Escriba aquí la descripción del servicio..."
+              value={description}
+              onChange={(event) => setDescription(event.target.value)}
+              required
+            />
           </label>
-          <textarea
-            id="description"
-            rows="4"
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Escriba aquí la descripción del servicio..."
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
-            required
-          ></textarea>
           <select
             id="categories"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
             value={requiredType}
             onChange={(event) => setRequiredType(event.target.value)}
           >
@@ -153,19 +150,16 @@ const AddService = () => {
             </select>
           </div> */}
 
-          <label
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-            htmlFor="file"
-          >
-            Subir archivo:
+          <label className="block">
+            <span className="text-gray-700">Subir archivo:</span>
+            <input
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+              aria-describedby="file_help"
+              id="file"
+              type="file"
+              onChange={(event) => setFile(event.target.files[0])}
+            />
           </label>
-          <input
-            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-            aria-describedby="file_help"
-            id="file"
-            type="file"
-            onChange={(event) => setFile(event.target.files[0])}
-          />
 
           {/* ANTIGUO SELECCION DE ARCHIVOS */}
           {/* <div className="service-file">

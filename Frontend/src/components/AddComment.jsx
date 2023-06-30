@@ -57,25 +57,27 @@ const AddComment = () => {
       </h2>
       <form onSubmit={handleSubmit} className="bg-white rounded-lg px-8">
         <div className="comment mb-4">
-          <label className="block mb-2 text-gray-800 font-bold">
-            Comentario:
+          <label className="block">
+            <span className="text-gray-700">Comentario:</span>
+            <textarea
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              placeholder="Escriba aquí su comentario..."
+              required
+              value={comment}
+              onChange={(event) => setComment(event.target.value)}
+            />
           </label>
-          <textarea
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-            placeholder="Escriba aquí su comentario..."
-            required
-            value={comment}
-            onChange={(event) => setComment(event.target.value)}
-          />
         </div>
-        <div className="file mb-4">
-          <label className="block mb-2 text-gray-800 font-bold">Archivo:</label>
+        <label className="block">
+          <span className="text-gray-700">Subir archivo:</span>
           <input
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-            type="comment-file"
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            aria-describedby="file_help"
+            id="file"
+            type="file"
             onChange={(event) => setFile(event.target.files[0])}
           />
-        </div>
+        </label>
         <button
           className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-indigo-700"
           type="submit"

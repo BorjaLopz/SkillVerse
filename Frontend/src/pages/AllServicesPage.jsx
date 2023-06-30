@@ -19,14 +19,14 @@ function AllServicesPage() {
           <p>
             <NavLink
               to="/signup"
-              style={{ textDecoration: "underline", color: "blue" }}
+              style={{ textDecoration: "underline", color: "#523D80" }}
             >
               Regístrate
             </NavLink>{" "}
             o{" "}
             <NavLink
               to="/login"
-              style={{ textDecoration: "underline", color: "blue" }}
+              style={{ textDecoration: "underline", color: "#523D80" }}
             >
               inicia sesión
             </NavLink>{" "}
