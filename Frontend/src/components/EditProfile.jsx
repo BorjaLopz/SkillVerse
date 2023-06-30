@@ -1,5 +1,6 @@
-import { useState } from "react";
+import {  useState } from "react";
 import axios from "axios";
+import useAuth from "../hooks/useAuth";
 
 const validateKoFiURL = (value) => {
         if (value.trim() === "") {
@@ -9,8 +10,8 @@ const validateKoFiURL = (value) => {
     return koFiURLRegex.test(value);
   };
 
-const EditProfile = ({ id, admin }) => {
-  const [formData, setFormData] = useState({
+const EditProfile = ({id}) => {
+   const [formData, setFormData] = useState({
     email: "",
     userPhoto: "",
     nickname: "",
@@ -20,46 +21,31 @@ const EditProfile = ({ id, admin }) => {
     biography: "",
     ko_fi: "",
   });
-
+ 
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
-
-  /*const handleChange = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };*/
-  const handleChange = (event) => {
  
-    
+
+  const { user } = useAuth();
+
+  const handleChange = (event) => {   
   const { name, value } = event.target;
   setFormData((prevFormData) =>({
     ...prevFormData,
     [name]: value,
   }));
 
-
- 
-
-  /*if (name === "ko_fi") {
-    if (!validateKoFiURL(value)) {
-      setError("Por favor, introduce una URL válida de Ko-fi.");
-    } else {
-      setError("");*/
-  
-  
-   if (name === "ko_fi" && value.trim() !== "") {
+   if (name === "ko_fi") {
     if (!validateKoFiURL(value)) {
       setError("Por favor, introduce una URL válida de Ko-fi.");
     } else {
       setError("");
+      
     }
   }
 };
 
-
-  const handleSubmit = async (event) => {
+    const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!validateKoFiURL(formData.ko_fi)) {
@@ -68,9 +54,10 @@ const EditProfile = ({ id, admin }) => {
     }
 
     try {
-      const response = await axios.put(`/user/${id}/edit`, formData, {
+      const response = await axios.put(`http://localhost:3000/user/${user.user.id}/edit`, formData, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+           "Access-Control-Allow-Origin": "*",
+          Authorization: `${user.token}`,
         },
       });
 
@@ -83,6 +70,9 @@ const EditProfile = ({ id, admin }) => {
       }
     }
   };
+
+
+
   return (
     <div className="edit-profile">
       <h2>Editar perfil</h2>
@@ -172,7 +162,7 @@ const EditProfile = ({ id, admin }) => {
           <br />
         
           <div>
-            < a href={formData.ko_fi} target="_blank" rel="noopener noreferrer">
+            < a href= "https://ko-fi.com" target="_blank" rel="noopener noreferrer">
           <img
               src="/icons/ko-fi-icon.svg"
               alt="Ko-fi"

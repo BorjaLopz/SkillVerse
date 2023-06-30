@@ -55,7 +55,7 @@ const createUser = async (
       `
 
     INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, ko_fi) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      [email, nickname, name, surname, password, biography, userPhoto, ko_fi]
+      [email, nickname, name, surname, passwordHash, biography, userPhoto, ko_fi]
 
     );
 

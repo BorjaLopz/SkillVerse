@@ -253,7 +253,7 @@ const editUserController = async (req, res, next) => {
 
   try {
     //Comprobacion para evitar que puedas editar otro usuario
-    if (id !== id_params && !admin) {
+    if (id !== id_params && !admin && id_params !== 0) {
       throw generateError("No puedes editar otro usuario", 403);
     }
 

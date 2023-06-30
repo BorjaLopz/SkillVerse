@@ -23,7 +23,7 @@ const addAdmin = async (connection) => {
   const hashedDefaultPassword = await bcrypt.hash("admin", 10);
   await connection.query(
     `
-      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin, active, ko_fi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       "admin@admin.com",
       "admin",
@@ -33,6 +33,8 @@ const addAdmin = async (connection) => {
       "soy admin",
       "../images/default_admin_avatar.png",
       true,
+      true,
+      "https://ko-fi.com"
     ]
   );
 };
@@ -144,10 +146,7 @@ async function main() {
 
         const koFi = "https://ko-fi.com"
        
-        
-
-
-
+      
         const [userResult] = await connection.query(
           `
       INSERT INTO users(email, nickname, name, surname, password, biography,  userPhoto, admin, active, ko_fi) 
