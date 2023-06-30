@@ -118,9 +118,7 @@ function ServiceCard() {
         </div>
         <ViewComments />
         <div
-          className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
-            service.done ? "bg-green-400" : "bg-red-400"
-          }`}
+          className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8`}
         >
           {isAuthenticated && !isDone && <AddComment />}
           {isAuthenticated &&
