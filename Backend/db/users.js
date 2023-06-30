@@ -243,6 +243,26 @@ const getUserData = async (idUser) => {
   }
 };
 
+const getAllUsers = async () => {
+  let connection;
+  try {
+    connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
+    const [result] = await connection.query(`SELECT * FROM users`);
+
+    if (result.length === 0) {
+      throw generateError("No hay ningún usuario", 404);
+    }
+
+    return result;
+  } catch (e) {
+    throw e;
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 const getUserAvatar = async (nickname) => {
   let connection;
   try {
@@ -273,4 +293,5 @@ module.exports = {
   deleteUser,
   getUserData,
   getUserAvatar,
+  getAllUsers,
 };
