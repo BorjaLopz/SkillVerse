@@ -17,6 +17,8 @@ function NavBar() {
         <NavLink to="/services">Servicios</NavLink> {" || "}
         {!isAuthenticated && <NavLink to="/signup">Regístrate</NavLink>}
         {!isAuthenticated && " || "}
+        {isAuthenticated && <NavLink to="/users">Usuarios</NavLink>}
+        {isAuthenticated && " || "}
         {!isAuthenticated && <NavLink to="/login">Inicia sesión</NavLink>}
         {!isAuthenticated && " || "}
         {isAuthenticated && <NavLink to="/logout">Cerrar sesión</NavLink>}

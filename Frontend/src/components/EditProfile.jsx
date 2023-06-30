@@ -3,12 +3,12 @@ import axios from "axios";
 import useAuth from "../hooks/useAuth";
 
 const validateKoFiURL = (value) => {
-        if (value.trim() === "") {
+  if (value.trim() === "") {
     return true; // No se valida si está vacío
-    }
-    const koFiURLRegex = /^https?:\/\/(?:www\.)?ko-fi\.com\/[a-zA-Z0-9]+$/;
-    return koFiURLRegex.test(value);
-  };
+  }
+  const koFiURLRegex = /^https?:\/\/(?:www\.)?ko-fi\.com\/[a-zA-Z0-9]+$/;
+  return koFiURLRegex.test(value);
+};
 
 const EditProfile = ({id}) => {
    const [formData, setFormData] = useState({
@@ -24,6 +24,7 @@ const EditProfile = ({id}) => {
  
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
+
  
 
   const { user } = useAuth();
@@ -46,6 +47,7 @@ const EditProfile = ({id}) => {
 };
 
     const handleSubmit = async (event) => {
+
     event.preventDefault();
 
     if (!validateKoFiURL(formData.ko_fi)) {
@@ -146,7 +148,7 @@ const EditProfile = ({id}) => {
           />
         </label>
         <br />
-   <label>
+        <label>
           Ko-fi:
           <input
             type="URL"
@@ -156,12 +158,11 @@ const EditProfile = ({id}) => {
           />
         </label>
 
-
-
         <label>
           <br />
-        
+
           <div>
+
             < a href= "https://ko-fi.com" target="_blank" rel="noopener noreferrer">
           <img
               src="/icons/ko-fi-icon.svg"
@@ -169,6 +170,7 @@ const EditProfile = ({id}) => {
               style={{ width: "40px", height: "40px" }}
             />
              </a>
+
           </div>
         </label>
         <br />
@@ -176,11 +178,10 @@ const EditProfile = ({id}) => {
         <button type="submit">Guardar cambios</button>
       </form>
       {error && <p className="error-message">{error}</p>}
-            {successMessage && <p>{successMessage}</p>}
+      {successMessage && <p>{successMessage}</p>}
       {/* {renderAdminContent()} */}
     </div>
   );
 };
 
-export default EditProfile
-
+export default EditProfile;

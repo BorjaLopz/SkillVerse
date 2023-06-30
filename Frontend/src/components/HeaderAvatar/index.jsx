@@ -6,7 +6,7 @@ const HeaderAvatar = ({ user }) => {
   return (
     <div className="header-avatar">
       <Avatar avatar={user.picture} username={user.name} />
-      <NavLink to="/profile">Perfil</NavLink> {" | "}
+      {/* <NavLink to="/profile">Perfil</NavLink> {" | "} */}
     </div>
   );
 };

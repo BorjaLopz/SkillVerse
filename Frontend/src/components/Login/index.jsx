@@ -17,8 +17,6 @@ function Login() {
     const { data } = await post({ url: "/user/login", body: credentials });
     if (data) {
       navigate("/");
-    } else {
-      toast.error("Usuario o contraseña incorrecta");
     }
   };
 

@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 
 function HomeButton() {
   return (
-    <nav>
-      <NavLink className="home-button" to="/">
+    <nav className="inline-block">
+      <NavLink className="p-0 border-none bg-transparent text-inherit" to="/">
         Inicio
-      </NavLink>{" "}
+      </NavLink>
     </nav>
   );
 }

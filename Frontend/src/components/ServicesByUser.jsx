@@ -20,6 +20,13 @@ function ServicesByUser({ nickname }) {
   }, []);
   return (
     <>
+      {serviceUser.length !== 0 ? (
+        <p className="text-center text-4xl">Servicios de {`${nickname}`}</p>
+      ) : (
+        <p className="text-center text-4xl">
+          {`${nickname}`} aún no ha subido ningún servicio
+        </p>
+      )}
       {serviceUser.map((service) => (
         <div key={service.id} className="group relative">
           <Link to={`/service/${service.id}`}>

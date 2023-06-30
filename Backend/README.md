@@ -1,4 +1,5 @@
 # ⚙ Inicialización
+* Posicíonate en la carpeta ./Backend y abre la terminal.
 ## Archivo .env
 * El archivo .env no se mostrará ya que está incluido en el .gitignore.
 * La información contenida no es sensible ya que se trata de un proyecto de ejemplo, pero por convención lo introducimos de esta forma.

@@ -12,7 +12,7 @@ const createUser = async (
   surname = "",
   biography = "",
   userPhoto = "",
-  ko_fi = "",
+  ko_fi = ""
 ) => {
   let connection;
   try {
@@ -27,6 +27,10 @@ const createUser = async (
 
     if (user.length > 0) {
       throw generateError("Email ya en uso", 409);
+    }
+
+    if (nickname.length < 4) {
+      throw generateError("El nickname debe tener al menos 4 caracteres", 400);
     }
 
     const [userNickname] = await connection.query(
@@ -55,7 +59,17 @@ const createUser = async (
       `
 
     INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, ko_fi) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      [email, nickname, name, surname, passwordHash, biography, userPhoto, ko_fi]
+
+      [
+        email,
+        nickname,
+        name,
+        surname,
+        passwordHash,
+        biography,
+        userPhoto,
+        ko_fi,
+      ]
 
     );
 
@@ -127,14 +141,33 @@ const editUser = async (tmp_user) => {
   let connection;
 
   try {
-    let { id, email, nickname, name, surname, password, biography, userPhoto, ko_fi } =
-      tmp_user;
+    let {
+      id,
+      email,
+      nickname,
+      name,
+      surname,
+      password,
+      biography,
+      userPhoto,
+      ko_fi,
+    } = tmp_user;
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
 
     const [result] = await connection.query(
       `UPDATE users SET email = ?, nickname = ?, name = ?, surname = ?, password = ?, biography = ?, userPhoto = ?, ko_fi = ? WHERE id = ?;`,
-      [email, nickname, name, surname, password, biography, userPhoto, ko_fi, id ]
+      [
+        email,
+        nickname,
+        name,
+        surname,
+        password,
+        biography,
+        userPhoto,
+        ko_fi,
+        id,
+      ]
     );
 
     return result;
@@ -212,6 +245,26 @@ const getUserData = async (idUser) => {
   }
 };
 
+const getAllUsers = async () => {
+  let connection;
+  try {
+    connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
+    const [result] = await connection.query(`SELECT * FROM users`);
+
+    if (result.length === 0) {
+      throw generateError("No hay ningún usuario", 404);
+    }
+
+    return result;
+  } catch (e) {
+    throw e;
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 const getUserAvatar = async (nickname) => {
   let connection;
   try {
@@ -242,4 +295,5 @@ module.exports = {
   deleteUser,
   getUserData,
   getUserAvatar,
+  getAllUsers,
 };
