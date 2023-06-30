@@ -69,8 +69,15 @@ const ServicesList = () => {
                     service.done ? "bg-green-400" : "bg-red-400"
                   }`}
                 >
-                  {" "}
-                  {/* bg-slate-400*/}
+                  {service.done ? (
+                    <img
+                      id="check_image"
+                      src={"../../public/icons/check-circle.png"}
+                      alt="check"
+                    />
+                  ) : (
+                    ""
+                  )}
                   <div>
                     <h3 className="text-sm text-gray-700">
                       <p>{service.title}</p>

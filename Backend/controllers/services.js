@@ -25,6 +25,7 @@ const {
   ALLOWED_EXTENSIONS,
   uploadFilesInFolder,
 } = require("../helpers");
+const { getUserData } = require("../db/users");
 
 const newServiceController = async (req, res, next) => {
   try {
@@ -58,53 +59,14 @@ const newServiceController = async (req, res, next) => {
       );
     }
 
-    // //Tratar el fichero
-    // let fileName;
-    // let uploadPath;
-
-    // if (req.files?.file) {
-    //   let sampleFile = req.files.file;
-
-    //   //Crear el path
-    //   const uploadDir = path.join(__dirname, "../uploads");
-
-    //   //Crear directorio si no existe
-    //   await createPathIfNotExists(uploadDir);
-
-    //   //Comprobar si la extension es valida.
-    //   console.log(chalk.red(getExtensionFile(sampleFile.name)));
-    //   if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
-    //     throw generateError(
-    //       `Formato no válido. Tipos de formatos permitidos: ${ALLOWED_EXTENSIONS}`,
-    //       415
-    //     );
-    //   }
-
-    //   //Obtener la extensión del fichero para guardarlo de la misma manera
-    //   fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`;
-
-    //   uploadPath = uploadDir + "\\" + fileName;
-
-    //   //Subir el fichero
-    //   sampleFile.mv(uploadPath, function (e) {
-    //     if (e) {
-    //       throw generateError("No se pudo enviar el archivo", 400);
-    //     }
-    //   });
-    // }
-    // else {
-    //   console.log("req.files es ", req.files?.file)
-    // }
-
-    // console.log("req.files desde controllers");
-    // console.log(req);
+    const user = await getUserData(req.userId);
 
     const fileName = await uploadFilesInFolder(
       req,
       "file",
       "service",
       title,
-      req.userId
+      user.nickname
     );
     console.log("fileName: ", fileName);
 

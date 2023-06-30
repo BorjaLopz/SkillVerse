@@ -25,8 +25,16 @@ const { DB_DATABASE } = process.env;
 
 const newUserController = async (req, res, next) => {
   try {
-    const { email, nickname, name, surname, password, biography, userPhoto, ko_fi } =
-      req.body;
+    const {
+      email,
+      nickname,
+      name,
+      surname,
+      password,
+      biography,
+      userPhoto,
+      ko_fi,
+    } = req.body;
 
     const schema = Joi.object({
       email: Joi.string().email().required(),
@@ -217,8 +225,6 @@ const getUserDataController = async (req, res, next) => {
     const { id } = req.params;
 
     const userData = await getUserData(id);
-    // console.log("CONTROLLER");
-    // console.log(userData);
     res.send({
       status: "ok",
       userData: userData,
@@ -233,8 +239,7 @@ const getUserAvatarController = async (req, res, next) => {
     const { nickname } = req.params;
 
     const userAvatar = await getUserAvatar(nickname);
-    // console.log("CONTROLLER");
-    // console.log(userAvatar);
+
     res.send({
       status: "ok",
       userAvatar: userAvatar,
@@ -258,7 +263,8 @@ const editUserController = async (req, res, next) => {
     }
 
     const [user] = await getAllFieldsExceptPassword(id_params);
-    let { email, nickname, name, surname, password, biography, ko_fi } = req.body;
+    let { email, nickname, name, surname, password, biography, ko_fi } =
+      req.body;
 
     let userPhoto = await uploadFilesInFolder(req, "userPhoto", "user");
 

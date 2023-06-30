@@ -18,7 +18,6 @@ function ServiceCard() {
   const { get, patch } = useServer();
   const navigate = useNavigate();
 
-  console.log(user.user.id);
   const getService = async () => {
     try {
       const { data } = await get({ url: `/service/${id}` });
