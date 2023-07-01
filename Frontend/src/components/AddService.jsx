@@ -83,7 +83,6 @@ const AddService = () => {
           value={title}
           onChange={(event) => setTitle(event.target.value)}
           required
-          minLength={15}
         />
 
         <label
