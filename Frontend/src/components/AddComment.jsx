@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import useServer from "../hooks/useServer";
 import toast from "react-hot-toast";
+import axios from "axios";
+import useAuth from "../hooks/useAuth";
 
 const AddComment = () => {
   const [comment, setComment] = useState("");
   const [file, setFile] = useState(null);
   const { post } = useServer();
+  const { user } = useAuth();
+  console.log(user);
 
   const getServiceIdFromURL = () => {
     const url = window.location.href;
@@ -23,27 +27,31 @@ const AddComment = () => {
     event.preventDefault();
 
     try {
-      const currentComment = {
-        comment,
-        file,
+      const formData = new FormData();
+      formData.append("comment", comment);
+      formData.append("file", file);
+
+      const config = {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "content-type": "multipart/form-data",
+          Authorization: `${user.token}`,
+        },
       };
 
-      const { data } = await post({
-        url: `/comments/${serviceId}`,
-        body: currentComment,
-      });
+      const response = await axios.post(
+        `http://localhost:3000/comments/${serviceId}`,
+        formData,
+        config
+      );
 
-      console.log(data);
-
-      if (data) {
-        toast.success(`Comentario enviado con éxito`);
+      if (response.data) {
+        toast.success("Comentario publicado con éxito");
         setComment("");
         setFile(null);
-      } else {
-        toast.error(`No se ha podido crear el comentario. Inténtalo de nuevo.`);
       }
     } catch (error) {
-      console.error("Error sending the new service:", error);
+      toast.error("No se pudo publicar el comentario");
     }
   };
 
@@ -71,10 +79,9 @@ const AddComment = () => {
         <label className="block">
           <span className="text-gray-700">Subir archivo:</span>
           <input
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            aria-describedby="file_help"
-            id="file"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
             type="file"
+            accept="image/*, .pdf, .doc, .docx"
             onChange={(event) => setFile(event.target.files[0])}
           />
         </label>
