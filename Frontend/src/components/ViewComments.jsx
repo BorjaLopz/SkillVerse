@@ -1,38 +1,22 @@
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, NavLink, useParams } from "react-router-dom";
 import useServer from "../hooks/useServer";
-import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
-import { Link, NavLink } from "react-router-dom";
 
 function ViewComments() {
   const [comments, setComments] = useState([]);
   const [userData, setUserData] = useState({});
   const { isAuthenticated } = useAuth();
-
   const { id } = useParams();
   const { get } = useServer();
 
-  const getServiceIdFromURL = () => {
-    const url = window.location.href;
-    const parts = url.split("/");
-    const serviceIdIndex = parts.findIndex((part) => part === "service");
-    if (serviceIdIndex !== -1 && serviceIdIndex + 1 < parts.length) {
-      return parts[serviceIdIndex + 1];
-    }
-    return null;
-  };
-
-  const serviceId = getServiceIdFromURL();
-
   const getComments = async () => {
     try {
-      const { data } = await get({ url: `/comments/${serviceId}` });
+      const { data } = await get({ url: `/comments/${id}` });
       setComments(data.message);
 
-      console.log(data.message);
-
       if (data.message.length > 0) {
-        getUserOwner(data.message[0].user_id);
+        getUserOwner(data.message[0]?.user_id);
       }
     } catch (e) {
       console.log("Error al obtener los comentarios:", e.message);
@@ -42,7 +26,6 @@ function ViewComments() {
   const getUserOwner = async (userId) => {
     try {
       const { data } = await get({ url: `/userdata/${userId}` });
-      console.log(data);
       setUserData(data.userData);
     } catch (e) {
       console.log(
@@ -53,10 +36,20 @@ function ViewComments() {
   };
 
   useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (isAuthenticated) {
+        getComments();
+      }
+    }, 500);
+
+    return () => clearInterval(intervalId);
+  }, [isAuthenticated]);
+
+  useEffect(() => {
     if (isAuthenticated) {
       getComments();
     }
-  }, [isAuthenticated]);
+  }, [id, isAuthenticated]);
 
   return (
     <>
@@ -78,25 +71,25 @@ function ViewComments() {
           para ver y hacer comentarios.
         </p>
       )}
-      {isAuthenticated && (
+      {isAuthenticated && comments && comments.length > 0 && (
         <div className="p-8">
           {comments.map((comment) => (
             <div key={comment.id} className="shadow-xl rounded-lg">
               <div className="bg-white rounded-b-lg px-8">
-                <Link to={`/user/${userData.nickname}`} />
+                <Link to={`/user/${comment?.user?.nickname}`} />
 
                 <div className="relative">
-                  <Link to={`/user/${userData.nickname}`}>
+                  <Link to={`/user/${comment?.user?.nickname}`}>
                     <img
                       className="right-0 w-16 h-16 rounded-full mr-4 shadow-lg absolute -mt-8 bg-gray-100"
-                      src={userData.userPhoto}
-                      alt={`Foto de perfil de ${userData.nickname}`}
+                      src={comment?.user?.userPhoto}
+                      alt={`Foto de perfil de ${comment?.user?.nickname}`}
                     />
                   </Link>
                 </div>
                 <div className="pt-8 pb-8">
-                  <Link to={`/user/${userData.nickname}`}>
-                    <p className="text-sm text-gray-600">{`${userData.nickname}`}</p>
+                  <Link to={`/user/${comment?.user?.nickname}`}>
+                    <p className="text-sm text-gray-600">{`${comment?.user?.nickname}`}</p>
                   </Link>
                   <p className="mt-6 text-gray-700">{comment.comment}</p>
                 </div>
