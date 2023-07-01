@@ -110,7 +110,7 @@ function ServiceCard() {
               <p className="mt-6 text-gray-700">{service.request_body}</p>
               {service.file_name !== "" && (
                 <Link to={`${service.file_name}`} target="_blank">
-                  <img src="../../public/icons/download.png" />
+                  <img src="/icons/download.png" />
                 </Link>
               )}
             </div>

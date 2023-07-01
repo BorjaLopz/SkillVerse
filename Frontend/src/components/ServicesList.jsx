@@ -76,7 +76,7 @@ const ServicesList = () => {
                   {service.done ? (
                     <img
                       id="check_image"
-                      src={"../../public/icons/check-circle.png"}
+                      src={"/icons/check-circle.png"}
                       alt="check"
                     />
                   ) : (

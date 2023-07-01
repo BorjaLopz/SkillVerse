@@ -1,7 +1,7 @@
 import React from "react";
 import AddService from "../components/AddService.jsx";
 import ServicesList from "../components/ServicesList.jsx";
-//
+import ScrollToTopButton from "../components/ScrollTop.jsx";
 import useAuth from "../hooks/useAuth";
 
 // import SearchBar from "../components/SearchBar.jsx";
@@ -33,7 +33,7 @@ function AllServicesPage() {
             para agregar servicios.
           </p>
         )}
-        {isAuthenticated && <AddService />}{" "}
+        {isAuthenticated && <AddService />} <ScrollToTopButton />
       </main>
     </>
   );
