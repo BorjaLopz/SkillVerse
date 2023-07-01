@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import "./style.css";
 
-function ScrollToTopButton() {
+function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Mostrar o ocultar el botón cuando se desplaza la página
+    // Mostrar u ocultar el botón cuando se desplaza la página
     const handleScroll = () => {
       const scrollTop =
         window.pageYOffset || document.documentElement.scrollTop;
@@ -37,4 +38,4 @@ function ScrollToTopButton() {
   );
 }
 
-export default ScrollToTopButton;
+export default ScrollToTop;

@@ -7,6 +7,7 @@ import DoneCheck from "./DoneCheck";
 import ViewComments from "./ViewComments";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import ScrollToTop from "./ScrollToTop";
 
 function ServiceCard() {
   const [service, setService] = useState([]);
@@ -116,6 +117,7 @@ function ServiceCard() {
             </div>
           </div>
         </div>
+        <ScrollToTop />
         <ViewComments />
         <div
           className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8`}
