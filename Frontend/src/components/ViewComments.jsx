@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import useServer from "../hooks/useServer";
 import useAuth from "../hooks/useAuth";
+import axios from "axios";
 
 function ViewComments() {
   const [comments, setComments] = useState([]);
-  const [userData, setUserData] = useState({});
-  const { isAuthenticated } = useAuth();
+  const [commentOwners, setCommentOwners] = useState({});
+  const { isAuthenticated, user } = useAuth();
   const { id } = useParams();
   const { get } = useServer();
 
@@ -16,20 +17,38 @@ function ViewComments() {
       setComments(data.message);
 
       if (data.message.length > 0) {
-        getUserOwner(data.message[0]?.user_id);
+        const userIds = data.message.map((comment) => comment.user_id);
+        getUserCommentOwners(userIds);
       }
     } catch (e) {
       console.log("Error al obtener los comentarios:", e.message);
     }
   };
 
+  const getUserCommentOwners = async (userIds) => {
+    try {
+      const promises = userIds.map((userId) => getUserOwner(userId));
+      const owners = await Promise.all(promises);
+      const ownersMap = owners.reduce((map, owner) => {
+        map[owner.id] = owner;
+        return map;
+      }, {});
+      setCommentOwners(ownersMap);
+    } catch (e) {
+      console.log(
+        "Error al obtener los datos de los usuarios propietarios de los comentarios:",
+        e.message
+      );
+    }
+  };
+
   const getUserOwner = async (userId) => {
     try {
       const { data } = await get({ url: `/userdata/${userId}` });
-      setUserData(data.userData);
+      return data.userData;
     } catch (e) {
       console.log(
-        "Error al obtener los datos del usuario propietario:",
+        "Error al obtener los datos del usuario propietario del comentario:",
         e.message
       );
     }
@@ -73,29 +92,34 @@ function ViewComments() {
       )}
       {isAuthenticated && comments && comments.length > 0 && (
         <div className="p-8">
-          {comments.map((comment) => (
-            <div key={comment.id} className="shadow-xl rounded-lg">
-              <div className="bg-white rounded-b-lg px-8">
-                <Link to={`/user/${comment?.user?.nickname}`} />
+          {comments.map((comment) => {
+            const commentOwner = commentOwners[comment.user_id];
+            return (
+              <div key={comment.id} className="shadow-xl rounded-lg">
+                <div className="bg-white rounded-b-lg px-8">
+                  <Link to={`/user/${commentOwner?.nickname}`} />
 
-                <div className="relative">
-                  <Link to={`/user/${comment?.user?.nickname}`}>
-                    <img
-                      className="right-0 w-16 h-16 rounded-full mr-4 shadow-lg absolute -mt-8 bg-gray-100"
-                      src={comment?.user?.userPhoto}
-                      alt={`Foto de perfil de ${comment?.user?.nickname}`}
-                    />
-                  </Link>
-                </div>
-                <div className="pt-8 pb-8">
-                  <Link to={`/user/${comment?.user?.nickname}`}>
-                    <p className="text-sm text-gray-600">{`${comment?.user?.nickname}`}</p>
-                  </Link>
-                  <p className="mt-6 text-gray-700">{comment.comment}</p>
+                  <div className="relative">
+                    <Link to={`/user/${commentOwner?.nickname}`}>
+                      <img
+                        className="right-0 w-16 h-16 rounded-full mr-4 shadow-lg absolute -mt-8 bg-gray-100"
+                        src={commentOwner?.userPhoto}
+                        alt={`Foto de perfil de ${commentOwner?.nickname}`}
+                      />
+                    </Link>
+                  </div>
+                  <div className="pt-8 pb-8">
+                    <Link to={`/user/${commentOwner?.nickname}`}>
+                      <p className="text-sm text-gray-600">
+                        {`${commentOwner?.nickname}`}
+                      </p>
+                    </Link>
+                    <p className="mt-6 text-gray-700">{comment.comment}</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </>

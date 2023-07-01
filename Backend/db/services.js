@@ -291,10 +291,6 @@ const getAllCommentsFromService = async (id) => {
       [id]
     );
 
-    if (getCommentByID.length === 0) {
-      throw generateError("No hay comentarios de este servicio", 404);
-    }
-
     return getCommentByID;
   } finally {
     if (connection) connection.release();
