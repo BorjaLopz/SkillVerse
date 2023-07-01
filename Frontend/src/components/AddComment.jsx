@@ -9,7 +9,6 @@ const AddComment = () => {
   const [file, setFile] = useState(null);
   const { post } = useServer();
   const { user } = useAuth();
-  console.log(user);
 
   const getServiceIdFromURL = () => {
     const url = window.location.href;
