@@ -18,6 +18,15 @@ const AddService = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (description.length < 15) {
+      toast.error("La descripción debe tener al menos 15 caracteres");
+      return;
+    }
+    if (title.length < 15) {
+      toast.error("El título debe tener al menos 15 caracteres");
+      return;
+    }
+
     try {
       //#region //formData por implementar bien
       const formData = new FormData();
@@ -52,12 +61,12 @@ const AddService = () => {
         .post("http://localhost:3000/service/add", formData, config)
         .catch(function (e) {
           if (e.response) {
-            console.log(e.response.data);
+            // console.log(e.response.data);
             toast.error(e.response.data.message);
           }
         });
     } catch (error) {
-      toast.error(`No se ha podido generaro el servicio. ${error}`);
+      toast.error(`No se ha podido generar el servicio. ${error}`);
     }
   };
 
@@ -92,7 +101,6 @@ const AddService = () => {
               value={title}
               onChange={(event) => setTitle(event.target.value)}
               required
-              minLength={15}
             />
           </label>
           {/* ANTIGUO TEXT AREA */}
@@ -108,7 +116,7 @@ const AddService = () => {
             />
           </div> */}
 
-          <label for="description" className="block">
+          <label htmlFor="description" className="block">
             <span className="text-gray-700">Descripción:</span>
             <textarea
               id="description"
