@@ -17,6 +17,15 @@ const AddService = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (description.length < 15) {
+      toast.error("La descripción debe tener al menos 15 caracteres");
+      return;
+    }
+    if (title.length < 15) {
+      toast.error("El título debe tener al menos 15 caracteres");
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append("title", title);
