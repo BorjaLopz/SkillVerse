@@ -18,6 +18,7 @@ import AddService from "./components/AddService.jsx";
 import Footer from "./components/Footer/index.jsx";
 import LogOut from "./components/LogOut";
 import ServiceCard from "./components/ServiceCard";
+import UsersPage from "./pages/UsersPage";
 //import ServicesList from "./components/ServicesList";
 //import CommentCard from "./components/CommentCard";
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/logout" element={<LogOut />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/users" element={<UsersPage />} />
         <Route path="/user/:nickname" element={<ProfilePage />} />
         <Route path="/service/:id" element={<ServiceCard />} />
         <Route path="*" element={<NotFoundPage />} />

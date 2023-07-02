@@ -1,4 +1,5 @@
 # ⚙ Inicialización
+* Posicíonate en la carpeta ./Frontend y abre la terminal.
 ## NPM necesarios
 * Debes instalar primero los módulos necesarios:
 ```

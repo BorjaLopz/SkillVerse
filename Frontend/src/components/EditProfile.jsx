@@ -178,7 +178,7 @@ console.log(formData)
           />
         </label>
         <br />
-   <label>
+        <label>
           Ko-fi:
           <input
             type="URL"
@@ -207,7 +207,7 @@ console.log(formData)
         <button type="submit">Guardar cambios</button>
       </form>
       {error && <p className="error-message">{error}</p>}
-            {successMessage && <p>{successMessage}</p>}
+      {successMessage && <p>{successMessage}</p>}
       {/* {renderAdminContent()} */}
 
       {/* <div>
@@ -219,5 +219,4 @@ console.log(formData)
   );
 };
 
-export default EditProfile
-
+export default EditProfile;

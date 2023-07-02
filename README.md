@@ -13,8 +13,6 @@ _Proyecto para HACK A BOSS - 2023: Web donde personas que necesiten algún servi
   - Subir un archivo con el servicio resuelto.
   - Marcar un servicio como ya resuelto.
   - Gestionar el perfil de usuario.
-  - Borrar su usuario.
-  - Borrar un comentario.
   
 ## ⚙ Inicialización
 Para inicializar la app debes seguir los pasos indicados en el ReadMe de la carpeta Backend y Frontend.

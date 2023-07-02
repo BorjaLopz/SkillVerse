@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import useServer from "../hooks/useServer";
 import toast from "react-hot-toast";
 
@@ -37,7 +36,7 @@ const AddComment = () => {
       console.log(data);
 
       if (data) {
-        toast.success(`Comentario enviado con exito`);
+        toast.success(`Comentario enviado con éxito`);
         setComment("");
         setFile(null);
       } else {
