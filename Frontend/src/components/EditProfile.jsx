@@ -1,46 +1,63 @@
+
 import { useState } from "react";
+
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
+//import { Link } from "react-router-dom";
 
 const validateKoFiURL = (value) => {
-  if (value.trim() === "") {
+  if (!value || value.trim() === "") {
     return true; // No se valida si está vacío
   }
   const koFiURLRegex = /^https?:\/\/(?:www\.)?ko-fi\.com\/[a-zA-Z0-9]+$/;
   return koFiURLRegex.test(value);
 };
 
-const EditProfile = ({ id }) => {
+
+const EditProfile = () => {
+  const { user } = useAuth();
+
   const [formData, setFormData] = useState({
-    email: "",
-    userPhoto: "",
-    nickname: "",
-    name: "",
-    surname: "",
+    email: user.email,
+    userPhoto: user.userPhoto,
+    nickname: user.nickname,
+    name: user.name,
+    surname: user.surname,
+
     password: "",
-    biography: "",
+    biography: user.biography,
     ko_fi: "",
   });
 
+  console.log(formData)
+  
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
-
-  const { user } = useAuth();
+  const [koFiURL, setKoFiURL] = useState("");
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
 
-    if (name === "ko_fi") {
+
+    if (name === "ko_fi" && value.trim() !== "") {
+
       if (!validateKoFiURL(value)) {
         setError("Por favor, introduce una URL válida de Ko-fi.");
       } else {
         setError("");
+
+        setKoFiURL(value);
       }
     }
+    
+
+
   };
 
   const handleSubmit = async (event) => {
@@ -63,15 +80,44 @@ const EditProfile = ({ id }) => {
         }
       );
 
-      setFormData(response.data);
+
+
+
+
+      // Actualizar el estado con los datos actualizados del usuario
+     setFormData((prevFormData) => ({
+       ...prevFormData,
+  email: response.data.email,
+  userPhoto: response.data.userPhoto,
+  nickname: response.data.nickname,
+  name: response.data.name,
+  surname: response.data.surname,
+  password: response.data.password,
+  biography: response.data.biography,
+  ko_fi: response.data.ko_fi,
+        // Actualiza otros campos si es necesario
+      }));
+
+
+
       setSuccessMessage("¡Perfil actualizado exitosamente!");
+
+      if (formData.ko_fi.trim() !== "") {
+        setKoFiURL(formData.ko_fi);
+        
+      }
     } catch (error) {
-      //console.error(error);
       if (error.response && error.response.status === 401) {
         window.location.href = "/login";
       }
     }
   };
+
+
+
+
+console.log(formData)
+
 
   return (
     <div className="edit-profile">
@@ -172,20 +218,21 @@ const EditProfile = ({ id }) => {
         <label className="block">
           <br />
 
-          <div>
-            <a
-              href="https://ko-fi.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+          {koFiURL && (
+            <a href={koFiURL} target="_blank" rel="noopener noreferrer">
+
               <img
                 src="/icons/ko-fi-icon.svg"
                 alt="Ko-fi"
                 style={{ width: "40px", height: "40px" }}
               />
             </a>
-          </div>
+
+          )}
+
         </label>
+
+       
         <br />
 
         <button
@@ -200,7 +247,13 @@ const EditProfile = ({ id }) => {
         <p className="text-green-500 mt-2">{successMessage}</p>
       )}
       {/* {renderAdminContent()} */}
+
+      {/* <div>
+        <Link to={`/profile/${formData.nickname}`}>Volver al Servicio</Link>
+          </div> */}
     </div>
+
+
   );
 };
 

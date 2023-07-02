@@ -1,4 +1,5 @@
-import { useParams, NavLink, Link } from "react-router-dom";
+
+import { useParams } from "react-router-dom";
 import useServer from "../hooks/useServer";
 import React, { useEffect, useState } from "react";
 import AddComment from "./AddComment";
@@ -7,9 +8,11 @@ import DoneCheck from "./DoneCheck";
 import ViewComments from "./ViewComments";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import ProfileCard from "./ProfileCard"; 
 import ScrollToTop from "./ScrollToTop";
 
-function ServiceCard() {
+
+const ServiceCard =() => {
   const [service, setService] = useState([]);
   const [userOwner, setUserOwner] = useState();
   const [userServiceOwner, setUserServiceOwner] = useState();
@@ -85,9 +88,7 @@ function ServiceCard() {
       <div className="p-8">
         <div className="shadow-xl rounded-lg">
           <div className="h-64 bg-gray-200 bg-cover bg-center rounded-t-lg flex items-center justify-center">
-            <p className="text-black font-bold text-4xl">
-              {service.service_type}
-            </p>
+            <p className="text-black font-bold text-4xl">{service.service_type}</p>
           </div>
           <div className="bg-white rounded-b-lg px-8">
             <Link to={`/user/${userData.nickname}`} />
@@ -102,9 +103,7 @@ function ServiceCard() {
               </Link>
             </div>
             <div className="pt-8 pb-8">
-              <h1 className="text-2xl font-bold text-gray-700">
-                {service.title}
-              </h1>
+              <h1 className="text-2xl font-bold text-gray-700">{service.title}</h1>
               <Link to={`/user/${userData.nickname}`}>
                 <p className="text-sm text-gray-600">{`${userData.nickname}`}</p>
               </Link>
@@ -115,12 +114,17 @@ function ServiceCard() {
                 </Link>
               )}
             </div>
+            <ProfileCard formData={userData} /> {/* Renderiza el componente ProfileCard aquí */}
           </div>
         </div>
         <ScrollToTop />
         <ViewComments />
-        <div
-          className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8`}
+
+           <div
+          className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
+            service.done ? "bg-green-400" : "bg-red-400"
+          }`}
+
         >
           {isAuthenticated && !isDone && <AddComment />}
           {isAuthenticated &&
@@ -132,12 +136,32 @@ function ServiceCard() {
               setService={setService}
               isLoading={isLoading}
               handleMarkAsDone={handleMarkAsDone}
-            />
+   />
           ) : null}
         </div>
+        {/* /* {isDone ||
+          (isAuthenticated && !isDone && (
+            <DoneCheck
+              id={service.id}
+              complete={service.complete}
+              setService={setService}
+              isLoading={isLoading}
+              handleMarkAsDone={handleMarkAsDone}
+            /><AddComment />
+          ))}*/}
+        {isAuthenticated && <AddComment />}
+        {isAuthenticated && (
+          <DoneCheck
+            id={service.id}
+            complete={service.complete}
+            setService={setService}
+            handleMarkAsDone={handleMarkAsDone}
+          />
+        )}
       </div>
     </>
   );
-}
+};
 
 export default ServiceCard;
+

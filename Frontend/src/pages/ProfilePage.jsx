@@ -1,7 +1,7 @@
 import React from "react";
 import Profile from "../components/Profile";
 import { useParams } from "react-router";
-import { useLocation } from "react-router-dom";
+
 
 function ProfilePage() {
   const { nickname } = useParams();
@@ -9,8 +9,12 @@ function ProfilePage() {
   return (
     <main>
       <Profile user={nickname} />
+    
     </main>
   );
 }
 
 export default ProfilePage;
+
+
+
