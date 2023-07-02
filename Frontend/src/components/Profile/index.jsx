@@ -27,7 +27,7 @@ function Profile({ user }) {
             </section>
 
             <section>
-                <p className="text-center text-4xl">Servicios de {`${user}`}</p>
+          
                 <ServicesByUser nickname={user} />
             </section>
         </>
