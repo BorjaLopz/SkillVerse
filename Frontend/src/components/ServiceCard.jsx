@@ -1,5 +1,5 @@
 
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import useServer from "../hooks/useServer";
 import React, { useEffect, useState } from "react";
 import AddComment from "./AddComment";
@@ -9,6 +9,7 @@ import ViewComments from "./ViewComments";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import ProfileCard from "./ProfileCard"; 
+
 
 const ServiceCard =() => {
   const [service, setService] = useState([]);
