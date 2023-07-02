@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import useServer from "../hooks/useServer";
 import toast from "react-hot-toast";
+import axios from "axios";
+import useAuth from "../hooks/useAuth";
 
 const AddComment = () => {
   const [comment, setComment] = useState("");
   const [file, setFile] = useState(null);
   const { post } = useServer();
+  const { user } = useAuth();
 
   const getServiceIdFromURL = () => {
     const url = window.location.href;
@@ -23,56 +26,66 @@ const AddComment = () => {
     event.preventDefault();
 
     try {
-      const currentComment = {
-        comment,
-        file,
+      const formData = new FormData();
+      formData.append("comment", comment);
+      formData.append("file", file);
+
+      const config = {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "content-type": "multipart/form-data",
+          Authorization: `${user.token}`,
+        },
       };
 
-      const { data } = await post({
-        url: `/comments/${serviceId}`,
-        body: currentComment,
-      });
+      const response = await axios.post(
+        `http://localhost:3000/comments/${serviceId}`,
+        formData,
+        config
+      );
 
-      console.log(data);
-
-      if (data) {
-        toast.success(`Comentario enviado con éxito`);
+      if (response.data) {
+        toast.success("Comentario publicado con éxito");
         setComment("");
         setFile(null);
-      } else {
-        toast.error(`No se ha podido crear el comentario. Inténtalo de nuevo.`);
       }
     } catch (error) {
-      console.error("Error sending the new service:", error);
+      toast.error("No se pudo publicar el comentario");
     }
   };
 
   return (
     <div className="add-comment p-8">
-      <h2 className="text-2xl font-bold mb-4">Añadir Comentario</h2>
+      <h2
+        className="text-4xl font-bold tracking-tight text-center"
+        style={{ color: "#523d80" }}
+      >
+        Añadir comentarios
+      </h2>
       <form onSubmit={handleSubmit} className="bg-white rounded-lg px-8">
         <div className="comment mb-4">
-          <label className="block mb-2 text-gray-800 font-bold">
-            Comentario:
+          <label className="block">
+            <span className="text-gray-700">Comentario:</span>
+            <textarea
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              placeholder="Escriba aquí su comentario..."
+              required
+              value={comment}
+              onChange={(event) => setComment(event.target.value)}
+            />
           </label>
-          <textarea
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-            placeholder="Escriba aquí su comentario..."
-            required
-            value={comment}
-            onChange={(event) => setComment(event.target.value)}
-          />
         </div>
-        <div className="file mb-4">
-          <label className="block mb-2 text-gray-800 font-bold">Archivo:</label>
+        <label className="block">
+          <span className="text-gray-700">Subir archivo:</span>
           <input
             className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-            type="comment-file"
+            type="file"
+            accept="image/*, .pdf, .doc, .docx"
             onChange={(event) => setFile(event.target.files[0])}
           />
-        </div>
+        </label>
         <button
-          className="publish-comment bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+          className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-indigo-700"
           type="submit"
         >
           Publicar
