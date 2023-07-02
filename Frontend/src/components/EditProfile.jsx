@@ -1,52 +1,56 @@
-import {  useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
+//import { Link } from "react-router-dom";
 
 const validateKoFiURL = (value) => {
-        if (!value || value.trim() === "") {
+  if (!value || value.trim() === "") {
     return true; // No se valida si está vacío
-    }
-    const koFiURLRegex = /^https?:\/\/(?:www\.)?ko-fi\.com\/[a-zA-Z0-9]+$/;
-    return koFiURLRegex.test(value);
-  };
+  }
+  const koFiURLRegex = /^https?:\/\/(?:www\.)?ko-fi\.com\/[a-zA-Z0-9]+$/;
+  return koFiURLRegex.test(value);
+};
 
-const EditProfile = ({id}) => {
-   const [formData, setFormData] = useState({
-    email: "",
-    userPhoto: "",
-    nickname: "",
-    name: "",
-    surname: "",
+const EditProfile = () => {
+  const { user } = useAuth();
+
+  const [formData, setFormData] = useState({
+    email: user.email,
+    userPhoto: user.userPhoto,
+    nickname: user.nickname,
+    name: user.name,
+    surname: user.surname,
     password: "",
-    biography: "",
+    biography: user.biography,
     ko_fi: "",
   });
- 
+  console.log(formData)
+  
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
   const [koFiURL, setKoFiURL] = useState("");
 
-  const { user } = useAuth();
+  const handleChange = (event) => {
+    const { name, value } = event.target;
 
-  
-  const handleChange = (event) => {   
-  const { name, value } = event.target;
-  setFormData((prevFormData) =>({
-    ...prevFormData,
-    [name]: value,
-  }));
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
 
-   if (name === "ko_fi" && value.trim() !== "") {
-    if (!validateKoFiURL(value)) {
-      setError("Por favor, introduce una URL válida de Ko-fi.");
-    } else {
-      setError("");
-      setKoFiURL(value);
+    if (name === "ko_fi" && value.trim() !== "") {
+      if (!validateKoFiURL(value)) {
+        setError("Por favor, introduce una URL válida de Ko-fi.");
+      } else {
+        setError("");
+        setKoFiURL(value);
+      }
     }
-  }
-};
+    
 
-    const handleSubmit = async (event) => {
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!validateKoFiURL(formData.ko_fi)) {
@@ -55,27 +59,51 @@ const EditProfile = ({id}) => {
     }
 
     try {
-      const response = await axios.put(`http://localhost:3000/user/${user.user.id}/edit`, formData, {
-        headers: {
-         "Access-Control-Allow-Origin": "*",
-          Authorization: `${user.token}`,
-        },
-      });
+      const response = await axios.put(
+        `http://localhost:3000/user/${user.user.id}/edit`,
+        formData,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+            Authorization: `${user.token}`,
+          },
+        }
+      );
 
-      setFormData(response.data);
+
+
+
+      // Actualizar el estado con los datos actualizados del usuario
+     setFormData((prevFormData) => ({
+       ...prevFormData,
+  email: response.data.email,
+  userPhoto: response.data.userPhoto,
+  nickname: response.data.nickname,
+  name: response.data.name,
+  surname: response.data.surname,
+  password: response.data.password,
+  biography: response.data.biography,
+  ko_fi: response.data.ko_fi,
+        // Actualiza otros campos si es necesario
+      }));
+
+
       setSuccessMessage("¡Perfil actualizado exitosamente!");
 
-        if (formData.ko_fi.trim() !== "") {
+      if (formData.ko_fi.trim() !== "") {
         setKoFiURL(formData.ko_fi);
+        
       }
-    
     } catch (error) {
-      //console.error(error);
       if (error.response && error.response.status === 401) {
         window.location.href = "/login";
       }
     }
   };
+
+
+
+console.log(formData)
 
   return (
     <div className="edit-profile">
@@ -181,7 +209,13 @@ const EditProfile = ({id}) => {
       {error && <p className="error-message">{error}</p>}
             {successMessage && <p>{successMessage}</p>}
       {/* {renderAdminContent()} */}
+
+      {/* <div>
+        <Link to={`/profile/${formData.nickname}`}>Volver al Servicio</Link>
+          </div> */}
     </div>
+
+
   );
 };
 

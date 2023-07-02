@@ -5,7 +5,7 @@ import "./App.css";
 // import ServicesList from "./components/ServicesList.jsx"
 import PrivateRoutes from "./components/PrivateRoutes.jsx";
 
-import Loading from "./components/Loading";
+//import Loading from "./components/Loading";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";

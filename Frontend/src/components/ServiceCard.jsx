@@ -1,3 +1,4 @@
+
 import { useParams } from "react-router-dom";
 import useServer from "../hooks/useServer";
 import React, { useEffect, useState } from "react";
@@ -7,8 +8,9 @@ import { Link } from "react-router-dom";
 import DoneCheck from "./DoneCheck";
 import ViewComments from "./ViewComments";
 import { useNavigate } from "react-router-dom";
+import ProfileCard from "./ProfileCard"; 
 
-function ServiceCard() {
+const ServiceCard =() => {
   const [service, setService] = useState([]);
   const [userServiceOwner, setUserServiceOwner] = useState();
   const [userData, setUserData] = useState({});
@@ -23,7 +25,6 @@ function ServiceCard() {
       const { data } = await get({ url: `/service/${id}` });
       console.log(data);
 
-      //Si no hay ningun servicio con dicha id (usuarios malos que quieren romper el proyecto), nos movemos a la pagina 404 directamente
       if (!data) {
         navigate("/404");
       }
@@ -37,7 +38,7 @@ function ServiceCard() {
 
   const getUserOwner = async (userId) => {
     try {
-      const { data } = await get({ url: `/userdata/${userId}` }); //Tarda en
+      const { data } = await get({ url: `/userdata/${userId}` });
       setUserData(data.userData);
     } catch (e) {
       console.log("error: ", e.message);
@@ -54,7 +55,7 @@ function ServiceCard() {
         url: `/service/${id}/done`,
         body: { done: 1 },
       });
-      console.log(`desde handleMarkAsDone`);
+
       if (!error) {
         setService((prevService) => ({
           ...prevService,
@@ -62,24 +63,19 @@ function ServiceCard() {
         }));
 
         toast.success(`Servicio ${id} completado con éxito`);
-        console.log(`success desde handleMarkAsDone`);
 
         setIsDone(true);
       } else {
-        toast.error(
-          `No se ha podido completar el servicio. Inténtalo de nuevo.`
-        );
-        console.log(`error desde handleMarkAsDone`);
+        toast.error("No se ha podido completar el servicio. Inténtalo de nuevo.");
       }
     } catch (error) {
       console.error("Error completing the service:", error);
     } finally {
       setIsLoading(false);
     }
-    console.log("Componente handleMarkAsDone renderizado");
   };
 
-  const dowloadFile = (file) => {
+    const dowloadFile = (file) => {
     console.log(`Nos vamos a descargar ${file}`);
   };
 
@@ -88,9 +84,7 @@ function ServiceCard() {
       <div className="p-8">
         <div className="shadow-xl rounded-lg">
           <div className="h-64 bg-gray-200 bg-cover bg-center rounded-t-lg flex items-center justify-center">
-            <p className="text-black font-bold text-4xl">
-              {service.service_type}
-            </p>
+            <p className="text-black font-bold text-4xl">{service.service_type}</p>
           </div>
           <div className="bg-white rounded-b-lg px-8">
             <Link to={`/user/${userData.nickname}`} />
@@ -105,31 +99,30 @@ function ServiceCard() {
               </Link>
             </div>
             <div className="pt-8 pb-8">
-              <h1 className="text-2xl font-bold text-gray-700">
-                {service.title}
-              </h1>
+              <h1 className="text-2xl font-bold text-gray-700">{service.title}</h1>
               <Link to={`/user/${userData.nickname}`}>
                 <p className="text-sm text-gray-600">{`${userData.nickname}`}</p>
               </Link>
               <p className="mt-6 text-gray-700">{service.request_body}</p>
               {service.file_name !== "" && (
-                // <div className="downloadFile">
+    // <div className="downloadFile">
                 //   <button
                 //     id="downloadButton"
                 //     onClick={() => dowloadFile(service.file_name)}
                 //     value="download"
                 //   >{`Download ${service.file_name}`}</button>
                 // </div>
+
                 <Link to={`${service.file_name}`} target="_blank">
                   Download
                 </Link>
               )}
             </div>
+            <ProfileCard formData={userData} /> {/* Renderiza el componente ProfileCard aquí */}
           </div>
         </div>
         <ViewComments />
-
-        {/* /* {isDone ||
+        {/*  {isDone ||
           (isAuthenticated && !isDone && (
             <DoneCheck
               id={service.id}
@@ -138,6 +131,7 @@ function ServiceCard() {
               handleMarkAsDone={handleMarkAsDone}
             /><AddComment />
           ))}*/}
+
         {isAuthenticated && <AddComment />}
         {isAuthenticated && (
           <DoneCheck
@@ -150,6 +144,7 @@ function ServiceCard() {
       </div>
     </>
   );
-}
+};
 
 export default ServiceCard;
+
