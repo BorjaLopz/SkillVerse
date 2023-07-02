@@ -6,10 +6,20 @@
 
 /* hacer grid */
 
+body {
+  --oscuro: #827799;
+  --claro: #fcfaff;
+  --neutro: #d2c9e5;
+  --voscuro: #999668;
+  --vclaro: #e6e4ca;
+  --links: #523d80;
+}
+
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: var(--claro);
 }
 
 main {
@@ -18,13 +28,7 @@ main {
 }
 
 header {
-  background-color: rgba(171, 226, 208, 0.596);
-  place-content: center;
-  padding: 2rem;
-}
-
-footer {
-  background-color: rgba(22, 97, 72, 0.596);
+  background-color: var(--oscuro);
   place-content: center;
   padding: 2rem;
 }

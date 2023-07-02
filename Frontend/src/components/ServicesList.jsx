@@ -53,9 +53,12 @@ const ServicesList = () => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="servicios" style={{ backgroundColor: "transparent" }}>
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 bg-gray">
-        <h2 className="text-4xl font-bold tracking-tight text-gray-900 text-center">
+        <h2
+          className="text-4xl font-bold tracking-tight text-center"
+          style={{ color: "#523d80" }}
+        >
           SERVICIOS
         </h2>
 
@@ -65,14 +68,15 @@ const ServicesList = () => {
             <div key={service.id} className="group relative">
               <Link to={`/service/${service.id}`}>
                 <div
-                  className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
-                    service.done ? "bg-green-400" : "bg-red-400"
-                  }`}
+                  className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8`}
+                  style={{
+                    backgroundColor: service.done ? "#999668" : "#e6e4ca",
+                  }}
                 >
                   {service.done ? (
                     <img
                       id="check_image"
-                      src={"../../public/icons/check-circle.png"}
+                      src={"/icons/check-circle.png"}
                       alt="check"
                     />
                   ) : (

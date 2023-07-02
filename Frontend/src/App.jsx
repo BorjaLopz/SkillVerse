@@ -2,10 +2,13 @@ import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import "./App.css";
 
-// import ServicesList from "./components/ServicesList.jsx"
+import PageTitle from "./components/PageTitle";
 import PrivateRoutes from "./components/PrivateRoutes.jsx";
 
-//import Loading from "./components/Loading";
+
+
+import Loading from "./components/Loading";
+
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage.jsx";
 import AboutPage from "./pages/AboutPage.jsx";
@@ -19,15 +22,11 @@ import Footer from "./components/Footer/index.jsx";
 import LogOut from "./components/LogOut";
 import ServiceCard from "./components/ServiceCard";
 import UsersPage from "./pages/UsersPage";
-//import ServicesList from "./components/ServicesList";
-//import CommentCard from "./components/CommentCard";
 
 function App() {
   return (
     <div className="app">
-      {/*<CommentCard key={index} comment={comment} />*/}
-      {/*<ServicesList /> */}
-
+      <PageTitle />
       <Toaster position="top-right" reverseOrder={false} />
       <Header />
       <Routes>

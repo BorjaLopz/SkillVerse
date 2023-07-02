@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+
+import { useState } from "react";
+
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 //import { Link } from "react-router-dom";
@@ -11,6 +13,7 @@ const validateKoFiURL = (value) => {
   return koFiURLRegex.test(value);
 };
 
+
 const EditProfile = () => {
   const { user } = useAuth();
 
@@ -20,10 +23,12 @@ const EditProfile = () => {
     nickname: user.nickname,
     name: user.name,
     surname: user.surname,
+
     password: "",
     biography: user.biography,
     ko_fi: "",
   });
+
   console.log(formData)
   
   const [successMessage, setSuccessMessage] = useState("");
@@ -33,20 +38,25 @@ const EditProfile = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
+
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
 
+
     if (name === "ko_fi" && value.trim() !== "") {
+
       if (!validateKoFiURL(value)) {
         setError("Por favor, introduce una URL válida de Ko-fi.");
       } else {
         setError("");
+
         setKoFiURL(value);
       }
     }
     
+
 
   };
 
@@ -73,6 +83,7 @@ const EditProfile = () => {
 
 
 
+
       // Actualizar el estado con los datos actualizados del usuario
      setFormData((prevFormData) => ({
        ...prevFormData,
@@ -86,6 +97,7 @@ const EditProfile = () => {
   ko_fi: response.data.ko_fi,
         // Actualiza otros campos si es necesario
       }));
+
 
 
       setSuccessMessage("¡Perfil actualizado exitosamente!");
@@ -103,111 +115,137 @@ const EditProfile = () => {
 
 
 
+
 console.log(formData)
+
 
   return (
     <div className="edit-profile">
-      <h2>Editar perfil</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Correo electrónico:
+      <h2
+        className="text-4xl font-bold tracking-tight text-center"
+        style={{ color: "#523d80" }}
+      >
+        Editar perfil
+      </h2>
+      <form onSubmit={handleSubmit} className="mt-6">
+        <label className="block">
+          <span className="text-gray-700">Correo electrónico:</span>
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
         <br />
-        <label>
-          Avatar:
+        <label className="block">
+          <span className="text-gray-700">Avatar:</span>
           <input
             type="text"
             name="userPhoto"
             value={formData.userPhoto}
             onChange={handleChange}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
         <br />
-        <label>
-          Nickname:
+        <label className="block">
+          <span className="text-gray-700">Nickname:</span>
           <input
             type="text"
             name="nickname"
             value={formData.nickname}
             onChange={handleChange}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
         <br />
-        <label>
-          Nombre:
+        <label className="block">
+          <span className="text-gray-700">Nombre:</span>
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
         <br />
-        <label>
-          Apellido:
+        <label className="block">
+          <span className="text-gray-700">Apellido:</span>
           <input
             type="text"
             name="surname"
             value={formData.surname}
             onChange={handleChange}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
         <br />
-        <label>
-          Contraseña:
+        <label className="block">
+          <span className="text-gray-700">Contraseña:</span>
           <input
             type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
         <br />
-        <label>
-          Biografía:
+        <label className="block">
+          <span className="text-gray-700">Biografía:</span>
           <textarea
             name="biography"
             value={formData.biography}
             onChange={handleChange}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
         <br />
-        <label>
-          Ko-fi:
+        <label className="block">
+          <span className="text-gray-700">Ko-Fi:</span>
           <input
             type="URL"
             name="ko_fi"
             value={formData.ko_fi}
             onChange={handleChange}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
 
-        <label>
+        <label className="block">
           <br />
+
           {koFiURL && (
             <a href={koFiURL} target="_blank" rel="noopener noreferrer">
+
               <img
                 src="/icons/ko-fi-icon.svg"
                 alt="Ko-fi"
                 style={{ width: "40px", height: "40px" }}
               />
             </a>
+
           )}
+
         </label>
 
        
         <br />
 
-        <button type="submit">Guardar cambios</button>
+        <button
+          className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-indigo-700"
+          type="submit"
+        >
+          Guardar cambios
+        </button>
       </form>
-      {error && <p className="error-message">{error}</p>}
-      {successMessage && <p>{successMessage}</p>}
+      {error && <p className="text-red-500 mt-2">{error}</p>}
+      {successMessage && (
+        <p className="text-green-500 mt-2">{successMessage}</p>
+      )}
       {/* {renderAdminContent()} */}
 
       {/* <div>

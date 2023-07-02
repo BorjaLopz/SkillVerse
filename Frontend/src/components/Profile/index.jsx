@@ -12,7 +12,10 @@ function Profile({ user }) {
     return (
         <>
             <section className="user-info">
-                <h2 className="text-center text-4xl">{`Perfil de ${user}`}</h2>
+              <h2
+          className="text-4xl font-bold tracking-tight text-center"
+          style={{ color: "#523d80" }}
+        >{`Perfil de ${user}`}</h2>
                 <Avatar user={user} />
                
             </section>

@@ -16,7 +16,7 @@ function DoneCheck({ complete, setComplete, handleMarkAsDone }) {
   return (
     <div className="button-done">
       <button
-        className="publish-comment bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+        className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-indigo-700"
         onClick={handleClick}
       >
         Marcar como hecho
