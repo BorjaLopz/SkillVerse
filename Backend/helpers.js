@@ -142,6 +142,9 @@ async function uploadFilesInFolder(
   let fileName;
   let uploadPath;
 
+  console.log("req.files");
+  console.log(req.files);
+
   if (req.files && req.files[fieldNamePostman]) {
     let sampleFile = req.files[fieldNamePostman];
 
@@ -175,6 +178,8 @@ async function uploadFilesInFolder(
       });
 
       const [halfPath] = USER_PATH.split("Frontend").slice(-1);
+
+      console.log(`..${halfPath}/${fileName}`);
 
       return `..${halfPath}/${fileName}`;
     } else {

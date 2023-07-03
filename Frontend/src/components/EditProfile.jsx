@@ -3,6 +3,8 @@ import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import toast from "react-hot-toast";
+
 
 const validateKoFiURL = (value) => {
   if (!value || value.trim() === "") {
@@ -14,16 +16,17 @@ const validateKoFiURL = (value) => {
 
 const EditProfile = () => {
   const { user } = useAuth();
+  const [file, setFile] = useState(null);
 
   const [formData, setFormData] = useState({
-    email: user.email,
-    userPhoto: user.userPhoto,
-    nickname: user.nickname,
-    name: user.name,
-    surname: user.surname,
+    email: user.user.email,
+    userPhoto: file || user.user.userPhoto,
+    nickname: user.user.nickname,
+    name: user.user.name || "",
+    surname: user.user.surname || "",
 
     password: "",
-    biography: user.biography,
+    biography: user.user.biography || "",
     ko_fi: "",
   });
 
@@ -57,8 +60,24 @@ const EditProfile = () => {
     }
   };
 
+  const handleFile = (e) => {
+    e.preventDefault();
+    setFile(e.target.files[0]);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    const fD = new FormData();
+
+    fD.append("userPhoto", file);
+    fD.append("email", formData.email);
+    fD.append("nickname", formData.nickname);
+    fD.append("name", formData.name);
+    fD.append("surname", formData.surname);
+    fD.append("password", formData.password);
+    fD.append("biography", formData.biography);
+    fD.append("kofi", formData.kofi);
 
     if (!validateKoFiURL(formData.ko_fi)) {
       setError("Por favor, introduce una URL válida de Ko-fi.");
@@ -68,7 +87,7 @@ const EditProfile = () => {
     try {
       const response = await axios.put(
         `http://localhost:3000/user/${user.user.id}/edit`,
-        formData,
+        fD,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
@@ -81,7 +100,7 @@ const EditProfile = () => {
       setFormData((prevFormData) => ({
         ...prevFormData,
         email: response.data.email,
-        userPhoto: response.data.userPhoto,
+        userPhoto: file,
         nickname: response.data.nickname,
         name: response.data.name,
         surname: response.data.surname,
@@ -91,6 +110,8 @@ const EditProfile = () => {
         // Actualiza otros campos si es necesario
       }));
 
+      setSuccessMessage("¡Perfil actualizado exitosamente!");
+      toast.success("¡Perfil actualizado exitosamente!");
       if (formData.ko_fi.trim() !== "") {
         setKoFiURL(formData.ko_fi);
       }
@@ -124,10 +145,12 @@ const EditProfile = () => {
         <label className="block">
           <span className="text-gray-700">Avatar:</span>
           <input
-            type="text"
+            type="file"
+            id="userPhoto"
             name="userPhoto"
-            value={formData.userPhoto}
-            onChange={handleChange}
+            onChange={(e) => handleFile(e)}
+            // onChange={(event) => setFile(event.target.files[0])}
+            // onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
