@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import useServer from "../hooks/useServer";
 
 const validateKoFiURL = (value) => {
   if (!value || value.trim() === "") {
@@ -14,22 +15,40 @@ const validateKoFiURL = (value) => {
   return koFiURLRegex.test(value);
 };
 
-const EditProfile = () => {
+const EditProfile = ({ nickname }) => {
   const { user } = useAuth();
   const [file, setFile] = useState(null);
   const navigate = useNavigate();
+  const { get } = useServer();
+  const [currentUser, setCurrentUser] = useState({});
 
   const [formData, setFormData] = useState({
-    email: user.email,
-    userPhoto: user.userPhoto,
-    nickname: user.nickname,
-    name: user.name,
-    surname: user.surname,
+    email: user.user.email,
+    userPhoto: user.user.userPhoto,
+    nickname: user.user.nickname,
+    name: "",
+    surname: "",
     password: "",
     repeatPassword: "",
-    biography: user.biography,
+    biography: "",
     ko_fi: "",
   });
+
+  /* Cogemos el id de usuario para usarlo en el siguiente GET*/
+  const fetchUser = async () => {
+    try {
+      const { data } = await get({ url: `/useravatar/${nickname}` });
+      if (data.status) {
+        setCurrentUser(data.userAvatar);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
@@ -73,6 +92,9 @@ const EditProfile = () => {
 
     const fD = new FormData();
 
+    console.log("formData");
+    console.log(formData);
+
     fD.append("userPhoto", file);
     fD.append("email", formData.email);
     fD.append("nickname", formData.nickname);
@@ -80,7 +102,7 @@ const EditProfile = () => {
     fD.append("surname", formData.surname);
     fD.append("password", formData.password);
     fD.append("biography", formData.biography);
-    fD.append("kofi", formData.kofi);
+    fD.append("kofi", formData.ko_fi);
 
     if (!validateKoFiURL(formData.ko_fi)) {
       setError("Por favor, introduce una URL válida de Ko-fi.");
@@ -93,7 +115,7 @@ const EditProfile = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:3000/user/${user.user.id}/edit`,
+        `http://localhost:3000/user/${currentUser.id}/edit`,
         fD,
         {
           headers: {
@@ -117,21 +139,6 @@ const EditProfile = () => {
         // Actualiza otros campos si es necesario
       }));
 
-      // setTimeout(() => {
-      //   setSuccessMessage("¡Perfil actualizado exitosamente!");
-      //   toast.success("¡Perfil actualizado exitosamente!");
-      //   toast(
-      //     "Necesitamos que te vuelvas a loguear para actualizar los cambios correctamente. ",
-      //     {
-      //       duration: 2000,
-      //     }
-      //   );
-      // }, 4000);
-
-      // setTimeout(() => {
-      //   navigate("/logout");
-      // }, 3000);
-
       setTimeout(function request() {
         setSuccessMessage("¡Perfil actualizado exitosamente!");
         toast.success("¡Perfil actualizado exitosamente!");
@@ -141,9 +148,9 @@ const EditProfile = () => {
             duration: 4500,
           }
         );
-        setTimeout(() => {
-          navigate("/logout");
-        }, 5000);
+        // setTimeout(() => {
+        //   navigate("/logout");
+        // }, 5000);
       }, 1000);
 
       if (formData.ko_fi.trim() !== "") {

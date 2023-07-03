@@ -36,7 +36,7 @@ function Profile({ user }) {
         <Avatar user={user} />
       </section>
       <section className="user-edit">
-        <EditProfile />
+        <EditProfile nickname={user} />
       </section>
       <section className="delete-user">
         <DeleteAccount />

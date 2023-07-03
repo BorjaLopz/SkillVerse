@@ -277,7 +277,15 @@ const editUserController = async (req, res, next) => {
     let { email, nickname, name, surname, password, biography, ko_fi } =
       req.body;
 
-    let userPhoto = await uploadFilesInFolder(req, "userPhoto", "user");
+    console.log("user");
+    console.log(user);
+
+    let userPhoto = await uploadFilesInFolder(
+      req,
+      "userPhoto",
+      "user",
+      user.nickname
+    );
 
     email = email || user.email;
     userPhoto = userPhoto || user.userPhoto;
@@ -326,6 +334,9 @@ const editUserController = async (req, res, next) => {
     tmp_user.biography = user.biography;
     tmp_user.userPhoto = user.userPhoto;
     tmp_user.ko_fi = user.ko_fi;
+
+    console.log("tmp_user");
+    console.log(tmp_user);
 
     const updatedUser = await editUser(tmp_user);
 

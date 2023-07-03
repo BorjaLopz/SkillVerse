@@ -154,9 +154,6 @@ const editUser = async (tmp_user) => {
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
 
-    console.log("tmp_user");
-    console.log(tmp_user);
-
     const [result] = await connection.query(
       `UPDATE users SET email = ?, nickname = ?, name = ?, surname = ?, password = ?, biography = ?, userPhoto = ?, ko_fi = ? WHERE id = ?;`,
       [
