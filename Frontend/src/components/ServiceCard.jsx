@@ -118,6 +118,7 @@ const ServiceCard = () => {
             </div>
             <ProfileCard formData={userData} />{" "}
             {/* Renderiza el componente ProfileCard aquí */}
+            
           </div>
         </div>
         <ScrollToTop />

@@ -5,6 +5,7 @@ import DeleteAccount from "../DeleteAccount";
 import ServicesByUser from "../ServicesByUser";
 import useServer from "../../hooks/useServer";
 import { useNavigate } from "react-router-dom";
+import ProfileCard from "../ProfileCard";
 
 function Profile({ user }) {
   const [currentUser, setCurrentUser] = useState({});
@@ -34,6 +35,9 @@ function Profile({ user }) {
           style={{ color: "#523d80" }}
         >{`Perfil de ${user}`}</h2>
         <Avatar user={user} />
+      </section>
+      <section>
+        <ProfileCard formData={currentUser} />
       </section>
       <section className="user-edit">
         <EditProfile nickname={user} />

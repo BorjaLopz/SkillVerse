@@ -8,7 +8,6 @@ const ProfileCard = ({ formData }) => {
       <h3>Datos Personales</h3>
       <p>Nickname: {formData.nickname}</p>
       <p>Email: {formData.email}</p>
-      <p>Foto de usuario: {formData.userPhoto}</p>
       <p>Nombre: {formData.name}</p>
       <p>Apellido: {formData.surname}</p>
       <p>Biografía: {formData.biography}</p>
@@ -20,10 +19,6 @@ const ProfileCard = ({ formData }) => {
           style={{ width: "40px", height: "40px" }}
         />
       </a>
-
-      <div>
-        <Link to={`/user/${formData.nickname}`}>Ver perfil</Link>
-      </div>
     </div>
   );
 };

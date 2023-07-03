@@ -148,9 +148,9 @@ const EditProfile = ({ nickname }) => {
             duration: 4500,
           }
         );
-        // setTimeout(() => {
-        //   navigate("/logout");
-        // }, 5000);
+        setTimeout(() => {
+          navigate("/logout");
+        }, 5000);
       }, 1000);
 
       if (formData.ko_fi.trim() !== "") {
