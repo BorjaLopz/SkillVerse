@@ -3,7 +3,10 @@ import NavBar from "../NavBar";
 
 function Header() {
   return (
-    <header>
+    <header
+      className="sticky top-0 z-50"
+      style={{ backgroundColor: "#827799" }}
+    >
       <NavBar />
     </header>
   );
