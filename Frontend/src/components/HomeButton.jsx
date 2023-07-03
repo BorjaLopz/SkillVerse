@@ -1,13 +1,12 @@
 import { NavLink } from "react-router-dom";
+import MainIcon from "./MainIcon";
 
 function HomeButton() {
   return (
     <nav className="inline-block">
-      <h1>
-        <NavLink className="p-0 border-none bg-transparent text-inherit" to="/">
-          Inicio
-        </NavLink>
-      </h1>
+      <NavLink className="p-0 border-none bg-transparent text-inherit" to="/">
+        <img src="/public/Icono.png" width={100} />
+      </NavLink>
     </nav>
   );
 }
