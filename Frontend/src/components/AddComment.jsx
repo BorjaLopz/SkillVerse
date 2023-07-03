@@ -3,12 +3,15 @@ import useServer from "../hooks/useServer";
 import toast from "react-hot-toast";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
+import Loading from "../components/Loading";
 
 const AddComment = () => {
   const [comment, setComment] = useState("");
   const [file, setFile] = useState(null);
   const { post } = useServer();
   const { user } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const [showForm, setShowForm] = useState(true);
 
   const getServiceIdFromURL = () => {
     const url = window.location.href;
@@ -25,7 +28,14 @@ const AddComment = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (comment.length < 10) {
+      toast.error("La descripción debe tener al menos 10 caracteres");
+      return;
+    }
+
     try {
+      setIsLoading(true);
+      setShowForm(false);
       const formData = new FormData();
       formData.append("comment", comment);
       formData.append("file", file);
@@ -48,6 +58,10 @@ const AddComment = () => {
         toast.success("Comentario publicado con éxito");
         setComment("");
         setFile(null);
+        setTimeout(() => {
+          setIsLoading(false);
+          setShowForm(true);
+        }, 1000);
       }
     } catch (error) {
       toast.error("No se pudo publicar el comentario");
@@ -56,41 +70,46 @@ const AddComment = () => {
 
   return (
     <div className="add-comment p-8">
-      <h2
-        className="text-4xl font-bold tracking-tight text-center"
-        style={{ color: "#523d80" }}
-      >
-        Añadir comentarios
-      </h2>
-      <form onSubmit={handleSubmit} className="bg-white rounded-lg px-8">
-        <div className="comment mb-4">
-          <label className="block">
-            <span className="text-gray-700">Comentario:</span>
-            <textarea
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-              placeholder="Escriba aquí su comentario..."
-              required
-              value={comment}
-              onChange={(event) => setComment(event.target.value)}
-            />
-          </label>
-        </div>
-        <label className="block">
-          <span className="text-gray-700">Subir archivo:</span>
-          <input
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
-            type="file"
-            accept="image/*, .pdf, .doc, .docx"
-            onChange={(event) => setFile(event.target.files[0])}
-          />
-        </label>
-        <button
-          className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-indigo-700"
-          type="submit"
-        >
-          Publicar
-        </button>
-      </form>
+      {showForm && (
+        <>
+          <h2
+            className="text-4xl font-bold tracking-tight text-center"
+            style={{ color: "#523d80" }}
+          >
+            Añadir comentarios
+          </h2>
+          <form onSubmit={handleSubmit} className="bg-white rounded-lg px-8">
+            <div className="comment mb-4">
+              <label className="block">
+                <span className="text-gray-700">Comentario:</span>
+                <textarea
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                  placeholder="Escriba aquí su comentario..."
+                  required
+                  value={comment}
+                  onChange={(event) => setComment(event.target.value)}
+                />
+              </label>
+            </div>
+            <label className="block">
+              <span className="text-gray-700">Subir archivo:</span>
+              <input
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                type="file"
+                accept="image/*, .pdf, .doc, .docx"
+                onChange={(event) => setFile(event.target.files[0])}
+              />
+            </label>
+            <button
+              className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-indigo-700"
+              type="submit"
+            >
+              Publicar
+            </button>
+          </form>
+        </>
+      )}
+      {isLoading && <Loading />}
     </div>
   );
 };

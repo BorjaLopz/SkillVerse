@@ -33,7 +33,7 @@ function App() {
         <Route path="/logout" element={<LogOut />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/users" element={<UsersPage />} />
-        <Route path="/user/:nickname" element={<ProfilePage />} />
+        <Route path="/user/:nickname" el ement={<ProfilePage />} />
         <Route path="/service/:id" element={<ServiceCard />} />
         <Route path="*" element={<NotFoundPage />} />
         <Route element={<PrivateRoutes />}>

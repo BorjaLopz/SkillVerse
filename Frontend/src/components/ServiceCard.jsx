@@ -114,7 +114,6 @@ const ServiceCard = () => {
                 </Link>
               )}
             </div>
-           
           </div>
         </div>
         <ScrollToTop />

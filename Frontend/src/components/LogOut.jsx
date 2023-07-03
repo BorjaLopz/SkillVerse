@@ -3,6 +3,7 @@ import { localStorageKey } from "../config";
 import useAuth from "../hooks/useAuth";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import Loading from "./Loading";
 
 function LogOut() {
   const { user } = useAuth();
@@ -26,8 +27,11 @@ function LogOut() {
     };
   }, [user.user.nickname, navigate]);
 
-  // return null;
-  return <main></main>;
+  return (
+    <main>
+      <Loading />
+    </main>
+  );
 }
 
 export default LogOut;
