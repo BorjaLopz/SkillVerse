@@ -1,4 +1,3 @@
-
 import { useParams, Link } from "react-router-dom";
 import useServer from "../hooks/useServer";
 import React, { useEffect, useState } from "react";
@@ -8,12 +7,10 @@ import DoneCheck from "./DoneCheck";
 import ViewComments from "./ViewComments";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import ProfileCard from "./ProfileCard"; 
+import ProfileCard from "./ProfileCard";
 import ScrollToTop from "./ScrollToTop";
 
-
-
-const ServiceCard =() => {
+const ServiceCard = () => {
   const [service, setService] = useState([]);
   const [userOwner, setUserOwner] = useState();
   const [userServiceOwner, setUserServiceOwner] = useState();
@@ -89,11 +86,12 @@ const ServiceCard =() => {
       <div className="p-8">
         <div className="shadow-xl rounded-lg">
           <div className="h-64 bg-gray-200 bg-cover bg-center rounded-t-lg flex items-center justify-center">
-            <p className="text-black font-bold text-4xl">{service.service_type}</p>
+            <p className="text-black font-bold text-4xl">
+              {service.service_type}
+            </p>
           </div>
           <div className="bg-white rounded-b-lg px-8">
             <Link to={`/user/${userData.nickname}`} />
-
             <div className="relative">
               <Link to={`/user/${userData.nickname}`}>
                 <img
@@ -104,7 +102,9 @@ const ServiceCard =() => {
               </Link>
             </div>
             <div className="pt-8 pb-8">
-              <h1 className="text-2xl font-bold text-gray-700">{service.title}</h1>
+              <h1 className="text-2xl font-bold text-gray-700">
+                {service.title}
+              </h1>
               <Link to={`/user/${userData.nickname}`}>
                 <p className="text-sm text-gray-600">{`${userData.nickname}`}</p>
               </Link>
@@ -115,17 +115,17 @@ const ServiceCard =() => {
                 </Link>
               )}
             </div>
-            <ProfileCard formData={userData} /> {/* Renderiza el componente ProfileCard aquí */}
+            <ProfileCard formData={userData} />{" "}
+            {/* Renderiza el componente ProfileCard aquí */}
           </div>
         </div>
         <ScrollToTop />
         <ViewComments />
 
-           <div
+        <div
           className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
             service.done ? "bg-green-400" : "bg-red-400"
           }`}
-
         >
           {isAuthenticated && !isDone && <AddComment />}
           {isAuthenticated &&
@@ -137,7 +137,7 @@ const ServiceCard =() => {
               setService={setService}
               isLoading={isLoading}
               handleMarkAsDone={handleMarkAsDone}
-   />
+            />
           ) : null}
         </div>
         {/* /* {isDone ||
@@ -165,4 +165,3 @@ const ServiceCard =() => {
 };
 
 export default ServiceCard;
-
