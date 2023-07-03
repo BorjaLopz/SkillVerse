@@ -14,12 +14,8 @@ function Profile({ user }) {
   const fetchUser = async (user) => {
     try {
       const { data } = await get({ url: `/useravatar/${user}` });
-      console.log("data");
-      console.log(data.status);
-      console.log(typeof data);
-      setCurrentUser(data.userAvatar);
-      if (!data) {
-        console.log("No hay data");
+      if (data.status) {
+        setCurrentUser(data.userAvatar);
       }
     } catch (e) {
       console.log(e);

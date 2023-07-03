@@ -4,7 +4,7 @@ import useAuth from "../hooks/useAuth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
-
+import { useNavigate } from "react-router-dom";
 
 const validateKoFiURL = (value) => {
   if (!value || value.trim() === "") {
@@ -17,6 +17,7 @@ const validateKoFiURL = (value) => {
 const EditProfile = () => {
   const { user } = useAuth();
   const [file, setFile] = useState(null);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     email: user.user.email,
@@ -110,8 +111,35 @@ const EditProfile = () => {
         // Actualiza otros campos si es necesario
       }));
 
-      setSuccessMessage("¡Perfil actualizado exitosamente!");
-      toast.success("¡Perfil actualizado exitosamente!");
+      // setTimeout(() => {
+      //   setSuccessMessage("¡Perfil actualizado exitosamente!");
+      //   toast.success("¡Perfil actualizado exitosamente!");
+      //   toast(
+      //     "Necesitamos que te vuelvas a loguear para actualizar los cambios correctamente. ",
+      //     {
+      //       duration: 2000,
+      //     }
+      //   );
+      // }, 4000);
+
+      // setTimeout(() => {
+      //   navigate("/logout");
+      // }, 3000);
+
+      setTimeout(function request() {
+        setSuccessMessage("¡Perfil actualizado exitosamente!");
+        toast.success("¡Perfil actualizado exitosamente!");
+        toast(
+          "Necesitamos que te vuelvas a loguear para actualizar los cambios correctamente. ",
+          {
+            duration: 4500,
+          }
+        );
+        setTimeout(() => {
+          navigate("/logout");
+        }, 5000);
+      }, 1000);
+
       if (formData.ko_fi.trim() !== "") {
         setKoFiURL(formData.ko_fi);
       }
@@ -151,7 +179,7 @@ const EditProfile = () => {
             onChange={(e) => handleFile(e)}
             // onChange={(event) => setFile(event.target.files[0])}
             // onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
           />
         </label>
         <br />
