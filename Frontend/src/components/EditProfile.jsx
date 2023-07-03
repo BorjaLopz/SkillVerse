@@ -20,14 +20,14 @@ const EditProfile = () => {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
-    email: user.user.email,
-    userPhoto: file || user.user.userPhoto,
-    nickname: user.user.nickname,
-    name: user.user.name || "",
-    surname: user.user.surname || "",
-
+    email: user.email,
+    userPhoto: user.userPhoto,
+    nickname: user.nickname,
+    name: user.name,
+    surname: user.surname,
     password: "",
-    biography: user.user.biography || "",
+    repeatPassword: "",
+    biography: user.biography,
     ko_fi: "",
   });
 
@@ -36,7 +36,6 @@ const EditProfile = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [koFiURL, setKoFiURL] = useState("");
-  const [mainPassword, setMainPassword] = useState("");
 
   const togglePassword = () => {
     setPasswordVisibility(!passwordVisibility);
@@ -55,9 +54,12 @@ const EditProfile = () => {
         setError("Por favor, introduce una URL válida de Ko-fi.");
       } else {
         setError("");
-
         setKoFiURL(value);
       }
+    }
+
+    if (name === "password" || name === "repeatPassword") {
+      setRepeatPassword(value);
     }
   };
 
@@ -82,6 +84,10 @@ const EditProfile = () => {
 
     if (!validateKoFiURL(formData.ko_fi)) {
       setError("Por favor, introduce una URL válida de Ko-fi.");
+      return;
+    }
+
+    if (formData.password !== formData.repeatPassword) {
       return;
     }
 
@@ -143,6 +149,8 @@ const EditProfile = () => {
       if (formData.ko_fi.trim() !== "") {
         setKoFiURL(formData.ko_fi);
       }
+
+      setSuccessMessage("Cambios guardados exitosamente.");
     } catch (error) {
       if (error.response && error.response.status === 401) {
         window.location.href = "/login";
@@ -232,8 +240,8 @@ const EditProfile = () => {
           <span className="text-gray-700">Repetir contraseña:</span>
           <input
             id="repeat-password"
-            name="repeat-password"
-            value={formData.password}
+            name="repeatPassword"
+            value={formData.repeatPassword}
             type={passwordVisibility ? "text" : "password"}
             onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
@@ -252,9 +260,7 @@ const EditProfile = () => {
           />
         </label>
 
-        {repeatPassword === mainPassword ? (
-          ""
-        ) : (
+        {repeatPassword !== formData.password && (
           <p className="bg-red-400 text-white font-bold py-2 px-4 rounded mt-2">
             Las contraseñas no coinciden
           </p>
