@@ -4,13 +4,11 @@ import EditProfile from "../EditProfile";
 import DeleteAccount from "../DeleteAccount";
 import ServicesByUser from "../ServicesByUser";
 import useServer from "../../hooks/useServer";
-import { useNavigate } from "react-router-dom";
 import ProfileCard from "../ProfileCard";
 
 function Profile({ user }) {
   const [currentUser, setCurrentUser] = useState({});
   const { get } = useServer();
-  const navigate = useNavigate();
 
   const fetchUser = async (user) => {
     try {

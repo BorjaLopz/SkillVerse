@@ -13,7 +13,6 @@ import ScrollToTop from "./ScrollToTop";
 const ServiceCard = () => {
   const [service, setService] = useState([]);
   const [userOwner, setUserOwner] = useState();
-  const [userServiceOwner, setUserServiceOwner] = useState();
   const [userData, setUserData] = useState({});
   const [isDone, setIsDone] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +20,7 @@ const ServiceCard = () => {
   const { id } = useParams();
   const { get, patch } = useServer();
   const navigate = useNavigate();
-  const [reloadCard, setReloadCard] = useState(false);
+ 
 
   const getService = async () => {
     try {
