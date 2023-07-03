@@ -235,7 +235,6 @@ const getUserDataController = async (req, res, next) => {
 
 const getAllUsersController = async (req, res, next) => {
   try {
-
     const userData = await getAllUsers();
     res.send({
       status: "ok",

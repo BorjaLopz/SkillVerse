@@ -34,7 +34,7 @@ const addAdmin = async (connection) => {
       "../images/default_admin_avatar.png",
       true,
       true,
-      "https://ko-fi.com"
+      "https://ko-fi.com",
     ]
   );
 };
@@ -144,9 +144,8 @@ async function main() {
       for (let i = 0; i < users; i++) {
         const password = await bcrypt.hash("Password123", 10);
 
-        const koFi = "https://ko-fi.com"
-       
-      
+        const koFi = "https://ko-fi.com";
+
         const [userResult] = await connection.query(
           `
       INSERT INTO users(email, nickname, name, surname, password, biography,  userPhoto, admin, active, ko_fi) 
@@ -160,7 +159,7 @@ async function main() {
             password,
             faker.lorem.sentences(),
             faker.image.avatar(),
-            true,
+            false,
             true,
             koFi,
           ]
@@ -200,7 +199,7 @@ async function main() {
           `,
               [
                 userId + j,
-                i + 1, 
+                i + 1,
                 faker.lorem.sentences(),
                 faker.system.fileName(),
                 faker.datatype.boolean(),

@@ -1,4 +1,5 @@
-import { useParams, NavLink, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
+
 import useServer from "../hooks/useServer";
 import React, { useEffect, useState } from "react";
 import AddComment from "./AddComment";
@@ -7,8 +8,8 @@ import DoneCheck from "./DoneCheck";
 import ViewComments from "./ViewComments";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import ScrollToTop from "./ScrollToTop";
 import ProfileCard from "./ProfileCard";
+import ScrollToTop from "./ScrollToTop";
 
 const ServiceCard = () => {
   const [service, setService] = useState([]);
@@ -92,7 +93,6 @@ const ServiceCard = () => {
           </div>
           <div className="bg-white rounded-b-lg px-8">
             <Link to={`/user/${userData.nickname}`} />
-
             <div className="relative">
               <Link to={`/user/${userData.nickname}`}>
                 <img
@@ -116,7 +116,8 @@ const ServiceCard = () => {
                 </Link>
               )}
             </div>
-            <ProfileCard formData={userData} />
+            <ProfileCard formData={userData} />{" "}
+            {/* Renderiza el componente ProfileCard aquí */}
           </div>
         </div>
         <ScrollToTop />

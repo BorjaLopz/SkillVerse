@@ -22,6 +22,7 @@ const ServicesList = () => {
             service_type: s.service_type,
             user_id: s.user_id,
             done: s.done,
+            creation_date: s.creation_date.split("T")[0],
           }));
           setServices(service);
           setFilteredServices(service);
@@ -82,11 +83,25 @@ const ServicesList = () => {
                   ) : (
                     ""
                   )}
+                  {/* {console.log(service.creation_date)} */}
                   <div>
+                    <p className="text-l tracking-tight text-gray-900 dark:text-white text-right">
+                      {service.creation_date.split("-")[2]}
+                      {"-"}
+                      {service.creation_date.split("-")[1]}
+                      {"-"}
+                      {service.creation_date.split("-")[0]}
+                    </p>
                     <h3 className="text-sm text-gray-700">
-                      <p>{service.title}</p>
-                      <p>{service.request_body}</p>
-                      <p>{service.service_type}</p>
+                      <p className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        {service.title}
+                      </p>
+                      <p className="font-normal text-gray-700 dark:text-gray-200">
+                        {service.request_body}
+                      </p>
+                      <p className="text-xl text-center">
+                        {service.service_type}
+                      </p>
                     </h3>
                   </div>
                 </div>

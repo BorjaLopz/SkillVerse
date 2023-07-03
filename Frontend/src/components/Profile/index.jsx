@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "../Avatar";
 import EditProfile from "../EditProfile";
 import DeleteAccount from "../DeleteAccount";
 import ServicesByUser from "../ServicesByUser";
+import useServer from "../../hooks/useServer";
+import { useNavigate } from "react-router-dom";
 
 function Profile({ user }) {
-  return (
+  const [currentUser, setCurrentUser] = useState({});
+  const { get } = useServer();
+  const navigate = useNavigate();
+
+  const fetchUser = async (user) => {
+    try {
+      const { data } = await get({ url: `/useravatar/${user}` });
+      if (data.status) {
+        setCurrentUser(data.userAvatar);
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchUser(user);
+  }, []);
+
+  return currentUser?.id ? (
     <>
       <section className="user-info">
         <h2
@@ -25,6 +46,8 @@ function Profile({ user }) {
         <ServicesByUser nickname={user} />
       </section>
     </>
+  ) : (
+    ""
   );
 }
 
