@@ -61,7 +61,6 @@ const newServiceController = async (req, res, next) => {
       title,
       user.nickname
     );
-    console.log("fileName: ", fileName);
 
     const id_services = await createService(
       title,

@@ -120,8 +120,8 @@ async function uploadFilesInFolder(
   req,
   fieldNamePostman,
   typeOfFile,
-  titleOfService = "",
-  nickname = ""
+  nickname = "",
+  titleOfService = ""
 ) {
   /* 
     fieldNamePostman = Nombre que tiene el campo en postman
@@ -160,11 +160,11 @@ async function uploadFilesInFolder(
     /* DEFINIMOS RUTAS Y NOMBRE DE LOS ARCHIVOS SI ES FOTO DE PERFIL */
     if (typeOfFile.toUpperCase() === "USER") {
       //Vamos a borrar la foto anterior existente.
-      checkIfProfilePictureExists(req.nickname);
+      checkIfProfilePictureExists(nickname);
 
       console.log("USER");
       //Obtener la extensión del fichero para guardarlo de la misma forma
-      fileName = `${req.nickname} - profile picture - ${nanoid(
+      fileName = `${nickname} - profile picture - ${nanoid(
         24
       )}.${getExtensionFile(sampleFile.name)}`;
 
