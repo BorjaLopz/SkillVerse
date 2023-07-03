@@ -27,6 +27,10 @@ const AddService = () => {
       toast.error("El título debe tener al menos 15 caracteres");
       return;
     }
+    if (!requiredType) {
+      toast.error("Debes seleccionar una categoría");
+      return;
+    }
 
     try {
       setIsLoading(true);
@@ -102,13 +106,13 @@ const AddService = () => {
             />
 
             <label
-              htmlFor="description"
+              htmlFor="requiredType"
               className="block mb-2 font-medium text-gray-900"
             >
               Descripción:
             </label>
             <textarea
-              id="description"
+              id="requiredType"
               rows="4"
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Escriba aquí la descripción del servicio..."
