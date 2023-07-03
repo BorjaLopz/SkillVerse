@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import ProfileCard from "./ProfileCard";
 import ScrollToTop from "./ScrollToTop";
-import ProfileCard from "./ProfileCard";
 
 const ServiceCard = () => {
   const [service, setService] = useState([]);
