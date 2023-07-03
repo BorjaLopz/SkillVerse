@@ -1,13 +1,14 @@
 import { useState } from "react";
-
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
-//import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
+
 
 const validateKoFiURL = (value) => {
   if (!value || value.trim() === "") {
-    return true; // No se valida si está vacío
+    return true;
   }
   const koFiURLRegex = /^https?:\/\/(?:www\.)?ko-fi\.com\/[a-zA-Z0-9]+$/;
   return koFiURLRegex.test(value);
@@ -31,7 +32,14 @@ const EditProfile = () => {
 
   const [successMessage, setSuccessMessage] = useState("");
   const [error, setError] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
   const [koFiURL, setKoFiURL] = useState("");
+  const [mainPassword, setMainPassword] = useState("");
+
+  const togglePassword = () => {
+    setPasswordVisibility(!passwordVisibility);
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -104,7 +112,6 @@ const EditProfile = () => {
 
       setSuccessMessage("¡Perfil actualizado exitosamente!");
       toast.success("¡Perfil actualizado exitosamente!");
-
       if (formData.ko_fi.trim() !== "") {
         setKoFiURL(formData.ko_fi);
       }
@@ -114,8 +121,6 @@ const EditProfile = () => {
       }
     }
   };
-
-  // console.log(formData);
 
   return (
     <div className="edit-profile">
@@ -186,13 +191,47 @@ const EditProfile = () => {
         <label className="block">
           <span className="text-gray-700">Contraseña:</span>
           <input
-            type="password"
+            id="password"
             name="password"
             value={formData.password}
+            type={passwordVisibility ? "text" : "password"}
             onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
         </label>
+        <br />
+        <label className="block">
+          <span className="text-gray-700">Repetir contraseña:</span>
+          <input
+            id="repeat-password"
+            name="repeat-password"
+            value={formData.password}
+            type={passwordVisibility ? "text" : "password"}
+            onChange={handleChange}
+            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+          />
+        </label>
+        <input
+          type="checkbox"
+          id="ojoPassword"
+          className="hidden"
+          onChange={togglePassword}
+        />
+        <label htmlFor="ojoPassword" className="cursor-pointer">
+          <FontAwesomeIcon
+            icon={passwordVisibility ? faEye : faEyeSlash}
+            className="text-gray-700"
+          />
+        </label>
+
+        {repeatPassword === mainPassword ? (
+          ""
+        ) : (
+          <p className="bg-red-400 text-white font-bold py-2 px-4 rounded mt-2">
+            Las contraseñas no coinciden
+          </p>
+        )}
+
         <br />
         <label className="block">
           <span className="text-gray-700">Biografía:</span>

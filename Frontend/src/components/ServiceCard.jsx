@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+
 import useServer from "../hooks/useServer";
 import React, { useEffect, useState } from "react";
 import AddComment from "./AddComment";
@@ -9,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import ProfileCard from "./ProfileCard";
 import ScrollToTop from "./ScrollToTop";
+import ProfileCard from "./ProfileCard";
 
 const ServiceCard = () => {
   const [service, setService] = useState([]);
@@ -121,11 +123,8 @@ const ServiceCard = () => {
         </div>
         <ScrollToTop />
         <ViewComments />
-
         <div
-          className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
-            service.done ? "bg-green-400" : "bg-red-400"
-          }`}
+          className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8`}
         >
           {isAuthenticated && !isDone && <AddComment />}
           {isAuthenticated &&
@@ -140,25 +139,6 @@ const ServiceCard = () => {
             />
           ) : null}
         </div>
-        {/* /* {isDone ||
-          (isAuthenticated && !isDone && (
-            <DoneCheck
-              id={service.id}
-              complete={service.complete}
-              setService={setService}
-              isLoading={isLoading}
-              handleMarkAsDone={handleMarkAsDone}
-            /><AddComment />
-          ))}*/}
-        {isAuthenticated && <AddComment />}
-        {isAuthenticated && (
-          <DoneCheck
-            id={service.id}
-            complete={service.complete}
-            setService={setService}
-            handleMarkAsDone={handleMarkAsDone}
-          />
-        )}
       </div>
     </>
   );
