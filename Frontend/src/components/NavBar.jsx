@@ -14,7 +14,7 @@ function NavBar() {
       <nav>
         <HomeButton />
         <NavLink style={{ color: "#fcfaff" }} to="/about">
-          Sobre nosotr@s
+          Conócenos
         </NavLink>{" "}
         {" || "}
         <NavLink style={{ color: "#fcfaff" }} to="/services">

@@ -8,7 +8,6 @@ import DoneCheck from "./DoneCheck";
 import ViewComments from "./ViewComments";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import ProfileCard from "./ProfileCard";
 import ScrollToTop from "./ScrollToTop";
 
 const ServiceCard = () => {
@@ -116,9 +115,6 @@ const ServiceCard = () => {
                 </Link>
               )}
             </div>
-            <ProfileCard formData={userData} />{" "}
-            {/* Renderiza el componente ProfileCard aquí */}
-            
           </div>
         </div>
         <ScrollToTop />
