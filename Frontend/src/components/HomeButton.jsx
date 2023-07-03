@@ -5,7 +5,7 @@ function HomeButton() {
   return (
     <nav className="inline-block">
       <NavLink className="p-0 border-none bg-transparent text-inherit" to="/">
-        <img src="/public/Icono.png" width={100} />
+        <img src="/Icono.png" width={100} />
       </NavLink>
     </nav>
   );
