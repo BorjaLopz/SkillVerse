@@ -5,6 +5,7 @@ import DeleteAccount from "../DeleteAccount";
 import ServicesByUser from "../ServicesByUser";
 import useServer from "../../hooks/useServer";
 import ProfileCard from "../ProfileCard";
+import "./style.css";
 
 function Profile({ user }) {
   const [currentUser, setCurrentUser] = useState({});
@@ -28,10 +29,7 @@ function Profile({ user }) {
   return currentUser?.id ? (
     <>
       <section className="user-info">
-        <h2
-          className="text-4xl font-bold tracking-tight text-center"
-          style={{ color: "#523d80" }}
-        >{`Perfil de ${user}`}</h2>
+        <h2 className="profile-title">{`Perfil de ${user}`}</h2>
         <Avatar user={user} />
       </section>
       <section>
