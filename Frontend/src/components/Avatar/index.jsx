@@ -1,7 +1,4 @@
 import "./avatar.css";
-// import { getTokenFromLocalStorage } from "../../../../Backend/helpers";
-import useGetTokenValues from "../../hooks/useGetTokenValues";
-import useAuth from "../../hooks/useAuth";
 import { useEffect, useState } from "react";
 import useServer from "../../hooks/useServer";
 
