@@ -16,6 +16,7 @@ node_modules/
 .env
 **/.env
 requestfiles/*
+fotosUsuario/*
 
 # Editor directories and files
 .vscode/*

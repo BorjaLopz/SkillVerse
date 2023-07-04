@@ -1,3 +1,11 @@
+body {
+  --text: #020203;
+  --background: #eef1f7;
+  --primary-button: #9991ca;
+  --secondary-button: #e6d9ed;
+  --accent: #8750a5;
+}
+
 footer {
   background-color: var(--claro);
   padding: 2rem;
@@ -5,4 +13,10 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #020203;
+}
+
+.hab {
+  text-decoration: underline;
+  color: #8750a5;
 }

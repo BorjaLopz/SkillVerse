@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useServer from "../hooks/useServer";
-import SearchBar from "./SearchBar";
-import { categories } from "../config";
 
 const ServicesList = () => {
   const [services, setServices] = useState([]);
@@ -13,10 +11,6 @@ const ServicesList = () => {
 
   const handleClick = (currentService) => {
     setFilteredServices(currentService);
-    // console.log("filteredServices");
-    // console.log(filteredServices);
-    // console.log("currenteeeeeeeeeService");
-    // console.log(currentService);
     setPrueba(currentService);
     console.log("prueba");
     console.log(prueba);
@@ -72,16 +66,6 @@ const ServicesList = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (filteredServices === "Todos los servicios") {
-  //     console.log("Todos");
-  //     fetchAllServices();
-  //   } else {
-  //     console.log("Categorias");
-  //     fetchFilterServices();
-  //   }
-  // }, []);
-
   useEffect(() => {
     fetchAllServices();
 
@@ -94,7 +78,6 @@ const ServicesList = () => {
 
   return (
     <>
-      {/* <SearchBar filterServices={handleClick} /> */}
       <div className="servicios" style={{ backgroundColor: "transparent" }}>
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 bg-gray">
           <h2
@@ -124,7 +107,6 @@ const ServicesList = () => {
                     ) : (
                       ""
                     )}
-                    {/* {console.log(service.creation_date)} */}
                     <div>
                       <p className="text-l tracking-tight text-gray-900 dark:text-white text-right">
                         {service.creation_date.split("-")[2]}
