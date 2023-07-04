@@ -40,10 +40,11 @@ function Profile({ user }) {
       <section className="user-edit">
         <EditProfile nickname={user} />
       </section>
-      <section className="delete-user">
-        <DeleteAccount />
-      </section>
-
+      {currentUser.admin ? null : (
+        <section className="delete-user">
+          <DeleteAccount />
+        </section>
+      )}
       <section>
         <ServicesByUser nickname={user} />
       </section>

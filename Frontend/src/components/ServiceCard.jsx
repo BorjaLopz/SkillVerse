@@ -8,7 +8,7 @@ import DoneCheck from "./DoneCheck";
 import ViewComments from "./ViewComments";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import ScrollToTop from "./ScrollToTop";
+import DeleteService from "./DeleteService";
 
 const ServiceCard = () => {
   const [service, setService] = useState([]);
@@ -20,7 +20,6 @@ const ServiceCard = () => {
   const { id } = useParams();
   const { get, patch } = useServer();
   const navigate = useNavigate();
- 
 
   const getService = async () => {
     try {
@@ -107,6 +106,7 @@ const ServiceCard = () => {
               <Link to={`/user/${userData.nickname}`}>
                 <p className="text-sm text-gray-600">{`${userData.nickname}`}</p>
               </Link>
+              <DeleteService serviceId={service.id} />
               <p className="mt-6 text-gray-700">{service.request_body}</p>
               {service.file_name !== "" && (
                 <Link to={`${service.file_name}`} target="_blank">
@@ -116,7 +116,6 @@ const ServiceCard = () => {
             </div>
           </div>
         </div>
-        <ScrollToTop />
         <ViewComments />
         <div
           className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8`}
