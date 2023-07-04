@@ -5,19 +5,18 @@
 }
 
 body {
-  --oscuro: #827799;
-  --claro: #fcfaff;
-  --neutro: #d2c9e5;
-  --voscuro: #999668;
-  --vclaro: #e6e4ca;
-  --links: #523d80;
+  --text: #1c1b17;
+  --background: #e8e7e3;
+  --primary-button: #9b9dab;
+  --secondary-button: #f6f5f4;
+  --accent: #66697a;
 }
 
 .app {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: var(--claro);
+  background-color: var(--background);
 }
 
 main {

@@ -206,9 +206,6 @@ const commentsFileController = async (req, res, next) => {
     }
 
     //Tratar el fichero
-    // let fileName;
-    // let uploadPath;
-
     const service = await getServiceByID(id);
 
     const user = await getUserData(req.userId);
@@ -221,39 +218,6 @@ const commentsFileController = async (req, res, next) => {
       service.title
     );
 
-    console.log("fileName");
-    console.log(fileName);
-
-    // if (req.files && req.files.commentFile) {
-    //   const serviceById = await getServiceByID(id);
-    //   const [userById] = await getAllFieldsExceptPassword(req.userId);
-
-    //   let sampleFile = req.files.commentFile;
-
-    //   //Creamos el path
-    //   const uploadDir = path.join(
-    //     __dirname,
-    //     "../../Frontend/public/commentFiles"
-    //   );
-
-    //   //Crear directorio si no existe
-    //   await createPathIfNotExists(uploadDir);
-
-    //   //Obtener la extensión del fichero para guardarlo de la misma forma
-    //   fileName = `${serviceById.title} - ${userById.nickname} - ${nanoid(
-    //     5
-    //   )}.${getExtensionFile(sampleFile.name)}`;
-
-    //   uploadPath = uploadDir + "\\" + fileName;
-
-    //   //Subir el fichero
-    //   sampleFile.mv(uploadPath, function (e) {
-    //     if (e) {
-    //       throw generateError("No se pudo enviar el archivo", 400);
-    //     }
-    //     console.log(chalk.green("Archivo subido"));
-    //   });
-    // }
 
     const id_comment = await createComment(comment, fileName, req.userId, id);
 

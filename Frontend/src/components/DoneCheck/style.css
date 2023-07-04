@@ -1,0 +1,26 @@
+body {
+  --text: #1c1b17;
+  --background: #e8e7e3;
+  --primary-button: #9b9dab;
+  --secondary-button: #f6f5f4;
+  --accent: #66697a;
+}
+
+.button-done {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.publish-comment {
+  background-color: #5f8eea;
+  color: #fff;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.publish-comment:hover {
+  background-color: #3b6fbd;
+}

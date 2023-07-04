@@ -29,7 +29,7 @@ const AddComment = () => {
     event.preventDefault();
 
     if (comment.length < 10) {
-      toast.error("La descripción debe tener al menos 10 caracteres");
+      toast.error("El comentario debe tener al menos 10 caracteres");
       return;
     }
 
@@ -40,10 +40,11 @@ const AddComment = () => {
       formData.append("comment", comment);
       formData.append("commentFile", file);
 
+
       const config = {
         headers: {
           "Access-Control-Allow-Origin": "*",
-          "content-type": "multipart/form-data",
+          "Content-Type": "multipart/form-data",
           Authorization: `${user.token}`,
         },
       };
