@@ -38,7 +38,7 @@ const AddComment = () => {
       setShowForm(false);
       const formData = new FormData();
       formData.append("comment", comment);
-      formData.append("file", file);
+      formData.append("commentFile", file);
 
       const config = {
         headers: {
@@ -96,6 +96,7 @@ const AddComment = () => {
               <input
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg"
                 type="file"
+                id="file"
                 accept="image/*, .pdf, .doc, .docx"
                 onChange={(event) => setFile(event.target.files[0])}
               />

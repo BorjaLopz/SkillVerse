@@ -19,10 +19,11 @@ const SERVICES_VALUES = Object.freeze({
 // EXTENSIÓN DE ARCHIVOS PERMITIDOS //
 const ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg", "pdf", "doc"];
 
-const TYPE_OF_SERVICE = ["SERVICE", "USER"];
+const TYPE_OF_SERVICE = ["SERVICE", "USER", "COMMENT"];
 
 const USER_PATH = "../Frontend/public/fotosUsuario";
 const SERVICE_PATH = "../Frontend/public/publicServices";
+const COMMENT_PATH = "../Frontend/public/commentFiles";
 
 const categories = [
   "Diseño Gráfico",
@@ -142,17 +143,26 @@ async function uploadFilesInFolder(
   let fileName;
   let uploadPath;
 
-  console.log("req.files");
-  console.log(req.files);
-
   if (req.files && req.files[fieldNamePostman]) {
     let sampleFile = req.files[fieldNamePostman];
 
-    const currentPath =
-      typeOfFile.toUpperCase() === "USER" ? USER_PATH : SERVICE_PATH;
+    console.log("sampleFile");
+    console.log(sampleFile);
+
+    let currentPath;
+
+    if (typeOfFile.toUpperCase() === "USER") {
+      currentPath = USER_PATH;
+    } else if (typeOfFile.toUpperCase() === "SERVICE") {
+      currentPath = SERVICE_PATH;
+    } else if (typeOfFile.toUpperCase() === "COMMENT") {
+      currentPath = COMMENT_PATH;
+    }
 
     //Creamos el path
     const uploadDir = path.join(__dirname, currentPath);
+    console.log("uploadDir");
+    console.log(uploadDir);
 
     //Crear directorio si no existe
     await createPathIfNotExists(uploadDir);
@@ -162,7 +172,6 @@ async function uploadFilesInFolder(
       //Vamos a borrar la foto anterior existente.
       checkIfProfilePictureExists(nickname);
 
-      console.log("USER");
       //Obtener la extensión del fichero para guardarlo de la misma forma
       fileName = `${nickname} - profile picture - ${nanoid(
         24
@@ -179,11 +188,8 @@ async function uploadFilesInFolder(
 
       const [halfPath] = USER_PATH.split("Frontend").slice(-1);
 
-      console.log(`..${halfPath}/${fileName}`);
-
       return `..${halfPath}/${fileName}`;
-    } else {
-      console.log("SERVICE");
+    } else if (typeOfFile.toUpperCase() === "SERVICE") {
       //Comprobar si la extension es valida.
       if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
         throw generateError(
@@ -199,6 +205,32 @@ async function uploadFilesInFolder(
 
       uploadPath = uploadDir + "\\" + fileName;
       const [halfPath] = SERVICE_PATH.split("Frontend").slice(-1);
+
+      //Subir el fichero
+      sampleFile.mv(uploadPath, function (e) {
+        if (e) {
+          throw generateError("No se pudo enviar el archivo", 400);
+        }
+      });
+      return `${halfPath}/${fileName}`;
+    } else if (typeOfFile.toUpperCase() === "COMMENT") {
+      console.log("Ahora vamos a añadir ficheros desde un comentario!");
+      //Comprobar si la extension es valida.
+      if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
+        throw generateError(
+          `Formato no válido. Tipos de formatos permitidos: ${ALLOWED_EXTENSIONS}`,
+          415
+        );
+      }
+
+      //Obtener la extensión del fichero para guardarlo de la misma manera
+      fileName = `${nickname} - ${titleOfService} - ${nanoid(
+        5
+      )}.${getExtensionFile(sampleFile.name)}`;
+
+      uploadPath = uploadDir + "\\" + fileName;
+
+      const [halfPath] = COMMENT_PATH.split("Frontend").slice(-1);
 
       //Subir el fichero
       sampleFile.mv(uploadPath, function (e) {

@@ -116,7 +116,7 @@ async function main() {
       services_id INT NOT NULL,
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
       comment VARCHAR(500) NOT NULL,
-      serviceFile VARCHAR(50),
+      serviceFile VARCHAR(200),
       hide BOOLEAN DEFAULT FALSE,
       solution BOOLEAN DEFAULT FALSE,
       FOREIGN KEY (user_id) REFERENCES users (id),
@@ -131,10 +131,12 @@ async function main() {
     //Generamos las carpetas en caso de que no existan
     await createDirectories("../../Frontend/public/publicServices");
     await createDirectories("../../Frontend/public/fotosUsuario");
+    await createDirectories("../../Frontend/public/commentFiles");
 
     //Borramos fotos de usuarios y archivos de los servicios
     deleteFilesFromDirectory("../../Frontend/public/publicServices");
     deleteFilesFromDirectory("../../Frontend/public/fotosUsuario");
+    deleteFilesFromDirectory("../../Frontend/public/commentFiles");
 
     if (addData) {
       const users = 10;
