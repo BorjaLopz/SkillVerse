@@ -7,7 +7,7 @@ function DeleteService({ serviceId, onDelete }) {
 
   const handleDelete = async () => {
     try {
-      await deleteService({ url: `/service/${serviceId}` });
+      await deleteService({ url: `/service/${serviceId}/delete` });
       toast.success("Servicio borrado exitosamente");
       onDelete();
     } catch (error) {
