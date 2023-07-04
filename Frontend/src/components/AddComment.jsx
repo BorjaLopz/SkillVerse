@@ -28,12 +28,12 @@ const AddComment = () => {
     try {
       const formData = new FormData();
       formData.append("comment", comment);
-      formData.append("file", file);
+      formData.append("serviceFile", file);
 
       const config = {
         headers: {
           "Access-Control-Allow-Origin": "*",
-          "content-type": "multipart/form-data",
+          "Content-Type": "multipart/form-data",
           Authorization: `${user.token}`,
         },
       };
@@ -84,6 +84,7 @@ const AddComment = () => {
             onChange={(event) => setFile(event.target.files[0])}
           />
         </label>
+        
         <button
           className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-indigo-700"
           type="submit"

@@ -216,7 +216,7 @@ const commentsFileController = async (req, res, next) => {
       await createPathIfNotExists(uploadDir);
 
       //Obtener la extensión del fichero para guardarlo de la misma forma
-      fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`;
+      fileName = `file-${id}-${comment}.${getExtensionFile(sampleFile.name)}`;
 
       uploadPath = uploadDir + "\\" + fileName;
 
