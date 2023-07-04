@@ -1,10 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
-
 import useServer from "../../hooks/useServer.js";
 import { useState } from "react";
-import toast from "react-hot-toast";
+import "./style.css";
 
 function Login() {
   const navigate = useNavigate();
@@ -37,7 +36,6 @@ function Login() {
             Iniciar sesión
           </h2>
         </div>
-
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form className="login-form" onSubmit={submitHandler}>
             <div>
@@ -61,14 +59,6 @@ function Login() {
                 <label htmlFor="password" className="block">
                   <span className="text-gray-700">Contraseña:</span>
                 </label>
-                {/* <div className="text-sm">
-                <Link
-                  to="/passreset"
-                  className="font-semibold text-indigo-600 hover:text-indigo-500"
-                >
-                  ¿Olvidó su contraseña?
-                </Link>
-              </div> */}
               </div>
               <div className="mt-2">
                 <input

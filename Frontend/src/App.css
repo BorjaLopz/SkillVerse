@@ -5,11 +5,13 @@
 }
 
 body {
-  --text: #1c1b17;
-  --background: #e8e7e3;
-  --primary-button: #9b9dab;
-  --secondary-button: #f6f5f4;
-  --accent: #66697a;
+  --text: #020203;
+  --background: #eef1f7;
+  --secondary-button: #e6d9ed;
+  /* Para buttons*/
+  --primary-button: #9991ca;
+  /* Para títulos y hover */
+  --accent: #8750a5;
 }
 
 .app {
@@ -17,9 +19,16 @@ body {
   flex-direction: column;
   min-height: 100vh;
   background-color: var(--background);
+  color: var(--text);
 }
 
 main {
   flex-grow: 1;
   margin: 30px;
+}
+
+header {
+  background-color: var(--primary-button);
+  place-content: center;
+  padding: 2rem;
 }
