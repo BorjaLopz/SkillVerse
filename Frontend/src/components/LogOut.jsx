@@ -28,7 +28,7 @@ function LogOut() {
   }, [user.user.nickname, navigate]);
 
   return (
-    <main>
+    <main className="logout">
       <Loading />
     </main>
   );
