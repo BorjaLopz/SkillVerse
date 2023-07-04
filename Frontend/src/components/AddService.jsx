@@ -49,9 +49,6 @@ const AddService = () => {
         },
       };
 
-      console.log("formData");
-      console.log(formData);
-
       const response = await axios.post(
         "http://localhost:3000/service/add",
         formData,
