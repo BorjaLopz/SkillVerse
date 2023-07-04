@@ -1,11 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import koFiIcon from "/icons/ko-fi-icon.svg";
 
 const ProfileCard = ({ formData }) => {
   return (
     <div className="profile-card">
-      <h3>Datos Personales</h3>
+      <h3>Datos Personales:</h3>
       <p>Nickname: {formData.nickname}</p>
       <p>Email: {formData.email}</p>
       <p>Nombre: {formData.name}</p>

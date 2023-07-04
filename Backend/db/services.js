@@ -47,7 +47,7 @@ const getServiceByID = async (id) => {
     );
 
     if (!result.length) {
-      throw generateError(`No hay ningun servicio con id ${id}`, 400);
+      throw generateError(`No hay ningún servicio con ID ${id}`);
     }
 
     return result[0];

@@ -322,10 +322,6 @@ const EditProfile = ({ nickname }) => {
         <p className="text-green-500 mt-2">{successMessage}</p>
       )}
       {/* {renderAdminContent()} */}
-
-      {/* <div>
-        <Link to={`/profile/${formData.nickname}`}>Volver al Servicio</Link>
-          </div> */}
     </div>
   );
 };
