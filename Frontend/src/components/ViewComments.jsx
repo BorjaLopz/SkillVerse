@@ -3,6 +3,7 @@ import { Link, NavLink, useParams } from "react-router-dom";
 import useServer from "../hooks/useServer";
 import useAuth from "../hooks/useAuth";
 import axios from "axios";
+import DeleteComment from "./DeleteComment";
 
 function ViewComments() {
   const [comments, setComments] = useState([]);
@@ -115,11 +116,18 @@ function ViewComments() {
                       </p>
                     </Link>
                     <p className="mt-6 text-gray-700">{comment.comment}</p>
+<<<<<<< HEAD
                     {comment.serviceFile !== "" && (
                       <Link to={`${comment.serviceFile}`} target="_blank">
                         <img src="/icons/download.png" />
                       </Link>
                     )}
+=======
+                    <DeleteComment
+                      commentId={comment.id}
+                      onDelete={getComments}
+                    />
+>>>>>>> 21003cdd636a630414afad62386c5de49fcac3f7
                   </div>
                 </div>
               </div>

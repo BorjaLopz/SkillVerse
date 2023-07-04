@@ -13,7 +13,7 @@ function PageTitle() {
       if (currentPath === "/") {
         pageTitle = "Página de inicio";
       } else if (currentPath === "/about") {
-        pageTitle = "Sobre nosotr@s";
+        pageTitle = "Conócenos";
       } else if (currentPath === "/services") {
         pageTitle = "Servicios";
       } else if (currentPath === "/login") {

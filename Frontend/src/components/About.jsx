@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function About() {
   return (
@@ -11,14 +12,14 @@ function About() {
         es brindarte acceso a una amplia gama de habilidades y conocimientos
         para que puedas obtener resultados excepcionales.
       </p>
-      <h2>Cómo funciona</h2>
+      <h3>Cómo funciona</h3>
       <p>
         Explora nuestros servicios: Descubre una amplia variedad de servicios
         digitales disponibles en nuestra web. Ya sea que necesites u ofrezcas
         diseño gráfico, traducción, programación, fotografía o cualquier otra
         habilidad, ¡seguro encontrarás lo que estás buscando!
       </p>
-      <h2>Únete a nuestra comunidad</h2>
+      <h3>Únete a nuestra comunidad</h3>
       <p>
         Puedes mostrar tus habilidades, ganar experiencia trabajando en
         proyectos interesantes y establecer relaciones con clientes y
@@ -34,6 +35,38 @@ function About() {
         >
           Contáctanos
         </a>
+      </div>
+      <h2>Conoce al equipo:</h2>
+      <div className="team">
+        <div className="team">
+          <Link
+            to="https://www.linkedin.com/in/anabelenbernardez/"
+            target="_blank"
+          >
+            <img src="icons/smile.png" alt="LinkedIn de Ana Belén Bernárdez" />
+          </Link>
+        </div>
+
+        <div className="team">
+          <Link to="https://www.linkedin.com/in/monica-irimia/" target="_blank">
+            <img src="icons/smile.png" alt="LinkedIn de Mónica Irimia" />
+          </Link>
+        </div>
+
+        <div className="team">
+          <Link
+            to="https://www.linkedin.com/in/borjalopezdiaz/"
+            target="_blank"
+          >
+            <img src="icons/smile.png" alt="LinkedIn de Borja López" />
+          </Link>
+        </div>
+
+        <div className="team">
+          <Link to="https://www.linkedin.com/in/fesparal/" target="_blank">
+            <img src="icons/smile.png" alt="LinkedIn de Francisco Espárraga" />
+          </Link>
+        </div>
       </div>
     </div>
   );
