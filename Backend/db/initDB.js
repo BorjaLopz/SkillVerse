@@ -23,7 +23,7 @@ const addAdmin = async (connection) => {
   const hashedDefaultPassword = await bcrypt.hash("admin", 10);
   await connection.query(
     `
-      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin, active, ko_fi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       "admin@admin.com",
       "admin",
@@ -33,15 +33,17 @@ const addAdmin = async (connection) => {
       "soy admin",
       "../images/default_admin_avatar.png",
       true,
+      true,
+      "https://ko-fi.com",
     ]
   );
 };
 
-async function createDirectories (pathFile) {
+async function createDirectories(pathFile) {
   //Creamos el path
   const uploadDir = path.join(__dirname, pathFile);
   await createPathIfNotExists(uploadDir);
-};
+}
 
 const deleteFilesFromDirectory = async (pathFile) => {
   const directoryPath = path.join(__dirname, pathFile);
@@ -88,7 +90,7 @@ async function main() {
       userPhoto VARCHAR(200),
       admin BOOLEAN DEFAULT FALSE,
       active BOOLEAN DEFAULT TRUE,
-     ko_fi VARCHAR(100) NULL 
+      ko_fi VARCHAR(100) NULL 
     );
     `);
 
@@ -127,11 +129,11 @@ async function main() {
     await addAdmin(connection);
 
     //Generamos las carpetas en caso de que no existan
-    await createDirectories("../uploads");
+    await createDirectories("../../Frontend/public/publicServices");
     await createDirectories("../../Frontend/public/fotosUsuario");
 
     //Borramos fotos de usuarios y archivos de los servicios
-    deleteFilesFromDirectory("../uploads");
+    deleteFilesFromDirectory("../../Frontend/public/publicServices");
     deleteFilesFromDirectory("../../Frontend/public/fotosUsuario");
 
     if (addData) {
@@ -142,10 +144,12 @@ async function main() {
       for (let i = 0; i < users; i++) {
         const password = await bcrypt.hash("Password123", 10);
 
+        const koFi = "https://ko-fi.com";
+
         const [userResult] = await connection.query(
           `
-      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto) 
-      VALUES (?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO users(email, nickname, name, surname, password, biography,  userPhoto, admin, active, ko_fi) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
           [
             faker.internet.email(),
@@ -155,6 +159,9 @@ async function main() {
             password,
             faker.lorem.sentences(),
             faker.image.avatar(),
+            false,
+            true,
+            koFi,
           ]
         );
 
@@ -191,8 +198,8 @@ async function main() {
           VALUES (?, ?, ?, ?, ?, ?)
           `,
               [
-                userId,
-                j + 1,
+                userId + j,
+                i + 1,
                 faker.lorem.sentences(),
                 faker.system.fileName(),
                 faker.datatype.boolean(),
@@ -201,7 +208,7 @@ async function main() {
             );
 
             console.log(
-              chalk.green(`Inserted comment ${k + 1} for service ${j + 1}`)
+              chalk.green(`Inserted comment ${k + 1} for service ${i + 1}`)
             );
           }
         }

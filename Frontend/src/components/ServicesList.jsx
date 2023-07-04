@@ -13,6 +13,7 @@ const ServicesList = () => {
       try {
         const resp = await fetch(`http://localhost:3000/service`);
         const { message: data } = await resp.json();
+
         if (typeof data === "object") {
           const service = data.map((s) => ({
             id: s.id,
@@ -21,6 +22,7 @@ const ServicesList = () => {
             service_type: s.service_type,
             user_id: s.user_id,
             done: s.done,
+            creation_date: s.creation_date.split("T")[0],
           }));
           setServices(service);
           setFilteredServices(service);
@@ -32,7 +34,7 @@ const ServicesList = () => {
     };
 
     fetchServices();
-    
+
     const intervalId = setInterval(() => {
       fetchServices();
     }, 500);
@@ -52,9 +54,12 @@ const ServicesList = () => {
   };
 
   return (
-    <div className="bg-white">
+    <div className="servicios" style={{ backgroundColor: "transparent" }}>
       <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 bg-gray">
-        <h2 className="text-4xl font-bold tracking-tight text-gray-900 text-center">
+        <h2
+          className="text-4xl font-bold tracking-tight text-center"
+          style={{ color: "#523d80" }}
+        >
           SERVICIOS
         </h2>
 
@@ -64,17 +69,39 @@ const ServicesList = () => {
             <div key={service.id} className="group relative">
               <Link to={`/service/${service.id}`}>
                 <div
-                  className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
-                    service.done ? "bg-slate-400" : "bg-slate-200"
-                  }`}
+                  className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8`}
+                  style={{
+                    backgroundColor: service.done ? "#999668" : "#e6e4ca",
+                  }}
                 >
-                  {" "}
-                  {/* bg-slate-400*/}
+                  {service.done ? (
+                    <img
+                      id="check_image"
+                      src={"/icons/check-circle.png"}
+                      alt="check"
+                    />
+                  ) : (
+                    ""
+                  )}
+                  {/* {console.log(service.creation_date)} */}
                   <div>
+                    <p className="text-l tracking-tight text-gray-900 dark:text-white text-right">
+                      {service.creation_date.split("-")[2]}
+                      {"-"}
+                      {service.creation_date.split("-")[1]}
+                      {"-"}
+                      {service.creation_date.split("-")[0]}
+                    </p>
                     <h3 className="text-sm text-gray-700">
-                      <p>{service.title}</p>
-                      <p>{service.request_body}</p>
-                      <p>{service.service_type}</p>
+                      <p className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                        {service.title}
+                      </p>
+                      <p className="font-normal text-gray-700 dark:text-gray-200">
+                        {service.request_body}
+                      </p>
+                      <p className="text-xl text-center">
+                        {service.service_type}
+                      </p>
                     </h3>
                   </div>
                 </div>

@@ -13,16 +13,41 @@ function NavBar() {
     <div className="navbar">
       <nav>
         <HomeButton />
-        <NavLink to="/about">Sobre nosotr@s</NavLink> {" || "}
-        <NavLink to="/services">Servicios</NavLink> {" || "}
-        {!isAuthenticated && <NavLink to="/signup">Regístrate</NavLink>}
+        <NavLink style={{ color: "#fcfaff" }} to="/about">
+          Sobre nosotr@s
+        </NavLink>{" "}
+        {" || "}
+        <NavLink style={{ color: "#fcfaff" }} to="/services">
+          Servicios
+        </NavLink>{" "}
+        {" || "}
+        {!isAuthenticated && (
+          <NavLink style={{ color: "#fcfaff" }} to="/signup">
+            Regístrate
+          </NavLink>
+        )}
         {!isAuthenticated && " || "}
-        {!isAuthenticated && <NavLink to="/login">Inicia sesión</NavLink>}
+        {isAuthenticated && (
+          <NavLink style={{ color: "#fcfaff" }} to="/users">
+            Usuarios
+          </NavLink>
+        )}
+        {isAuthenticated && " || "}
+        {!isAuthenticated && (
+          <NavLink style={{ color: "#fcfaff" }} to="/login">
+            Inicia sesión
+          </NavLink>
+        )}
         {!isAuthenticated && " || "}
-        {isAuthenticated && <NavLink to="/logout">Cerrar sesión</NavLink>}
+        {isAuthenticated && (
+          <NavLink style={{ color: "#fcfaff" }} to="/logout">
+            Cerrar sesión
+          </NavLink>
+        )}
         {isAuthenticated && " || "}
         {isAuthenticated && (
           <NavLink
+            style={{ color: "#fcfaff" }}
             to={{ pathname: `/profile/${user.user.user.nickname}` }}
             state={{ from: `${user.user.user.nickname}` }}
           >

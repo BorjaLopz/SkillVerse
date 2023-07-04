@@ -25,7 +25,9 @@ const Avatar = ({ user = "" }) => {
 
   return (
     <>
-      <img className="avatar" src={userAvatar} alt={`Avatar de ${user}`} />
+      <div className="avatar-container">
+        <img className="avatar" src={userAvatar} alt={`Avatar de ${user}`} />
+      </div>
     </>
   );
 };

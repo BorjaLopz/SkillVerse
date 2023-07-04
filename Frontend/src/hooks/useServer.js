@@ -4,18 +4,22 @@ import jwt_decode from "jwt-decode";
 import Http from "../services/Http.js";
 import useAuth from "./useAuth.js";
 
+import { useNavigate } from "react-router-dom";
+
 function useServer() {
   const { token, setUser } = useAuth();
+  const navigate = useNavigate();
 
   const handleResponse = ({ data, loading, error }) => {
     if (data?.data) {
       const user = jwt_decode(data.data);
       setUser({ user, token: data.data });
-      toast.success(`Bienvenid@ ${user.nickname}`);
+      toast.success(`Bienvenid@ ${user.nickname}`, { duration: 5000 });
     }
 
     if (error) {
       toast.error(error.message);
+      navigate("/404");
     }
 
     return { data, loading, error };

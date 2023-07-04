@@ -25,6 +25,7 @@ const {
   ALLOWED_EXTENSIONS,
   uploadFilesInFolder,
 } = require("../helpers");
+const { getUserData } = require("../db/users");
 
 const newServiceController = async (req, res, next) => {
   try {
@@ -39,11 +40,7 @@ const newServiceController = async (req, res, next) => {
     }
 
     //Comprobar request_body
-    if (
-      !request_body ||
-      request_body.lenght > 500 ||
-      request_body.lenght < 15
-    ) {
+    if (request_body.lenght < 15) {
       throw generateError(
         "La descripción debe tener más de 15 caracteres y menos de 500 ",
         400
@@ -52,55 +49,18 @@ const newServiceController = async (req, res, next) => {
 
     //Comprobar required_type
     if (!required_type || required_type.lenght > 20) {
-      throw generateError(
-        "El tipo de servicio requerido debe tener menos de 20 caracteres",
-        400
-      );
+      throw generateError("Debes seleccionar una categoría", 400);
     }
 
-    // //Tratar el fichero
-    // let fileName;
-    // let uploadPath;
+    const user = await getUserData(req.userId);
 
-    // if (req.files?.file) {
-    //   let sampleFile = req.files.file;
-
-    //   //Crear el path
-    //   const uploadDir = path.join(__dirname, "../uploads");
-
-    //   //Crear directorio si no existe
-    //   await createPathIfNotExists(uploadDir);
-
-    //   //Comprobar si la extension es valida.
-    //   console.log(chalk.red(getExtensionFile(sampleFile.name)));
-    //   if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
-    //     throw generateError(
-    //       `Formato no válido. Tipos de formatos permitidos: ${ALLOWED_EXTENSIONS}`,
-    //       415
-    //     );
-    //   }
-
-    //   //Obtener la extensión del fichero para guardarlo de la misma manera
-    //   fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`;
-
-    //   uploadPath = uploadDir + "\\" + fileName;
-
-    //   //Subir el fichero
-    //   sampleFile.mv(uploadPath, function (e) {
-    //     if (e) {
-    //       throw generateError("No se pudo enviar el archivo", 400);
-    //     }
-    //   });
-    // }
-    // else {
-    //   console.log("req.files es ", req.files?.file)
-    // }
-
-    // console.log("req.files desde controllers");
-    // console.log(req);
-
-    const fileName = await uploadFilesInFolder(req, "file", "service");
-    console.log("fileName: ", fileName);
+    const fileName = await uploadFilesInFolder(
+      req,
+      "file",
+      "service",
+      title,
+      user.nickname
+    );
 
     const id_services = await createService(
       title,
@@ -116,6 +76,8 @@ const newServiceController = async (req, res, next) => {
       message: `Services created with id ${id_services}`,
     });
   } catch (e) {
+    console.log("error desde service");
+    console.log(e);
     next(e);
   }
 };
@@ -213,9 +175,11 @@ const getServiceByTypeController = async (req, res, next) => {
 const getServiceByNicknameController = async (req, res, next) => {
   try {
     const { nickname } = req.params;
-
+    //const userId = await getUserIdByNickname(nickname);
     const services = await getServiceByNickname(nickname);
-
+    /*if (services.length === 0) {
+      throw generateError("No existen servicios para este usuario", 400);
+    }*/
     res.send({
       status: "ok",
       message: services,
@@ -252,7 +216,7 @@ const commentsFileController = async (req, res, next) => {
       await createPathIfNotExists(uploadDir);
 
       //Obtener la extensión del fichero para guardarlo de la misma forma
-      fileName = `${nanoid(24)}.${getExtensionFile(sampleFile.name)}`;
+      fileName = `file-${id}-${comment}.${getExtensionFile(sampleFile.name)}`;
 
       uploadPath = uploadDir + "\\" + fileName;
 

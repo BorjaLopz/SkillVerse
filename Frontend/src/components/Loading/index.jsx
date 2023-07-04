@@ -10,9 +10,3 @@ const Loading = () => {
 };
 
 export default Loading;
-
-// Optional code to simulate delay
-// setTimeout(() => {
-//   setUsers(respose.data);
-//   setIsLoading(false);
-// }, 1000);

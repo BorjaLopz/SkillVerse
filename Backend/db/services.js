@@ -27,6 +27,8 @@ const createService = async (
     );
 
     return newService.insertId;
+  } catch (e) {
+    throw e;
   } finally {
     if (connection) connection.release();
   }
@@ -288,10 +290,6 @@ const getAllCommentsFromService = async (id) => {
       `SELECT * FROM comments WHERE services_id = ?`,
       [id]
     );
-
-    if (getCommentByID.length === 0) {
-      throw generateError("No hay comentarios de este servicio", 404);
-    }
 
     return getCommentByID;
   } finally {

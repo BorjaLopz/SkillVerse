@@ -27,6 +27,14 @@ function About() {
         conectar y lograr tus metas digitales. ¡Regístrate hoy mismo y descubre
         todo lo que nuestra plataforma tiene para ofrecerte!
       </p>
+      <div className="contact">
+        <a
+          href="mailto:portaldigital@help.es"
+          style={{ textDecoration: "underline", color: "#523d80" }}
+        >
+          Contáctanos
+        </a>
+      </div>
     </div>
   );
 }

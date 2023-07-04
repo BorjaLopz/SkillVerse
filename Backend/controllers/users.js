@@ -18,6 +18,7 @@ const {
   getUserPhoto,
   getUserData,
   getUserAvatar,
+  getAllUsers,
 } = require("../db/users");
 const { getConnection } = require("../db/db");
 
@@ -25,8 +26,16 @@ const { DB_DATABASE } = process.env;
 
 const newUserController = async (req, res, next) => {
   try {
-    const { email, nickname, name, surname, password, biography, userPhoto } =
-      req.body;
+    const {
+      email,
+      nickname,
+      name,
+      surname,
+      password,
+      biography,
+      userPhoto,
+      ko_fi,
+    } = req.body;
 
     const schema = Joi.object({
       email: Joi.string().email().required(),
@@ -44,16 +53,17 @@ const newUserController = async (req, res, next) => {
     const avatar = userPhoto || defaultAvatar;
 
     //Encriptar la contraseña
-    const passwordHash = await bcrypt.hash(password, 10);
+    // const passwordHash = await bcrypt.hash(password, 10);
 
     const id = await createUser(
       email,
-      passwordHash,
+      password,
       nickname,
       name,
       surname,
       biography,
-      avatar
+      avatar,
+      ko_fi
     );
 
     res.send({
@@ -214,8 +224,18 @@ const getUserDataController = async (req, res, next) => {
     const { id } = req.params;
 
     const userData = await getUserData(id);
-    // console.log("CONTROLLER");
-    // console.log(userData);
+    res.send({
+      status: "ok",
+      userData: userData,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getAllUsersController = async (req, res, next) => {
+  try {
+    const userData = await getAllUsers();
     res.send({
       status: "ok",
       userData: userData,
@@ -230,8 +250,7 @@ const getUserAvatarController = async (req, res, next) => {
     const { nickname } = req.params;
 
     const userAvatar = await getUserAvatar(nickname);
-    // console.log("CONTROLLER");
-    // console.log(userAvatar);
+
     res.send({
       status: "ok",
       userAvatar: userAvatar,
@@ -240,8 +259,6 @@ const getUserAvatarController = async (req, res, next) => {
     next(error);
   }
 };
-
-
 
 const editUserController = async (req, res, next) => {
   const id_params = +req.params.id;
@@ -252,14 +269,23 @@ const editUserController = async (req, res, next) => {
 
   try {
     //Comprobacion para evitar que puedas editar otro usuario
-    if (id !== id_params && !admin) {
+    if (id !== id_params && !admin && id_params !== 0) {
       throw generateError("No puedes editar otro usuario", 403);
     }
 
     const [user] = await getAllFieldsExceptPassword(id_params);
-    let { email, nickname, name, surname, password, biography } = req.body;
+    let { email, nickname, name, surname, password, biography, ko_fi } =
+      req.body;
 
-    let userPhoto = await uploadFilesInFolder(req, "userPhoto", "user");
+    console.log("user");
+    console.log(user);
+
+    let userPhoto = await uploadFilesInFolder(
+      req,
+      "userPhoto",
+      "user",
+      user.nickname
+    );
 
     email = email || user.email;
     userPhoto = userPhoto || user.userPhoto;
@@ -268,6 +294,7 @@ const editUserController = async (req, res, next) => {
     surname = surname || user.surname;
     password = password || user.password;
     biography = biography || user.biography;
+    ko_fi = ko_fi || user.ko_fi;
 
     if (email != user.email) {
       user.email = email;
@@ -293,6 +320,9 @@ const editUserController = async (req, res, next) => {
     if (biography != user.biography) {
       user.biography = biography;
     }
+    if (ko_fi != user.ko_fi) {
+      user.ko_fi = ko_fi;
+    }
 
     //Añadimos campos al objeto
     tmp_user.id = id_params;
@@ -303,6 +333,10 @@ const editUserController = async (req, res, next) => {
     tmp_user.password = user.password;
     tmp_user.biography = user.biography;
     tmp_user.userPhoto = user.userPhoto;
+    tmp_user.ko_fi = user.ko_fi;
+
+    console.log("tmp_user");
+    console.log(tmp_user);
 
     const updatedUser = await editUser(tmp_user);
 
@@ -333,4 +367,5 @@ module.exports = {
   getAllFieldsExceptPasswordController,
   getUserDataController,
   getUserAvatarController,
+  getAllUsersController,
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import AddService from "../components/AddService.jsx";
 import ServicesList from "../components/ServicesList.jsx";
-//
+import ScrollToTop from "../components/ScrollToTop/index.jsx";
 import useAuth from "../hooks/useAuth";
 
 // import SearchBar from "../components/SearchBar.jsx";
@@ -19,21 +19,22 @@ function AllServicesPage() {
           <p>
             <NavLink
               to="/signup"
-              style={{ textDecoration: "underline", color: "blue" }}
+              style={{ textDecoration: "underline", color: "#523D80" }}
             >
               Regístrate
             </NavLink>{" "}
             o{" "}
             <NavLink
               to="/login"
-              style={{ textDecoration: "underline", color: "blue" }}
+              style={{ textDecoration: "underline", color: "#523D80" }}
             >
               inicia sesión
             </NavLink>{" "}
             para agregar servicios.
           </p>
         )}
-        {isAuthenticated && <AddService />}{" "}
+        <ScrollToTop />
+        {isAuthenticated && <AddService />}
       </main>
     </>
   );

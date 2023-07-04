@@ -19,6 +19,7 @@ const {
   getAllFieldsExceptPasswordController,
   getUserDataController,
   getUserAvatarController,
+  getAllUsersController,
 } = require("./controllers/users");
 
 const {
@@ -65,6 +66,9 @@ app.post("/user/register", newUserController);
 /* PRUEBA OBTENCION FOTO */
 app.get("/userdata/:id", getUserDataController);
 
+/* PRUEBA OBTENCION FOTO */
+app.get("/users", getAllUsersController);
+
 app.get("/useravatar/:nickname", getUserAvatarController);
 
 //Obtener todos los campos de un user excepto su ID
@@ -75,6 +79,7 @@ app.put("/user/:id/edit", authUser, editUserController);
 
 //Borrar un user
 app.delete("/user/:id/delete", authUser, deleteUserController);
+
 
 //#endregion USER
 

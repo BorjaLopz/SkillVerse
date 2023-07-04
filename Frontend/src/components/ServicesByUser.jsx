@@ -20,10 +20,26 @@ function ServicesByUser({ nickname }) {
   }, []);
   return (
     <>
+      {serviceUser.length !== 0 ? (
+        <p
+          className="text-4xl font-bold tracking-tight text-center"
+          style={{ color: "#523d80" }}
+        >
+          Servicios de {`${nickname}`}
+        </p>
+      ) : (
+        <p className="text-center text-4xl">
+          {`${nickname}`} aún no ha subido ningún servicio
+        </p>
+      )}
       {serviceUser.map((service) => (
         <div key={service.id} className="group relative">
           <Link to={`/service/${service.id}`}>
-            <div className="aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between bg-slate-400 p-8">
+            <div
+              className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
+                service.done ? "bg-slate-400" : "bg-slate-200"
+              }`}
+            >
               <div>
                 <h3 className="text-sm text-gray-700">
                   <p>{service.title}</p>
