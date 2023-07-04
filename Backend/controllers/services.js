@@ -89,7 +89,8 @@ const getServiceByIDController = async (req, res, next) => {
 
     //Obtener el servicio
     const service = await getServiceByID(id);
-    // console.log(service);
+    console.log("service");
+    console.log(service);
 
     //Enviarlo a postman
     res.send({
@@ -110,7 +111,7 @@ const getAllServicesController = async (req, res, next) => {
     //Enviar a postman
     res.send({
       status: "ok",
-      message: services,
+      serviceData: services,
     });
   } catch (e) {
     next(e);
@@ -165,7 +166,7 @@ const getServiceByTypeController = async (req, res, next) => {
 
     res.send({
       status: "ok",
-      message: service,
+      serviceData: service,
     });
   } catch (e) {
     next(e);

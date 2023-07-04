@@ -101,7 +101,7 @@ app.delete("/service/:id/delete", authUser, deleteServiceController);
 app.patch("/service/:id/:status", authUser, updateServiceStatusByIDController);
 
 //Obtener servicios en funcion de su tipo
-app.get("/service/type/(:type)?", authUser, getServiceByTypeController);
+app.get("/service/type/(:type)", authUser, getServiceByTypeController);
 
 //Añadir comentario fichero
 app.post("/comments/:id", authUser, commentsFileController);
