@@ -19,7 +19,7 @@ function useServer() {
 
     if (error) {
       toast.error(error.message);
-      navigate("/404");
+      // navigate("/404");
     }
 
     return { data, loading, error };

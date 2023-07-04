@@ -117,8 +117,8 @@ const getServiceByType = async (type, id) => {
     await connection.query(`USE ${DB_DATABASE}`);
 
     const [result] = await connection.query(
-      `SELECT * FROM services WHERE service_type LIKE ? AND done = ? AND user_id != ?`,
-      [`%${type}%`, 0, id]
+      `SELECT * FROM services WHERE service_type LIKE ? AND user_id != ?`,
+      [`%${type}%`, id]
     );
 
     if (result.length === 0) {
@@ -129,6 +129,8 @@ const getServiceByType = async (type, id) => {
     }
 
     return result;
+  } catch (e) {
+    throw e;
   } finally {
     if (connection) connection.release();
   }

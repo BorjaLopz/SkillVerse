@@ -4,7 +4,7 @@ import ServicesList from "../components/ServicesList.jsx";
 import ScrollToTop from "../components/ScrollToTop/index.jsx";
 import useAuth from "../hooks/useAuth";
 
-// import SearchBar from "../components/SearchBar.jsx";
+import SearchBar from "../components/SearchBar.jsx";
 import { NavLink } from "react-router-dom";
 
 function AllServicesPage() {
@@ -13,7 +13,6 @@ function AllServicesPage() {
   return (
     <>
       <main>
-        {/* <SearchBar /> */}
         <ServicesList />
         {!isAuthenticated && (
           <p>

@@ -24,7 +24,6 @@ const EditProfile = ({ nickname }) => {
 
   const [formData, setFormData] = useState({
     email: "",
-    userPhoto: user.user.userPhoto,
     nickname: "",
     name: "",
     surname: "",
