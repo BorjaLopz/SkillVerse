@@ -49,9 +49,6 @@ const AddService = () => {
         },
       };
 
-      console.log("formData");
-      console.log(formData);
-
       const response = await axios.post(
         "http://localhost:3000/service/add",
         formData,
@@ -136,7 +133,7 @@ const AddService = () => {
             </select>
 
             <label
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 font-medium text-gray-900"
               htmlFor="file"
             >
               Subir archivo:

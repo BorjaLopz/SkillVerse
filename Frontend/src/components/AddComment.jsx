@@ -29,7 +29,7 @@ const AddComment = () => {
     event.preventDefault();
 
     if (comment.length < 10) {
-      toast.error("La descripción debe tener al menos 10 caracteres");
+      toast.error("El comentario debe tener al menos 10 caracteres");
       return;
     }
 
@@ -38,12 +38,13 @@ const AddComment = () => {
       setShowForm(false);
       const formData = new FormData();
       formData.append("comment", comment);
-      formData.append("file", file);
+      formData.append("commentFile", file);
+
 
       const config = {
         headers: {
           "Access-Control-Allow-Origin": "*",
-          "content-type": "multipart/form-data",
+          "Content-Type": "multipart/form-data",
           Authorization: `${user.token}`,
         },
       };
@@ -96,6 +97,7 @@ const AddComment = () => {
               <input
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg"
                 type="file"
+                id="file"
                 accept="image/*, .pdf, .doc, .docx"
                 onChange={(event) => setFile(event.target.files[0])}
               />
