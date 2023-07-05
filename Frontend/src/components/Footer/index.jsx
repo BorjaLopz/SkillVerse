@@ -31,7 +31,7 @@ const Footer = () => {
           <Link
             to="https://www.hackaboss.com/"
             target="_blank"
-            style={{ textDecoration: "underline", color: "#523D80" }}
+            style={{ textDecoration: "underline", color: "#8750a5" }}
           >
             {" "}
             HACK A BOSS

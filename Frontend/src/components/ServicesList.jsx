@@ -82,13 +82,13 @@ const ServicesList = () => {
         <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 bg-gray">
           <h2
             className="text-4xl font-bold tracking-tight text-center"
-            style={{ color: "#523d80" }}
+            style={{ color: "#8750a5" }}
           >
             SERVICIOS
           </h2>
 
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 ">
-            {!servicesAvailables && <p>No hay ningún servicio aún</p>}
+            {!servicesAvailables && <p>No hay ningún servicio aún.</p>}
             {services.map((service) => (
               <div key={service.id} className="group relative">
                 <Link to={`/service/${service.id}`}>

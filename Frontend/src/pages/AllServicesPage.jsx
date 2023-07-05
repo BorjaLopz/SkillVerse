@@ -3,8 +3,6 @@ import AddService from "../components/AddService.jsx";
 import ServicesList from "../components/ServicesList.jsx";
 import ScrollToTop from "../components/ScrollToTop/index.jsx";
 import useAuth from "../hooks/useAuth";
-
-import SearchBar from "../components/SearchBar.jsx";
 import { NavLink } from "react-router-dom";
 
 function AllServicesPage() {
@@ -18,14 +16,14 @@ function AllServicesPage() {
           <p>
             <NavLink
               to="/signup"
-              style={{ textDecoration: "underline", color: "#523D80" }}
+              style={{ textDecoration: "underline", color: "#8750a5" }}
             >
               Regístrate
             </NavLink>{" "}
             o{" "}
             <NavLink
               to="/login"
-              style={{ textDecoration: "underline", color: "#523D80" }}
+              style={{ textDecoration: "underline", color: "#8750a5" }}
             >
               inicia sesión
             </NavLink>{" "}

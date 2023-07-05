@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./style.css";
 
 function About() {
   return (
@@ -43,13 +44,14 @@ function About() {
             to="https://www.linkedin.com/in/anabelenbernardez/"
             target="_blank"
           >
-            <img src="icons/smile.png" alt="LinkedIn de Ana Belén Bernárdez" />
+            <img src="icons/smile.png" alt="LinkedIn de Ana Belén Bernárdez" />{" "}
+            Ana
           </Link>
         </div>
 
         <div className="team">
           <Link to="https://www.linkedin.com/in/monica-irimia/" target="_blank">
-            <img src="icons/smile.png" alt="LinkedIn de Mónica Irimia" />
+            <img src="icons/smile.png" alt="LinkedIn de Mónica Irimia" /> Mónica
           </Link>
         </div>
 
@@ -58,13 +60,7 @@ function About() {
             to="https://www.linkedin.com/in/borjalopezdiaz/"
             target="_blank"
           >
-            <img src="icons/smile.png" alt="LinkedIn de Borja López" />
-          </Link>
-        </div>
-
-        <div className="team">
-          <Link to="https://www.linkedin.com/in/fesparal/" target="_blank">
-            <img src="icons/smile.png" alt="LinkedIn de Francisco Espárraga" />
+            <img src="icons/smile.png" alt="LinkedIn de Borja López" /> Borja
           </Link>
         </div>
       </div>
