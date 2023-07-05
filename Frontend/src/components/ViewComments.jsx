@@ -130,9 +130,9 @@ function ViewComments() {
                       </p>
                     </Link>
                     {comment.serviceFile !== "" && (
-                      <Link to={`${comment.serviceFile}`} target="_blank">
+                      <a href={`${comment.serviceFile}`} download>
                         <img src="/icons/download.png" />
-                      </Link>
+                      </a>
                     )}
                     <p className="mt-6 text-gray-700">{comment.comment}</p>
 
