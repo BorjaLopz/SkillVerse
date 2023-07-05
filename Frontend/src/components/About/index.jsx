@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import TheTeam from "../TheTeam";
 import "./style.css";
 
 function About() {
@@ -38,7 +39,8 @@ function About() {
         </a>
       </div>
       <h2>Conoce al equipo:</h2>
-      <div className="team">
+      <TheTeam />
+      <div className="all-team">
         <div className="team">
           <Link
             to="https://www.linkedin.com/in/anabelenbernardez/"
