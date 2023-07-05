@@ -4,12 +4,13 @@ import "./style.css";
 import { useReward } from "react-rewards";
 
 const Footer = () => {
-  const { reward, isAnimating } = useReward("rewardId", "confetti");
-
-  const config = {
-    emoji: ["💖", "💙", "❤"],
-    elementCount: 1,
-  };
+  const { reward: confettiReward, isAnimating } = useReward(
+    "rewardId",
+    "emoji",
+    {
+      emoji: ["⚡️", "✨", "💜", "🚀"],
+    }
+  );
 
   return (
     <footer>
@@ -17,7 +18,12 @@ const Footer = () => {
         <p>
           {" "}
           Hecho con{" "}
-          <button disabled={isAnimating} onClick={reward} config={config}>
+          <button
+            disabled={isAnimating}
+            onClick={() => {
+              confettiReward();
+            }}
+          >
             <span id="rewardId" />
             💜
           </button>{" "}
