@@ -3,7 +3,7 @@ import "./style.css";
 
 function Header() {
   return (
-    <header className="header">
+    <header className="header"  >
       <NavBar />
     </header>
   );
