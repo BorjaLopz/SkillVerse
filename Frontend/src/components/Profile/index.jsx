@@ -44,7 +44,7 @@ function Profile({ user }) {
         )}
       </section>
       {(currentToken.user.admin || user === currentToken.user.nickname) && (
-        <DeleteAccount />
+        <DeleteAccount user={user} />
       )}
       <section>
         <ServicesByUser nickname={user} />
