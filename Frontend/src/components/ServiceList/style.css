@@ -12,8 +12,6 @@
     background-color: #ccc;
 }
 
-
-
 .main-title{
     font-size: 2.5rem;
     font-weight: bold;
@@ -39,7 +37,14 @@
 }
 
 .card.done {
-    background-color:#e6d9ed;
+    background-color:#e6d9ed;  
+}
+
+.card.done .date,
+.card.done .card-title,
+.card.done .description,
+.card.done .service-type {
+    color: #888;
 }
 
 .card:not(.done) {
@@ -53,9 +58,15 @@
     color: #000;
 }
 
-.card-content {
-    flex-grow: 1;  
-}
+ .card-content
+.service-type {
+    font-size: 1.25rem;
+    flex-grow: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+ 
+} 
 
  .card-title{
     font-size: 1.25rem;
@@ -67,13 +78,6 @@
     margin-top: 4px;
     font-size: 1rem;
     color: #444;
-}
-
-.service-type {
-    font-size: 1.25rem;
-    text-align: center;
-    margin-top: auto;
-
 }
 
 .check-icon {
