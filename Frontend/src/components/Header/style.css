@@ -1,5 +1,5 @@
 header {
-  place-content: space-around;
+  place-content: space-between;
   padding: 2rem;
   background-color: #827799;
   position: sticky;
@@ -24,6 +24,19 @@ header > div > nav {
   display: flex;
   align-items: center;
 }
+
 .navbar > nav > a:hover {
   text-decoration: underline;
+  display: flex;
+}
+
+header > div > nav {
+  width: auto;
+  justify-content: space-around;
+}
+
+.navbar {
+  width: 100%;
+  justify-content: center;
+  display: flex;
 }
