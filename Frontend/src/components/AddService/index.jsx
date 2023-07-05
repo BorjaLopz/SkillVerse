@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import useServer from "../hooks/useServer";
+import useServer from "../../hooks/useServer";
 import toast from "react-hot-toast";
-import { categories } from "../config";
+import { categories } from "../../config";
 import axios from "axios";
-import useAuth from "../hooks/useAuth";
-import Loading from "../components/Loading";
+import useAuth from "../../hooks/useAuth";
+import Loading from "../Loading";
+import "./style.css";
 
 const AddService = () => {
   const [title, setTitle] = useState("");
@@ -49,6 +50,9 @@ const AddService = () => {
         },
       };
 
+      console.log("formData");
+      console.log(formData);
+
       const response = await axios.post(
         "http://localhost:3000/service/add",
         formData,
@@ -80,38 +84,27 @@ const AddService = () => {
     <div className="add-service">
       {showForm && (
         <>
-          <h2
-            className="text-4xl font-bold tracking-tight text-center"
-            style={{ color: "#523d80" }}
-          >
-            Añadir servicio
-          </h2>
+          <h2 className="add-service-title">Añadir servicio</h2>
           <form onSubmit={handleSubmit}>
-            <label
-              htmlFor="title"
-              className="block mb-2 font-medium text-gray-900"
-            >
+            <label htmlFor="title" className="form-label">
               Título:
             </label>
             <input
               id="title"
-              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="form-input"
               placeholder="Escriba aquí el título del servicio.."
               value={title}
               onChange={(event) => setTitle(event.target.value)}
               required
             />
 
-            <label
-              htmlFor="requiredType"
-              className="block mb-2 font-medium text-gray-900"
-            >
+            <label htmlFor="requiredType" className="form-label">
               Descripción:
             </label>
             <textarea
               id="requiredType"
               rows="4"
-              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="form-textarea"
               placeholder="Escriba aquí la descripción del servicio..."
               value={description}
               onChange={(event) => setDescription(event.target.value)}
@@ -120,7 +113,7 @@ const AddService = () => {
 
             <select
               id="categories"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="form-select"
               value={requiredType}
               onChange={(event) => setRequiredType(event.target.value)}
             >
@@ -132,14 +125,11 @@ const AddService = () => {
               ))}
             </select>
 
-            <label
-              className="block mb-2 font-medium text-gray-900"
-              htmlFor="file"
-            >
+            <label className="form-label  " htmlFor="file">
               Subir archivo:
             </label>
             <input
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+              className="form-file"
               aria-describedby="file_help"
               id="file"
               type="file"
@@ -147,10 +137,7 @@ const AddService = () => {
             />
 
             <div>
-              <button
-                className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-indigo-700"
-                type="submit"
-              >
+              <button className="submit-button" type="submit">
                 Crear servicio
               </button>
             </div>
