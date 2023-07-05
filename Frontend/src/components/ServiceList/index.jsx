@@ -107,7 +107,7 @@ const ServicesList = () => {
                     ""
                   )}
                   <div className="card-content">
-                    <p className="date">
+                    <p className={`date ${service.done ? "card-done-text" : ""}`}>
                       {service.creation_date.split("-")[2]}-
                       {service.creation_date.split("-")[1]}-
                       {service.creation_date.split("-")[0]}

@@ -1,0 +1,89 @@
+.edit-profile {
+    margin: 2rem auto;
+    max-width: 600px;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.edit-profile h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #8750a5;
+    margin-bottom: 2rem;
+}
+
+.edit-profile form {
+    margin-bottom: 2rem;
+}
+
+.edit-profile label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.edit-profile textarea,
+.edit-profile input[type="file"],
+.edit-profile input[type="text"],
+.edit-profile input[type="email"],
+.edit-profile input[type="password"],
+.edit-profile input[type="URL"] {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.25rem;
+    transition: border-color 0.3s ease;
+}
+
+.edit-profile textarea:focus,
+.edit-profile input[type="file"]:focus,
+.edit-profile input[type="text"]:focus,
+.edit-profile input[type="email"]:focus,
+.edit-profile input[type="password"]:focus,
+.edit-profile input[type="URL"]:focus {
+    outline: none;
+    border-color: #805ad5;
+}
+
+.edit-profile input[type="file"] {
+    appearance: none;
+}
+
+.edit-profile button {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #966fac;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.edit-profile button:hover {
+    background-color:#5f3179;
+}
+
+.edit-profile .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.ko-fi-icon {
+    width: 40px;
+    height: 40px;
+    margin-top: 10px;
+}
+

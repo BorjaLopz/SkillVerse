@@ -40,6 +40,13 @@
   background-color: #e6d9ed;
 }
 
+.card.done .date,
+.card.done .card-title,
+.card.done .description,
+.card.done .service-type {
+  color: #888;
+}
+
 .card:not(.done) {
   background-color: #9991ca;
 }

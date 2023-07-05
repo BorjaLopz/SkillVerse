@@ -1,19 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import useServer from "../hooks/useServer";
+import { useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
-function DeleteAccount({ accountId, onDelete }) {
-  const { delete: deleteAccount } = useServer();
+function DeleteAccount({ user }) {
+  const { delete: deleteAccount, get } = useServer();
+  const [currentUser, setCurrentUser] = useState({});
+  const navigate = useNavigate();
+  const { user: userLogged } = useAuth();
+
+  const fetchUser = async () => {
+    try {
+      const { data } = await get({ url: `/useravatar/${user}` });
+      setCurrentUser(data.userAvatar);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const handleDelete = async () => {
     try {
-      await deleteAccount({ url: `/profile/${accountId}` });
+      await deleteAccount({ url: `/user/${currentUser.id}/delete/` });
       toast.success("Usuario borrado exitosamente");
-      onDelete();
+      if(userLogged.user.id === currentUser.id)
+      {
+        navigate("/logout");
+      }
+      navigate("/users")
     } catch (error) {
       toast.error("Error al borrar el usuario");
     }
   };
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <button

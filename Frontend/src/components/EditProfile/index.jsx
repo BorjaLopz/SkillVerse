@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import useServer from "../hooks/useServer";
+import useServer from "../../hooks/useServer";
+import "./style.css"
 
 const validateKoFiURL = (value) => {
   if (!value || value.trim() === "") {
@@ -161,164 +162,121 @@ const EditProfile = ({ nickname }) => {
     }
   };
 
-  return (
+ return (
     <div className="edit-profile">
-      <h2
-        className="text-4xl font-bold tracking-tight text-center"
-        style={{ color: "#523d80" }}
-      >
-        Editar perfil
-      </h2>
-      <form onSubmit={handleSubmit} className="mt-6">
-        <label className="block">
-          <span className="text-gray-700">Correo electrónico:</span>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          />
-        </label>
-        <br />
-        <label className="block">
-          <span className="text-gray-700">Avatar:</span>
+      <h2>Editar Perfil</h2>
+      {error && <p className="error-message">{error}</p>}
+      {successMessage && (
+        <p className="success-message">{successMessage}</p>
+      )}
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="userPhoto">Foto de Perfil</label>
           <input
             type="file"
             id="userPhoto"
             name="userPhoto"
-            onChange={(e) => handleFile(e)}
-            // onChange={(event) => setFile(event.target.files[0])}
-            // onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+            accept=".jpg, .jpeg, .png"
+            onChange={handleFile}
           />
-        </label>
-        <br />
-        <label className="block">
-          <span className="text-gray-700">Nickname:</span>
+        </div>
+        <div>
+          <label htmlFor="email">Correo Electrónico</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="nickname">Nombre de Usuario</label>
           <input
             type="text"
+            id="nickname"
             name="nickname"
             value={formData.nickname}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
-        </label>
-        <br />
-        <label className="block">
-          <span className="text-gray-700">Nombre:</span>
+        </div>
+        <div>
+          <label htmlFor="name">Nombre</label>
           <input
             type="text"
+            id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
-        </label>
-        <br />
-        <label className="block">
-          <span className="text-gray-700">Apellido:</span>
+        </div>
+        <div>
+          <label htmlFor="surname">Apellidos</label>
           <input
             type="text"
+            id="surname"
             name="surname"
             value={formData.surname}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
-        </label>
-        <br />
-        <label className="block">
-          <span className="text-gray-700">Contraseña:</span>
+        </div>
+        <div>
+          <label htmlFor="password">Contraseña</label>
+          <div className="password-input">
+            <input
+              type={passwordVisibility ? "text" : "password"}
+              id="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <FontAwesomeIcon
+              icon={passwordVisibility ? faEyeSlash : faEye}
+              className="password-icon"
+              onClick={togglePassword}
+            />
+          </div>
+        </div>
+        <div>
+          <label htmlFor="repeatPassword">Repetir Contraseña</label>
           <input
-            id="password"
-            name="password"
-            value={formData.password}
-            type={passwordVisibility ? "text" : "password"}
-            onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          />
-        </label>
-        <br />
-        <label className="block">
-          <span className="text-gray-700">Repetir contraseña:</span>
-          <input
-            id="repeat-password"
+            type="password"
+            id="repeatPassword"
             name="repeatPassword"
             value={formData.repeatPassword}
-            type={passwordVisibility ? "text" : "password"}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
-        </label>
-        <input
-          type="checkbox"
-          id="ojoPassword"
-          className="hidden"
-          onChange={togglePassword}
-        />
-        <label htmlFor="ojoPassword" className="cursor-pointer">
-          <FontAwesomeIcon
-            icon={passwordVisibility ? faEye : faEyeSlash}
-            className="text-gray-700"
-          />
-        </label>
-
-        {repeatPassword !== formData.password && (
-          <p className="bg-red-400 text-white font-bold py-2 px-4 rounded mt-2">
-            Las contraseñas no coinciden
-          </p>
-        )}
-
-        <br />
-        <label className="block">
-          <span className="text-gray-700">Biografía:</span>
+        </div>
+        <div>
+          <label htmlFor="biography">Biografía</label>
           <textarea
+            id="biography"
             name="biography"
             value={formData.biography}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
-        </label>
-        <br />
-        <label className="block">
-          <span className="text-gray-700">Ko-Fi:</span>
+        </div>
+        <div className="URL-container">
+          <label htmlFor="ko_fi">URL de Ko-fi</label>
           <input
             type="URL"
+            id="ko_fi"
             name="ko_fi"
             value={formData.ko_fi}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          />
-        </label>
-
-        <label className="block">
-          <br />
-
-          {koFiURL && (
+         />
+             {koFiURL && (
             <a href={koFiURL} target="_blank" rel="noopener noreferrer">
               <img
                 src="/icons/ko-fi-icon.svg"
                 alt="Ko-fi"
-                style={{ width: "40px", height: "40px" }}
+                className="ko-fi-icon"
               />
             </a>
           )}
-        </label>
-
-        <br />
-
-        <button
-          className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-indigo-700"
-          type="submit"
-        >
-          Guardar cambios
-        </button>
+        </div>
+        <button type="submit">Guardar Cambios</button>
       </form>
-      {error && <p className="text-red-500 mt-2">{error}</p>}
-      {successMessage && (
-        <p className="text-green-500 mt-2">{successMessage}</p>
-      )}
-      {/* {renderAdminContent()} */}
     </div>
   );
 };

@@ -23,7 +23,7 @@ const addAdmin = async (connection) => {
   const hashedDefaultPassword = await bcrypt.hash("admin", 10);
   await connection.query(
     `
-      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin, active, ko_fi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin, ko_fi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
     [
       "admin@admin.com",
       "admin",
@@ -32,7 +32,6 @@ const addAdmin = async (connection) => {
       hashedDefaultPassword,
       "Soy administrador/a de esta página.",
       "../images/default_admin_avatar.png",
-      true,
       true,
       "https://ko-fi.com",
     ]
@@ -89,7 +88,6 @@ async function main() {
       biography VARCHAR(600),
       userPhoto VARCHAR(200),
       admin BOOLEAN DEFAULT FALSE,
-      active BOOLEAN DEFAULT TRUE,
       ko_fi VARCHAR(100) NULL 
     );
     `);
@@ -104,7 +102,6 @@ async function main() {
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
       service_type VARCHAR(200) NOT NULL,
       done BOOLEAN DEFAULT FALSE,
-      hide BOOLEAN DEFAULT FALSE,
       FOREIGN KEY (user_id) REFERENCES users (id)
     );
     `);
@@ -117,7 +114,6 @@ async function main() {
       creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
       comment VARCHAR(500) NOT NULL,
       serviceFile VARCHAR(200),
-      hide BOOLEAN DEFAULT FALSE,
       solution BOOLEAN DEFAULT FALSE,
       FOREIGN KEY (user_id) REFERENCES users (id),
       FOREIGN KEY (services_id) REFERENCES services (id)
@@ -150,8 +146,8 @@ async function main() {
 
         const [userResult] = await connection.query(
           `
-      INSERT INTO users(email, nickname, name, surname, password, biography,  userPhoto, admin, active, ko_fi) 
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin, ko_fi) 
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
       `,
           [
             faker.internet.email(),
@@ -162,7 +158,6 @@ async function main() {
             faker.lorem.sentences(),
             faker.image.avatar(),
             false,
-            true,
             koFi,
           ]
         );
@@ -174,8 +169,8 @@ async function main() {
           // Generar un servicio aleatorio
           await connection.query(
             `
-        INSERT INTO services(title, request_body, file_name, user_id, service_type, done, hide)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO services(title, request_body, file_name, user_id, service_type, done)
+        VALUES (?, ?, ?, ?, ?, ?)
         `,
             [
               faker.lorem.words(6),
@@ -183,7 +178,6 @@ async function main() {
               faker.system.fileName(),
               userId,
               getRandomCategory(),
-              faker.datatype.boolean(),
               faker.datatype.boolean(),
             ]
           );
@@ -196,15 +190,14 @@ async function main() {
             // Generar un comentario aleatorio
             await connection.query(
               `
-          INSERT INTO comments(user_id, services_id, comment, serviceFile, hide, solution)
-          VALUES (?, ?, ?, ?, ?, ?)
+          INSERT INTO comments(user_id, services_id, comment, serviceFile, solution)
+          VALUES (?, ?, ?, ?, ?)
           `,
               [
                 userId + j,
                 i + 1,
                 faker.lorem.sentences(),
                 faker.system.fileName(),
-                faker.datatype.boolean(),
                 faker.datatype.boolean(),
               ]
             );
