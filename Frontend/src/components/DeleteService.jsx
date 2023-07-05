@@ -6,7 +6,7 @@ import useAuth from "../hooks/useAuth";
 
 function DeleteService({ serviceId, onDelete }) {
   const { delete: deleteService, get } = useServer();
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const { id: idService } = useParams();
   const navigate = useNavigate();
   const [serviceOwner, setServiceOwner] = useState({});
@@ -38,7 +38,9 @@ function DeleteService({ serviceId, onDelete }) {
   return (
     <>
       {/* {(userOwner === user.user.id || user.user.admin)} */}
-      {user.user.admin || serviceOwner.user_id === user.user.id ? (
+      {/* user.user.admin || serviceOwner.user_id === user.user.id */}
+      {isAuthenticated &&
+      (user.user.admin || serviceOwner.user_id === user.user.id) ? (
         <button
           className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-red-900"
           onClick={handleDelete}
