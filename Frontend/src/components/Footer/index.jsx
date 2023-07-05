@@ -1,19 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./style.css";
+import { useReward } from "react-rewards";
 
 const Footer = () => {
+  const { reward: confettiReward, isAnimating } = useReward(
+    "rewardId",
+    "emoji",
+    {
+      emoji: ["⚡️", "✨", "💜", "🚀"],
+    }
+  );
+
   return (
     <footer>
       <div className="linkedin">
         <p>
           {" "}
-          Hecho con 💜 para
-          <Link
-            to="https://www.hackaboss.com/"
-            target="_blank"
-            style={{ textDecoration: "underline", color: "#523D80" }}
+          Hecho con{" "}
+          <button
+            disabled={isAnimating}
+            onClick={() => {
+              confettiReward();
+            }}
           >
+            <span id="rewardId" />
+            💜
+          </button>{" "}
+          para
+          <Link className="hab" to="https://www.hackaboss.com/" target="_blank">
             {" "}
             HACK A BOSS
           </Link>{" "}

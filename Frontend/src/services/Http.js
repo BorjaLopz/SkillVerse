@@ -16,9 +16,6 @@ async function Http({
   };
 
   if (token) {
-    // config.headers.Authorization = token
-    // config.headers.Authorization = `Bearer ${token}`;
-    // console.log(token);
     config.headers.Authorization = `${token}`;
   }
 
@@ -27,7 +24,6 @@ async function Http({
   }
 
   try {
-    // console.log(fullURL.href);
     const res = await fetch(fullURL.href, config);
     const data = await res.json();
     if (!res.ok) throw data;

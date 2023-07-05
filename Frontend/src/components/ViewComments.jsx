@@ -8,6 +8,7 @@ import DeleteComment from "./DeleteComment";
 function ViewComments() {
   const [comments, setComments] = useState([]);
   const [commentOwners, setCommentOwners] = useState({});
+  const [serviceOwner, setServiceOwner] = useState({});
   const { isAuthenticated, user } = useAuth();
   const { id } = useParams();
   const { get } = useServer();
@@ -15,10 +16,10 @@ function ViewComments() {
   const getComments = async () => {
     try {
       const { data } = await get({ url: `/comments/${id}` });
-      setComments(data.message);
+      setComments(data.commentData);
 
-      if (data.message.length > 0) {
-        const userIds = data.message.map((comment) => comment.user_id);
+      if (data.commentData.length > 0) {
+        const userIds = data.commentData.map((comment) => comment.user_id);
         getUserCommentOwners(userIds);
       }
     } catch (e) {
@@ -54,6 +55,19 @@ function ViewComments() {
       );
     }
   };
+
+  const fetchServiceOwner = async () => {
+    try {
+      const { data } = await get({ url: `/service/${id}` });
+      setServiceOwner(data.message);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchServiceOwner();
+  }, []);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -115,11 +129,20 @@ function ViewComments() {
                         {`${commentOwner?.nickname}`}
                       </p>
                     </Link>
+                    {comment.serviceFile !== "" && (
+                      <Link to={`${comment.serviceFile}`} target="_blank">
+                        <img src="/icons/download.png" />
+                      </Link>
+                    )}
                     <p className="mt-6 text-gray-700">{comment.comment}</p>
-                    <DeleteComment
-                      commentId={comment.id}
-                      onDelete={getComments}
-                    />
+
+                    {user.user.admin ||
+                    comment.user_id === user.user.id ||
+                    serviceOwner.user_id === user.user.id ? (
+                      <DeleteComment commentId={comment.id} />
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               </div>

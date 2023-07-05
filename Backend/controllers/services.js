@@ -14,6 +14,7 @@ const {
   deleteService,
   deleteAllCommentsFromService,
 } = require("../db/services");
+
 const {
   generateError,
   createPathIfNotExists,
@@ -25,6 +26,9 @@ const {
   ALLOWED_EXTENSIONS,
   uploadFilesInFolder,
 } = require("../helpers");
+
+const { getAllFieldsExceptPassword } = require("../db/users");
+
 const { getUserData } = require("../db/users");
 
 const newServiceController = async (req, res, next) => {
@@ -58,8 +62,8 @@ const newServiceController = async (req, res, next) => {
       req,
       "file",
       "service",
-      title,
-      user.nickname
+      user.nickname,
+      title
     );
 
     const id_services = await createService(
@@ -89,8 +93,6 @@ const getServiceByIDController = async (req, res, next) => {
 
     //Obtener el servicio
     const service = await getServiceByID(id);
-    console.log("service");
-    console.log(service);
 
     //Enviarlo a postman
     res.send({
@@ -204,31 +206,18 @@ const commentsFileController = async (req, res, next) => {
     }
 
     //Tratar el fichero
-    let fileName;
-    let uploadPath;
+    const service = await getServiceByID(id);
 
-    if (req.files && req.files.serviceFile) {
-      let sampleFile = req.files.serviceFile;
+    const user = await getUserData(req.userId);
 
-      //Creamos el path
-      const uploadDir = path.join(__dirname, "../requestfiles");
+    const fileName = await uploadFilesInFolder(
+      req,
+      "commentFile",
+      "comment",
+      user.nickname,
+      service.title
+    );
 
-      //Crear directorio si no existe
-      await createPathIfNotExists(uploadDir);
-
-      //Obtener la extensión del fichero para guardarlo de la misma forma
-      fileName = `file-${id}-${comment}.${getExtensionFile(sampleFile.name)}`;
-
-      uploadPath = uploadDir + "\\" + fileName;
-
-      //Subir el fichero
-      sampleFile.mv(uploadPath, function (e) {
-        if (e) {
-          throw generateError("No se pudo enviar el archivo", 400);
-        }
-        console.log(chalk.green("Archivo subido"));
-      });
-    }
 
     const id_comment = await createComment(comment, fileName, req.userId, id);
 
@@ -347,7 +336,7 @@ const getAllCommentsFromServiceController = async (req, res, next) => {
 
     res.send({
       status: "ok",
-      message: comments,
+      commentData: comments,
     });
   } catch (e) {
     next(e);

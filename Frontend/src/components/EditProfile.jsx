@@ -91,9 +91,6 @@ const EditProfile = ({ nickname }) => {
 
     const fD = new FormData();
 
-    console.log("formData");
-    console.log(formData);
-
     fD.append("userPhoto", file);
     fD.append("email", formData.email);
     fD.append("nickname", formData.nickname);
