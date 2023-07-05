@@ -14,7 +14,7 @@ const Footer = () => {
 
   return (
     <footer>
-      <div className="linkedin">
+      <div>
         <p>
           {" "}
           Hecho con{" "}

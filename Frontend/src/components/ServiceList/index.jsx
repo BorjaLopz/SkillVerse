@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useServer from "../../hooks/useServer";
-import SearchBar from "../SearchBar";
-import { categories } from "../../config";
 import "./style.css";
 
 const ServicesList = () => {
