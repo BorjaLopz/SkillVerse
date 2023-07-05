@@ -202,10 +202,14 @@ const deleteUser = async (idUser) => {
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
 
-    const [user] = await connection.query(
-      `SELECT id, nickname, active, admin FROM users WHERE id = ? AND active = ?`,
-      [idUser, 1]
-    );
+    console.log("BORRAMOS USUARIO ", idUser);
+
+    const [user] = await connection.query(`SELECT * FROM users WHERE id = ?`, [
+      idUser,
+    ]);
+
+    console.log("user");
+    console.log(user[0]);
 
     if (user.length === 0) {
       throw generateError("User already deleted", 404);

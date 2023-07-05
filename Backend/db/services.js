@@ -11,7 +11,6 @@ const createService = async (
   user_id,
   service_type,
   file_name = "",
-  hide = false,
   done = false
 ) => {
   let connection;
@@ -22,8 +21,8 @@ const createService = async (
 
     const [newService] = await connection.query(
       `
-    INSERT INTO services (title, request_body, user_id, file_name, service_type, done, hide) VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [title, request_body, user_id, file_name, service_type, done, hide]
+    INSERT INTO services (title, request_body, user_id, file_name, service_type, done) VALUES (?, ?, ?, ?, ?, ?)`,
+      [title, request_body, user_id, file_name, service_type, done]
     );
 
     return newService.insertId;
@@ -196,7 +195,6 @@ const createComment = async (
   service_file = "",
   user_id,
   service_id,
-  hide = false,
   solution = false
 ) => {
   let connection;
@@ -207,8 +205,8 @@ const createComment = async (
 
     const [newComment] = await connection.query(
       `
-    INSERT INTO comments (user_id, services_id, comment, serviceFile, hide) VALUES (?, ?, ?, ?, ?)`,
-      [user_id, service_id, comment, service_file, hide]
+    INSERT INTO comments (user_id, services_id, comment, serviceFile) VALUES (?, ?, ?, ?)`,
+      [user_id, service_id, comment, service_file]
     );
 
     return newComment.insertId;
@@ -317,6 +315,44 @@ const deleteAllCommentsFromService = async (id) => {
   }
 };
 
+const deleteAllCommentsByUserFromService = async (id) => {
+  let connection;
+
+  try {
+    connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
+    const [commentsDeleted] = await connection.query(
+      `DELETE FROM comments WHERE user_id = ?;`,
+      [id]
+    );
+    console.log("BORRAMOS COMENTARIOS DEL ", id);
+
+    return commentsDeleted;
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
+const deleteAllServicesByUser = async (id) => {
+  let connection;
+
+  try {
+    connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
+    const [servicesDeleted] = await connection.query(
+      `DELETE FROM services WHERE user_id = ?;`,
+      [id]
+    );
+    console.log("BORRAMOS SERVICIOS DEL ", id);
+
+    return servicesDeleted;
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 module.exports = {
   createService,
   getServiceByID,
@@ -329,4 +365,6 @@ module.exports = {
   getAllCommentsFromService,
   deleteService,
   deleteAllCommentsFromService,
+  deleteAllServicesByUser,
+  deleteAllCommentsByUserFromService,
 };

@@ -6,10 +6,12 @@ import ServicesByUser from "../ServicesByUser";
 import useServer from "../../hooks/useServer";
 import ProfileCard from "../ProfileCard";
 import "./style.css";
+import useAuth from "../../hooks/useAuth";
 
 function Profile({ user }) {
   const [currentUser, setCurrentUser] = useState({});
   const { get } = useServer();
+  const { user: currentToken } = useAuth();
 
   const fetchUser = async (user) => {
     try {
@@ -36,12 +38,13 @@ function Profile({ user }) {
         <ProfileCard formData={currentUser} />
       </section>
       <section className="user-edit">
-        <EditProfile nickname={user} />
+        {/* Comprobamos si somos el mismo usuario para poder editar el perfil o el admin */}
+        {(currentToken.user.admin || user === currentToken.user.nickname) && (
+          <EditProfile nickname={user} />
+        )}
       </section>
-      {currentUser.admin ? null : (
-        <section className="delete-user">
-          <DeleteAccount />
-        </section>
+      {(currentToken.user.admin || user === currentToken.user.nickname) && (
+        <DeleteAccount />
       )}
       <section>
         <ServicesByUser nickname={user} />
