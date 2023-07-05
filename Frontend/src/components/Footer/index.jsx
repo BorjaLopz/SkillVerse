@@ -28,7 +28,11 @@ const Footer = () => {
             💜
           </button>{" "}
           para
-          <Link className="hab" to="https://www.hackaboss.com/" target="_blank">
+          <Link
+            to="https://www.hackaboss.com/"
+            target="_blank"
+            style={{ textDecoration: "underline", color: "#8750a5" }}
+          >
             {" "}
             HACK A BOSS
           </Link>{" "}

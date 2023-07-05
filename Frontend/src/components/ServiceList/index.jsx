@@ -85,49 +85,47 @@ const ServicesList = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-    return (
-      <>
-        <div className="servicios">
-          <div className="container">
-            <h2 className="title main-title ">SERVICIOS</h2>
+  return (
+    <>
+      <div className="servicios">
+        <div className="container">
+          <h2 className="title main-title ">SERVICIOS</h2>
 
-            <div className="grid">
-              {!servicesAvailables && <p>No hay ningún servicio aún</p>}
-              {services.map((service) => (
-                <div
-                  key={service.id}
-                  className={`card ${service.done ? "done" : ""}`}>
-                  <Link to={`/service/${service.id}`}>
-                    {service.done ? (
-                      <img
-                        className="check-icon"
-                        src={"/icons/check-circle.png"}
-                        alt="check"
-                      />
-                    ) : (
-                       "" 
-                    )}
-                    <div className="card-content">
-                      <p className="date">
-                        {service.creation_date.split("-")[2]}-
-                        {service.creation_date.split("-")[1]}-
-                        {service.creation_date.split("-")[0]}
-                      </p>
-                      <h3 className="card-title">{service.title}</h3>
-                      <p className="description">{service.request_body}</p>
-                     <p className="service-type">{service.service_type}</p>
-                    </div>
-                  </Link>
-                </div>
-              )) }
-            </div>
+          <div className="grid">
+            {!servicesAvailables && <p>No hay ningún servicio aún</p>}
+            {services.map((service) => (
+              <div
+                key={service.id}
+                className={`card ${service.done ? "done" : ""}`}
+              >
+                <Link to={`/service/${service.id}`}>
+                  {service.done ? (
+                    <img
+                      className="check-icon"
+                      src={"/icons/check-circle.png"}
+                      alt="check"
+                    />
+                  ) : (
+                    ""
+                  )}
+                  <div className="card-content">
+                    <p className="date">
+                      {service.creation_date.split("-")[2]}-
+                      {service.creation_date.split("-")[1]}-
+                      {service.creation_date.split("-")[0]}
+                    </p>
+                    <h3 className="card-title">{service.title}</h3>
+                    <p className="description">{service.request_body}</p>
+                    <p className="service-type">{service.service_type}</p>
+                  </div>
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
-      </>
-    );
-  };
+      </div>
+    </>
+  );
+};
 
-  
 export default ServicesList;
-
-
