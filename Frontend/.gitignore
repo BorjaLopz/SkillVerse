@@ -17,6 +17,8 @@ node_modules/
 **/.env
 requestfiles/*
 fotosUsuario/*
+commentFiles/*
+publicServices/*
 
 # Editor directories and files
 .vscode/*
