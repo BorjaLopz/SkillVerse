@@ -110,9 +110,9 @@ const ServiceCard = () => {
               <DeleteService serviceId={service.id} />
               <p className="mt-6 text-gray-700">{service.request_body}</p>
               {service.file_name !== "" && (
-                <Link to={`${service.file_name}`} target="_blank">
+                <a href={`${service.serviceFile}`} download>
                   <img src="/icons/download.png" />
-                </Link>
+                </a>
               )}
             </div>
           </div>
