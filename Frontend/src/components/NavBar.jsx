@@ -13,40 +13,59 @@ function NavBar() {
     <div className="navbar">
       <nav>
         <HomeButton />
-        <NavLink style={{ color: "#fcfaff" }} to="/about">
+        <NavLink
+          className="links-header"
+          style={{ color: "#fcfaff" }}
+          to="/about"
+        >
           Conócenos
         </NavLink>{" "}
-        {" || "}
-        <NavLink style={{ color: "#fcfaff" }} to="/services">
+        <NavLink
+          className="links-header"
+          style={{ color: "#fcfaff" }}
+          to="/services"
+        >
           Servicios
         </NavLink>{" "}
-        {" || "}
         {!isAuthenticated && (
-          <NavLink style={{ color: "#fcfaff" }} to="/signup">
+          <NavLink
+            className="links-header"
+            style={{ color: "#fcfaff" }}
+            to="/signup"
+          >
             Regístrate
           </NavLink>
         )}
-        {!isAuthenticated && " || "}
         {isAuthenticated && (
-          <NavLink style={{ color: "#fcfaff" }} to="/users">
+          <NavLink
+            className="links-header"
+            style={{ color: "#fcfaff" }}
+            to="/users"
+          >
             Usuarios
           </NavLink>
         )}
-        {isAuthenticated && " || "}
         {!isAuthenticated && (
-          <NavLink style={{ color: "#fcfaff" }} to="/login">
+          <NavLink
+            className="links-header"
+            style={{ color: "#fcfaff" }}
+            to="/login"
+          >
             Inicia sesión
           </NavLink>
         )}
-        {!isAuthenticated && " || "}
         {isAuthenticated && (
-          <NavLink style={{ color: "#fcfaff" }} to="/logout">
+          <NavLink
+            className="links-header"
+            style={{ color: "#fcfaff" }}
+            to="/logout"
+          >
             Cerrar sesión
           </NavLink>
         )}
-        {isAuthenticated && " || "}
         {isAuthenticated && (
           <NavLink
+            className="links-header"
             style={{ color: "#fcfaff" }}
             to={{ pathname: `/profile/${user.user.user.nickname}` }}
             state={{ from: `${user.user.user.nickname}` }}
@@ -54,7 +73,6 @@ function NavBar() {
             Perfil
           </NavLink>
         )}
-        {isAuthenticated && " || "}
         {isAuthenticated && <Avatar user={`${user.user.user.nickname}`} />}
       </nav>
     </div>

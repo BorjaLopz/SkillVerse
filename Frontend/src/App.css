@@ -23,8 +23,3 @@ main {
   flex-grow: 1;
   margin: 30px;
 }
-
-header {
-  place-content: center;
-  padding: 2rem;
-}
