@@ -1,9 +1,8 @@
 import React from "react";
-import AddService from "../components/AddService.jsx";
-import ServicesList from "../components/ServicesList.jsx";
+import AddService from "../components/AddService/index.jsx";
+import ServicesList from "../components/ServiceList/index.jsx";
 import ScrollToTop from "../components/ScrollToTop/index.jsx";
 import useAuth from "../hooks/useAuth";
-
 import SearchBar from "../components/SearchBar.jsx";
 import { NavLink } from "react-router-dom";
 

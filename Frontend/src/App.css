@@ -5,12 +5,12 @@
 }
 
 body {
-  --text: #020203;
+--text: #020203;
   --background: #eef1f7;
   --secondary-button: #e6d9ed;
   /* Para buttons*/
   --primary-button: #9991ca;
-  /* Para títulos y hover */
+/* Para títulos y hover */
   --accent: #8750a5;
 }
 

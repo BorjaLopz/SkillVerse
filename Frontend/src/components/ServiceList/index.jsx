@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import useServer from "../hooks/useServer";
+import useServer from "../../hooks/useServer";
+import SearchBar from "../SearchBar";
+import { categories } from "../../config";
+import "./style.css";
 
 const ServicesList = () => {
   const [services, setServices] = useState([]);
@@ -12,8 +15,6 @@ const ServicesList = () => {
   const handleClick = (currentService) => {
     setFilteredServices(currentService);
     setPrueba(currentService);
-    console.log("prueba");
-    console.log(prueba);
   };
 
   const fetchAllServices = async () => {
@@ -41,8 +42,6 @@ const ServicesList = () => {
   };
 
   const fetchFilterServices = async () => {
-    console.log("prueba");
-    console.log(prueba);
     try {
       const { data } = await get({
         url: `/service/type/${prueba}`,
@@ -66,6 +65,16 @@ const ServicesList = () => {
     }
   };
 
+  // useEffect(() => {
+  //   if (filteredServices === "Todos los servicios") {
+  //     console.log("Todos");
+  //     fetchAllServices();
+  //   } else {
+  //     console.log("Categorias");
+  //     fetchFilterServices();
+  //   }
+  // }, []);
+
   useEffect(() => {
     fetchAllServices();
 
@@ -76,66 +85,49 @@ const ServicesList = () => {
     return () => clearInterval(intervalId);
   }, []);
 
-  return (
-    <>
-      <div className="servicios" style={{ backgroundColor: "transparent" }}>
-        <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 bg-gray">
-          <h2
-            className="text-4xl font-bold tracking-tight text-center"
-            style={{ color: "#523d80" }}
-          >
-            SERVICIOS
-          </h2>
+    return (
+      <>
+        <div className="servicios">
+          <div className="container">
+            <h2 className="title main-title ">SERVICIOS</h2>
 
-          <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 ">
-            {!servicesAvailables && <p>No hay ningún servicio aún</p>}
-            {services.map((service) => (
-              <div key={service.id} className="group relative">
-                <Link to={`/service/${service.id}`}>
-                  <div
-                    className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8`}
-                    style={{
-                      backgroundColor: service.done ? "#999668" : "#e6e4ca",
-                    }}
-                  >
+            <div className="grid">
+              {!servicesAvailables && <p>No hay ningún servicio aún</p>}
+              {services.map((service) => (
+                <div
+                  key={service.id}
+                  className={`card ${service.done ? "done" : ""}`}>
+                  <Link to={`/service/${service.id}`}>
                     {service.done ? (
                       <img
-                        id="check_image"
+                        className="check-icon"
                         src={"/icons/check-circle.png"}
                         alt="check"
                       />
                     ) : (
-                      ""
+                       "" 
                     )}
-                    <div>
-                      <p className="text-l tracking-tight text-gray-900 dark:text-white text-right">
-                        {service.creation_date.split("-")[2]}
-                        {"-"}
-                        {service.creation_date.split("-")[1]}
-                        {"-"}
+                    <div className="card-content">
+                      <p className="date">
+                        {service.creation_date.split("-")[2]}-
+                        {service.creation_date.split("-")[1]}-
                         {service.creation_date.split("-")[0]}
                       </p>
-                      <h3 className="text-sm text-gray-700">
-                        <p className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                          {service.title}
-                        </p>
-                        <p className="font-normal text-gray-700 dark:text-gray-200">
-                          {service.request_body}
-                        </p>
-                        <p className="text-xl text-center">
-                          {service.service_type}
-                        </p>
-                      </h3>
+                      <h3 className="card-title">{service.title}</h3>
+                      <p className="description">{service.request_body}</p>
+                     <p className="service-type">{service.service_type}</p>
                     </div>
-                  </div>
-                </Link>
-              </div>
-            ))}
+                  </Link>
+                </div>
+              )) }
+            </div>
           </div>
         </div>
-      </div>
-    </>
-  );
-};
+      </>
+    );
+  };
 
+  
 export default ServicesList;
+
+

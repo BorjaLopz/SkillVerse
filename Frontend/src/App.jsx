@@ -13,7 +13,7 @@ import ProfilePage from "./pages/ProfilePage.jsx";
 import AllServicesPage from "./pages/AllServicesPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
-import AddService from "./components/AddService.jsx";
+import AddService from "./components/AddService";
 import Footer from "./components/Footer/index.jsx";
 import LogOut from "./components/LogOut";
 import ServiceCard from "./components/ServiceCard";
