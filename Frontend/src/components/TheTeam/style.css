@@ -10,7 +10,6 @@
   padding-top: 3rem;
   display: flex;
   flex-direction: row;
-
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 50px;
@@ -110,6 +109,6 @@
   fill: rgb(14, 14, 14);
 }
 
-.profileDiv img {
+.our-photo {
   border-radius: 0.25rem;
 }
