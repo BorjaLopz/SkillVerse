@@ -146,9 +146,6 @@ async function uploadFilesInFolder(
   if (req.files && req.files[fieldNamePostman]) {
     let sampleFile = req.files[fieldNamePostman];
 
-    console.log("sampleFile");
-    console.log(sampleFile);
-
     let currentPath;
 
     if (typeOfFile.toUpperCase() === "USER") {
@@ -161,8 +158,6 @@ async function uploadFilesInFolder(
 
     //Creamos el path
     const uploadDir = path.join(__dirname, currentPath);
-    console.log("uploadDir");
-    console.log(uploadDir);
 
     //Crear directorio si no existe
     await createPathIfNotExists(uploadDir);

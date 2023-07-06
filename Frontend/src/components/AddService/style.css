@@ -1,83 +1,79 @@
-
 .add-service {
-    margin: 2rem auto;
-    max-width: 600px;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 600px;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .add-service h2 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-    color: #8750a5;
-    margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: #8750a5;
+  margin-bottom: 2rem;
 }
 
 .add-service form {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .add-service label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
-    color: #000;
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #000;
 }
 
 .add-service input,
 .add-service textarea,
 .add-service select {
-    width: 100%;
-    padding: 0.75rem;
-    font-size: 1rem;
-    color: #000;
-    background-color: #f7fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 0.25rem;
-    transition: border-color 0.3s ease;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  color: #000;
+  background-color: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.25rem;
+  transition: border-color 0.3s ease;
 }
 
 .add-service input:focus,
 .add-service textarea:focus,
 .add-service select:focus {
-    outline: none;
-    border-color: #805ad5;
+  outline: none;
+  border-color: #805ad5;
 }
 
 .add-service select {
-    appearance: none;
+  appearance: none;
 }
 
 .add-service button {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #fff;
-    background-color: #966fac;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #966fac;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .add-service button:hover {
-    background-color: #5f3179;
+  background-color: #5f3179;
 }
 
- .submit-button {
-    margin-top: 1rem;
+.submit-button {
+  margin-top: 1rem;
 }
-
 
 .loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100px;
-} 
-
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}

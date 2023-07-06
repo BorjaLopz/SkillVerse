@@ -88,7 +88,7 @@ const addBorja = async (connection) => {
       "López Díaz",
       hashedDefaultPassword,
       "Soy administrador de esta página.",
-      "../images/borja.png",
+      "../images/borja.jpg",
       true,
       "https://ko-fi.com",
     ]

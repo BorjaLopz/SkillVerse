@@ -57,7 +57,7 @@ function TheTeam() {
             to="https://www.linkedin.com/in/borjalopezdiaz/"
             target="_blank"
           >
-            <img src="images/borja.png" alt="Contacto de Borja López" />
+            <img src="images/borja.jpg" alt="Contacto de Borja López" />
           </Link>
         </div>
         <div className="infoDiv">

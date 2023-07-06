@@ -90,6 +90,9 @@ const EditProfile = ({ nickname }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    console.log("formData");
+    console.log(formData);
+
     const fD = new FormData();
 
     fD.append("userPhoto", file);

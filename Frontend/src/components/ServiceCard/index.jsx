@@ -106,9 +106,9 @@ const ServiceCard = () => {
 
               <p className="delete-service">{service.request_body}</p>
               {service.file_name !== "" && (
-                <Link to={`${service.file_name}`} target="_blank">
-                  <img src="/icons/external-link.png" />
-                </Link>
+                <a href={`${service.file_name}`} download>
+                  <img src="/icons/download.png" /> {/* /icons/paperclip.png*/}
+                </a>
               )}
             </div>
             <DeleteService serviceId={service.id} />
