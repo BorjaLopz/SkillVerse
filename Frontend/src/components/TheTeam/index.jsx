@@ -13,6 +13,7 @@ function TheTeam() {
               target="_blank"
             >
               <img
+                className="our-photo"
                 src="images/monica.png
             "
                 alt="Contacto de Mónica Irimia"
@@ -62,7 +63,11 @@ function TheTeam() {
               to="https://www.linkedin.com/in/borjalopezdiaz/"
               target="_blank"
             >
-              <img src="images/borja.png" alt="Contacto de Borja López" />
+              <img
+                className="our-photo"
+                src="images/borja.png"
+                alt="Contacto de Borja López"
+              />
             </Link>
           </div>
           <div className="infoDiv">
@@ -109,6 +114,7 @@ function TheTeam() {
               target="_blank"
             >
               <img
+                className="our-photo"
                 src="images/ana_belen.png"
                 alt="Contacto de Ana Belén Bernárdez"
               />
