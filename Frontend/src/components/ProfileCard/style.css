@@ -1,47 +1,68 @@
-
 .profile-card {
-    margin: 2rem auto;
-    max-width: 400px;
-    padding: 2rem;
-    background-color: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  max-width: 600px;
+  padding: 2rem;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
 }
 
 .profile-card .title {
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
-    color: #8750a5;
-    margin-bottom: 3rem;
-    margin-top: 0;
+  font-weight: bold;
+  text-align: center;
+  color: #8750a5;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
 }
 
 .profile-card .field {
-    display: flex;
-    margin-bottom: 1rem;
+  display: flex;
+  margin-bottom: 1rem;
 }
 
 .profile-card .field-name {
-    font-weight: bold;
-    color: #000;
-    margin-right: 0.5rem;
+  font-weight: bold;
+  color: #000;
+  margin-right: 0.5rem;
 }
 
 .profile-card .field-value {
-    color: #686767;
+  color: #686767;
 }
 
 .profile-card a {
-    display: inline-block;
-    margin-top: 1rem;
+  display: inline-block;
+  margin-top: 1rem;
 }
 
 .profile-card img.ko-fi-icon {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
 .profile-card img.ko-fi-icon:hover {
-    opacity: 0.8;
+  opacity: 0.8;
+}
+
+@media (max-width: 576px) {
+  .profile-card {
+    padding: 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  .profile-card .title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .profile-card .field {
+    flex-wrap: wrap;
+    margin-bottom: 0.5rem;
+  }
+
+  .profile-card .field-name {
+    flex-basis: 100%;
+    margin-bottom: 0.25rem;
+  }
 }

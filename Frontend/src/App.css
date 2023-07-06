@@ -15,10 +15,24 @@ body {
 }
 
 .app {
+  overflow-x: clip;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: var(--background);
+  /* background-color: var(--background); */
+  background-color: hsla(248, 34%, 68%, 1);
+  background-image: radial-gradient(
+      at 95% 94%,
+      hsla(219, 36%, 95%, 1) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 6% 90%, hsla(219, 36%, 95%, 1) 0px, transparent 50%),
+    radial-gradient(at 69% 91%, hsla(220, 36%, 95%, 1) 0px, transparent 50%),
+    radial-gradient(at 32% 89%, hsla(220, 36%, 95%, 1) 0px, transparent 50%),
+    radial-gradient(at 90% 53%, hsla(279, 35%, 89%, 1) 0px, transparent 50%),
+    radial-gradient(at 18% 49%, hsla(279, 35%, 89%, 1) 0px, transparent 50%),
+    radial-gradient(at 94% 23%, hsla(247, 33%, 68%, 1) 0px, transparent 50%),
+    radial-gradient(at 13% 11%, hsla(248, 34%, 68%, 1) 0px, transparent 50%);
   color: var(--text);
 }
 
