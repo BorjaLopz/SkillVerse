@@ -31,7 +31,7 @@ function PageTitle() {
         pageTitle = "Información de usuario";
       }
 
-      document.title = pageTitle;
+      document.title = "portalDigital | " + pageTitle;
     };
     setTimeout(updatePageTitle, 0);
   }, [location]);

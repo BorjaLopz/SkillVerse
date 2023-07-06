@@ -1,41 +1,41 @@
 import React from "react";
 import koFiIcon from "/icons/ko-fi-icon.svg";
-import "./style.css"
+import "./style.css";
 const ProfileCard = ({ formData }) => {
+  console.log(formData);
   return (
     <>
-      
-       <div className="profile-card">
-      <h3 className="title">Datos Personales:</h3>
-      <div className="field">
-        <span className="field-name">Nickname:</span>
-        <span className="field-value">{formData.nickname}</span>
+      <div className="profile-card">
+        <h3 className="title">Datos Personales:</h3>
+        <div className="field">
+          <span className="field-name">Nickname:</span>
+          <span className="field-value">{formData.nickname}</span>
+        </div>
+        <div className="field">
+          <span className="field-name">Email:</span>
+          <span className="field-value">{formData.email}</span>
+        </div>
+        <div className="field">
+          <span className="field-name">Nombre:</span>
+          <span className="field-value">{formData.name}</span>
+        </div>
+        <div className="field">
+          <span className="field-name">Apellido:</span>
+          <span className="field-value">{formData.surname}</span>
+        </div>
+        <div className="field">
+          <span className="field-name">Biografía:</span>
+          <span className="field-value">{formData.biography}</span>
+        </div>
+        {/* <a href={formData.ko_fi} target="_blank" rel="noopener noreferrer">
+          <img src={koFiIcon} alt="Ko-fi" className="ko-fi-icon" />
+        </a> */}
+        {formData.ko_fi !== "" && (
+          <a href={formData.ko_fi} target="_blank" rel="noopener noreferrer">
+            <img src={koFiIcon} alt="Ko-fi" className="ko-fi-icon" />
+          </a>
+        )}
       </div>
-      <div className="field">
-        <span className="field-name">Email:</span>
-        <span className="field-value">{formData.email}</span>
-      </div>
-      <div className="field">
-        <span className="field-name">Nombre:</span>
-        <span className="field-value">{formData.name}</span>
-      </div>
-      <div className="field">
-        <span className="field-name">Apellido:</span>
-        <span className="field-value">{formData.surname}</span>
-      </div>
-      <div className="field">
-        <span className="field-name">Biografía:</span>
-        <span className="field-value">{formData.biography}</span>
-      </div>
-
-      <a href={formData.ko_fi} target="_blank" rel="noopener noreferrer">
-        <img
-          src={koFiIcon}
-          alt="Ko-fi"
-          className="ko-fi-icon" 
-        />
-        </a>
-         </div>
     </>
   );
 };

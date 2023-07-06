@@ -206,9 +206,6 @@ const deleteUser = async (idUser) => {
       idUser,
     ]);
 
-    console.log("user");
-    console.log(user[0]);
-
     if (user.length === 0) {
       throw generateError("User already deleted", 404);
     }

@@ -326,7 +326,6 @@ const deleteAllCommentsByUserFromService = async (id) => {
       `DELETE FROM comments WHERE user_id = ?;`,
       [id]
     );
-    console.log("BORRAMOS COMENTARIOS DEL ", id);
 
     return commentsDeleted;
   } finally {
@@ -345,7 +344,6 @@ const deleteAllServicesByUser = async (id) => {
       `DELETE FROM services WHERE user_id = ?;`,
       [id]
     );
-    console.log("BORRAMOS SERVICIOS DEL ", id);
 
     return servicesDeleted;
   } finally {

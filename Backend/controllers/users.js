@@ -283,7 +283,7 @@ const editUserController = async (req, res, next) => {
     }
 
     const [user] = await getAllFieldsExceptPassword(id_params);
-    let { email, nickname, name, surname, password, biography, ko_fi } =
+    let { email, nickname, name, surname, password, biography, kofi } =
       req.body;
 
     let userPhoto = await uploadFilesInFolder(
@@ -300,7 +300,7 @@ const editUserController = async (req, res, next) => {
     surname = surname || user.surname;
     password = password || user.password;
     biography = biography || user.biography;
-    ko_fi = ko_fi || user.ko_fi;
+    kofi = kofi || user.ko_fi;
 
     if (email != user.email) {
       user.email = email;
@@ -326,8 +326,8 @@ const editUserController = async (req, res, next) => {
     if (biography != user.biography) {
       user.biography = biography;
     }
-    if (ko_fi != user.ko_fi) {
-      user.ko_fi = ko_fi;
+    if (kofi != user.ko_fi) {
+      user.ko_fi = kofi;
     }
 
     //Añadimos campos al objeto
