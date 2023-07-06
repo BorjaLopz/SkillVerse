@@ -62,7 +62,6 @@
   font-size: 0.875rem;
   color: #6b7280;
 }
-
 .service-card-add-comments {
   height: 0;
   padding-bottom: 100%;
@@ -70,4 +69,8 @@
   border-radius: 0.375rem;
   margin-top: 1rem;
   justify-content: space-between;
+}
+
+.service-card-add-comments.null-padding {
+  padding-bottom: 10%;
 }
