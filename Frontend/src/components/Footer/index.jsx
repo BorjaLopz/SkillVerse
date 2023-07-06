@@ -24,15 +24,11 @@ const Footer = () => {
               confettiReward();
             }}
           >
-            <span id="rewardId" />
+            <span id="rewardId" className="rewardId" />
             💜
           </button>{" "}
           para
-          <Link
-            to="https://www.hackaboss.com/"
-            target="_blank"
-            style={{ textDecoration: "underline", color: "#8750a5" }}
-          >
+          <Link to="https://www.hackaboss.com/" target="_blank" className="hab">
             {" "}
             HACK A BOSS
           </Link>{" "}

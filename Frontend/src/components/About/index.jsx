@@ -40,20 +40,19 @@ function About() {
       </div>
       <h2>Conoce al equipo:</h2>
       <TheTeam />
-      <div className="all-team">
-        <div className="team">
+      <div className="team">
+        <div>
           <Link
             to="https://www.linkedin.com/in/anabelenbernardez/"
             target="_blank"
           >
-            <img src="icons/smile.png" alt="LinkedIn de Ana Belén Bernárdez" />{" "}
-            Ana
+            <img src="icons/smile.png" alt="LinkedIn de Ana Belén Bernárdez" />
           </Link>
         </div>
 
         <div className="team">
           <Link to="https://www.linkedin.com/in/monica-irimia/" target="_blank">
-            <img src="icons/smile.png" alt="LinkedIn de Mónica Irimia" /> Mónica
+            <img src="icons/smile.png" alt="LinkedIn de Mónica Irimia" />
           </Link>
         </div>
 
@@ -62,7 +61,7 @@ function About() {
             to="https://www.linkedin.com/in/borjalopezdiaz/"
             target="_blank"
           >
-            <img src="icons/smile.png" alt="LinkedIn de Borja López" /> Borja
+            <img src="icons/smile.png" alt="LinkedIn de Borja López" />
           </Link>
         </div>
       </div>

@@ -6,7 +6,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useServer from "../../hooks/useServer";
-import "./style.css"
+import "./style.css";
 
 const validateKoFiURL = (value) => {
   if (!value || value.trim() === "") {
@@ -162,13 +162,11 @@ const EditProfile = ({ nickname }) => {
     }
   };
 
- return (
+  return (
     <div className="edit-profile">
       <h2>Editar Perfil</h2>
       {error && <p className="error-message">{error}</p>}
-      {successMessage && (
-        <p className="success-message">{successMessage}</p>
-      )}
+      {successMessage && <p className="success-message">{successMessage}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="userPhoto">Foto de Perfil</label>
@@ -264,8 +262,8 @@ const EditProfile = ({ nickname }) => {
             name="ko_fi"
             value={formData.ko_fi}
             onChange={handleChange}
-         />
-             {koFiURL && (
+          />
+          {koFiURL && (
             <a href={koFiURL} target="_blank" rel="noopener noreferrer">
               <img
                 src="/icons/ko-fi-icon.svg"

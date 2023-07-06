@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import useServer from "../hooks/useServer";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import "./deletewhatever.css";
 
 function DeleteAccount({ user }) {
   const { delete: deleteAccount, get } = useServer();
@@ -23,11 +24,10 @@ function DeleteAccount({ user }) {
     try {
       await deleteAccount({ url: `/user/${currentUser.id}/delete/` });
       toast.success("Usuario borrado exitosamente");
-      if(userLogged.user.id === currentUser.id)
-      {
+      if (userLogged.user.id === currentUser.id) {
         navigate("/logout");
       }
-      navigate("/users")
+      navigate("/users");
     } catch (error) {
       toast.error("Error al borrar el usuario");
     }
@@ -38,10 +38,7 @@ function DeleteAccount({ user }) {
   }, []);
 
   return (
-    <button
-      className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-red-900"
-      onClick={handleDelete}
-    >
+    <button className="delete-whatever" onClick={handleDelete}>
       Borrar cuenta
     </button>
   );
