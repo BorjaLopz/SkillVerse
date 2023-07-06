@@ -15,6 +15,9 @@ _Proyecto para HACK A BOSS - 2023: Web donde personas que necesiten algún servi
   - Subir un archivo con el servicio resuelto.
   - Marcar un servicio como ya resuelto.
   - Gestionar el perfil de usuario.
+  - Eliminar su servicio.
+  - Eliminar su comentario.
+  - Eliminar su cuenta.
 
 ## ⚙ Inicialización
 

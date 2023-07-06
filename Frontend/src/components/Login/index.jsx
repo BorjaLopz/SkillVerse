@@ -34,7 +34,7 @@ function Login() {
         <div className="login-form">
           <form onSubmit={submitHandler}>
             <div>
-              <label htmlFor="email">
+              <label className="login-info" htmlFor="email">
                 <span>Correo electrónico:</span>
                 <div>
                   <input
@@ -49,32 +49,30 @@ function Login() {
             </div>
 
             <div>
-              <div>
-                <label htmlFor="password">
-                  <span>Contraseña:</span>
-                </label>
-              </div>
-              <div>
-                <input
-                  id="password"
-                  name="password"
-                  type={passwordVisibility ? "text" : "password"}
-                  autoComplete="current-password"
-                  required
-                />
-                <input
-                  type="checkbox"
-                  id="ojoPassword"
-                  className="hidden"
-                  onChange={togglePassword}
-                />
-                <label htmlFor="ojoPassword">
-                  <FontAwesomeIcon
-                    icon={passwordVisibility ? faEye : faEyeSlash}
-                    className="eye"
+              <label className="login-info" htmlFor="password">
+                <span>Contraseña:</span>
+                <div>
+                  <input
+                    id="password"
+                    name="password"
+                    type={passwordVisibility ? "text" : "password"}
+                    autoComplete="current-password"
+                    required
                   />
-                </label>
-              </div>
+                  <input
+                    type="checkbox"
+                    id="ojoPassword"
+                    className="hidden"
+                    onChange={togglePassword}
+                  />
+                  <label htmlFor="ojoPassword">
+                    <FontAwesomeIcon
+                      icon={passwordVisibility ? faEye : faEyeSlash}
+                      className="login-eye"
+                    />
+                  </label>
+                </div>
+              </label>
             </div>
 
             <div>

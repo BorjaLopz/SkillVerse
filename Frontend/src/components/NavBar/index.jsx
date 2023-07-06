@@ -32,7 +32,14 @@ function NavBar() {
           </NavLink>
         )}
         {isAuthenticated}
-        {isAuthenticated && <Avatar user={`${user.user.user.nickname}`} />}
+        {isAuthenticated && (
+          <div className="avatar-nav-container">
+            <Avatar
+              className="avatar-nav"
+              user={`${user.user.user.nickname}`}
+            />
+          </div>
+        )}
       </nav>
     </div>
   );
