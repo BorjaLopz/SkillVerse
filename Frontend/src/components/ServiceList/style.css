@@ -1,86 +1,87 @@
 .container {
-    max-width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 16px;
-    padding-right: 16px;
+  max-width: 1140px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .section {
-    padding-top: 64px;
-    padding-bottom: 96px;
-    background-color: #ccc;
+  padding-top: 64px;
+  padding-bottom: 96px;
+  background-color: #ccc;
 }
 
-.main-title{
-    font-size: 2.5rem;
-    font-weight: bold;
-    text-align: center;
-    color: #8750a5;
+.main-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: #8750a5;
 }
 
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
 }
 
 .card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-    padding: 16px;
-    background-color: #e6e4ca;
-    border-radius: 0.25rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: #e6e4ca;
+  border-radius: 0.25rem;
 }
 
 .card.done {
-    background-color:#e6d9ed;  
+  background-color: #e6d9ed;
 }
 
 .card.done .date,
 .card.done .card-title,
 .card.done .description,
 .card.done .service-type {
-    color: #888;
+  color: #888;
 }
 
 .card:not(.done) {
-    background-color: #9991ca;
+  background-color: #9991ca;
 }
 
 .date {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: right;
-    color: #000;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: right;
+  color: #000;
 }
 
- .card-content
-.service-type {
-    font-size: 1.25rem;
-    flex-grow: 1; 
-    display: flex;
-    justify-content: center;
-    align-items: center; 
- 
-} 
+.card-content {
+  flex-grow: 1;
+}
 
- .card-title{
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #000;
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #000;
 }
 
 .description {
-    margin-top: 4px;
-    font-size: 1rem;
-    color: #444;
+  margin-top: 4px;
+  font-size: 1rem;
+  color: #444;
+}
+
+.service-type {
+  font-size: 1.25rem;
+  text-align: center;
+  margin-top: auto;
 }
 
 .check-icon {
+
     position: absolute;
     top: 8px;
     left: 8px;
@@ -88,3 +89,4 @@
     height: 24px;
     
 }
+

@@ -1,0 +1,17 @@
+.services-by h2 {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: bold;
+  letter-spacing: -0.025em;
+  text-align: center;
+  color: #523d80;
+}
+
+.services-by-info {
+  position: relative;
+}
+
+.services-by h3 {
+  font-size: 0.875rem;
+  color: #4a5568;
+}
