@@ -21,10 +21,9 @@
   background-color: rgb(24, 24, 24);
   transition-duration: 0.5s;
   color: rgb(155, 155, 155);
-  font-family: Whitney, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Helvetica, Arial, sans-serif;
   font-weight: 500;
   font-size: 16px;
+  border-radius: 0.25rem;
 }
 
 .cardContainer:hover .profileDiv {
@@ -39,8 +38,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: aliceblue;
+  background-color: white;
   z-index: 1;
+  border-radius: 0.25rem;
 }
 
 .nameDiv {
@@ -50,10 +50,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  background-color: aliceblue;
-  font-family: Whitney, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Helvetica, Arial, sans-serif;
   gap: 2px;
+  border-radius: 0.25rem;
 }
 
 .name {

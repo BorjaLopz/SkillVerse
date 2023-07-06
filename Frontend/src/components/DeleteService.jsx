@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import useServer from "../hooks/useServer";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import "./deletewhatever.css";
 
 function DeleteService({ serviceId, onDelete }) {
   const { delete: deleteService, get } = useServer();
@@ -41,10 +42,7 @@ function DeleteService({ serviceId, onDelete }) {
       {/* user.user.admin || serviceOwner.user_id === user.user.id */}
       {isAuthenticated &&
       (user.user.admin || serviceOwner.user_id === user.user.id) ? (
-        <button
-          className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-red-900"
-          onClick={handleDelete}
-        >
+        <button className="delete-whatever" onClick={handleDelete}>
           Borrar servicio
         </button>
       ) : (

@@ -39,13 +39,11 @@ function Profile({ user }) {
       </section>
       <section className="user-edit">
         {/* Comprobamos si somos el mismo usuario para poder editar el perfil o el admin */}
+        {user === currentToken.user.nickname && <EditProfile nickname={user} />}
         {(currentToken.user.admin || user === currentToken.user.nickname) && (
-          <EditProfile nickname={user} />
+          <DeleteAccount user={user} />
         )}
       </section>
-      {(currentToken.user.admin || user === currentToken.user.nickname) && (
-        <DeleteAccount user={user} />
-      )}
       <section>
         <ServicesByUser nickname={user} />
       </section>

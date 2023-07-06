@@ -202,8 +202,6 @@ const deleteUser = async (idUser) => {
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
 
-    console.log("BORRAMOS USUARIO ", idUser);
-
     const [user] = await connection.query(`SELECT * FROM users WHERE id = ?`, [
       idUser,
     ]);
