@@ -21,6 +21,7 @@
   width: 5rem;
   flex: none;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .users-list-data {

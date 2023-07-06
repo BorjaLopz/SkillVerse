@@ -28,10 +28,67 @@ const addAdmin = async (connection) => {
       "admin@admin.com",
       "admin",
       "admin",
-      "admin_surname",
+      "admin_admin",
       hashedDefaultPassword,
       "Soy administrador/a de esta página.",
       "../images/default_admin_avatar.png",
+      true,
+      "https://ko-fi.com",
+    ]
+  );
+};
+
+const addAna = async (connection) => {
+  const hashedDefaultPassword = await bcrypt.hash("admin", 10);
+  await connection.query(
+    `
+      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin, ko_fi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      "ana@admin.gal",
+      "anab",
+      "Ana Belén",
+      "Bernárdez Martínez",
+      hashedDefaultPassword,
+      "Soy administradora de esta página.",
+      "../images/ana_belen.png",
+      true,
+      "https://ko-fi.com",
+    ]
+  );
+};
+
+const addMonica = async (connection) => {
+  const hashedDefaultPassword = await bcrypt.hash("admin", 10);
+  await connection.query(
+    `
+      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin, ko_fi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      "monica@admin.gal",
+      "monica",
+      "Mónica",
+      "Irimia Villarmea",
+      hashedDefaultPassword,
+      "Soy administradora de esta página.",
+      "../images/monica.png",
+      true,
+      "https://ko-fi.com",
+    ]
+  );
+};
+
+const addBorja = async (connection) => {
+  const hashedDefaultPassword = await bcrypt.hash("admin", 10);
+  await connection.query(
+    `
+      INSERT INTO users(email, nickname, name, surname, password, biography, userPhoto, admin, ko_fi) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+    [
+      "borja@admin.es",
+      "borja",
+      "Borja",
+      "López Díaz",
+      hashedDefaultPassword,
+      "Soy administrador de esta página.",
+      "../images/borja.png",
       true,
       "https://ko-fi.com",
     ]
@@ -123,6 +180,9 @@ async function main() {
 
     //Añadimos admin
     await addAdmin(connection);
+    await addAna(connection);
+    await addMonica(connection);
+    await addBorja(connection);
 
     //Generamos las carpetas en caso de que no existan
     await createDirectories("../../Frontend/public/publicServices");
