@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import useServer from "../hooks/useServer";
+import useServer from "../../hooks/useServer";
+import "./style.css";
 
 function Users() {
   const { get } = useServer();
@@ -20,22 +21,16 @@ function Users() {
   }, []);
 
   return (
-    <ul role="list" className="divide-y divide-gray-100">
+    <ul role="list" className="users-list">
       {users.map((user) => (
-        <li key={user.email} className="flex justify-between gap-x-6 py-5">
-          <div className="flex gap-x-8">
+        <li key={user.email}>
+          <div className="users-list-info">
             <Link to={`/user/${user.nickname}`}>
-              <img
-                className="h-20 w-20 flex-none rounded-full bg-gray-50"
-                src={user.userPhoto}
-                alt=""
-              />
+              <img src={user.userPhoto} alt={`Foto de ${user.nickname}`} />
             </Link>
-            <div className="min-w-0 flex-auto">
+            <div className="users-list-data">
               <Link to={`/user/${user.nickname}`}>
-                <p className="text-xl font-semibold leading-6 text-gray-900">
-                  {user.nickname}
-                </p>
+                <p className="users-list-nickname">{user.nickname}</p>
               </Link>
               <Link
                 to="#"
@@ -43,26 +38,24 @@ function Users() {
                   window.location = `mailto: ${user.email}`;
                 }}
               >
-                <p className="mt-1 truncate text-m leading-10 text-gray-500">
-                  {user.email}
-                </p>
+                <p className="users-list-email">{user.email}</p>
               </Link>
             </div>
           </div>
-          <div className="hidden sm:flex sm:flex-col sm:items-end">
+          <div className="users-list-role">
             {user.admin ? (
-              <div className="mt-1 flex items-center gap-x-1.5">
-                <div className="flex-none rounded-full bg-emerald-600/20 p-1">
-                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-600" />
+              <div className="role-container">
+                <div className="role-admin-outside">
+                  <div className="role-admin-inside" />
                 </div>
-                <p className="text-xs leading-5 text-gray-500">Admin</p>
+                <p className="role-admin">Admin</p>
               </div>
             ) : (
-              <div className="mt-1 flex items-center gap-x-1.5">
-                <div className="flex-none rounded-full bg-zinc-500/20 p-1">
-                  <div className="h-1.5 w-1.5 rounded-full bg-zinc-500" />
+              <div className="role-container">
+                <div className="role-user-outside">
+                  <div className="role-user-inside" />
                 </div>
-                <p className="text-xs leading-5 text-gray-500">Usuario</p>
+                <p className="role-user">Usuario</p>
               </div>
             )}
           </div>

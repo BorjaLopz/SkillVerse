@@ -1,15 +1,15 @@
 import { useParams, Link } from "react-router-dom";
 
-import useServer from "../hooks/useServer";
+import useServer from "../../hooks/useServer";
 import React, { useEffect, useState } from "react";
-import AddComment from "./AddComment";
-import useAuth from "../hooks/useAuth";
-import DoneCheck from "./DoneCheck";
-import ViewComments from "./ViewComments";
+import AddComment from "../AddComment";
+import useAuth from "../../hooks/useAuth";
+import DoneCheck from "../DoneCheck";
+import ViewComments from "../ViewComments";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import DeleteService from "./DeleteService";
-
+import DeleteService from "../DeleteService";
+import "./style.css";
 
 const ServiceCard = () => {
   const [service, setService] = useState([]);
@@ -82,45 +82,40 @@ const ServiceCard = () => {
 
   return (
     <>
-      <div className="p-8">
-        <div className="shadow-xl rounded-lg">
-          <div className="h-64 bg-gray-200 bg-cover bg-center rounded-t-lg flex items-center justify-center">
-            <p className="text-black font-bold text-4xl">
-              {service.service_type}
-            </p>
+      <div className="service-card-page">
+        <div className="service-card">
+          <div className="service-card-type">
+            <p>{service.service_type}</p>
           </div>
-          <div className="bg-white rounded-b-lg px-8">
+          <div className="service-card-info">
             <Link to={`/user/${userData.nickname}`} />
-            <div className="relative">
+            <div className="service-card-photo">
               <Link to={`/user/${userData.nickname}`}>
                 <img
-                  className="right-0 w-16 h-16 rounded-full mr-4 shadow-lg absolute -mt-8 bg-gray-100"
+                  className="fotico"
                   src={userData.userPhoto}
                   alt={`Foto de perfil de ${userData.nickname}`}
                 />
               </Link>
             </div>
-            <div className="pt-8 pb-8">
-              <h1 className="text-2xl font-bold text-gray-700">
-                {service.title}
-              </h1>
+            <div className="service-card-info">
+              <h1>{service.title}</h1>
               <Link to={`/user/${userData.nickname}`}>
-                <p className="text-sm text-gray-600">{`${userData.nickname}`}</p>
+                <p>{`${userData.nickname}`}</p>
               </Link>
-              <DeleteService serviceId={service.id} />
-              <p className="mt-6 text-gray-700">{service.request_body}</p>
+
+              <p className="delete-service">{service.request_body}</p>
               {service.file_name !== "" && (
                 <Link to={`${service.file_name}`} target="_blank">
-                  <img src="/icons/download.png" />
+                  <img src="/icons/external-link.png" />
                 </Link>
               )}
             </div>
+            <DeleteService serviceId={service.id} />
           </div>
         </div>
         <ViewComments />
-        <div
-          className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8`}
-        >
+        <div className="service-card-add-comments">
           {isAuthenticated && !isDone && <AddComment />}
           {isAuthenticated &&
           !isDone &&
