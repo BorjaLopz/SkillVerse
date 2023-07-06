@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useServer from "../../hooks/useServer";
 import { Link } from "react-router-dom";
-import "./style.css";
+import "./style.css"
 
 function ServicesByUser({ nickname }) {
   const { get } = useServer();
@@ -19,35 +19,38 @@ function ServicesByUser({ nickname }) {
   useEffect(() => {
     fetchServicesByNickname(nickname);
   }, []);
-
   return (
-    <>
-      <div className="services-by">
-        {serviceUser.length !== 0 ? (
-          <h2>Servicios de {`${nickname}`}</h2>
-        ) : (
-          <h2>{`${nickname}`} aún no ha subido ningún servicio</h2>
-        )}
-        {serviceUser.map((service) => (
-          <div key={service.id} className="services-by-info">
-            <Link to={`/service/${service.id}`}>
-              <div
-                className={`aspect-h-1 aspect-w-1 w-full rounded-md mt-4 flex justify-between p-8 ${
-                  service.done ? "bg-slate-400" : "bg-slate-200"
-                }`}
-              >
-                <div>
-                  <h3>
-                    <p>{service.title}</p>
-                    <p>{service.request_body}</p>
-                    <p>{service.service_type}</p>
-                  </h3>
-                </div>
+     <>
+      {serviceUser.length !== 0 ? (
+        <p className="title">Servicios de {`${nickname}`}</p>
+      ) : (
+        <p className="message">{`${nickname}`} aún no ha subido ningún servicio</p>
+      )}
+      {serviceUser.map((service) => (
+        <div
+          key={service.id}
+          className="service-wrapper">
+          <Link to={`/service/${service.id}`} className="service-link">
+            <div className={service.done ? "card done" : "card"}>
+          {service.done ? (
+                    <img
+                      className="check-icon"
+                      src={"/icons/check-circle.png"}
+                      alt="check"
+                    />
+                  ) : (
+                    ""
+                  )}
+
+              <div>
+                <h3 className="card-title">{service.title}</h3>
+                <p className="description">{service.request_body}</p>
+                <p className="service-type">{service.service_type}</p>
               </div>
-            </Link>
-          </div>
-        ))}
-      </div>
+            </div>
+          </Link>
+        </div>
+      ))}
     </>
   );
 }

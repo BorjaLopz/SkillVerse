@@ -1,17 +1,89 @@
-.services-by h2 {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-  font-weight: bold;
-  letter-spacing: -0.025em;
-  text-align: center;
-  color: #523d80;
+.title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #8750a5;
 }
 
-.services-by-info {
-  position: relative;
+.message {
+    text-align: center;
+    font-size: 2.5rem;
 }
 
-.services-by h3 {
-  font-size: 0.875rem;
-  color: #4a5568;
+.service-wrapper {
+    margin-top: 16px;
+}
+
+.service-link {
+    display: block;
+    width: 100%;
+    border-radius: 0.25rem;
+    margin-top: 8px;
+    padding: 8px;
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.service-link:hover {
+    background-color: #9966b4;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px;
+    background-color: #e6e4ca;
+    border-radius: 0.25rem;
+}
+
+.card.done {
+    background-color: #e6d9ed;
+}
+
+.card.done .card-title,
+.card.done .description,
+.card.done .service-type {
+    color: #888;
+}
+
+.card:not(.done) {
+    background-color: #8782ac;
+}
+
+.date {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: right;
+    color: #000;
+}
+
+.card-content .service-type {
+    font-size: 1.25rem;
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #000;
+}
+
+.description {
+    margin-top: 4px;
+    font-size: 1rem;
+    color: #444;
+}
+
+.check-icon {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 16px !important;
+    height: 16px !important;
 }
