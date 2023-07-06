@@ -115,7 +115,11 @@ const ServiceCard = () => {
           </div>
         </div>
         <ViewComments />
-        <div className="service-card-add-comments">
+        <div
+          className={`service-card-add-comments ${
+            isDone ? "null-padding" : ""
+          }`}
+        >
           {isAuthenticated && !isDone && <AddComment />}
           {isAuthenticated &&
           !isDone &&
