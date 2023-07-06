@@ -9,6 +9,12 @@ const Footer = () => {
     "emoji",
     {
       emoji: ["⚡️", "✨", "💜", "🚀"],
+      elementSize: 20,
+      elementCount: 40,
+      decay: 0.95,
+      spread: 50,
+      zIndex: 999,
+      position: "fixed",
     }
   );
 

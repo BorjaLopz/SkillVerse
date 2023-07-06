@@ -4,7 +4,7 @@ import "./style.css";
 function TheTeam() {
   return (
     <>
-      <h2>Conoce al equipo:</h2>
+      <h2 className="meet-team">Conoce al equipo:</h2>
       <div className="the-team">
         <div className="cardContainer">
           <div className="profileDiv">

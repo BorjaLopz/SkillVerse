@@ -6,7 +6,7 @@ import "./style.css";
 function About() {
   return (
     <div className="about">
-      <h2>¡Bienvenid@s!</h2>
+      <h2 className="welcome">¡Bienvenid💜s!</h2>
       <p>
         ¿Necesitas ayuda con un proyecto digital? ¡Estás en el lugar correcto!
         Somos una plataforma que conecta a personas que necesitan servicios
@@ -31,12 +31,7 @@ function About() {
         todo lo que nuestra plataforma tiene para ofrecerte!
       </p>
       <div className="contact">
-        <a
-          href="mailto:portaldigital@help.es"
-          style={{ textDecoration: "underline", color: "#523d80" }}
-        >
-          Contáctanos
-        </a>
+        <a href="mailto:portaldigital@help.es">Contáctanos</a>
       </div>
       <TheTeam />
     </div>
