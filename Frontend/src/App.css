@@ -8,9 +8,9 @@ body {
   --text: #020203;
   --background: #eef1f7;
   --secondary-button: #e6d9ed;
-  /* Para buttons*/
+  /* Para buttons y hover*/
   --primary-button: #9991ca;
-  /* Para títulos y hover */
+  /* Para títulos*/
   --accent: #8750a5;
 }
 

@@ -2,9 +2,9 @@ body {
   --text: #020203;
   --background: #eef1f7;
   --secondary-button: #e6d9ed;
-  /* Para buttons*/
+  /* Para hover*/
   --primary-button: #9991ca;
-  /* Para títulos y hover */
+  /* Para títulos y buttons*/
   --accent: #8750a5;
 }
 
@@ -76,7 +76,7 @@ body {
 .login-form button {
   display: inline-block;
   cursor: pointer;
-  color: #eef1f7;
+  color: #ffffff;
   font-weight: bold;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;

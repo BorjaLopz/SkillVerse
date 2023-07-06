@@ -72,7 +72,7 @@ const getAllServices = async (user_id = -1) => {
       [user_id]
     );
     if (result.length === 0) {
-      return "No hay ningún servicio aún";
+      return "No hay servicios aún";
     }
 
     return result;
