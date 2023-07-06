@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import useServer from "../hooks/useServer";
 import { useParams } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import "./deletewhatever.css";
 
 function DeleteComment({ commentId, onDelete }) {
   const { delete: deleteComment, get } = useServer();
@@ -56,10 +57,7 @@ function DeleteComment({ commentId, onDelete }) {
       ) : (
         ""
       )} */}
-      <button
-        className="publish-comment text-white font-bold py-2 px-4 rounded content-center bg-indigo-500 hover:bg-red-900"
-        onClick={handleDelete}
-      >
+      <button className="delete-whatever" onClick={handleDelete}>
         Borrar comentario
       </button>
     </>

@@ -38,34 +38,7 @@ function About() {
           Contáctanos
         </a>
       </div>
-      <h2>Conoce al equipo:</h2>
       <TheTeam />
-      <div className="all-team">
-        <div className="team">
-          <Link
-            to="https://www.linkedin.com/in/anabelenbernardez/"
-            target="_blank"
-          >
-            <img src="icons/smile.png" alt="LinkedIn de Ana Belén Bernárdez" />{" "}
-            Ana
-          </Link>
-        </div>
-
-        <div className="team">
-          <Link to="https://www.linkedin.com/in/monica-irimia/" target="_blank">
-            <img src="icons/smile.png" alt="LinkedIn de Mónica Irimia" /> Mónica
-          </Link>
-        </div>
-
-        <div className="team">
-          <Link
-            to="https://www.linkedin.com/in/borjalopezdiaz/"
-            target="_blank"
-          >
-            <img src="icons/smile.png" alt="LinkedIn de Borja López" /> Borja
-          </Link>
-        </div>
-      </div>
     </div>
   );
 }

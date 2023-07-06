@@ -55,6 +55,7 @@ import toast from "react-hot-toast";
 import useServer from "../hooks/useServer";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import "./deletewhatever.css";
 
 function DeleteAccount({ user }) {
   const { delete: deleteAccount, get } = useServer();
@@ -90,6 +91,7 @@ function DeleteAccount({ user }) {
 
 
 
+
   
     return (
     <div className="flex justify-center">
@@ -103,6 +105,7 @@ function DeleteAccount({ user }) {
         Borrar cuenta
       </button>
     </div>
+
   );
 }
   

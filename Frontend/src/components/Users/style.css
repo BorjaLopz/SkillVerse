@@ -21,11 +21,13 @@
   width: 5rem;
   flex: none;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .users-list-data {
   min-width: 0;
   flex: 1 1 auto;
+  padding: 1rem;
 }
 
 .users-list-nickname {
