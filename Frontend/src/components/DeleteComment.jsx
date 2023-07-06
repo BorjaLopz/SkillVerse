@@ -57,7 +57,9 @@ function DeleteComment({ commentId, onDelete }) {
       ) : (
         ""
       )} */}
-      <button className="delete-whatever" onClick={handleDelete}>
+      
+        <button className="delete-whatever"
+        onClick={handleDelete}>
         Borrar comentario
       </button>
     </>
@@ -65,3 +67,5 @@ function DeleteComment({ commentId, onDelete }) {
 }
 
 export default DeleteComment;
+
+
