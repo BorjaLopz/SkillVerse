@@ -38,7 +38,6 @@ function About() {
           Contáctanos
         </a>
       </div>
-      <h2>Conoce al equipo:</h2>
       <TheTeam />
     </div>
   );
