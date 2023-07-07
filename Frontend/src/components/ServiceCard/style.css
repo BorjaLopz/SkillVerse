@@ -63,18 +63,3 @@
   color: #565c66;
  
 }
-
-.nickname {
-  font-weight: bold;
-  text-decoration: underline;
-  text-decoration-color: #565c66;
-}
-
-
-.service-card-add-comments {
-  height: 0;
-  width: 100%;
-  border-radius: 0.25rem;
-  margin-top: 1rem;
-  justify-content: space-between;
-}

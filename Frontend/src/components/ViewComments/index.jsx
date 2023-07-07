@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
 import useServer from "../../hooks/useServer";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
 import DeleteComment from "../DeleteComment";
-import "./style.css"
+import "./style.css";
 
 function ViewComments() {
   const [comments, setComments] = useState([]);
@@ -86,61 +85,61 @@ function ViewComments() {
     }
   }, [id, isAuthenticated]);
 
-
   return (
     <>
       {!isAuthenticated && (
-        <p className="view-comments-text">
-          <NavLink
-            to="/signup"
-            className="view-comments-link"
-          >
-            Regístrate
-          </NavLink>{" "}
-          o{" "}
-          <NavLink
-            to="/login"
-            className="view-comments-link"
-          >
-            inicia sesión
-          </NavLink>{" "}
-          para ver y hacer comentarios.
-        </p>
+        <div className="agregar-comentarios">
+          <p>
+            <NavLink className="agregar-auth" to="/signup">
+              Regístrate
+            </NavLink>{" "}
+            o{" "}
+            <NavLink className="agregar-auth" to="/login">
+              inicia sesión
+            </NavLink>{" "}
+            para ver y hacer comentarios.
+          </p>
+        </div>
       )}
       {isAuthenticated && comments && comments.length > 0 && (
-        <div className="view-comments-container">
+        <div>
           {comments.map((comment) => {
             const commentOwner = commentOwners[comment.user_id];
             return (
               <div key={comment.id} className="comment-container">
-                <div className="comment-profile">
-                  <Link
-                    to={`/user/${commentOwner?.nickname}`}
-                    className="comment-profile-link"
-                  >
-                    <img
-                      className="comment-profile-image"
-                      src={commentOwner?.userPhoto}
-                      alt={`Foto de perfil de ${commentOwner?.nickname}`}
-                    />
-                  </Link>
-                </div>
-                <div className="comment-details">
-                  <Link
-                    to={`/user/${commentOwner?.nickname}`}
-                    className="comment-owner-link"
-                  >
-                    <p className="comment-owner">{commentOwner?.nickname}</p>
-                  </Link>
-                  {comment.serviceFile !== "" && (
-                    <a href={`${comment.serviceFile}`} download className="comment-download-link">
-                      <img src="/icons/download.png" className="comment-download-icon" alt="Descargar archivo" />
-                    </a>
-                  )}
-                  <p className="comment-text">{comment.comment}</p>
-                  {(user.user.admin || comment.user_id === user.user.id || serviceOwner.user_id === user.user.id) && (
-                    <DeleteComment commentId={comment.id} />
-                  )}
+                <div>
+                  <Link to={`/user/${commentOwner?.nickname}`} />
+
+                  <div className="comment-user-info">
+                    <Link to={`/user/${commentOwner?.nickname}`}>
+                      <img
+                        className="comment-view-photo"
+                        src={commentOwner?.userPhoto}
+                        alt={`Foto de perfil de ${commentOwner?.nickname}`}
+                      />
+                    </Link>
+                  </div>
+                  <div className="comment-view-more-info">
+                    <Link to={`/user/${commentOwner?.nickname}`}>
+                      <p className="comment-view-nickname">
+                        {`${commentOwner?.nickname}`}
+                      </p>
+                    </Link>
+                    {comment.serviceFile !== "" && (
+                      <a href={`${comment.serviceFile}`} download>
+                        <img src="/icons/download.png" />
+                      </a>
+                    )}
+                    <p className="comment-view-comment">{comment.comment}</p>
+
+                    {user.user.admin ||
+                    comment.user_id === user.user.id ||
+                    serviceOwner.user_id === user.user.id ? (
+                      <DeleteComment commentId={comment.id} />
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
               </div>
             );
@@ -150,4 +149,5 @@ function ViewComments() {
     </>
   );
 }
+
 export default ViewComments;
