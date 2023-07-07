@@ -86,15 +86,14 @@ card.done {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-}  
-
+}
 
 .description {
   margin-top: 4px;
   font-size: 1rem;
   color: #353434;
-  flex-grow: 1; 
+  flex-grow: 1;
+  overflow: hidden;
 }
 
 .service-type {
@@ -102,6 +101,8 @@ card.done {
   font-weight: bold;
   text-align: center;
   margin-top: auto;
+  padding: 10px;
+  margin-bottom: 3px;
 }
 
 .check-icon-services {
@@ -160,7 +161,7 @@ card.done {
   }
 }
 
-@media (min-width: 577px) and (max-width: 992px) {
+@media (min-width: 577px) {
   .container {
     padding-left: 20px;
     padding-right: 20px;

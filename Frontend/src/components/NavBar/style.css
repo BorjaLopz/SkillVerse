@@ -13,3 +13,30 @@
     font-size: 18px;
   }
 }
+
+div:not(.sin_animacion) > nav ::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -4px;
+  left: 25%;
+  background-color: #ff9950;
+  transform-origin: bottom center;
+  transition: transform 0.25s ease-in-out;
+}
+
+div:not(.sin_animacion) > nav :hover::after {
+  transform: scaleX(2);
+  transform-origin: bottom center;
+}
+
+.animation {
+  display: inline-block;
+  position: relative;
+  color: white;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}

@@ -3,6 +3,7 @@ import HomeButton from "../HomeButton";
 import useAuth from "../../hooks/useAuth";
 import Avatar from "../Avatar";
 import "./style.css";
+import AvatarHeader from "../AvatarHeader";
 
 function NavBar() {
   const { isAuthenticated } = useAuth();
@@ -13,18 +14,35 @@ function NavBar() {
     <div className="navbar">
       <nav>
         <HomeButton />
-        <NavLink to="/about">Conócenos</NavLink>
-        <NavLink to="/services">Servicios</NavLink>
-        {!isAuthenticated && <NavLink to="/signup">Regístrate</NavLink>}
-        {!isAuthenticated}
-        {isAuthenticated && <NavLink to="/users">Usuarios</NavLink>}
-        {isAuthenticated}
-        {!isAuthenticated && <NavLink to="/login">Inicia sesión</NavLink>}
-        {!isAuthenticated}
-        {isAuthenticated && <NavLink to="/logout">Cerrar sesión</NavLink>}
-        {isAuthenticated}
+        <NavLink className="animation" to="/about">
+          Conócenos
+        </NavLink>
+        <NavLink className="animation" to="/services">
+          Servicios
+        </NavLink>
+        {!isAuthenticated && (
+          <NavLink className="animation" to="/signup">
+            Regístrate
+          </NavLink>
+        )}
+        {isAuthenticated && (
+          <NavLink className="animation" to="/users">
+            Usuarios
+          </NavLink>
+        )}
+        {!isAuthenticated && (
+          <NavLink className="animation" to="/login">
+            Inicia sesión
+          </NavLink>
+        )}
+        {isAuthenticated && (
+          <NavLink className="animation" to="/logout">
+            Cerrar sesión
+          </NavLink>
+        )}
         {isAuthenticated && (
           <NavLink
+            className="animation"
             to={{ pathname: `/profile/${user.user.user.nickname}` }}
             state={{ from: `${user.user.user.nickname}` }}
           >
@@ -33,8 +51,8 @@ function NavBar() {
         )}
         {isAuthenticated}
         {isAuthenticated && (
-          <div className="avatar-nav-container">
-            <Avatar
+          <div className="avatar-nav-container sin_animacion">
+            <AvatarHeader
               className="avatar-nav"
               user={`${user.user.user.nickname}`}
             />

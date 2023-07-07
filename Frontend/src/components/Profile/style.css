@@ -7,31 +7,34 @@
 
 #profile-avatar {
   padding: 1rem;
+  /* background-color: black; */
 }
 
 .profile-title {
-  font-size: 2.25rem;
+  font-size: 4rem;
   line-height: 2.5rem;
   font-weight: 700;
-  letter-spacing: -0.025em;
   text-align: center;
   color: white;
   margin-top: 50px;
   margin-bottom: 50px;
+  font-family: "Soria", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
+  letter-spacing: 2px;
 }
 
 @media (max-width: 576px) {
   .profile-title {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     line-height: 1.75rem;
     margin-top: 30px;
     margin-bottom: 30px;
   }
 }
 
-@media (min-width: 576px) and (max-width: 992px) {
+@media (min-width: 576px) {
   .profile-title {
-    font-size: 1.75rem;
+    font-size: 3rem;
     line-height: 2rem;
     margin-top: 40px;
     margin-bottom: 40px;
