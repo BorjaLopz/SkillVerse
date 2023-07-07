@@ -50,7 +50,6 @@ main {
 header {
   background-color: var(--primary-button);
   place-content: center;
-  padding: 2rem;
 }
 
 footer {

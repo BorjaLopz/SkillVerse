@@ -1,14 +1,10 @@
 import { NavLink } from "react-router-dom";
+import "./style.css";
 
 function HomeButton() {
   return (
     <NavLink to="/">
-      <img
-        src="/IconoWHITE1.png"
-        width={400}
-        style={{ alignItems: "center" }}
-        className="sin_animacion"
-      />
+      <img src="/IconoWHITE1.png" className="home-button" />
     </NavLink>
   );
 }
