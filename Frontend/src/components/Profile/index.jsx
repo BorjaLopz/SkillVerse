@@ -38,18 +38,11 @@ function Profile({ user }) {
         <ProfileCard formData={currentUser} />
       </section>
       <section className="user-edit">
-        {currentToken &&
-          currentToken.user &&
-          user === currentToken.user.nickname && (
-            <EditProfile nickname={user} />
-          )}
-        {currentToken &&
-          currentToken.user &&
-          (currentToken.user.admin || user === currentToken.user.nickname) && (
-            <DeleteAccount user={user} />
-          )}
+        {user === currentToken.user.nickname && <EditProfile nickname={user} />}
+        {(currentToken.user.admin || user === currentToken.user.nickname) && (
+          <DeleteAccount user={user} />
+        )}
       </section>
-
       <section>
         <ServicesByUser nickname={user} />
       </section>

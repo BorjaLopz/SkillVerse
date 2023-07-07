@@ -6,7 +6,7 @@ const ProfileCard = ({ formData }) => {
   return (
     <>
       <div className="profile-card">
-        <h3 className="title">Datos Personales:</h3>
+        <h3 className="title">Datos personales:</h3>
         <div className="field">
           <span className="field-name">Nickname:</span>
           <span className="field-value">{formData.nickname}</span>
