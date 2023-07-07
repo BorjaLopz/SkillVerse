@@ -59,7 +59,7 @@ card.done {
 }
 
 .card:not(.done) {
-  background-color: #9991ca;
+  background-color: #756bb6;
 }
 
 .date {
@@ -83,13 +83,15 @@ card.done {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
+
+}  
+
 
 .description {
   margin-top: 4px;
   font-size: 1rem;
-  color: #444;
-  flex-grow: 1;
+  color: #353434;
+  flex-grow: 1; 
 }
 
 .service-type {

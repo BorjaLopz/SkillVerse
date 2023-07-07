@@ -78,7 +78,7 @@
   color: #000;
 }
 
-.description {
+.description-user {
   margin-top: 4px;
   font-size: 1rem;
   color: #444;
@@ -88,8 +88,8 @@
   position: absolute;
   top: 8px;
   left: 8px;
-  width: 16px !important;
-  height: 16px !important;
+  width: 18px !important;
+  height: 18px !important;
 }
 
 @media (max-width: 576px) {
