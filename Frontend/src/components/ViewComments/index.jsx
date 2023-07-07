@@ -131,7 +131,7 @@ function ViewComments() {
                       </a>
                     )}
                     <p className="comment-view-comment">{comment.comment}</p>
-
+                    {/* No lo mostramos si el servicio esta finalizado */}
                     {user.user.admin ||
                     comment.user_id === user.user.id ||
                     serviceOwner.user_id === user.user.id ? (

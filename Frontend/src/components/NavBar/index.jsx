@@ -3,6 +3,7 @@ import HomeButton from "../HomeButton";
 import useAuth from "../../hooks/useAuth";
 import Avatar from "../Avatar";
 import "./style.css";
+import AvatarHeader from "../AvatarHeader";
 
 function NavBar() {
   const { isAuthenticated } = useAuth();
@@ -51,7 +52,7 @@ function NavBar() {
         {isAuthenticated}
         {isAuthenticated && (
           <div className="avatar-nav-container sin_animacion">
-            <Avatar
+            <AvatarHeader
               className="avatar-nav"
               user={`${user.user.user.nickname}`}
             />
