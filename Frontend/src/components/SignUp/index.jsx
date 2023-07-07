@@ -36,7 +36,7 @@ function SignUp() {
         <div className="sign-up-form">
           <form onSubmit={submitHandler}>
             <div>
-              <label htmlFor="email">
+              <label className="sign-up-info" htmlFor="email">
                 <span>Correo electrónico:</span>
                 <div>
                   <input
@@ -51,7 +51,7 @@ function SignUp() {
             </div>
 
             <div>
-              <label htmlFor="nickname">
+              <label className="sign-up-info" htmlFor="nickname">
                 <span>Nickname:</span>
                 <div>
                   <input
@@ -67,7 +67,7 @@ function SignUp() {
 
             <div>
               <div>
-                <label htmlFor="password">
+                <label className="sign-up-info" htmlFor="password">
                   <span>Contraseña:</span>
                 </label>
               </div>
@@ -86,7 +86,7 @@ function SignUp() {
 
             <div>
               <div>
-                <label htmlFor="password">
+                <label className="sign-up-info" htmlFor="password">
                   <span>Repetir contraseña:</span>
                 </label>
               </div>

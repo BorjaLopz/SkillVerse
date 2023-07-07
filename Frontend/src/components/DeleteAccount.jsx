@@ -39,13 +39,7 @@ function DeleteAccount({ user }) {
 
   return (
     <div className="flex justify-center">
-      <button
-        className="publish-comment text-white font-bold py-1 px-4 rounded bg-purple-500 hover:bg-purple-600 hover:border-purple-950 hover:border-opacity-100 hover:border-2"
-        style={{
-          fontSize: "1rem",
-        }}
-        onClick={handleDelete}
-      >
+      <button className="delete-whatever" onClick={handleDelete}>
         Borrar cuenta
       </button>
     </div>

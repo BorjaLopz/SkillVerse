@@ -1,91 +1,129 @@
+
 .title-user {
     font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
     color: #8750a5;
     margin-top: 80px;
+
 }
 
 .message {
-    text-align: center;
-    font-size: 2.5rem;
-    color: #8750a5;
+  text-align: center;
+  font-size: 2rem;
+  color: #8750a5;
+  margin: 3rem;
+  padding: 1rem;
+  border-radius: 0.35rem;
+  border: 3px solid white;
 }
 
 .service-wrapper {
-    margin-top: 16px;
+  margin-top: 16px;
 }
 
 .service-link {
-    display: block;
-    width: 100%;
-    border-radius: 0.25rem;
-    margin-top: 8px;
-    padding: 8px;
-    color: #fff;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
+  display: block;
+  width: 100%;
+  border-radius: 0.25rem;
+  margin-top: 8px;
+  padding: 8px;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
 .service-link:hover {
-    background-color: #9966b4;
+  background-color: #9966b4;
 }
 
 .card {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 16px;
-    background-color: #e6e4ca;
-    border-radius: 0.25rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: #e6e4ca;
+  border-radius: 0.25rem;
 }
 
 .card.done {
-    background-color: #e6d9ed;
+  background-color: #e6d9ed;
 }
 
 .card.done .card-title-user,
+
 .card.done .description-user,
+
 .card.done .service-type {
-    color: #888;
+  color: #888;
 }
 
 .card:not(.done) {
-    background-color: #8782ac;
+  background-color: #8782ac;
 }
 
 .date {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: right;
-    color: #000;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: right;
+  color: #000;
 }
 
 .card-content .service-type {
-    font-size: 1.25rem;
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  font-size: 1.25rem;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-title-user {
-    font-size: 1.25rem;
-    font-weight: bold;
-    color: #000;
+
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #000;
 }
 
-.description-user{
-    margin-top: 4px;
-    font-size: 1rem;
-    color: #444;
+.description {
+  margin-top: 4px;
+  font-size: 1rem;
+  color: #444;
 }
 
 .check-icon {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    width: 24px !important;
-    height: 24x !important;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  width: 16px !important;
+  height: 16px !important;
 }
+
+@media (max-width: 576px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .message {
+    font-size: 1.5rem;
+    margin: 2rem;
+    padding: 0.75rem;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  .date {
+    font-size: 1.25rem;
+  }
+
+  .card-title-user {
+    font-size: 1rem;
+  }
+
+  .description {
+    font-size: 0.875rem;
+  }
+}
+

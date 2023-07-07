@@ -73,13 +73,8 @@
 
 .service-card-add-comments {
   height: 0;
-  padding-bottom: 100%;
   width: 100%;
   border-radius: 0.25rem;
   margin-top: 1rem;
   justify-content: space-between;
-}
-
-.service-card-add-comments.null-padding {
-  padding-bottom: 10%;
 }

@@ -1,3 +1,11 @@
 .navbar {
-  color: #eef1f7;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+@media (max-width: 576px) {
+  .navbar {
+    font-size: 18px;
+  }
 }

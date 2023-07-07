@@ -8,7 +8,7 @@
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #8750a5;
+  color: white;
 }
 
 .about p {
@@ -29,4 +29,35 @@
 .about .contact a:hover {
   text-decoration: underline;
   color: #9991ca;
+}
+
+@media (max-width: 576px) {
+  .about {
+    padding: 10px;
+  }
+
+  .welcome {
+    font-size: 2rem;
+  }
+
+  .about h3 {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .about {
+    padding: 15px;
+  }
+
+  .welcome {
+    font-size: 2.5rem;
+  }
+
+  .about h3 {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 992px) {
 }

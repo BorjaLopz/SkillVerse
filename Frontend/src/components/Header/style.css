@@ -1,14 +1,13 @@
 .header {
   place-content: space-between;
   padding: 2rem;
-  background-color: #9991ca;
   position: sticky;
   top: 0;
-  z-index: 50;
+  z-index: 500;
   display: flex;
 }
 
-header > div > nav {
+.header > div > nav {
   width: auto;
   justify-content: space-around;
 }
@@ -30,13 +29,27 @@ header > div > nav {
   display: flex;
 }
 
-header > div > nav {
-  width: auto;
-  justify-content: space-around;
-}
+@media (max-width: 576px) {
+  .header {
+    padding: 1rem;
+  }
 
-.navbar {
-  width: 100%;
-  justify-content: center;
-  display: flex;
+  .header > div > nav {
+    justify-content: center;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navbar > nav {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .navbar > nav > a {
+    margin-bottom: 0.5rem;
+  }
 }
