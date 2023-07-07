@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useServer from "../../hooks/useServer";
 import "./style.css";
+import koFiIcon from "/icons/ko-fi-icon.svg";
 
 function Users() {
   const { get } = useServer();
@@ -40,6 +41,18 @@ function Users() {
               >
                 <p className="users-list-email">{user.email}</p>
               </Link>
+        {user.ko_fi && (
+                <a href={user.ko_fi} target="_blank" rel="noopener noreferrer">
+                  <div className="ko-fi-container">
+                    <img
+                      src="/icons/ko-fi-icon.svg"
+                      alt="Ko-fi"
+                      className="ko-fi-icon small"
+                    />
+                    </div>
+          </a>
+        )}
+
             </div>
           </div>
           <div className="users-list-role">
