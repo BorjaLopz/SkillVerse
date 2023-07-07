@@ -4,7 +4,7 @@ function HomeButton() {
   return (
     <nav className="inline-block">
       <NavLink to="/">
-        <img src="/Icono.png" width={80} />
+        <img src="/IconoWHITE1.png" width={80} />
       </NavLink>
     </nav>
   );

@@ -17,6 +17,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: "Soria", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
+  letter-spacing: 2px;
 }
 
 .service-card-type p {
@@ -61,5 +64,4 @@
 .service-card-info p {
   font-size: 1.4rem;
   color: #565c66;
- 
 }

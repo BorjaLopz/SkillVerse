@@ -1,7 +1,7 @@
-import { ReactComponent as Logo } from "../../../public/pruebas/Icono.svg";
+import { ReactComponent as Logo } from "../../../public/pruebas/Icono1.svg";
 
-function Icono1() {
+function Icono() {
   return <Logo />;
 }
 
-export default Icono1;
+export default Icono;
