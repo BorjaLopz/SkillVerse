@@ -1,4 +1,4 @@
-# 🧩 Portal de necesidades digitales
+# 🧩 SkillVerse: Portal de necesidades digitales
 
 _Proyecto para HACK A BOSS - 2023: Web donde personas que necesiten algún servicio digital puedan pedir ayuda a otros usuarios. Por ejemplo: traducir un texto, editar una foto, revisar un documento, etc. Solo necesidades que puedan realizarse mediante un fichero digital._
 
