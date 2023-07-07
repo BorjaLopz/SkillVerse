@@ -29,6 +29,34 @@
   letter-spacing: 2px;
 }
 
-.home-component > p {
+.home-component > div {
   margin-top: 1rem;
+}
+
+#main-div {
+  display: flex;
+  align-items: center;
+}
+
+#div-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#div-container:hover img {
+  animation: arrowAnimation 1s ease-in infinite;
+}
+
+@keyframes arrowAnimation {
+  0%,
+  50,
+  100% {
+    transform: translateX(0);
+  }
+
+  25%,
+  75% {
+    transform: translateX(8px);
+  }
 }

@@ -28,7 +28,7 @@ div:not(.sin_animacion) > nav ::after {
 }
 
 div:not(.sin_animacion) > nav :hover::after {
-  transform: scaleX(2);
+  transform: scaleX(1);
   transform-origin: bottom center;
 }
 
