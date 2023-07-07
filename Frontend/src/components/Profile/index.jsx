@@ -32,7 +32,7 @@ function Profile({ user }) {
     <>
       <section className="user-info">
         <h2 className="profile-title">{`Perfil de ${user}`}</h2>
-        <Avatar user={user} id="profile-avatar" />
+        {/* <Avatar user={user} id="profile-avatar" /> */}
       </section>
       <section>
         <ProfileCard formData={currentUser} />
