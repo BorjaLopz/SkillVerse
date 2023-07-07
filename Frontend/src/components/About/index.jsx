@@ -30,7 +30,7 @@ function About() {
         todo lo que nuestra plataforma tiene para ofrecerte!
       </p>
       <div className="contact">
-        <a href="mailto:portaldigital@help.es">Contáctanos</a>
+        <a href="mailto:skillverse@help.es">Contáctanos</a>
       </div>
       <TheTeam />
     </div>

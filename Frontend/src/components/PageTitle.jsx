@@ -7,10 +7,10 @@ function PageTitle() {
   useEffect(() => {
     const updatePageTitle = () => {
       const currentPath = window.location.pathname;
-      let pageTitle = "Portal Digital";
+      let pageTitle = "SkillVerse";
 
       if (currentPath === "/") {
-        pageTitle = "Página de inicio";
+        pageTitle = "Inicio";
       } else if (currentPath === "/about") {
         pageTitle = "Conócenos";
       } else if (currentPath === "/services") {
@@ -24,14 +24,14 @@ function PageTitle() {
       } else if (currentPath === "*") {
         pageTitle = "404 - Not Found";
       } else if (currentPath.startsWith("/profile/")) {
-        pageTitle = "Información de perfil";
+        pageTitle = "Perfil";
       } else if (currentPath.startsWith("/service/")) {
-        pageTitle = "Información de servicio";
+        pageTitle = "Servicio";
       } else if (currentPath.startsWith("/user/")) {
-        pageTitle = "Información de usuario";
+        pageTitle = "Usuario";
       }
 
-      document.title = "portalDigital | " + pageTitle;
+      document.title = "SkillVerse | " + pageTitle;
     };
     setTimeout(updatePageTitle, 0);
   }, [location]);

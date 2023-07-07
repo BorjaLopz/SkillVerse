@@ -3,54 +3,51 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 }
 
 .home-component {
   padding: 2rem;
-  /* border-radius: 0.375rem; */
+  border-radius: 0.375rem;
   text-align: center;
-}
-
-.slide-container {
-  width: 30rem;
-  height: 30rem;
-  margin-left: auto;
-  margin-right: auto;
-  /* margin-bottom: rem; */
+  width: 100vw;
 }
 
 .home-component > h2 {
-  font-size: 8rem;
-  line-height: 2.25rem;
+  text-align: center;
+  font-size: 4.5rem;
   font-weight: 700;
   color: #8750a5;
   font-family: "Soria", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
     sans-serif;
   letter-spacing: 2px;
+  background-image: linear-gradient(180deg, #8750a5, #8750a5, #9991ca, #8750a5);
+  background-clip: text;
+  color: transparent;
 }
 
-.home-component > div {
-  margin-top: 1rem;
-}
-
-#main-div {
-  display: flex;
-  align-items: center;
+.home-component > p {
+  color: #020203;
+  margin-bottom: 5px;
+  font-size: 16px;
 }
 
 #div-container {
   display: flex;
-  align-items: center;
+  align-content: center;
+  justify-content: center;
   cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-#div-container:hover img {
+#div-container:hover > img {
   animation: arrowAnimation 1s ease-out infinite;
 }
 
 @keyframes arrowAnimation {
   0%,
-  50,
+  50%,
   100% {
     transform: translateX(0);
   }
@@ -58,5 +55,30 @@
   25%,
   75% {
     transform: translateX(8px);
+  }
+}
+
+@media (min-width: 577px) {
+  .home-component > h2 {
+    font-size: 9rem;
+  }
+
+  .home-component > p {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+
+  #div-container {
+    font-size: 24px;
+    margin-bottom: 2rem;
+  }
+
+  #car-home {
+    display: inline-block;
+    width: 100%;
+  }
+
+  #car-home > img {
+    height: auto;
   }
 }

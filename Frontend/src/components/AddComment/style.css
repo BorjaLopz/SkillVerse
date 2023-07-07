@@ -44,7 +44,7 @@
 .add-comment textarea:focus,
 .add-comment input[type="file"]:focus {
   outline: none;
-  border-color: #805ad5;
+  border-color: #8750a5;
 }
 
 .add-comment input[type="file"] {
