@@ -7,12 +7,15 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.add-comment h2 {
+.add-comment > h2 {
   font-size: 2.5rem;
   font-weight: bold;
   text-align: center;
   color: #8750a5;
   margin-bottom: 2rem;
+  font-family: "Soria", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
+  letter-spacing: 2px;
 }
 
 .add-comment form {

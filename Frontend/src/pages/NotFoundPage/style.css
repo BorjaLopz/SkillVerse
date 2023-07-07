@@ -12,18 +12,21 @@
 }
 
 .not-found-image {
-  width: 4rem;
-  height: 4rem;
+  width: 25rem;
+  height: 25rem;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 2rem;
 }
 
-.not-found h2 {
+.not-found > h2 {
   font-size: 1.875rem;
   line-height: 2.25rem;
   font-weight: 700;
   color: #8750a5;
+  font-family: "Soria", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
+  letter-spacing: 2px;
 }
 
 .not-found p {

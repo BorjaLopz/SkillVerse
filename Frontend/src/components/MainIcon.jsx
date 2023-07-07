@@ -1,9 +1,9 @@
-import Icon from "/Favicon_1.svg";
+import Icon from "/Icono.png";
 
 function MainIcon() {
   return (
     <button>
-      <img src={Icon} alt="SVG logo image" width={100} />
+      <img src={Icon} alt="PNG logo image" width={100} />
     </button>
   );
 }
