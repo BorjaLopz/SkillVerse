@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import useServer from "../../hooks/useServer";
 import "./style.css";
 
+
 const validateKoFiURL = (value) => {
   if (!value || value.trim() === "") {
     return true;
