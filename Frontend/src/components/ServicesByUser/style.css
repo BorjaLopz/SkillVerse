@@ -1,8 +1,11 @@
-.title {
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-align: center;
-  color: #8750a5;
+
+.title-user {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #8750a5;
+    margin-top: 80px;
+
 }
 
 .message {
@@ -49,7 +52,9 @@
 }
 
 .card.done .card-title-user,
-.card.done .description,
+
+.card.done .description-user,
+
 .card.done .service-type {
   color: #888;
 }
@@ -74,6 +79,7 @@
 }
 
 .card-title-user {
+
   font-size: 1.25rem;
   font-weight: bold;
   color: #000;
@@ -120,3 +126,4 @@
     font-size: 0.875rem;
   }
 }
+

@@ -85,7 +85,7 @@ function ViewComments() {
     }
   }, [id, isAuthenticated]);
 
-  return (
+return (
     <>
       {!isAuthenticated && (
         <p>
@@ -155,3 +155,4 @@ function ViewComments() {
 }
 
 export default ViewComments;
+

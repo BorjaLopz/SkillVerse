@@ -99,7 +99,7 @@ const ServicesList = () => {
                 <Link to={`/service/${service.id}`}>
                   {service.done ? (
                     <img
-                      className="check-icon"
+                      className="check-icon-services"
                       src={"/icons/check-circle.png"}
                       alt="check"
                     />
@@ -112,7 +112,7 @@ const ServicesList = () => {
                       {service.creation_date.split("-")[1]}-
                       {service.creation_date.split("-")[0]}
                     </p>
-                    <h3 className="card-title">{service.title}</h3>
+                    <h3 className="card-title-list">{service.title}</h3>
                     <p className="description">{service.request_body}</p>
                     <p className="service-type">{service.service_type}</p>
                   </div>
