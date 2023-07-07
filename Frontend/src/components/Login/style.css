@@ -8,7 +8,7 @@ body {
 
 .login-page {
   display: flex;
-  min-height: 100vh;
+  max-height: 100vh;
   flex-direction: column;
   justify-content: center;
   padding: 3rem 1.5rem;

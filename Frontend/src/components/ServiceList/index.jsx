@@ -89,8 +89,10 @@ const ServicesList = () => {
         <div className="container">
           <h2 className="title main-title ">SERVICIOS</h2>
 
-          <div className="grid">
-            {!servicesAvailables && <p>No hay ningún servicio aún</p>}
+          <div className="grid-available">
+            {!servicesAvailables && (
+              <p className="services-none">No hay ningún servicio aún</p>
+            )}
             {services.map((service) => (
               <div
                 key={service.id}
@@ -107,7 +109,9 @@ const ServicesList = () => {
                     ""
                   )}
                   <div className="card-content">
-                    <p className={`date ${service.done ? "card-done-text" : ""}`}>
+                    <p
+                      className={`date ${service.done ? "card-done-text" : ""}`}
+                    >
                       {service.creation_date.split("-")[2]}-
                       {service.creation_date.split("-")[1]}-
                       {service.creation_date.split("-")[0]}
