@@ -333,12 +333,38 @@ const deleteAllCommentsByUserFromService = async (id) => {
   }
 };
 
+const deleteAllCommentsByService = async (id) => {
+  let connection;
+
+  try {
+    connection = await getConnection();
+    await connection.query(`USE ${DB_DATABASE}`);
+
+    /* Seleccionamos todos los servicios que tenga esta id */
+    const [servicesSelected] = await connection.query(
+      `SELECT id FROM services WHERE user_id = ?`,
+      [id]
+    );
+    
+    /* Recorremos el array generado anteriormente para borrar cada comentario en cada servicio */
+    servicesSelected.forEach((service) => {
+      deleteAllCommentsFromService(service.id);
+    })
+
+    return servicesSelected;
+  } finally {
+    if (connection) connection.release();
+  }
+};
+
 const deleteAllServicesByUser = async (id) => {
   let connection;
 
   try {
     connection = await getConnection();
     await connection.query(`USE ${DB_DATABASE}`);
+
+    /* Borramos todos los comentarios que tenga el servicio, independientemente del usuario que lo haya publicado. Error de claves foraneas */
 
     const [servicesDeleted] = await connection.query(
       `DELETE FROM services WHERE user_id = ?;`,
@@ -365,4 +391,5 @@ module.exports = {
   deleteAllCommentsFromService,
   deleteAllServicesByUser,
   deleteAllCommentsByUserFromService,
+  deleteAllCommentsByService,
 };

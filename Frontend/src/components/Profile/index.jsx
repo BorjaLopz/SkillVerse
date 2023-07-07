@@ -45,6 +45,7 @@ function Profile({ user }) {
           )}
         {currentToken &&
           currentToken.user &&
+          !currentUser.admin && //No se pueden borrar las cuentas de l@s admins
           (currentToken.user.admin || user === currentToken.user.nickname) && (
             <DeleteAccount user={user} />
           )}

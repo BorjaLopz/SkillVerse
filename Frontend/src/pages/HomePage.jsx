@@ -1,10 +1,10 @@
 import React from "react";
-// import HomePageComponent from "../components/HomePageComponent";
+import HomePageComponent from "../components/HomePageComponent";
 
 function HomePage() {
   return (
     <main>
-      {/* <HomePageComponent /> */}
+      <HomePageComponent />
     </main>
   );
 }

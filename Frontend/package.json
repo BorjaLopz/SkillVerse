@@ -20,10 +20,10 @@
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
     "react-hot-toast": "^2.4.1",
-    "react-multi-carousel": "^2.8.4",
     "react-rewards": "^2.0.4",
     "react-router": "^6.12.1",
     "react-router-dom": "^6.12.1",
+    "react-slideshow-image": "^4.2.1",
     "toastr": "^2.1.4"
   },
   "devDependencies": {
