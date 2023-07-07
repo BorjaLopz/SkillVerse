@@ -40,3 +40,21 @@
   padding-bottom: 2rem;
 }
 
+.agregar-comentarios {
+  padding: 2rem;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #020203;
+}
+
+.agregar-auth {
+  text-decoration: underline;
+  color: #8750a5;
+}
+
+.agregar-auth:hover {
+  text-decoration: underline;
+  color: #9991ca;
+}

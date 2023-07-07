@@ -22,7 +22,6 @@ const Footer = () => {
     <footer>
       <div>
         <p>
-          {" "}
           Hecho con{" "}
           <button
             disabled={isAnimating}
