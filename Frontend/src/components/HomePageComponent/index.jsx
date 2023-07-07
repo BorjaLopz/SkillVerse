@@ -28,7 +28,7 @@ function HomePageComponent() {
     alignItems: "center",
     justifyContent: "center",
     backgroundSize: "cover",
-    height: "650px",
+    height: "600px",
   };
   return (
     <main className="home-component-main">
