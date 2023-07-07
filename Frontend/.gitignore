@@ -15,10 +15,10 @@ node_modules/
 **/node_modules
 .env
 **/.env
-requestfiles/*
-fotosUsuario/*
-commentFiles/*
-publicServices/*
+public/requestfiles/*
+public/fotosUsuario/*
+public/commentFiles/*
+public/publicServices/*
 
 # Editor directories and files
 .vscode/*

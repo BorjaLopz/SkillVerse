@@ -9,9 +9,12 @@
   font-weight: bold;
   margin-bottom: 10px;
   color: white;
+  font-family: "Soria", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
+  letter-spacing: 2px;
 }
 
-.about p {
+.about > p {
   margin-bottom: 20px;
 }
 

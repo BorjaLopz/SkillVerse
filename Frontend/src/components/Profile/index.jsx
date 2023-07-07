@@ -50,7 +50,6 @@ function Profile({ user }) {
             <DeleteAccount user={user} />
           )}
       </section>
-
       <section>
         <ServicesByUser nickname={user} />
       </section>
