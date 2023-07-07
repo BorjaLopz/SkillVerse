@@ -46,7 +46,7 @@
 .add-service textarea:focus,
 .add-service select:focus {
   outline: none;
-  border-color: #805ad5;
+  border-color: #8750a5;
 }
 
 .add-service select {

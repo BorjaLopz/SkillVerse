@@ -1,9 +1,12 @@
 import React from "react";
 import HomePageComponent from "../components/HomePageComponent";
 
-
 function HomePage() {
-  return <HomePageComponent />;
+  return (
+    <main>
+      <HomePageComponent />
+    </main>
+  );
 }
 
 export default HomePage;

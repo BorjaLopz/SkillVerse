@@ -52,7 +52,7 @@
 .edit-profile input[type="password"]:focus,
 .edit-profile input[type="URL"]:focus {
   outline: none;
-  border-color: #805ad5;
+  border-color: #8750a5;
 }
 
 .edit-profile input[type="file"] {

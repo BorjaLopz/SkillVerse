@@ -5,18 +5,18 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 const images = [
-  "../../../public/pruebas/icono1.svg",
-  "../../../public/pruebas/icono2.svg",
-  "../../../public/pruebas/icono3.svg",
-  "../../../public/pruebas/icono4.svg",
-  "../../../public/pruebas/icono5.svg",
-  "../../../public/pruebas/icono6.svg",
-  "../../../public/pruebas/icono7.svg",
-  "../../../public/pruebas/icono8.svg",
-  "../../../public/pruebas/icono9.svg",
-  "../../../public/pruebas/icono10.svg",
-  "../../../public/pruebas/icono11.svg",
-  "../../../public/pruebas/icono12.svg",
+  "../../../public/icons/icono1.svg",
+  "../../../public/icons/icono2.svg",
+  "../../../public/icons/icono3.svg",
+  "../../../public/icons/icono4.svg",
+  "../../../public/icons/icono5.svg",
+  "../../../public/icons/icono6.svg",
+  "../../../public/icons/icono7.svg",
+  "../../../public/icons/icono8.svg",
+  "../../../public/icons/icono9.svg",
+  "../../../public/icons/icono10.svg",
+  "../../../public/icons/icono11.svg",
+  "../../../public/icons/icono12.svg",
 ];
 
 const arrow = "../../../public/icons/arrow-narrow-right.png";
@@ -34,29 +34,26 @@ function HomePageComponent() {
     <main className="home-component-main">
       <div className="home-component">
         <h2>SkillVerse</h2>
-        <div id="main-div">
+        <p>
           Conectamos a personas con profesionales talentosos de todo el mundo.
-          <Link to="/services">
-            <span id="div-container">
-              Descubre más <img src={arrow} width={20} />
-            </span>
-          </Link>
-        </div>
-        <p></p>
+        </p>
+        <Link to="/services">
+          <span id="div-container">
+            Descubre más <img src={arrow} width={20} />
+          </span>
+        </Link>
 
-        <div className="slide-container">
-          {/* Si queremos que la transición sea con zoomout */}
-          {/* <Zoom scale={0.4}></Zoom> */}
+        {/* Si queremos que la transición sea con zoomout */}
+        {/* <Zoom scale={0.4}></Zoom> */}
 
-          {/* Si queremos que la transición sea fadeout */}
-          <Fade arrows="" transitionDuration={1000} duration={2000}>
-            {images.map((image, index) => (
-              <div key={index} style={{ ...divStyle }}>
-                <img style={{ width: "100%" }} src={image} />
-              </div>
-            ))}
-          </Fade>
-        </div>
+        {/* Si queremos que la transición sea fadeout */}
+        <Fade arrows="" transitionDuration={1000} duration={2000}>
+          {images.map((image, index) => (
+            <div id="car-home" key={index} style={{ ...divStyle }}>
+              <img src={image} />
+            </div>
+          ))}
+        </Fade>
       </div>
     </main>
   );

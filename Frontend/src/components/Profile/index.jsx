@@ -6,7 +6,6 @@ import useServer from "../../hooks/useServer";
 import ProfileCard from "../ProfileCard";
 import "./style.css";
 import useAuth from "../../hooks/useAuth";
-import Avatar from "../Avatar";
 
 function Profile({ user }) {
   const [currentUser, setCurrentUser] = useState({});
