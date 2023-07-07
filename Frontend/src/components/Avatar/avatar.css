@@ -1,8 +1,9 @@
 .avatar {
   width: 5rem;
   height: 5rem;
-  object-fit: cover;
   border-radius: 50%;
-  width: 75px;
-  height: 75px;
+  width: 400px;
+  object-fit: cover;
+  /* height: auto; */
+  /* height: 75px; */
 }
