@@ -22,7 +22,7 @@ function ServicesByUser({ nickname }) {
   return (
      <>
       {serviceUser.length !== 0 ? (
-        <p className="title">Servicios de {`${nickname}`}</p>
+        <p className="title-user">Servicios de {`${nickname}`}</p>
       ) : (
         <p className="message">{`${nickname}`} aún no ha subido ningún servicio</p>
       )}
@@ -43,8 +43,8 @@ function ServicesByUser({ nickname }) {
                   )}
 
               <div>
-                <h3 className="card-title">{service.title}</h3>
-                <p className="description">{service.request_body}</p>
+                <h3 className="card-title-user">{service.title}</h3>
+                <p className="description-user">{service.request_body}</p>
                 <p className="service-type">{service.service_type}</p>
               </div>
             </div>

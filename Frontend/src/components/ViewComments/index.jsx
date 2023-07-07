@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
-import useServer from "../hooks/useServer";
-import useAuth from "../hooks/useAuth";
+import useServer from "../../hooks/useServer";
+import useAuth from "../../hooks/useAuth";
 import axios from "axios";
-import DeleteComment from "./DeleteComment";
+import DeleteComment from "../DeleteComment";
+import "./style.css"
 
 function ViewComments() {
   const [comments, setComments] = useState([]);
@@ -85,20 +86,21 @@ function ViewComments() {
     }
   }, [id, isAuthenticated]);
 
+
   return (
     <>
       {!isAuthenticated && (
-        <p>
+        <p className="view-comments-text">
           <NavLink
             to="/signup"
-            style={{ textDecoration: "underline", color: "#523D80" }}
+            className="view-comments-link"
           >
             Regístrate
           </NavLink>{" "}
           o{" "}
           <NavLink
             to="/login"
-            style={{ textDecoration: "underline", color: "#523D80" }}
+            className="view-comments-link"
           >
             inicia sesión
           </NavLink>{" "}
@@ -106,44 +108,39 @@ function ViewComments() {
         </p>
       )}
       {isAuthenticated && comments && comments.length > 0 && (
-        <div className="p-8">
+        <div className="view-comments-container">
           {comments.map((comment) => {
             const commentOwner = commentOwners[comment.user_id];
             return (
-              <div key={comment.id} className="shadow-xl rounded-lg">
-                <div className="bg-white rounded-b-lg px-8">
-                  <Link to={`/user/${commentOwner?.nickname}`} />
-
-                  <div className="relative">
-                    <Link to={`/user/${commentOwner?.nickname}`}>
-                      <img
-                        className="right-0 w-16 h-16 rounded-full mr-4 shadow-lg absolute -mt-8 bg-gray-100"
-                        src={commentOwner?.userPhoto}
-                        alt={`Foto de perfil de ${commentOwner?.nickname}`}
-                      />
-                    </Link>
-                  </div>
-                  <div className="pt-8 pb-8">
-                    <Link to={`/user/${commentOwner?.nickname}`}>
-                      <p className="text-sm text-gray-600">
-                        {`${commentOwner?.nickname}`}
-                      </p>
-                    </Link>
-                    {comment.serviceFile !== "" && (
-                      <a href={`${comment.serviceFile}`} download>
-                        <img src="/icons/download.png" />
-                      </a>
-                    )}
-                    <p className="mt-6 text-gray-700">{comment.comment}</p>
-
-                    {user.user.admin ||
-                    comment.user_id === user.user.id ||
-                    serviceOwner.user_id === user.user.id ? (
-                      <DeleteComment commentId={comment.id} />
-                    ) : (
-                      ""
-                    )}
-                  </div>
+              <div key={comment.id} className="comment-container">
+                <div className="comment-profile">
+                  <Link
+                    to={`/user/${commentOwner?.nickname}`}
+                    className="comment-profile-link"
+                  >
+                    <img
+                      className="comment-profile-image"
+                      src={commentOwner?.userPhoto}
+                      alt={`Foto de perfil de ${commentOwner?.nickname}`}
+                    />
+                  </Link>
+                </div>
+                <div className="comment-details">
+                  <Link
+                    to={`/user/${commentOwner?.nickname}`}
+                    className="comment-owner-link"
+                  >
+                    <p className="comment-owner">{commentOwner?.nickname}</p>
+                  </Link>
+                  {comment.serviceFile !== "" && (
+                    <a href={`${comment.serviceFile}`} download className="comment-download-link">
+                      <img src="/icons/download.png" className="comment-download-icon" alt="Descargar archivo" />
+                    </a>
+                  )}
+                  <p className="comment-text">{comment.comment}</p>
+                  {(user.user.admin || comment.user_id === user.user.id || serviceOwner.user_id === user.user.id) && (
+                    <DeleteComment commentId={comment.id} />
+                  )}
                 </div>
               </div>
             );
@@ -153,5 +150,4 @@ function ViewComments() {
     </>
   );
 }
-
 export default ViewComments;

@@ -43,7 +43,7 @@ card.done {
 }
 
 .card.done .date,
-.card.done .card-title,
+.card.done .card-title-list,
 .card.done .description,
 .card.done .service-type {
   color: #888;
@@ -54,7 +54,7 @@ card.done {
 }
 
 .date {
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
   text-align: right;
   color: #000;
@@ -67,11 +67,15 @@ card.done {
   justify-content: space-between;
 }
 
-.card-title {
-  font-size: 1.25rem;
+ .card-title-list{
+  font-size: 1.4rem;
   font-weight: bold;
   color: #000;
-}
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+} 
+
 
 .description {
   margin-top: 4px;
@@ -82,16 +86,16 @@ card.done {
 }
 
 .service-type {
-  font-size: 1.25rem;
+  font-size: 1.1rem !important;
+  font-weight: bold;
   text-align: center; 
   margin-top: auto;
-  
 }
 
-.check-icon {
+.check-icon-services {
   position: absolute;
   top: 8px;
   left: 8px;
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
 }

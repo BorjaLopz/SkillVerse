@@ -1,4 +1,4 @@
-.title {
+.title-user {
     font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
@@ -45,8 +45,8 @@
     background-color: #e6d9ed;
 }
 
-.card.done .card-title,
-.card.done .description,
+.card.done .card-title-user,
+.card.done .description-user,
 .card.done .service-type {
     color: #888;
 }
@@ -70,13 +70,13 @@
     align-items: center;
 }
 
-.card-title {
+.card-title-user {
     font-size: 1.25rem;
     font-weight: bold;
     color: #000;
 }
 
-.description {
+.description-user{
     margin-top: 4px;
     font-size: 1rem;
     color: #444;
@@ -86,6 +86,6 @@
     position: absolute;
     top: 8px;
     left: 8px;
-    width: 16px !important;
-    height: 16px !important;
+    width: 24px !important;
+    height: 24x !important;
 }
