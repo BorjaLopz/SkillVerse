@@ -1,5 +1,8 @@
 import "react-slideshow-image/dist/styles.css";
 import { Fade, Zoom } from "react-slideshow-image";
+import "./style.css";
+import { Link } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
 
 const images = [
   "../../../public/pruebas/icono1.svg",
@@ -17,6 +20,7 @@ const images = [
 ];
 
 function HomePageComponent() {
+  const { isAuthenticated } = useAuth();
   const divStyle = {
     display: "flex",
     alignItems: "center",
@@ -25,21 +29,31 @@ function HomePageComponent() {
     height: "650px",
   };
   return (
-    <>
-      <div className="slide-container">
-        {/* Si queremos que la transición sea con zoomout */}
-        {/* <Zoom scale={0.4}></Zoom> */}
+    <main className="home-component-main">
+      <div className="home-component">
+        <h2>SkillVerse</h2>
+        <p>
+          Conectamos a{" "}
+          <span>
+            {isAuthenticated ? <Link to="/users" style={{textDecoration: "underline"}}>personas</Link> : "personas"}
+          </span>{" "}
+          con profesionales talentosos de todo el mundo
+        </p>
+        <div className="slide-container">
+          {/* Si queremos que la transición sea con zoomout */}
+          {/* <Zoom scale={0.4}></Zoom> */}
 
-        {/* Si queremos que la transición sea fadeout */}
-        <Fade arrows="" transitionDuration={1000} duration={1000}>
-          {images.map((image, index) => (
-            <div key={index} style={{ ...divStyle }}>
-              <img style={{ width: "50%" }} src={image} />
-            </div>
-          ))}
-        </Fade>
+          {/* Si queremos que la transición sea fadeout */}
+          <Fade arrows="" transitionDuration={1000} duration={2000}>
+            {images.map((image, index) => (
+              <div key={index} style={{ ...divStyle }}>
+                <img style={{ width: "100%" }} src={image} />
+              </div>
+            ))}
+          </Fade>
+        </div>
       </div>
-    </>
+    </main>
   );
 }
 
