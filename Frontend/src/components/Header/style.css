@@ -1,7 +1,6 @@
 .header {
   place-content: space-between;
   padding: 2rem;
-  position: sticky;
   top: 0;
   z-index: 500;
   display: flex;
@@ -46,5 +45,11 @@
 
   .navbar > nav > a {
     margin-bottom: 0.5rem;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 992px) {
+  .header {
+    position: sticky;
   }
 }
