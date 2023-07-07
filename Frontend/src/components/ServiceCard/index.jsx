@@ -101,9 +101,13 @@ const ServiceCard = () => {
             <div className="service-card-info">
               <h1>{service.title}</h1>
               <Link to={`/user/${userData.nickname}`}>
-                 <p className={`nickname ${userData.nickname === service.title ? 'underline' : ''}`}>
+                <p
+                  className={`nickname ${
+                    userData.nickname === service.title ? "underline" : ""
+                  }`}
+                >
                   {`${userData.nickname}`}
-                </p> 
+                </p>
               </Link>
 
               <p className="delete-service">{service.request_body}</p>
