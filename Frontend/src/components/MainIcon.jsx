@@ -1,4 +1,4 @@
-import Icon from "/Icono.png";
+import Icon from "/Icono1.png";
 
 function MainIcon() {
   return (
