@@ -45,7 +45,7 @@
 }
 
 #div-container:hover img {
-  animation: arrowAnimation 1s ease-in infinite;
+  animation: arrowAnimation 1s ease-out infinite;
 }
 
 @keyframes arrowAnimation {
