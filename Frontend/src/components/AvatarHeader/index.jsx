@@ -1,4 +1,4 @@
-import "./avatarHeader.css";
+import "./style.css";
 import { useEffect, useState } from "react";
 import useServer from "../../hooks/useServer";
 
@@ -23,7 +23,13 @@ const AvatarHeader = ({ user = "" }) => {
   return (
     <>
       <div className="avatar-container">
-        <img className="avatarHeader" src={userAvatar} alt={`Avatar de ${user}`} />
+        <div>
+          <img
+            className="avatarHeader"
+            src={userAvatar}
+            alt={`Avatar de ${user}`}
+          />
+        </div>
       </div>
     </>
   );

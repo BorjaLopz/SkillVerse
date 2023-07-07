@@ -40,7 +40,7 @@ function NavBar() {
             Cerrar sesión
           </NavLink>
         )}
-        {isAuthenticated && (
+        {/* {isAuthenticated && (
           <NavLink
             className="animation"
             to={{ pathname: `/profile/${user.user.user.nickname}` }}
@@ -48,15 +48,17 @@ function NavBar() {
           >
             Perfil
           </NavLink>
-        )}
-        {isAuthenticated}
+        )} */}
         {isAuthenticated && (
-          <div className="avatar-nav-container sin_animacion">
+          <NavLink
+            to={{ pathname: `/profile/${user.user.user.nickname}` }} // Ruta deseada
+            className="avatar-nav-container sin_animacion"
+          >
             <AvatarHeader
               className="avatar-nav"
               user={`${user.user.user.nickname}`}
             />
-          </div>
+          </NavLink>
         )}
       </nav>
     </div>

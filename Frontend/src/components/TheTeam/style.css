@@ -11,9 +11,11 @@
 
 .the-team {
   padding-top: 3rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .cardContainer {
