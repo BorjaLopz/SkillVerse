@@ -19,6 +19,8 @@ const images = [
   "../../../public/pruebas/icono12.svg",
 ];
 
+const arrow = "../../../public/icons/arrow-narrow-right.png";
+
 function HomePageComponent() {
   const { isAuthenticated } = useAuth();
   const divStyle = {
@@ -32,13 +34,16 @@ function HomePageComponent() {
     <main className="home-component-main">
       <div className="home-component">
         <h2>SkillVerse</h2>
-        <p>
-          Conectamos a{" "}
-          <span>
-            {isAuthenticated ? <Link to="/users" style={{textDecoration: "underline"}}>personas</Link> : "personas"}
-          </span>{" "}
-          con profesionales talentosos de todo el mundo
-        </p>
+        <div id="main-div">
+          Conectamos a personas con profesionales talentosos de todo el mundo.
+          <Link to="/services">
+            <span id="div-container">
+              Descubre más <img src={arrow} width={20} />
+            </span>
+          </Link>
+        </div>
+        <p></p>
+
         <div className="slide-container">
           {/* Si queremos que la transición sea con zoomout */}
           {/* <Zoom scale={0.4}></Zoom> */}
