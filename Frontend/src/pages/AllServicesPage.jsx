@@ -8,22 +8,23 @@ import { NavLink } from "react-router-dom";
 function AllServicesPage() {
   const { isAuthenticated } = useAuth();
 
-  return (
+ 
+    return (
     <>
       <main>
         <ServicesList />
         {!isAuthenticated && (
-          <p>
+          <p style={{ textAlign: "center", marginTop: "20px", color: "#8750a5" }}>
             <NavLink
               to="/signup"
-              style={{ textDecoration: "underline", color: "#8750a5" }}
+              style={{ textDecoration: "underline", color: "#8750a5", fontWeight: "bold" }}
             >
               Regístrate
             </NavLink>{" "}
             o{" "}
             <NavLink
               to="/login"
-              style={{ textDecoration: "underline", color: "#8750a5" }}
+              style={{ textDecoration: "underline", color: "#8750a5", fontWeight: "bold" }}
             >
               inicia sesión
             </NavLink>{" "}
@@ -36,5 +37,6 @@ function AllServicesPage() {
     </>
   );
 }
+  
 
 export default AllServicesPage;
