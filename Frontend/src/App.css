@@ -46,3 +46,7 @@ header {
   place-content: center;
   padding: 2rem;
 }
+
+footer {
+  margin-top: auto;
+}
