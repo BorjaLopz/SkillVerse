@@ -1,0 +1,41 @@
+.comment-container {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+  border-radius: 0.375rem;
+  background-color: #ffffff;
+  border-bottom-left-radius: 0.375rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  border-bottom-right-radius: 0.375rem;
+}
+
+.comment-user-info {
+  position: relative;
+}
+.comment-view-photo {
+  right: 0;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 9999px;
+  margin-right: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: absolute;
+  margin-top: -2rem;
+  background-color: #f3f4f6;
+}
+
+.comment-view-nickname {
+  color: #4b5563;
+  font-size: 0.875rem;
+}
+
+.comment-view-comment {
+  margin-top: 1.5rem;
+  color: #4a5568;
+}
+
+.comment-view-more-info {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}

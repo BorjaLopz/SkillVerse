@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink, useParams } from "react-router-dom";
-import useServer from "../hooks/useServer";
-import useAuth from "../hooks/useAuth";
-import axios from "axios";
-import DeleteComment from "./DeleteComment";
+import useServer from "../../hooks/useServer";
+import useAuth from "../../hooks/useAuth";
+import DeleteComment from "../DeleteComment";
+import "./style.css";
 
 function ViewComments() {
   const [comments, setComments] = useState([]);
@@ -106,26 +106,26 @@ function ViewComments() {
         </p>
       )}
       {isAuthenticated && comments && comments.length > 0 && (
-        <div className="p-8">
+        <div>
           {comments.map((comment) => {
             const commentOwner = commentOwners[comment.user_id];
             return (
-              <div key={comment.id} className="shadow-xl rounded-lg">
-                <div className="bg-white rounded-b-lg px-8">
+              <div key={comment.id} className="comment-container">
+                <div>
                   <Link to={`/user/${commentOwner?.nickname}`} />
 
-                  <div className="relative">
+                  <div className="comment-user-info">
                     <Link to={`/user/${commentOwner?.nickname}`}>
                       <img
-                        className="right-0 w-16 h-16 rounded-full mr-4 shadow-lg absolute -mt-8 bg-gray-100"
+                        className="comment-view-photo"
                         src={commentOwner?.userPhoto}
                         alt={`Foto de perfil de ${commentOwner?.nickname}`}
                       />
                     </Link>
                   </div>
-                  <div className="pt-8 pb-8">
+                  <div className="comment-view-more-info">
                     <Link to={`/user/${commentOwner?.nickname}`}>
-                      <p className="text-sm text-gray-600">
+                      <p className="comment-view-nickname">
                         {`${commentOwner?.nickname}`}
                       </p>
                     </Link>
@@ -134,7 +134,7 @@ function ViewComments() {
                         <img src="/icons/download.png" />
                       </a>
                     )}
-                    <p className="mt-6 text-gray-700">{comment.comment}</p>
+                    <p className="comment-view-comment">{comment.comment}</p>
 
                     {user.user.admin ||
                     comment.user_id === user.user.id ||
