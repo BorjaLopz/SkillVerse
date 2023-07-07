@@ -85,25 +85,21 @@ function ViewComments() {
     }
   }, [id, isAuthenticated]);
 
-return (
+  return (
     <>
       {!isAuthenticated && (
-        <p>
-          <NavLink
-            to="/signup"
-            style={{ textDecoration: "underline", color: "#523D80" }}
-          >
-            Regístrate
-          </NavLink>{" "}
-          o{" "}
-          <NavLink
-            to="/login"
-            style={{ textDecoration: "underline", color: "#523D80" }}
-          >
-            inicia sesión
-          </NavLink>{" "}
-          para ver y hacer comentarios.
-        </p>
+        <div className="agregar-comentarios">
+          <p>
+            <NavLink className="agregar-auth" to="/signup">
+              Regístrate
+            </NavLink>{" "}
+            o{" "}
+            <NavLink className="agregar-auth" to="/login">
+              inicia sesión
+            </NavLink>{" "}
+            para ver y hacer comentarios.
+          </p>
+        </div>
       )}
       {isAuthenticated && comments && comments.length > 0 && (
         <div>
@@ -155,4 +151,3 @@ return (
 }
 
 export default ViewComments;
-

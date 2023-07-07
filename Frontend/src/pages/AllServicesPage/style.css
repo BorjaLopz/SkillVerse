@@ -1,26 +1,18 @@
-body {
-  --text: #020203;
-  --background: #eef1f7;
-  --primary-button: #9991ca;
-  --secondary-button: #e6d9ed;
-  --accent: #8750a5;
-}
-
-footer {
+.agregar-servicios {
   padding: 2rem;
-  font-size: 12px;
+  font-size: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #020203;
 }
 
-.hab {
+.agregar-auth {
   text-decoration: underline;
   color: #8750a5;
 }
 
-.hab:hover {
+.agregar-auth:hover {
   text-decoration: underline;
   color: #9991ca;
 }
