@@ -25,6 +25,7 @@ const { getConnection } = require("../db/db");
 const {
   deleteAllServicesByUser,
   deleteAllCommentsByUserFromService,
+  deleteAllCommentsByService
 } = require("../db/services");
 
 const { DB_DATABASE } = process.env;
@@ -142,6 +143,7 @@ const deleteUserController = async (req, res, next) => {
       /* Borramos todos los comentarios del usuario*/
       // await deleteAllCommentsFromService(id_params);
       await deleteAllCommentsByUserFromService(id_params);
+      await deleteAllCommentsByService(id_params)
       await deleteAllServicesByUser(id_params);
       userNickname = await deleteUser(id_params);
     } else {

@@ -209,7 +209,6 @@ async function uploadFilesInFolder(
       });
       return `${halfPath}/${fileName}`;
     } else if (typeOfFile.toUpperCase() === "COMMENT") {
-      console.log("Ahora vamos a añadir ficheros desde un comentario!");
       //Comprobar si la extension es valida.
       if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
         throw generateError(

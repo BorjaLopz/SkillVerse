@@ -1,53 +1,38 @@
-import image1 from "../../../public/pruebas/foto_1.jpg";
-import image2 from "../../../public/pruebas/foto_2.jpg";
-import image3 from "../../../public/pruebas/foto_3.jpg";
-import image4 from "../../../public/pruebas/foto_4.png";
-import Carousel from "react-multi-carousel";
-import "react-multi-carousel/lib/styles.css";
+import "react-slideshow-image/dist/styles.css";
+import { Fade, Zoom } from "react-slideshow-image";
+
+const images = [
+  "../../../public/pruebas/foto_1.jpg",
+  "../../../public/pruebas/foto_2.jpg",
+  "../../../public/pruebas/foto_3.jpg",
+  "../../../public/pruebas/foto_4.png",
+];
 
 function HomePageComponent() {
-  const responsive = {
-    desktop: {
-      breakpoint: { max: 4000, min: 900 },
-      items: 3,
-    },
-    mobile: {
-      breakpoint: { max: 900, min: 0 },
-      items: 1,
-    },
+  const divStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundSize: "cover",
+    height: "600px",
   };
+  return (
+    <>
+      <div className="slide-container">
+        {/* Si queremos que la transición sea con zoomout */}
+        {/* <Zoom scale={0.4}></Zoom> */}
 
-  <Carousel
-    swipeable={true}
-    draggable={false}
-    showDots={false}
-    responsive={responsive}
-    infinite={true}
-    autoPlay={true}
-    autoPlaySpeed={5000}
-    keyBoardControl={true}
-    customTransition="all .5"
-    transitionDuration={500}
-    containerClass="carousel-container"
-    removeArrowOnDeviceType={["tablet", "mobile"]}
-    // deviceType={this.props.deviceType}
-    dotListClass="custom-dot-list-style"
-    itemClass="carousel-item-padding-40-px"
-    className="Carrusel"
-  >
-    <div>
-      <img src={image1} height={300} width={300} />
-    </div>
-    <div>
-      <img src={image2} height={300} width={300} />
-    </div>
-    <div>
-      <img src={image3} height={300} width={300} />
-    </div>
-    <div>
-      <img src={image4} height={300} width={300} />
-    </div>
-  </Carousel>;
+        {/* Si queremos que la transición sea fadeout */}
+        <Fade arrows="" transitionDuration={1000} duration={5000}>
+          {images.map((each, index) => (
+            <div key={index} style={{ ...divStyle }}>
+              <img style={{ width: "100%" }} src={each} />
+            </div>
+          ))}
+        </Fade>
+      </div>
+    </>
+  );
 }
 
 export default HomePageComponent;

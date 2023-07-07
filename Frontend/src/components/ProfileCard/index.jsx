@@ -2,7 +2,6 @@ import React from "react";
 import koFiIcon from "/icons/ko-fi-icon.svg";
 import "./style.css";
 const ProfileCard = ({ formData }) => {
-  console.log(formData);
   return (
     <>
       <div className="profile-card">
