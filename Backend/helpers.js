@@ -170,7 +170,6 @@ async function uploadFilesInFolder(
         );
       }
       
-
     /* DEFINIMOS RUTAS Y NOMBRE DE LOS ARCHIVOS SI ES FOTO DE PERFIL */
     if (typeOfFile.toUpperCase() === "USER") {
       //Vamos a borrar la foto anterior existente.
