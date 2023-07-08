@@ -169,6 +169,7 @@ async function uploadFilesInFolder(
           415
         );
       }
+      
 
     /* DEFINIMOS RUTAS Y NOMBRE DE LOS ARCHIVOS SI ES FOTO DE PERFIL */
     if (typeOfFile.toUpperCase() === "USER") {
