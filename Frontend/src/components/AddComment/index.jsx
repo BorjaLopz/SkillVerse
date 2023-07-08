@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import Loading from "../Loading";
-import "./style.css"
+import "./style.css";
 
 const AddComment = () => {
   const [comment, setComment] = useState("");
@@ -41,7 +41,6 @@ const AddComment = () => {
       formData.append("comment", comment);
       formData.append("commentFile", file);
 
-
       const config = {
         headers: {
           "Access-Control-Allow-Origin": "*",
@@ -66,11 +65,14 @@ const AddComment = () => {
         }, 1000);
       }
     } catch (error) {
-      toast.error("No se pudo publicar el comentario");
+      toast.error(error.response.data.message);
+
+      setIsLoading(false);
+      setShowForm(true);
     }
   };
 
- return (
+  return (
     <div className="add-comment">
       {showForm && (
         <>
