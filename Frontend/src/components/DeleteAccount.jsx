@@ -27,7 +27,10 @@ function DeleteAccount({ user }) {
       if (userLogged.user.id === currentUser.id) {
         navigate("/logout");
       }
-      navigate("/users");
+      else
+      {
+        navigate("/users");
+      }
     } catch (error) {
       toast.error("Error al borrar el usuario");
     }
