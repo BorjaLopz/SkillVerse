@@ -41,7 +41,7 @@ function DeleteService({ serviceId, onDelete }) {
       {/* {(userOwner === user.user.id || user.user.admin)} */}
       {/* user.user.admin || serviceOwner.user_id === user.user.id */}
       {isAuthenticated &&
-      !serviceOwner.done && //Si esta hecho, no podemos borrar el servicio
+      // !serviceOwner.done && //Si esta hecho, no podemos borrar el servicio
       (user.user.admin || serviceOwner.user_id === user.user.id) ? (
         <button className="delete-whatever" onClick={handleDelete}>
           Borrar servicio
