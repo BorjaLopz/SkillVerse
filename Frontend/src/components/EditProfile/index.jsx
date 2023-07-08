@@ -189,6 +189,7 @@ const EditProfile = ({ nickname }) => {
             onChange={handleChange}
           />
         </div>
+        
         <div>
           <label htmlFor="nickname">Nombre de Usuario</label>
           <input
