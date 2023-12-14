@@ -15,7 +15,21 @@
   font-size: 1.2rem;
 }
 
-div:not(.sin_animacion) > nav ::after {
+/* div:not(.sin_animacion) > nav ::after {
+  content: "";
+  position: absolute;
+  width: 50%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -3px;
+  left: 25%;
+  background-color: white;
+  transform-origin: bottom center;
+  transition: transform 0.25s ease-in-out;
+  border-radius: 35px;
+} */
+
+.animation::after {
   content: "";
   position: absolute;
   width: 50%;
@@ -29,7 +43,12 @@ div:not(.sin_animacion) > nav ::after {
   border-radius: 35px;
 }
 
-div:not(.sin_animacion) > nav :hover::after {
+/* div:not(.sin_animacion) > nav :hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom center;
+} */
+
+.animation:hover::after {
   transform: scaleX(1);
   transform-origin: bottom center;
 }
@@ -65,13 +84,9 @@ div:not(.sin_animacion) > nav :hover::after {
     height: 4rem; */
   }
 
-  .lowResolution * {
-    width: 100%;
-  }
-
   .lowResolution .avatarHeader {
-    width: 10%; /* Asegura que la imagen ocupe el 100% del contenedor padre */
-    height: 10%; /* Permite que la altura se ajuste automáticamente para mantener la proporción */
+    width: 2rem; /* Asegura que la imagen ocupe el 100% del contenedor padre */
+    /* height: 2rem; Permite que la altura se ajuste automáticamente para mantener la proporción */
     object-fit: cover;
   }
 }
@@ -96,15 +111,5 @@ div:not(.sin_animacion) > nav :hover::after {
     width: 100%;
     /* width: 4rem;
     height: 4rem; */
-  }
-
-  .lowResolution * {
-    width: 100%;
-  }
-
-  .lowResolution .avatarHeader {
-    width: 10%; /* Asegura que la imagen ocupe el 100% del contenedor padre */
-    height: 10%; /* Permite que la altura se ajuste automáticamente para mantener la proporción */
-    object-fit: cover;
   }
 }

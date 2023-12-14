@@ -7,7 +7,7 @@ body {
 }
 
 .switchMenuButton {
-  position: absolute;
+  /* position: absolute; */
 
   top: 0;
   left: 0;
@@ -16,7 +16,7 @@ body {
 }
 
 #containerBurguerMenu {
-  width: 90%;
+  width: 100%;
 }
 
 #containerBurguerMenu nav {
@@ -51,7 +51,7 @@ body {
   height: auto;
 
   background-color: rgb(37, 39, 53);
-  position: absolute;
+  /* position: absolute; */
   /* top: 10rem; */
   right: 0;
   z-index: 9;
@@ -67,10 +67,10 @@ body {
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  transform: translateX(-25rem); /* Inicialmente oculto */
+  transform: translateX(-50rem); /* Inicialmente oculto */
   opacity: 0;
   z-index: 990;
-  animation: menuAnimationReverse 0.5s forwards; /* Utiliza una animación llamada "menuAnimation" */
+  animation: menuAnimationReverse 0.75s forwards; /* Utiliza una animación llamada "menuAnimation" */
 }
 
 .menuBurguer.gap {
@@ -84,15 +84,24 @@ body {
   justify-content: space-around;
   align-items: center; */
 
-  width: 100%;
+  /*@TODO SE VE RARO YA QUE CUANDO NO ESTAMOS LOGADOS, SE QUEDA EL HUECO PARA LA IMAGEN */
+
+  /* width: 100%;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  align-items: center;
+  gap: 0.4rem; */
+
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
   gap: 0.4rem;
 }
 
 .menuBurguer.visible {
-  animation: menuAnimation 0.5s forwards; /* Utiliza una animación llamada "menuAnimationReverse" en reversa */
+  animation: menuAnimation 0.75s forwards; /* Utiliza una animación llamada "menuAnimationReverse" en reversa */
 }
 
 @keyframes menuAnimation {
@@ -109,7 +118,7 @@ body {
     opacity: 1;
   }
   to {
-    transform: translateX(-25rem);
+    transform: translateX(-50rem);
     opacity: 0;
   }
 }
@@ -131,5 +140,5 @@ body {
 
 .burguerBar.unclicked {
   transform: rotate(0) translate(0);
-  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.5s;
+  transition: cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.75s;
 }
