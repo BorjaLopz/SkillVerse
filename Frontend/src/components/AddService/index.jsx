@@ -15,7 +15,11 @@ const AddService = () => {
   const { user } = useAuth();
   const { post } = useServer();
   const [isLoading, setIsLoading] = useState(false);
-  const [showForm, setShowForm] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+
+  const handleToggleForm = () => {
+    setShowForm(!showForm);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -79,6 +83,9 @@ const AddService = () => {
 
   return (
     <div className="add-service">
+      <button onClick={handleToggleForm}>
+        {showForm ? "Cancelar" : "Añadir servicio"}
+      </button>
       {showForm && (
         <>
           <h2 className="add-service-title">Añadir servicio</h2>

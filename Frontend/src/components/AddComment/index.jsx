@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import Loading from "../Loading";
-import "./style.css"
+import "./style.css";
 
 const AddComment = () => {
   const [comment, setComment] = useState("");
@@ -12,7 +12,11 @@ const AddComment = () => {
   const { post } = useServer();
   const { user } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
-  const [showForm, setShowForm] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+
+  const handleToggleForm = () => {
+    setShowForm(!showForm);
+  };
 
   const getServiceIdFromURL = () => {
     const url = window.location.href;
@@ -40,7 +44,6 @@ const AddComment = () => {
       const formData = new FormData();
       formData.append("comment", comment);
       formData.append("commentFile", file);
-
 
       const config = {
         headers: {
@@ -70,11 +73,14 @@ const AddComment = () => {
     }
   };
 
- return (
+  return (
     <div className="add-comment">
+      <button onClick={handleToggleForm}>
+        {showForm ? "Cancelar" : "Añadir comentario"}
+      </button>
       {showForm && (
         <>
-          <h2 className="title">Añadir comentarios</h2>
+          <h2 className="title">Añadir comentario</h2>
           <form onSubmit={handleSubmit} className="form">
             <div className="comment">
               <label className="label">Comentario:</label>

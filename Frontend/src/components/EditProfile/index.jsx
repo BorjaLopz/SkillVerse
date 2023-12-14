@@ -8,7 +8,6 @@ import { useNavigate } from "react-router-dom";
 import useServer from "../../hooks/useServer";
 import "./style.css";
 
-
 const validateKoFiURL = (value) => {
   if (!value || value.trim() === "") {
     return true;
@@ -230,7 +229,7 @@ const EditProfile = ({ nickname }) => {
               onChange={handleChange}
             />
             <FontAwesomeIcon
-              icon={passwordVisibility ? faEyeSlash : faEye}
+              icon={passwordVisibility ? faEye : faEyeSlash}
               className="password-icon"
               onClick={togglePassword}
             />
@@ -265,7 +264,12 @@ const EditProfile = ({ nickname }) => {
             onChange={handleChange}
           />
           {koFiURL && (
-            <a href={koFiURL} target="_blank" rel="noopener noreferrer">
+            <a
+              href={koFiURL}
+              target="_blank"
+              rel="noopener noreferrer"
+              alt="koFi"
+            >
               <img
                 src="/icons/ko-fi-icon.svg"
                 alt="Ko-fi"
@@ -274,7 +278,9 @@ const EditProfile = ({ nickname }) => {
             </a>
           )}
         </div>
-        <button type="submit">Guardar Cambios</button>
+        <div className="save-changes-button">
+          <button type="submit">Guardar Cambios</button>
+        </div>
       </form>
     </div>
   );

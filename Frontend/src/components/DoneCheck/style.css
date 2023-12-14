@@ -1,18 +1,16 @@
+.done-container {
+  display: inline-block;
+}
+
 .button-done {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.publish-comment {
   background-color: #8750a5;
-  color: #fff;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
+  padding: 0.5rem;
+  border-radius: 0.35rem;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 3rem;
 }
 
-.publish-comment:hover {
-  background-color: #9991ca;
+.button-done:hover {
+  background-color: #17a854;
 }

@@ -21,17 +21,15 @@ const AvatarHeader = ({ user = "" }) => {
   }, []);
 
   return (
-    <>
+    <div>
       <div className="avatar-container">
-        <div>
-          <img
-            className="avatarHeader"
-            src={userAvatar}
-            alt={`Avatar de ${user}`}
-          />
-        </div>
+        <img
+          className="avatarHeader"
+          src={userAvatar}
+          alt={`Avatar de ${user}`}
+        />
       </div>
-    </>
+    </div>
   );
 };
 
