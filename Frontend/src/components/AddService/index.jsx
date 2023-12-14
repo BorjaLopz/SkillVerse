@@ -60,7 +60,7 @@ const AddService = () => {
         config
       );
 
-      if (response.status === 200) {
+      if (response?.status === 200) {
         toast.success(`Servicio ${title} creado con éxito`);
         setTitle("");
         setDescription("");
@@ -75,6 +75,8 @@ const AddService = () => {
       if (error.response) {
         console.log(error.response.data);
         toast.error(error.response.data.message);
+        setIsLoading(false);
+        setShowForm(true);
       } else {
         toast.error(`No se ha podido generar el servicio. ${error}`);
       }

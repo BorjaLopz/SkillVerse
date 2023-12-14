@@ -69,7 +69,10 @@ const AddComment = () => {
         }, 1000);
       }
     } catch (error) {
-      toast.error("No se pudo publicar el comentario");
+      toast.error(error.response.data.message);
+
+      setIsLoading(false);
+      setShowForm(true);
     }
   };
 

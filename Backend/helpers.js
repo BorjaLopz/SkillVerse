@@ -162,6 +162,14 @@ async function uploadFilesInFolder(
     //Crear directorio si no existe
     await createPathIfNotExists(uploadDir);
 
+    //Comprobar si la extension es valida.
+      if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
+        throw generateError(
+          `Formato no válido. Tipos de formatos permitidos: ${ALLOWED_EXTENSIONS}`,
+          415
+        );
+      }
+      
     /* DEFINIMOS RUTAS Y NOMBRE DE LOS ARCHIVOS SI ES FOTO DE PERFIL */
     if (typeOfFile.toUpperCase() === "USER") {
       //Vamos a borrar la foto anterior existente.
@@ -184,15 +192,7 @@ async function uploadFilesInFolder(
       const [halfPath] = USER_PATH.split("Frontend").slice(-1);
 
       return `..${halfPath}/${fileName}`;
-    } else if (typeOfFile.toUpperCase() === "SERVICE") {
-      //Comprobar si la extension es valida.
-      if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
-        throw generateError(
-          `Formato no válido. Tipos de formatos permitidos: ${ALLOWED_EXTENSIONS}`,
-          415
-        );
-      }
-
+    } else if (typeOfFile.toUpperCase() === "SERVICE") { 
       //Obtener la extensión del fichero para guardarlo de la misma manera
       fileName = `${nickname} - ${titleOfService} - ${nanoid(
         5
@@ -209,14 +209,6 @@ async function uploadFilesInFolder(
       });
       return `${halfPath}/${fileName}`;
     } else if (typeOfFile.toUpperCase() === "COMMENT") {
-      //Comprobar si la extension es valida.
-      if (!checkIfExtensionIsAllowed(getExtensionFile(sampleFile.name))) {
-        throw generateError(
-          `Formato no válido. Tipos de formatos permitidos: ${ALLOWED_EXTENSIONS}`,
-          415
-        );
-      }
-
       //Obtener la extensión del fichero para guardarlo de la misma manera
       fileName = `${nickname} - ${titleOfService} - ${nanoid(
         5
