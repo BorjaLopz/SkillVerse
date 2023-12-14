@@ -12,6 +12,8 @@ body {
   flex-direction: column;
   justify-content: center;
   padding: 3rem 1.5rem;
+
+  height: 100%;
 }
 
 .login {

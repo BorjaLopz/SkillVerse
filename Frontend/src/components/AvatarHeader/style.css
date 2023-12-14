@@ -15,6 +15,12 @@
   .avatarHeader {
     max-width: 20%;
     min-width: 5rem;
-    margin-right: 50px;
+
+    /* Sino, se ve enorme el icono :/ */
+    width: 5rem;
+    height: 5rem;
+    object-fit: cover;
+
+    /* margin-right: 50px; */
   }
 }

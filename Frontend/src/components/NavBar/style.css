@@ -1,11 +1,18 @@
 .navbar {
   color: white;
-  font-weight: bold;
-  font-size: 12px;
+  /* font-size: 12px; */
 }
 
-.navbar nav a {
-  margin-right: 10px;
+.lowResolution {
+  display: none;
+}
+
+.navbar .highResolution nav a {
+  /* margin-right: 10px; */
+  margin: 0 10px;
+
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 div:not(.sin_animacion) > nav ::after {
@@ -13,7 +20,7 @@ div:not(.sin_animacion) > nav ::after {
   position: absolute;
   width: 50%;
   transform: scaleX(0);
-  height: 4px;
+  height: 2px;
   bottom: -3px;
   left: 25%;
   background-color: white;
@@ -43,12 +50,61 @@ div:not(.sin_animacion) > nav :hover::after {
     margin: 3px;
     font-size: 14px;
   }
+
+  .highResolution {
+    display: none;
+  }
+
+  .lowResolution {
+    display: flex;
+    flex-direction: row;
+
+    position: relative;
+    width: 100%;
+    /* width: 4rem;
+    height: 4rem; */
+  }
+
+  .lowResolution * {
+    width: 100%;
+  }
+
+  .lowResolution .avatarHeader {
+    width: 10%; /* Asegura que la imagen ocupe el 100% del contenedor padre */
+    height: 10%; /* Permite que la altura se ajuste automáticamente para mantener la proporción */
+    object-fit: cover;
+  }
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 576px) {
   .animation {
     width: 100%;
     margin: 3px;
     font-size: 18px;
+  }
+
+  .highResolution {
+    display: none;
+  }
+
+  .lowResolution {
+    visibility: visible;
+    display: flex;
+    flex-direction: row;
+
+    position: relative;
+    width: 100%;
+    /* width: 4rem;
+    height: 4rem; */
+  }
+
+  .lowResolution * {
+    width: 100%;
+  }
+
+  .lowResolution .avatarHeader {
+    width: 10%; /* Asegura que la imagen ocupe el 100% del contenedor padre */
+    height: 10%; /* Permite que la altura se ajuste automáticamente para mantener la proporción */
+    object-fit: cover;
   }
 }
