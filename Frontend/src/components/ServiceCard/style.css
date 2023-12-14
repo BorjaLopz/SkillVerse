@@ -5,10 +5,12 @@
 .service-card {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
+  margin: 1rem 2rem 0 2rem;
+  position: relative;
 }
 
 .service-card-type {
-  height: 10rem;
+  height: 8rem;
   background-color: #edf2f7;
   background-size: cover;
   background-position: center;
@@ -28,40 +30,81 @@
   font-size: 2.25rem;
 }
 
-.service-card-info {
+.service-card-all-info {
   background-color: #fff;
+  position: relative;
+}
+
+.service-card-info {
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  max-width: 80%;
+  overflow-wrap: break-word;
+}
+
+.service-card-buttons {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  gap: 2rem;
+  bottom: 1rem;
+  right: 1rem;
 }
 
 .service-card-photo {
   position: relative;
+  display: inline-block;
 }
 
-.fotico {
+.service-user-photo {
   width: 7rem;
   height: 7rem;
   border-radius: 50%;
-  margin-right: 1rem;
+  margin-left: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-top: -2rem;
   background-color: #f7fafc;
+  border: 7px solid #8750a5;
 }
 
 .service-card-info {
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .service-card-info h1 {
-  font-size: 1.7rem;
+  font-size: 20px;
   color: #383d46;
   font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .service-card-info p {
-  font-size: 1.4rem;
-  color: #565c66;
+  font-size: 16px;
+}
+
+#service-nickname {
+  color: #8c98aa;
+  font-size: 12px;
+}
+
+#service-doc {
+  margin-top: 1rem;
+  background-color: #ccd2dd;
+  border-radius: 10px;
+  padding: 2px 20px;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+#service-doc > img {
+  width: 2rem;
+  margin-left: 5px;
+}
+
+#service-doc:hover {
+  background-color: #9991ca;
 }
