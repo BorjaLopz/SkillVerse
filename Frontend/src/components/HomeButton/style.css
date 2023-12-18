@@ -1,15 +1,21 @@
 .home-button {
   display: block;
-  max-width: 25%;
+  /* max-width: 25%; */
+  width: 10rem;
   height: auto;
   margin: 0 auto;
 }
 
 @media (min-width: 577px) {
   .home-button {
-    max-width: 20%;
-    min-width: 4rem;
+    /* max-width: 20%; */
+    min-width: 2rem;
+    width: 4rem;
     /* margin-right: 20px; */
     /* margin-left: 20rem; */
+  }
+
+  #searchRoutes {
+    gap: 0;
   }
 }

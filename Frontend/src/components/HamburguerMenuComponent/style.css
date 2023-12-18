@@ -50,7 +50,10 @@ body {
   min-height: 5rem;
   height: auto;
 
-  background-color: rgb(37, 39, 53);
+  /* background-color: #8750a5; */
+  background: #9991ca;
+  /* background: linear-gradient(180deg, #9991ca 0%, rgba(238, 241, 247, 1) 100%); */
+  background: linear-gradient(180deg, #9991ca 0%, #8750a5 100%);
   /* position: absolute; */
   /* top: 10rem; */
   right: 0;
