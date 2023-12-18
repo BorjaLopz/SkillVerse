@@ -89,8 +89,9 @@ const ServicesList = () => {
 
         setServicesAvailables(
           service.filter((s) => s.service_type === categorySelected).length > 0
-          ? true
-          : false)
+            ? true
+            : false
+        );
       }
     } catch (e) {
       console.log("Error getting services: ", e);
@@ -164,9 +165,7 @@ const ServicesList = () => {
         <div className="container">
           {isAuthenticated && <AddService />}
           {isAuthenticated && (
-            <SelectCategoryComponent
-              handleChangeSelect={(e) => setCategorySelected(e.target.value)}
-            />
+            <SelectCategoryComponent handleChangeSelect={handleChangeSelect} />
           )}
 
           <div className="grid-available">

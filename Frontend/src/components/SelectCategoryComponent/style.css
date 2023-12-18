@@ -4,7 +4,126 @@
   align-items: center;
 }
 
+.custom-select {
+  padding: 8px;
+  /* font-size: 16px; */
+  text-align: center; /* Alinea el texto al centro horizontalmente */
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease; /* Efecto de transición para cambios suaves */
+}
+
 .custom-select select {
   width: 100%;
   text-align: center;
+
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #8750a5;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  appearance: none;
+}
+
+.custom-select select option {
+  text-align: center;
+}
+
+.custom-select select * {
+  margin-top: 1rem;
+}
+
+.custom-select select option:hover {
+  background-color: #e01313; /* Cambia el color de fondo de las opciones en hover */
+}
+
+.custom-select select::after {
+  content: "\25BC"; /* Código Unicode para el triángulo hacia abajo */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: rgb(116, 11, 11);
+  pointer-events: none; /* Evita que la flecha sea clickeable */
+}
+
+/********************************************/
+
+.dropdown-container {
+  width: 100%;
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #8750a5;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #8750a5;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4rem;
+}
+
+.dropdown-button::after {
+  content: "\25BC"; /* Código Unicode para el triángulo hacia abajo */
+  position: absolute;
+  top: 50%;
+  right: 1.5rem;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  color: #000000;
+  pointer-events: none; /* Evita que la flecha sea clickeable */
+
+  transition: transform 0.2s ease-out; /* Añade una transición de rotación */
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  color: black;
+  font-weight: bold;
+}
+
+.dropdown-container.dropdown-open .dropdown-button::after {
+  content: "\25BC"; /* Código Unicode para el triángulo hacia arriba */
+  transform: translateY(-50%) rotate(180deg); /* Rotación de 180 grados */
+  opacity: 1; /* Asegura que la opacidad esté establecida cuando la flecha cambia */
+}
+
+.dropdown-menu .optionDropdown {
+  text-align: center;
+  list-style: none;
+  padding: 4px;
+  margin: 0;
+}
+
+.dropdown-menu li {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu .optionDropdown:hover {
+  background-color: #d39df0;
 }
