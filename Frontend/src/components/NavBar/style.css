@@ -1,7 +1,7 @@
 .navbar {
   color: white;
   width: 100%;
-  /* font-size: 12px; */
+  padding: 2rem;
 }
 
 .lowResolution {
@@ -90,6 +90,10 @@
     /* height: 2rem; Permite que la altura se ajuste automáticamente para mantener la proporción */
     object-fit: cover;
   }
+
+  .navbar {
+    padding: 0;
+  }
 }
 
 @media (max-width: 576px) {
@@ -112,5 +116,9 @@
     width: 100%;
     /* width: 4rem;
     height: 4rem; */
+  }
+
+  .navbar {
+    padding: 0;
   }
 }

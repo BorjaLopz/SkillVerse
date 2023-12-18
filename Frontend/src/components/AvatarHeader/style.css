@@ -24,3 +24,9 @@
     /* margin-right: 50px; */
   }
 }
+
+@media (max-width: 576px) {
+    .avatarHeader {
+      max-width: 3rem;
+  }
+}

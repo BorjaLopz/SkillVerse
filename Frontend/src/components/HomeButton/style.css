@@ -2,15 +2,16 @@
   display: block;
   /* max-width: 25%; */
   width: 10rem;
+  min-width: 5rem;
   height: auto;
   margin: 0 auto;
 }
 
-@media (min-width: 577px) {
+@media (max-width: 577px) {
   .home-button {
     /* max-width: 20%; */
     min-width: 2rem;
-    width: 4rem;
+    width: 2rem;
     /* margin-right: 20px; */
     /* margin-left: 20rem; */
   }
