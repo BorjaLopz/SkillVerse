@@ -1,0 +1,10 @@
+.custom-select {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.custom-select select {
+  width: 100%;
+  text-align: center;
+}

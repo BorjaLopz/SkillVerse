@@ -4,18 +4,21 @@ import useServer from "../../hooks/useServer";
 import "./style.css";
 import AddService from "../AddService";
 import useAuth from "../../hooks/useAuth.js";
+import SelectCategoryComponent from "../SelectCategoryComponent/SelectCategoryComponent.jsx";
+import { categories } from "../../config.js";
 
 const ServicesList = () => {
   const [services, setServices] = useState([]);
   const [servicesAvailables, setServicesAvailables] = useState(false);
-  const [filteredServices, setFilteredServices] = useState("");
-  const [prueba, setPrueba] = useState();
+  const [categorySelected, setCategorySelected] = useState(categories[0]);
+
   const { get } = useServer();
   const { isAuthenticated } = useAuth();
 
-  const handleClick = (currentService) => {
-    setFilteredServices(currentService);
-    setPrueba(currentService);
+  const handleChangeSelect = (e) => {
+    setCategorySelected(e);
+    console.log("selectedOption desde index");
+    console.log(e.target.value);
   };
 
   const fetchAllServices = async () => {
@@ -33,8 +36,8 @@ const ServicesList = () => {
           done: s.done,
           creation_date: s.creation_date.split("T")[0],
         }));
+
         setServices(service);
-        setFilteredServices(service);
         setServicesAvailables(true);
       }
     } catch (e) {
@@ -42,14 +45,37 @@ const ServicesList = () => {
     }
   };
 
+  // const fetchFilterServices = async () => {
+  //   try {
+  //     const { data } = await get({
+  //       url: `/service/type/${prueba}`,
+  //     });
+
+  //     if (typeof data.serviceData === "object") {
+  //       const service = data.serviceData.map((s) => ({
+  //         id: s.id,
+  //         title: s.title,
+  //         request_body: s.request_body,
+  //         service_type: s.service_type,
+  //         user_id: s.user_id,
+  //         done: s.done,
+  //         creation_date: s.creation_date.split("T")[0],
+  //       }));
+  //       setServices(service);
+  //       setServicesAvailables(true);
+  //     }
+  //   } catch (e) {
+  //     console.log("Error getting services: ", e);
+  //   }
+  // };
+
   const fetchFilterServices = async () => {
     try {
-      const { data } = await get({
-        url: `/service/type/${prueba}`,
-      });
+      const resp = await fetch(`http://localhost:3000/service`);
+      const { serviceData: data } = await resp.json();
 
-      if (typeof data.serviceData === "object") {
-        const service = data.serviceData.map((s) => ({
+      if (typeof data === "object") {
+        const service = data.map((s) => ({
           id: s.id,
           title: s.title,
           request_body: s.request_body,
@@ -58,8 +84,13 @@ const ServicesList = () => {
           done: s.done,
           creation_date: s.creation_date.split("T")[0],
         }));
-        setServices(service);
-        setServicesAvailables(true);
+
+        setServices(service.filter((s) => s.service_type === categorySelected));
+
+        setServicesAvailables(
+          service.filter((s) => s.service_type === categorySelected).length > 0
+          ? true
+          : false)
       }
     } catch (e) {
       console.log("Error getting services: ", e);
@@ -67,30 +98,76 @@ const ServicesList = () => {
   };
 
   // useEffect(() => {
-  //   if (filteredServices === "Todos los servicios") {
-  //     console.log("Todos");
-  //     fetchAllServices();
-  //   } else {
-  //     console.log("Categorias");
-  //     fetchFilterServices();
-  //   }
-  // }, []);
+  //   // Esta función obtiene los servicios nuevos o actualizados
+  //   const fetchNewServices = async () => {
+  //     try {
+  //       const resp = await fetch(`http://localhost:3000/service`);
+  //       const { serviceData: data } = await resp.json();
+
+  //       if (typeof data === "object") {
+  //         const newServices = data.map((s) => ({
+  //           id: s.id,
+  //           title: s.title,
+  //           request_body: s.request_body,
+  //           service_type: s.service_type,
+  //           user_id: s.user_id,
+  //           done: s.done,
+  //           creation_date: s.creation_date.split("T")[0],
+  //         }));
+
+  //         setServices((prevServices) => {
+  //           const updatedServices = newServices.filter((newService) =>
+  //             prevServices.some((oldService) => oldService.id === newService.id)
+  //           );
+
+  //           const filteredServices = prevServices
+  //             .filter((prevService) =>
+  //               updatedServices.every(
+  //                 (updatedService) => updatedService.id !== prevService.id
+  //               )
+  //             )
+  //             .concat(newServices);
+
+  //           return filteredServices;
+  //         });
+
+  //         setServicesAvailables(true);
+  //       }
+  //     } catch (e) {
+  //       console.log("Error getting services: ", e);
+  //     }
+  //   };
+
+  //   const intervalId = setInterval(() => {
+  //     fetchNewServices();
+  //   }, 500);
+
+  //   return () => clearInterval(intervalId);
+  // }, [categorySelected]);
 
   useEffect(() => {
-    fetchAllServices();
-
-    const intervalId = setInterval(() => {
+    if (categorySelected !== categories[0]) {
+      fetchFilterServices();
+    } else {
       fetchAllServices();
-    }, 500);
+    }
 
-    return () => clearInterval(intervalId);
-  }, []);
+    console.log(categories[0]);
+  }, [categorySelected]);
+
+  console.log("servicesAvailables");
+  console.log(servicesAvailables);
 
   return (
     <>
       <div className="servicios">
         <div className="container">
           {isAuthenticated && <AddService />}
+          {isAuthenticated && (
+            <SelectCategoryComponent
+              handleChangeSelect={(e) => setCategorySelected(e.target.value)}
+            />
+          )}
 
           <div className="grid-available">
             {!servicesAvailables && (
