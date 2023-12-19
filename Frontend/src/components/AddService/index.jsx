@@ -7,7 +7,7 @@ import useAuth from "../../hooks/useAuth";
 import Loading from "../Loading";
 import "./style.css";
 
-const AddService = () => {
+const AddService = ({ handleAddNewService }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [requiredType, setRequiredType] = useState("");
@@ -70,6 +70,7 @@ const AddService = () => {
           setIsLoading(false);
           setShowForm(true);
         }, 1000);
+        handleAddNewService();
       }
     } catch (error) {
       if (error.response) {

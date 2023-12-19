@@ -12,13 +12,17 @@ const ServicesList = () => {
   const [servicesAvailables, setServicesAvailables] = useState(false);
   const [categorySelected, setCategorySelected] = useState(categories[0]);
 
+  const [newServiceAdded, setNewServiceAdded] = useState(false);
+
   const { get } = useServer();
   const { isAuthenticated } = useAuth();
 
   const handleChangeSelect = (e) => {
     setCategorySelected(e);
-    console.log("selectedOption desde index");
-    console.log(e.target.value);
+  };
+
+  const handleAddNewService = () => {
+    setNewServiceAdded(!newServiceAdded);
   };
 
   const fetchAllServices = async () => {
@@ -44,30 +48,6 @@ const ServicesList = () => {
       console.log("Error getting services: ", e);
     }
   };
-
-  // const fetchFilterServices = async () => {
-  //   try {
-  //     const { data } = await get({
-  //       url: `/service/type/${prueba}`,
-  //     });
-
-  //     if (typeof data.serviceData === "object") {
-  //       const service = data.serviceData.map((s) => ({
-  //         id: s.id,
-  //         title: s.title,
-  //         request_body: s.request_body,
-  //         service_type: s.service_type,
-  //         user_id: s.user_id,
-  //         done: s.done,
-  //         creation_date: s.creation_date.split("T")[0],
-  //       }));
-  //       setServices(service);
-  //       setServicesAvailables(true);
-  //     }
-  //   } catch (e) {
-  //     console.log("Error getting services: ", e);
-  //   }
-  // };
 
   const fetchFilterServices = async () => {
     try {
@@ -152,18 +132,17 @@ const ServicesList = () => {
     } else {
       fetchAllServices();
     }
-
-    console.log(categories[0]);
   }, [categorySelected]);
 
-  console.log("servicesAvailables");
-  console.log(servicesAvailables);
+  useEffect(() => {
+    fetchAllServices();
+  }, [newServiceAdded]);
 
   return (
     <>
       <div className="servicios">
         <div className="container">
-          {isAuthenticated && <AddService />}
+          {isAuthenticated && <AddService handleAddNewService={handleAddNewService} />}
           {isAuthenticated && (
             <SelectCategoryComponent handleChangeSelect={handleChangeSelect} />
           )}

@@ -5,6 +5,11 @@ const ProfileCard = ({ formData }) => {
   return (
     <>
       <div className="profile-card">
+        <img
+          src={`${formData.userPhoto}`}
+          alt={`Imagen de ${formData.userPhoto}`}
+          className="field-icon"
+        />
         <h3 className="title">Datos personales:</h3>
         <div className="field">
           <span className="field-name">Nickname:</span>

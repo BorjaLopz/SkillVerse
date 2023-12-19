@@ -82,12 +82,17 @@ function DeleteComment({ commentId, onDelete }) {
             <div className="modal-overlay">
               <div className="confirm-dialog">
                 <p>¿Seguro que quieres borrar este comentario?</p>
-                <button className="confirm-delete" onClick={handleDelete}>
-                  Borrar
-                </button>
-                <button className="confirm-cancel" onClick={closeConfirmDialog}>
-                  Cancelar
-                </button>
+                <div id="buttonSectionDeleteAccount">
+                  <button className="confirm-delete" onClick={handleDelete}>
+                    Borrar
+                  </button>
+                  <button
+                    className="confirm-cancel"
+                    onClick={closeConfirmDialog}
+                  >
+                    Cancelar
+                  </button>
+                </div>
               </div>
             </div>
           )}

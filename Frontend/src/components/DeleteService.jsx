@@ -13,6 +13,9 @@ function DeleteService({ serviceId, onDelete }) {
   const navigate = useNavigate();
   const [serviceOwner, setServiceOwner] = useState({});
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+  const [buttonDisable, setButtonDisable] = useState(false);
+  const [inputService, setInputService] = useState("");
+  const [currentService, setCurrentService] = useState();
 
   const handleDelete = async () => {
     try {
@@ -24,6 +27,29 @@ function DeleteService({ serviceId, onDelete }) {
     } catch (error) {
       toast.error("Error al borrar el servicio");
     }
+  };
+
+  const switchButtonDisabled = () => {
+    console.log("inputService");
+    console.log(inputService);
+    console.log("serviceOwner.title");
+    console.log(serviceOwner.title);
+
+    console.log(typeof serviceOwner.title);
+
+    const modifiedTitle = serviceOwner?.title?.replaceAll(" ", "-") || " ";
+
+    if (inputService === modifiedTitle) {
+      setButtonDisable(true);
+    } else {
+      setButtonDisable(false);
+    }
+  };
+
+  const handleInputChange = (e) => {
+    e.preventDefault();
+    // console.log(e.target.value);
+    setInputService(e.target.value);
   };
 
   const fetchServiceOwner = async () => {
@@ -49,6 +75,11 @@ function DeleteService({ serviceId, onDelete }) {
     document.body.classList.remove("no-scroll");
   };
 
+  /* @TODO refrescar cada vez que modifiquemos el input para comprobar si podemos o no tenerlo deshabilitado*/
+  useEffect(() => {
+    switchButtonDisabled();
+  }, [inputService]);
+
   return (
     <>
       {isAuthenticated &&
@@ -65,13 +96,33 @@ function DeleteService({ serviceId, onDelete }) {
           {showConfirmDialog && (
             <div className="modal-overlay">
               <div className="confirm-dialog">
-                <p>¿Seguro que quieres borrar este servicio?</p>
-                <button className="confirm-delete" onClick={handleDelete}>
-                  Borrar
-                </button>
-                <button className="confirm-cancel" onClick={closeConfirmDialog}>
-                  Cancelar
-                </button>
+                <p>
+                  Introduce{" "}
+                  <span>{serviceOwner.title.replaceAll(" ", "-")} </span>
+                  para confirmar borrar el servicio
+                </p>
+                <input
+                  type="text"
+                  placeholder="Introduce el nombre del servicio"
+                  required
+                  value={inputService}
+                  onChange={handleInputChange}
+                />
+                <div id="buttonSectionDeleteAccount">
+                  <button
+                    className="confirm-delete"
+                    onClick={handleDelete}
+                    disabled={!buttonDisable}
+                  >
+                    Borrar
+                  </button>
+                  <button
+                    className="confirm-cancel"
+                    onClick={closeConfirmDialog}
+                  >
+                    Cancelar
+                  </button>
+                </div>
               </div>
             </div>
           )}

@@ -6,6 +6,8 @@
   border-radius: 0.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-size: 1rem;
+
+  position: relative;
 }
 
 .profile-card .title {
@@ -17,6 +19,18 @@
   font-family: "Soria", "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
     sans-serif;
   letter-spacing: 2px;
+}
+
+.profile-card .field-icon {
+  position: absolute;
+  top: -10%;
+  right: -10%;
+
+  width: 10rem; 
+  height: 10rem;
+  
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .profile-card .field {
